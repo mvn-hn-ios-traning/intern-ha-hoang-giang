@@ -16,12 +16,13 @@ class Employee {
     func isDestroyed() -> String {
         return "\(firstName) \(lastName) is destroyer"
     }
+    
     func isCreated() -> String {
         return "\(firstName) \(lastName) is creater"
     }
+    
     func named(_ firstName:String, _ lastName:String) -> String {
         let employeePro = Employee(firstName: firstName, lastName: lastName)
-        
         return "\(employeePro.firstName) \(employeePro.lastName)"
     }
 }
