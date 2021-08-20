@@ -1,8 +1,13 @@
 import UIKit
 
-protocol Shape {
-    func area() -> Float
-    func perimeter() -> Float
+class Shape {
+    func area() -> Float {
+        return 0
+    }
+    
+    func perimeter() -> Float {
+        return 0
+    }
 }
 
 class Circle: Shape {
@@ -11,10 +16,10 @@ class Circle: Shape {
     init(_ radius: Float) {
         self.radius = radius
     }
-    func area() -> Float {
+    override func area() -> Float {
         return radius*radius*3.14
     }
-    func perimeter() -> Float {
+    override func perimeter() -> Float {
         return radius*2*3.14
     }
 }
@@ -26,11 +31,11 @@ class Square: Shape {
         self.lengthOfSide = lengthOfSide
     }
     
-    func area() -> Float {
+    override func area() -> Float {
         return lengthOfSide*lengthOfSide
     }
     
-    func perimeter() -> Float {
+    override func perimeter() -> Float {
         return lengthOfSide*4
     }
 }
@@ -39,16 +44,16 @@ class Retangle: Shape {
     var width: Float
     var height: Float
     
-    init(_ width: Float, _ height: Float) {
+    init(width: Float, height: Float) {
         self.width = width
         self.height = height
     }
     
-    func area() -> Float {
+    override func area() -> Float {
         return width*height
     }
     
-    func perimeter() -> Float {
+    override func perimeter() -> Float {
         return (width+height)*2
     }
 }
@@ -69,15 +74,13 @@ class Total {
     }
 }
 
-let cirle1      = Circle(5.0)
+let circle1     = Circle(5.0)
 let circle2     = Circle(7.5)
 let square1     = Square(8.5)
-let square2    = Square(10.0)
-let retangle1   = Retangle(5.0, 8.5)
-let retangle2   = Retangle(1.0, 7.5)
+let square2     = Square(10.0)
+let retangle1   = Retangle(width: 5.0, height: 8.5)
+let retangle2   = Retangle(width: 1.0, height: 7.5)
 
-//var shapes  = [cirle1, circle2]
-//var shapes = [square1, square2]
-var shapes = [retangle1, retangle2]
+let shapes  = [circle1, square2, retangle2]
 let total   = Total(shapes)
 total.sum()
