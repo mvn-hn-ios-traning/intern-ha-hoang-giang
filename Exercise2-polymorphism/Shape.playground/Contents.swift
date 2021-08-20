@@ -16,11 +16,13 @@ class Circle: Shape {
     init(_ radius: Float) {
         self.radius = radius
     }
+    
     override func area() -> Float {
-        return radius*radius*3.14
+        return pow(radius, 2) * Float.pi
     }
+    
     override func perimeter() -> Float {
-        return radius*2*3.14
+        return radius * 2 * Float.pi
     }
 }
 
@@ -32,29 +34,29 @@ class Square: Shape {
     }
     
     override func area() -> Float {
-        return lengthOfSide*lengthOfSide
+        return pow(lengthOfSide, 2)
     }
     
     override func perimeter() -> Float {
-        return lengthOfSide*4
+        return lengthOfSide * 4
     }
 }
 
 class Retangle: Shape {
-    var width: Float
+    var width : Float
     var height: Float
     
     init(width: Float, height: Float) {
-        self.width = width
+        self.width  = width
         self.height = height
     }
     
     override func area() -> Float {
-        return width*height
+        return width * height
     }
     
     override func perimeter() -> Float {
-        return (width+height)*2
+        return (width + height) * 2
     }
 }
 
@@ -68,7 +70,7 @@ class Total {
     func sum() -> Float {
         var sum: Float = 0.0
         for shape in shapes {
-            sum += shape.area()+shape.perimeter()
+            sum += shape.area() + shape.perimeter()
         }
         return sum
     }
