@@ -35,30 +35,24 @@ struct Queue {
     }
     
     mutating func dequeue() -> String? {
-        var result: String? = nil
-        result = array.removeFirst()
-        return result
+        return array.isEmpty ? nil : array.removeFirst()
     }
     
     func peek() -> String? {
-        var result: String? = nil
-        result = array.last
-        return result
+        return array.isEmpty ? nil : array.last 
     }
     
     mutating func nextPlayer() -> String? {
-        guard let person = dequeue() else {
-            return nil
-        }
+        guard let person = dequeue() else { return nil }
         enqueue(person)
         return person
     }
 }
 
 var myTurn = Queue()
-myTurn.enqueue("Giang")
-myTurn.enqueue("Hoang")
-myTurn.enqueue("Ha")
+//myTurn.enqueue("Giang")
+//myTurn.enqueue("Hoang")
+//myTurn.enqueue("Ha")
 myTurn.peek()
 print(myTurn)
 myTurn.nextPlayer()
