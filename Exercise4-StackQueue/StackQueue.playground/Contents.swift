@@ -1,85 +1,70 @@
-import Foundation
+import UIKit
 
-struct Stack<Element> {
-    var array: [Element] = []
+//MARK: - Stack
+struct Stack {
+    var array:[Int] = [Int]()
     
-    mutating func push(_ element: Element) {
+    mutating func push(_ element: Int) {
         array.append(element)
     }
     
-    mutating func pop() -> Element? {
+    mutating func pop() -> Int? {
         return array.popLast()
     }
     
-    func peek() -> Element? {
+    func peek() -> Int? {
         return array.last
     }
 }
 
-extension Stack: CustomStringConvertible {
-    var description: String {
-        let topDivider = "---Stack--- \n"
-        let bottomDevider = "\n ------ \n"
-        let stackElements = array.map{"\($0)"}.reversed().joined(separator: "\n")
-        return topDivider + stackElements + bottomDevider
-    }
-}
+var myArray = Stack()
+myArray.push(0)
+myArray.push(1)
+myArray.push(2)
+myArray.peek()
+print(myArray)
+myArray.pop()
+print(myArray)
 
-public protocol Queue {
-    associatedtype Element
-    mutating func enqueue(_ element: Element) -> Bool
-    mutating func dequeue() -> Element?
-    var isEmpty: Bool { get }
-    var peek: Element? { get }
-}
-
-struct QueueArray<T>: Queue {
-    private var array: [T] = []
-    init() {}
+//MARK: - Queue
+struct Queue {
+    var array = [String]()
     
-    var isEmpty: Bool {
-        array.isEmpty
-    }
-    var peek: T? {
-        array.first
-    }
-    
-    mutating func enqueue(_ element: T) -> Bool {
+    mutating func enqueue(_ element: String) {
         array.append(element)
-        return true
     }
     
-    mutating func dequeue() -> T? {
-        isEmpty ? nil : array.removeFirst()
+    mutating func dequeue() -> String? {
+        var result: String? = nil
+        result = array.removeFirst()
+        return result
     }
-}
-
-extension QueueArray: CustomStringConvertible {
-    public var description: String {
-        String(describing: array)
+    
+    func peek() -> String? {
+        var result: String? = nil
+        result = array.last
+        return result
     }
-}
-
-extension QueueArray {
-    func reversed() -> QueueArray {
-        var queue = self
-        var stack = Stack<T>()
-        
-        while let element = queue.dequeue() {
-            stack.push(element)
+    
+    mutating func nextPlayer() -> String? {
+        guard let person = dequeue() else {
+            return nil
         }
-        while let element = stack.pop() {
-            queue.enqueue(element)
-        }
-        
-        return queue
+        enqueue(person)
+        return person
     }
 }
 
-var queue = QueueArray<String>()
-queue.enqueue("1")
-queue.enqueue("21")
-queue.enqueue("18")
-queue.enqueue("42")
-print("before: \(queue)")
-print("after: \(queue.reversed())")
+var myTurn = Queue()
+myTurn.enqueue("Giang")
+myTurn.enqueue("Hoang")
+myTurn.enqueue("Ha")
+myTurn.peek()
+print(myTurn)
+myTurn.nextPlayer()
+print(myTurn)
+myTurn.nextPlayer()
+print(myTurn)
+myTurn.nextPlayer()
+print(myTurn)
+
