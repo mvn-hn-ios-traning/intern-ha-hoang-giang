@@ -7,7 +7,7 @@ func makeBubleSort(_ array: [Int]) -> [Int] {
     var newArray = array
     let newArrayCounting = newArray.count
     
-    for _ in 1..<newArrayCounting{
+    for _ in 1..<newArrayCounting {
         for item in 0..<(newArrayCounting - 1) {
             if newArray[item] > newArray[item + 1] {
                 newArray.swapAt(item, item + 1)
@@ -26,7 +26,7 @@ func makeSelectionSort(_ array: [Int]) -> [Int] {
     let newArrayCounting = newArray.count
     var current = 0
     
-    while current < newArrayCounting - 1 {
+    while current < (newArrayCounting - 1) {
         var lowest = current
         for item in (current + 1)..<newArrayCounting {
             if newArray[lowest] > newArray[item] {
