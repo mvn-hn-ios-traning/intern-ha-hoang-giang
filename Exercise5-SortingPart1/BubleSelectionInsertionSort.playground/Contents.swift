@@ -69,12 +69,11 @@ func reverse(_ array: [Int]) -> [Int] {
     var leftIndex = 0
     var rightIndex = newArray.count - 1
     
-    for _ in 0..<(newArray.count / 2){
+    for _ in 0..<(newArray.count / 2) {
         newArray.swapAt(leftIndex, rightIndex)
         leftIndex += 1
         rightIndex -= 1
     }
-    
     return newArray
 }
 
