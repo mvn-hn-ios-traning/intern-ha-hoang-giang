@@ -6,9 +6,9 @@ func bubleSort(_ array: [Int]) -> [Int] {
     
     for _ in 1..<array.count{
         for x in 0..<array.count-1 {
-                if newArray[x] > newArray[x+1] {
-                    newArray.swapAt(x, x+1)
-                }
+            if newArray[x] > newArray[x+1] {
+                newArray.swapAt(x, x+1)
+            }
         }
     }
     return newArray
