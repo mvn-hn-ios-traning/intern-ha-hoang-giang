@@ -1,13 +1,14 @@
 import UIKit
 
 //MARK: - Buble Sort
-func bubleSort(_ array: [Int]) -> [Int] {
+func makeBubleSort(_ array: [Int]) -> [Int] {
     var newArray = array
+    let newArrayCounting = newArray.count
     
-    for _ in 1..<array.count{
-        for x in 0..<array.count-1 {
-            if newArray[x] > newArray[x+1] {
-                newArray.swapAt(x, x+1)
+    for _ in 1..<newArrayCounting{
+        for item in 0..<(newArrayCounting - 1) {
+            if newArray[item] > newArray[item + 1] {
+                newArray.swapAt(item, item + 1)
             }
         }
     }
@@ -15,36 +16,37 @@ func bubleSort(_ array: [Int]) -> [Int] {
 }
 
 //MARK: - Selection Sort
-func selectionSort(_ array: [Int]) -> [Int] {
+func makeSelectionSort(_ array: [Int]) -> [Int] {
     var newArray = array
-    var n = 0
+    let newArrayCounting = newArray.count
+    var current = 0
     
-    while n < newArray.count-1 {
-        var lowest = n
-        for x in (n+1)..<newArray.count{
-            if newArray[lowest] > newArray[x] {
-                lowest = x
+    while current < newArrayCounting - 1 {
+        var lowest = current
+        for item in (current + 1)..<newArrayCounting {
+            if newArray[lowest] > newArray[item] {
+                lowest = item
             }
         }
-        if lowest != n {
-            newArray.swapAt(lowest, n)
+        if lowest != current {
+            newArray.swapAt(lowest, current)
         }
-        n += 1
+        current += 1
     }
     return newArray
 }
 
 //MARK: - Insertion Sort
-func insertionSort(_ array: [Int]) -> [Int] {
+func makeInsertionSort(_ array: [Int]) -> [Int] {
     var newArray = array
-    var n = newArray.count
-    while n > 0 {
-        for x in 1..<n{
-            if newArray[x] < newArray[x-1] {
-                newArray.swapAt(x, x-1)
+    var newArrayCounting = newArray.count
+    while newArrayCounting > 0 {
+        for item in 1..<newArrayCounting{
+            if newArray[item] < newArray[item - 1] {
+                newArray.swapAt(item, item - 1)
             }
         }
-        n -= 1
+        newArrayCounting -= 1
     }
     return newArray
 }
@@ -52,20 +54,20 @@ func insertionSort(_ array: [Int]) -> [Int] {
 //MARK: - Test 1: Reverse 1 array
 func reverse(_ array: [Int]) -> [Int] {
     var newArray = array
-    var left = 0
-    var right = newArray.count - 1
+    var leftIndex = 0
+    var rightIndex = newArray.count - 1
     
-    while left < right {
-        newArray.swapAt(left, right)
-        left += 1
-        right -= 1
+    while leftIndex < rightIndex {
+        newArray.swapAt(leftIndex, rightIndex)
+        leftIndex += 1
+        rightIndex -= 1
     }
     return newArray
 }
 
 var array = [5, 19, 15, 10, 1, 20]
 print(array)
-print(insertionSort(array))
-print(selectionSort(array))
-print(bubleSort(array))
+print(makeInsertionSort(array))
+print(makeSelectionSort(array))
+print(makeBubleSort(array))
 print(reverse(array))
