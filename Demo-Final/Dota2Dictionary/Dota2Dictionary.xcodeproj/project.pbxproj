@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,7 @@
 		223743E626FB0A4800CAFF69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223743E526FB0A4800CAFF69 /* Assets.xcassets */; };
 		223743E926FB0A4800CAFF69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223743E726FB0A4800CAFF69 /* LaunchScreen.storyboard */; };
 		223743F926FB0B8400CAFF69 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743F826FB0B8400CAFF69 /* HomeViewModel.swift */; };
-		223743FC26FB0B9800CAFF69 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743FB26FB0B9800CAFF69 /* HomeModel.swift */; };
+		223743FC26FB0B9800CAFF69 /* PatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743FB26FB0B9800CAFF69 /* PatchModel.swift */; };
 		2237445B26FB3FB600CAFF69 /* HomeUseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237445A26FB3FB600CAFF69 /* HomeUseCaseDomain.swift */; };
 		2237445E26FB84AC00CAFF69 /* HomeUseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237445D26FB84AC00CAFF69 /* HomeUseCasePlatform.swift */; };
 		22785D1426FD6DFA0032131B /* HomeUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22785D1326FD6DFA0032131B /* HomeUseCaseProviderDomain.swift */; };
@@ -33,7 +33,7 @@
 		223743E826FB0A4800CAFF69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		223743EA26FB0A4800CAFF69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		223743F826FB0B8400CAFF69 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		223743FB26FB0B9800CAFF69 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		223743FB26FB0B9800CAFF69 /* PatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchModel.swift; sourceTree = "<group>"; };
 		2237445A26FB3FB600CAFF69 /* HomeUseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCaseDomain.swift; sourceTree = "<group>"; };
 		2237445D26FB84AC00CAFF69 /* HomeUseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCasePlatform.swift; sourceTree = "<group>"; };
 		22785D1326FD6DFA0032131B /* HomeUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCaseProviderDomain.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		2237445526FB36B900CAFF69 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				223743FB26FB0B9800CAFF69 /* HomeModel.swift */,
+				223743FB26FB0B9800CAFF69 /* PatchModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -221,7 +221,6 @@
 				9060517D75F65B71F1F43B2A /* Pods-Dota2Dictionary.debug.xcconfig */,
 				2E0ED97453E69538AAEA2281 /* Pods-Dota2Dictionary.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -233,6 +232,7 @@
 			buildConfigurationList = 223743ED26FB0A4800CAFF69 /* Build configuration list for PBXNativeTarget "Dota2Dictionary" */;
 			buildPhases = (
 				04437CCF5B2D02F50F51E923 /* [CP] Check Pods Manifest.lock */,
+				22F15F9C27008B9E00CACDE2 /* ShellScript */,
 				223743D526FB0A4400CAFF69 /* Sources */,
 				223743D626FB0A4400CAFF69 /* Frameworks */,
 				223743D726FB0A4400CAFF69 /* Resources */,
@@ -315,6 +315,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		22F15F9C27008B9E00CACDE2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		ADACEA48A7260FAFC295A2E7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,7 +363,7 @@
 				223743DD26FB0A4400CAFF69 /* AppDelegate.swift in Sources */,
 				2286A54726FC78BD0086134D /* ViewModelType.swift in Sources */,
 				223743DF26FB0A4400CAFF69 /* SceneDelegate.swift in Sources */,
-				223743FC26FB0B9800CAFF69 /* HomeModel.swift in Sources */,
+				223743FC26FB0B9800CAFF69 /* PatchModel.swift in Sources */,
 				223743F926FB0B8400CAFF69 /* HomeViewModel.swift in Sources */,
 				22785D1426FD6DFA0032131B /* HomeUseCaseProviderDomain.swift in Sources */,
 			);

@@ -8,5 +8,10 @@ target 'Dota2Dictionary' do
   # Pods for Dota2Dictionary
 
 pod 'Kingfisher'
+pod 'SwiftLint'
+
+#Rx
+pod 'RxSwift'
+pod 'RxCocoa'
 
 end
