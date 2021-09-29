@@ -15,7 +15,10 @@ class HeroViewController: UIViewController {
     var heroViewModel = HeroViewModel()
     let disposeBag = DisposeBag()
     
-    @IBOutlet weak var attributeCollectionView: UICollectionView!
+    @IBOutlet weak var strengthButton: UIButton!
+    @IBOutlet weak var agibilityButton: UIButton!
+    @IBOutlet weak var intelligentButton: UIButton!
+    
     @IBOutlet weak var allHeroCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -23,27 +26,11 @@ class HeroViewController: UIViewController {
         allHeroCollectionView.register(UINib(nibName: "AllHeroCollectionViewCell",
                                              bundle: nil),
                                        forCellWithReuseIdentifier: "AllHeroCollectionViewCell")
-        attributeCollectionView.register(UINib(nibName: "AttributeCollectionViewCell",
-                                             bundle: nil),
-                                       forCellWithReuseIdentifier: "AttributeCollectionViewCell")
         bindUI()
         configureNaviBarColor()
     }
     
     func bindUI() {
-        AttributeViewModel
-            .shared
-            .listAttribute
-            .asObservable()
-            .bind(to: self
-                    .attributeCollectionView
-                    .rx
-                    .items(cellIdentifier: "AttributeCollectionViewCell",
-                           cellType: AttributeCollectionViewCell.self)) { _, attribute, cell in
-                cell.configure(attribute: attribute)
-            }
-            .disposed(by: disposeBag)
-        
         heroViewModel
             .listHero
             .asObservable()
@@ -74,11 +61,6 @@ extension HeroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch collectionView {
-        case attributeCollectionView:
-            return CGSize(width: view.frame.size.width/3.35, height: 50)
-        default:
-            return CGSize(width: view.frame.size.width/3.35, height: view.frame.size.height/6.5)
-        }
+        return CGSize(width: view.frame.size.width/3.35, height: view.frame.size.height/6.5)
     }
 }
