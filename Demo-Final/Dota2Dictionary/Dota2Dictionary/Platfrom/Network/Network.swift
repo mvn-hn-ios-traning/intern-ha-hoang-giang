@@ -20,7 +20,9 @@ enum ApiMethod: String {
 
 extension String {
     func addingPercentEncodingForURLQueryValue() -> String? {
-        let allowedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
+        let allowedCharacters =
+            CharacterSet(charactersIn:
+                            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
         return self.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
     }
 }

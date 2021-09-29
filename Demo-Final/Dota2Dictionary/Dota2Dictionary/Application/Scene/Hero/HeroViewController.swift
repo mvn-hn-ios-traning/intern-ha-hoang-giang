@@ -32,14 +32,14 @@ class HeroViewController: UIViewController {
     
     func bindUI() {
         heroViewModel
-            .listHero
+            .listHeroNew
             .asObservable()
             .bind(to: self
                     .allHeroCollectionView
                     .rx
                     .items(cellIdentifier: "AllHeroCollectionViewCell",
                            cellType: AllHeroCollectionViewCell.self)) { _, hero, cell in
-                cell.configure(hero: hero)
+                cell.bind(hero)
             }
             .disposed(by: disposeBag)
         

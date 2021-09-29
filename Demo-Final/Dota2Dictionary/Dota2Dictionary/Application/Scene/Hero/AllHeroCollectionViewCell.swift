@@ -18,14 +18,10 @@ class AllHeroCollectionViewCell: UICollectionViewCell {
         // Initialization code
         contentView.backgroundColor = .black
     }
-
-    func configure(hero: HeroModel) {
-        /// hero's name
-        heroName.text = hero.localizedName
-
-        /// hero's avatar
-        let heroNewName = hero.name.replacingOccurrences(of: "npc_dota_hero_", with: "")
-        let url = URL(string: "http://cdn.dota2.com/apps/dota2/images/heroes/\(heroNewName)_full.png")
+    
+    func bind(_ viewModel: HeroItemViewModel) {
+        self.heroName.text = viewModel.heroName
+        let url = URL(string: "http://cdn.dota2.com/apps/dota2/images/heroes/\(viewModel.heroAvatar)_full.png")
         let processor = DownsamplingImageProcessor(size: heroAvatar.bounds.size)
         heroAvatar.kf.setImage(
             with: url,

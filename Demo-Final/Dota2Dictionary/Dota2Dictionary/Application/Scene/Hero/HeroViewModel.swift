@@ -14,6 +14,7 @@ class HeroViewModel: NSObject {
     let disposeBag = DisposeBag()
     
     var listHero = BehaviorRelay<[HeroModel]>(value: [])
+    var listHeroNew = Observable<[HeroItemViewModel]>.from([])
     
     override init() {
         super.init()
@@ -26,6 +27,9 @@ class HeroViewModel: NSObject {
                 self?.listHero.accept(data)
             }
         }
+        listHeroNew = listHero.map { $0.map {
+            HeroItemViewModel(with: $0)
+        } }
     }
     
 }
