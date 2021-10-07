@@ -11,4 +11,3 @@ public protocol HeroUseCaseProviderDomain {
     
     func makeHeroUseCaseDomain() -> HeroUseCaseDomain
 }
-

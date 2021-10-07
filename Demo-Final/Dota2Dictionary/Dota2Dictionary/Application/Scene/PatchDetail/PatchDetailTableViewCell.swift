@@ -13,7 +13,9 @@ class PatchDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var itemDetail: UILabel!
     @IBOutlet weak var avatar: UIImageView!
-
+    
+    let urlKey = "http://cdn.dota2.com/apps/dota2/images/"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,7 +28,10 @@ class PatchDetailTableViewCell: UITableViewCell {
     }
     
     func configure(model: NewPatchDetailViewModel) {
-        let url = URL(string: "http://cdn.dota2.com/apps/dota2/images/items/\(model.itemName)_lg.png")
+        self.itemName.text = model.newHeroName
+        self.itemDetail.text = model.newHeroDetail
+        
+        let url = URL(string: "\(urlKey)\(model.imageKey)/\(model.heroName)_\(model.sizeImg).png")
         let processor = DownsamplingImageProcessor(size: avatar.bounds.size)
         avatar
             .kf

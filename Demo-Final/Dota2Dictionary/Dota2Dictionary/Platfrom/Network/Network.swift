@@ -107,7 +107,39 @@ class Network: NSObject {
         }
     }
     /// get Items and Heroes Patch Data
-    func getDetailsAll(patchName: String, closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
+    func getHeroesDetailAll(patchName: String,
+                            closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
+        requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
+                   param: nil,
+                   method: .GET,
+                   loading: true) { (data, _) in
+            if let data = data as? [String: Any] {
+                var listPatch: [PatchModel] = [PatchModel]()
+                if let details = data[patchName] as? [String: Any] {
+                    /// handle Heroes patch data
+                    if let heroes = details["heroes"] as? [String: Any] {
+                        let sortHeroes = Array(heroes.keys).sorted(by: <)
+                        for hero in sortHeroes {
+                            let listPatchAdd: PatchModel = PatchModel()
+                            listPatchAdd.imageKey = "heroes"
+                            listPatchAdd.sizeImg = "full"
+                            listPatchAdd.hero = hero
+                            if let heroDetail = heroes[hero] as? [String] {
+                                listPatchAdd.heroDetail = heroDetail
+                            }
+                            listPatch.append(listPatchAdd)
+                        }
+                    }
+                }
+                closure(listPatch, nil)
+            } else {
+                closure(nil, nil)
+            }
+        }
+    }
+    
+    func getItemsDetailAll(patchName: String,
+                           closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
         requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
                    param: nil,
                    method: .GET,
@@ -120,22 +152,11 @@ class Network: NSObject {
                         let sortItems = Array(items.keys).sorted(by: >)
                         for item in sortItems {
                             let listPatchAdd: PatchModel = PatchModel()
-                            listPatchAdd.item = item
+                            listPatchAdd.imageKey = "items"
+                            listPatchAdd.sizeImg = "lg"
+                            listPatchAdd.hero = item
                             if let itemDetail = items[item] as? [String] {
-                                listPatchAdd.itemDetail = itemDetail
-                            }
-                            listPatch.append(listPatchAdd)
-                        }
-                    }
-                    /// handle Heroes patch data
-                    if let heroes = details["heroes"] as? [String: Any] {
-//                        listPatch.removeAll()
-                        let sortHeroes = Array(heroes.keys).sorted(by: <)
-                        for hero in sortHeroes {
-                            let listPatchAdd: PatchModel = PatchModel()
-                            listPatchAdd.hero = hero
-                            if let heroDetail = heroes[hero] as? [String] {
-                                listPatchAdd.heroDetail = heroDetail
+                                listPatchAdd.heroDetail = itemDetail
                             }
                             listPatch.append(listPatchAdd)
                         }
@@ -183,7 +204,9 @@ extension Dictionary {
     func stringFromHttpParameters() -> String {
         let parameterArray = self.map { (key, value) -> String in
             
-            let percentEscapedKey = (key as! String).addingPercentEncodingForURLQueryValue()!
+            let percentEscapedKey = (key as! String)
+                .addingPercentEncodingForURLQueryValue()!
+            
             if value is String {
                 let percentEscapedValue = (value as! String).addingPercentEncodingForURLQueryValue()!
                 return "\(percentEscapedKey)=\(percentEscapedValue)"

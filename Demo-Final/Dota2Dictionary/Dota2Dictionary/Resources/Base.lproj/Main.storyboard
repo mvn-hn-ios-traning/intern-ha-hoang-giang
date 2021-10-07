@@ -30,10 +30,10 @@
             </objects>
             <point key="canvasLocation" x="1193" y="-773"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Patch View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PatchViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,23 +72,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="JrI-wu-vYd">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <stackView opaque="NO" alpha="0.75" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="n4M-dZ-ZlK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2O-Pq-q11">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
+                                        <state key="normal" title="Heroes"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMe-Z2-paZ">
+                                        <rect key="frame" x="207" y="0.0" width="207" height="50"/>
+                                        <state key="normal" title="Items "/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Et1-ih-qxn"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Joa-bu-d7x"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JrI-wu-vYd" firstAttribute="leading" secondItem="Joa-bu-d7x" secondAttribute="leading" id="5ok-R0-CNl"/>
-                            <constraint firstItem="JrI-wu-vYd" firstAttribute="top" secondItem="Joa-bu-d7x" secondAttribute="top" id="Iv6-H6-p5P"/>
                             <constraint firstItem="Joa-bu-d7x" firstAttribute="trailing" secondItem="JrI-wu-vYd" secondAttribute="trailing" id="Wyc-ze-sHu"/>
+                            <constraint firstItem="n4M-dZ-ZlK" firstAttribute="top" secondItem="Joa-bu-d7x" secondAttribute="top" id="aOn-BI-JYB"/>
+                            <constraint firstItem="Joa-bu-d7x" firstAttribute="trailing" secondItem="n4M-dZ-ZlK" secondAttribute="trailing" id="dq0-x5-jB5"/>
                             <constraint firstItem="Joa-bu-d7x" firstAttribute="bottom" secondItem="JrI-wu-vYd" secondAttribute="bottom" id="jds-xS-Shu"/>
+                            <constraint firstItem="n4M-dZ-ZlK" firstAttribute="leading" secondItem="Joa-bu-d7x" secondAttribute="leading" id="oAU-Oa-kzI"/>
+                            <constraint firstItem="JrI-wu-vYd" firstAttribute="top" secondItem="n4M-dZ-ZlK" secondAttribute="bottom" id="ttt-ye-Bor"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="patchDetailTableView" destination="JrI-wu-vYd" id="pXl-R6-EsI"/>
+                        <outlet property="selectHeroesPatch" destination="m2O-Pq-q11" id="cGW-PY-HbB"/>
+                        <outlet property="selectItemsPatch" destination="mMe-Z2-paZ" id="IAY-l0-pIK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qac-lC-PbX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

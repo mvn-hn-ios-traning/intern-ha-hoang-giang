@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PatchViewController.swift
 //  Dota2Dictionary
 //
 //  Created by MacOS on 22/09/2021.
@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class HomeViewController: UIViewController {
+class PatchViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     var patchViewModel = PatchViewModel()
@@ -44,10 +44,17 @@ class HomeViewController: UIViewController {
             .modelSelected(NewPatchDetailViewModel.self)
             .subscribe(onNext: { [weak self] object in
                 guard let self = self else { return }
+                
+                if let selectedRowIndexPath = self.patchTableView.indexPathForSelectedRow {
+                    self.patchTableView.deselectRow(at: selectedRowIndexPath, animated: true)
+                }
+                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = storyboard
-                    .instantiateViewController(withIdentifier: "PatchDetailViewController")
-                    as! PatchDetailViewController
+                guard let viewController = storyboard
+                        .instantiateViewController(withIdentifier: "PatchDetailViewController")
+                        as? PatchDetailViewController else {
+                    return
+                }
                 viewController.title = object.newPatchName
                 viewController.patchDetailViewModel = PatchDetailViewModel(patchName: object.patchName)
                 self.navigationController?.pushViewController(viewController, animated: true)

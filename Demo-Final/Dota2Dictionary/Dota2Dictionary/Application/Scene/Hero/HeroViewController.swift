@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 import RxSwift
 import RxCocoa
+import RxViewController
 
 class HeroViewController: UIViewController {
     
@@ -35,19 +36,13 @@ class HeroViewController: UIViewController {
     func bindViewModel() {
         let input = HeroViewModel.Input(strengthSelecting: strengthButton.rx.tap.asDriver(),
                                         agibilitySelecting: agibilityButton.rx.tap.asDriver(),
-                                        intelligentSelecting: intelligentButton.rx.tap.asDriver())
+                                        intelligentSelecting: intelligentButton.rx.tap.asDriver(),
+                                        trigger: self.rx.viewWillAppear.map({ _ in
+                                        }).asDriver(onErrorJustReturn: Void()))
         
         let output = heroViewModel.transform(input: input)
-        let strengthOutput = output.selectedStrength
-        let agibilityOutput = output.selectedAgibility
-        let intelligentOutput = output.selectedIntelligent
-        
-        let allOutput = Observable.of(strengthOutput.asObservable(),
-                                      agibilityOutput.asObservable(),
-                                      intelligentOutput.asObservable())
-
-        allOutput
-            .merge()
+        output
+            .fetchOutput
             .bind(to: allHeroCollectionView
                     .rx
                     .items(cellIdentifier: "AllHeroCollectionViewCell",

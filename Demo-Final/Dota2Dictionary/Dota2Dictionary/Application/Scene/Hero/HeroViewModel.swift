@@ -9,7 +9,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class HeroViewModel {
+class HeroViewModel: ViewModelType {
     
     let disposeBag = DisposeBag()
     
@@ -37,7 +37,6 @@ class HeroViewModel {
     }
     
     func transform(input: Input) -> Output {
-        ///
         let strength = input
             .strengthSelecting
             .asObservable()
@@ -55,7 +54,6 @@ class HeroViewModel {
             })
             .asDriver(onErrorDriveWith: .empty())
         
-        /// 
         let agibility = input
             .agibilitySelecting
             .asObservable()
@@ -73,7 +71,6 @@ class HeroViewModel {
             })
             .asDriver(onErrorDriveWith: .empty())
         
-        ///
         let intelligent = input
             .intelligentSelecting
             .asObservable()
@@ -91,9 +88,24 @@ class HeroViewModel {
             })
             .asDriver(onErrorDriveWith: .empty())
         
-        return Output(selectedStrength: strength,
-                      selectedAgibility: agibility,
-                      selectedIntelligent: intelligent)
+        let triggerOutput = input
+            .trigger
+            .asObservable()
+            .flatMapLatest {
+                return self
+                    .useCase
+                    .loadStrengthData()
+            }.map({
+                $0.map { HeroItemViewModel(with: $0) }
+            })
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let fetchOutput = Observable.of(strength.asObservable(),
+                                          agibility.asObservable(),
+                                          intelligent.asObservable(),
+                                          triggerOutput.asObservable()).merge()
+        
+        return Output(fetchOutput: fetchOutput)
     }
 }
 
@@ -102,11 +114,10 @@ extension HeroViewModel {
         let strengthSelecting: Driver<Void>
         let agibilitySelecting: Driver<Void>
         let intelligentSelecting: Driver<Void>
+        let trigger: Driver<Void>
     }
     
     struct Output {
-        let selectedStrength: Driver<[HeroItemViewModel]>
-        let selectedAgibility: Driver<[HeroItemViewModel]>
-        let selectedIntelligent: Driver<[HeroItemViewModel]>
+        let fetchOutput: Observable<[HeroItemViewModel]>
     }
 }

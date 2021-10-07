@@ -18,17 +18,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0P-YZ-T68">
-                        <rect key="frame" x="5" y="38" width="358" height="337"/>
+                        <rect key="frame" x="5" y="58" width="358" height="317"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASg-7j-gXV">
-                        <rect key="frame" x="0.0" y="3" width="368" height="30"/>
+                        <rect key="frame" x="0.0" y="3" width="368" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="K9e-vU-qbf"/>
+                            <constraint firstAttribute="height" constant="50" id="K9e-vU-qbf"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>

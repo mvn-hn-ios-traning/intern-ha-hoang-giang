@@ -10,7 +10,7 @@
 		1954A026A02DA34703C39270 /* Pods_Dota2Dictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 961E74F0FCFC2746522085AA /* Pods_Dota2Dictionary.framework */; };
 		223743DD26FB0A4400CAFF69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743DC26FB0A4400CAFF69 /* AppDelegate.swift */; };
 		223743DF26FB0A4400CAFF69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743DE26FB0A4400CAFF69 /* SceneDelegate.swift */; };
-		223743E126FB0A4400CAFF69 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743E026FB0A4400CAFF69 /* HomeViewController.swift */; };
+		223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743E026FB0A4400CAFF69 /* PatchViewController.swift */; };
 		223743E426FB0A4400CAFF69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223743E226FB0A4400CAFF69 /* Main.storyboard */; };
 		223743E926FB0A4800CAFF69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 223743E726FB0A4800CAFF69 /* LaunchScreen.storyboard */; };
 		223743F926FB0B8400CAFF69 /* PatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223743F826FB0B8400CAFF69 /* PatchViewModel.swift */; };
@@ -33,7 +33,6 @@
 		2294FDAB270E0C9700CEE769 /* PatchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294FDAA270E0C9700CEE769 /* PatchDetailViewModel.swift */; };
 		2296977F270AD0B400E7103E /* PatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296977E270AD0B400E7103E /* PatchModel.swift */; };
 		22969781270AD35800E7103E /* NewPatchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22969780270AD35800E7103E /* NewPatchDetailViewModel.swift */; };
-		22969783270AD57200E7103E /* PatchUseCasePlatfrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22969782270AD57200E7103E /* PatchUseCasePlatfrom.swift */; };
 		22969787270B00E600E7103E /* PatchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22969786270B00E600E7103E /* PatchDetailViewController.swift */; };
 		22A128B52701541500728288 /* HeroNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A128B42701541500728288 /* HeroNetwork.swift */; };
 		22A128BA2701AA0100728288 /* HeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A128B92701AA0100728288 /* HeroViewController.swift */; };
@@ -45,7 +44,7 @@
 		223743D926FB0A4400CAFF69 /* Dota2Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dota2Dictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		223743DC26FB0A4400CAFF69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		223743DE26FB0A4400CAFF69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		223743E026FB0A4400CAFF69 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		223743E026FB0A4400CAFF69 /* PatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchViewController.swift; sourceTree = "<group>"; };
 		223743E326FB0A4400CAFF69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		223743E826FB0A4800CAFF69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		223743EA26FB0A4800CAFF69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +68,6 @@
 		2294FDAA270E0C9700CEE769 /* PatchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchDetailViewModel.swift; sourceTree = "<group>"; };
 		2296977E270AD0B400E7103E /* PatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchModel.swift; sourceTree = "<group>"; };
 		22969780270AD35800E7103E /* NewPatchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPatchDetailViewModel.swift; sourceTree = "<group>"; };
-		22969782270AD57200E7103E /* PatchUseCasePlatfrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUseCasePlatfrom.swift; sourceTree = "<group>"; };
 		22969786270B00E600E7103E /* PatchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchDetailViewController.swift; sourceTree = "<group>"; };
 		22A128B42701541500728288 /* HeroNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroNetwork.swift; sourceTree = "<group>"; };
 		22A128B92701AA0100728288 /* HeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +90,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		223167FE270ED44200459716 /* PatchDetail */ = {
+			isa = PBXGroup;
+			children = (
+				22969786270B00E600E7103E /* PatchDetailViewController.swift */,
+				2294FDAA270E0C9700CEE769 /* PatchDetailViewModel.swift */,
+				2294FDA6270DEDE100CEE769 /* PatchDetailTableViewCell.swift */,
+				2294FDA7270DEDE100CEE769 /* PatchDetailTableViewCell.xib */,
+			);
+			path = PatchDetail;
+			sourceTree = "<group>";
+		};
 		223743D026FB0A4400CAFF69 = {
 			isa = PBXGroup;
 			children = (
@@ -144,7 +153,8 @@
 		2237445026FB35DF00CAFF69 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				2237445226FB367900CAFF69 /* Home */,
+				2237445226FB367900CAFF69 /* PatchAll */,
+				223167FE270ED44200459716 /* PatchDetail */,
 				22A128B62701A94A00728288 /* Hero */,
 				22A128B72701A95A00728288 /* Favorite */,
 				22A128B82701A9A300728288 /* Profile */,
@@ -159,20 +169,16 @@
 			path = Ultility;
 			sourceTree = "<group>";
 		};
-		2237445226FB367900CAFF69 /* Home */ = {
+		2237445226FB367900CAFF69 /* PatchAll */ = {
 			isa = PBXGroup;
 			children = (
-				223743E026FB0A4400CAFF69 /* HomeViewController.swift */,
+				223743E026FB0A4400CAFF69 /* PatchViewController.swift */,
 				223743F826FB0B8400CAFF69 /* PatchViewModel.swift */,
 				22969780270AD35800E7103E /* NewPatchDetailViewModel.swift */,
 				2294FDA2270DB2D000CEE769 /* PatchTableViewCell.swift */,
 				2294FDA3270DB2D100CEE769 /* PatchTableViewCell.xib */,
-				22969786270B00E600E7103E /* PatchDetailViewController.swift */,
-				2294FDAA270E0C9700CEE769 /* PatchDetailViewModel.swift */,
-				2294FDA6270DEDE100CEE769 /* PatchDetailTableViewCell.swift */,
-				2294FDA7270DEDE100CEE769 /* PatchDetailTableViewCell.xib */,
 			);
-			path = Home;
+			path = PatchAll;
 			sourceTree = "<group>";
 		};
 		2237445326FB369200CAFF69 /* Platfrom */ = {
@@ -236,7 +242,6 @@
 		2237445C26FB849A00CAFF69 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				22969782270AD57200E7103E /* PatchUseCasePlatfrom.swift */,
 				2237445D26FB84AC00CAFF69 /* UseCasePlatform.swift */,
 				226BBD352704C81400808167 /* UseCaseProviderPlatform.swift */,
 			);
@@ -442,7 +447,7 @@
 				2237445B26FB3FB600CAFF69 /* UseCaseDomain.swift in Sources */,
 				2237445E26FB84AC00CAFF69 /* UseCasePlatform.swift in Sources */,
 				22969787270B00E600E7103E /* PatchDetailViewController.swift in Sources */,
-				223743E126FB0A4400CAFF69 /* HomeViewController.swift in Sources */,
+				223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */,
 				2296977F270AD0B400E7103E /* PatchModel.swift in Sources */,
 				223743DD26FB0A4400CAFF69 /* AppDelegate.swift in Sources */,
 				22F15F9E2700CACD00CACDE2 /* Network.swift in Sources */,
@@ -461,7 +466,6 @@
 				226BBD362704C81400808167 /* UseCaseProviderPlatform.swift in Sources */,
 				226F1BA72702C32A008A693D /* AllHeroCollectionViewCell.swift in Sources */,
 				22785D1426FD6DFA0032131B /* UseCaseProviderDomain.swift in Sources */,
-				22969783270AD57200E7103E /* PatchUseCasePlatfrom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

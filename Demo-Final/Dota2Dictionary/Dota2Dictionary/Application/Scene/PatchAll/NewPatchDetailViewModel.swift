@@ -44,6 +44,9 @@ final class NewPatchDetailViewModel {
         return newHero
     }
     
+    var imageKey: String
+    var sizeImg: String
+    
     init (with patch: PatchModel) {
         self.patch = patch
         self.patchName = patch.patchName
@@ -52,6 +55,8 @@ final class NewPatchDetailViewModel {
         self.newItemName = patch.item.replacingOccurrences(of: "_", with: " ").uppercased()
         self.heroName = patch.hero
         self.newHeroName = patch.hero.replacingOccurrences(of: "_", with: " ").uppercased()
+        self.imageKey = patch.imageKey
+        self.sizeImg = patch.sizeImg
     }
         
 }
