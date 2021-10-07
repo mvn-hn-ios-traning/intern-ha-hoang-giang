@@ -12,8 +12,8 @@ public class PatchModel: NSObject {
     var general: [String] = [""]
     var item: String = ""
     var itemDetail: [String] = [""]
-    var hero: String = ""
-    var heroDetail: [String] = [""]
+    var nameHeroItem: String = ""
+    var detailHeroItem: [String] = [""]
     var imageKey: String = ""
     var sizeImg: String = ""
     

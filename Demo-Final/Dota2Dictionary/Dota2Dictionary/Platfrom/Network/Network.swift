@@ -28,7 +28,7 @@ class Network: NSObject {
         
         // set method & param
         if method == .GET {
-            if let paramString = param?.stringFromHttpParameters() {
+            if let paramString = param {
                 request = URLRequest(url: URL(string: "\(url)?\(paramString)")!)
             } else {
                 request = URLRequest(url: URL(string: url)!)
@@ -123,9 +123,9 @@ class Network: NSObject {
                             let listPatchAdd: PatchModel = PatchModel()
                             listPatchAdd.imageKey = "heroes"
                             listPatchAdd.sizeImg = "full"
-                            listPatchAdd.hero = hero
+                            listPatchAdd.nameHeroItem = hero
                             if let heroDetail = heroes[hero] as? [String] {
-                                listPatchAdd.heroDetail = heroDetail
+                                listPatchAdd.detailHeroItem = heroDetail
                             }
                             listPatch.append(listPatchAdd)
                         }
@@ -154,9 +154,9 @@ class Network: NSObject {
                             let listPatchAdd: PatchModel = PatchModel()
                             listPatchAdd.imageKey = "items"
                             listPatchAdd.sizeImg = "lg"
-                            listPatchAdd.hero = item
+                            listPatchAdd.nameHeroItem = item
                             if let itemDetail = items[item] as? [String] {
-                                listPatchAdd.heroDetail = itemDetail
+                                listPatchAdd.detailHeroItem = itemDetail
                             }
                             listPatch.append(listPatchAdd)
                         }
@@ -188,32 +188,5 @@ class Network: NSObject {
                 closure(nil, nil)
             }
         }
-    }
-}
-
-extension String {
-    func addingPercentEncodingForURLQueryValue() -> String? {
-        let allowedCharacters =
-            CharacterSet(charactersIn:
-                            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
-        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
-    }
-}
-
-extension Dictionary {
-    func stringFromHttpParameters() -> String {
-        let parameterArray = self.map { (key, value) -> String in
-            
-            let percentEscapedKey = (key as! String)
-                .addingPercentEncodingForURLQueryValue()!
-            
-            if value is String {
-                let percentEscapedValue = (value as! String).addingPercentEncodingForURLQueryValue()!
-                return "\(percentEscapedKey)=\(percentEscapedValue)"
-            } else {
-                return "\(percentEscapedKey)=\(value)"
-            }
-        }
-        return parameterArray.joined(separator: "&")
     }
 }

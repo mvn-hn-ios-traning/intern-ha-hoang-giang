@@ -20,20 +20,6 @@ class HeroViewModel: ViewModelType {
     
     init() {
         self.useCase = HeroUseCasePlatform()
-        bindingData()
-    }
-    
-    func bindingData() {
-        Network.shared.getHeroAll { [weak self] data, _ in
-            if let data = data {
-                self?.listHero.accept(data)
-            }
-        }
-        listHeroNew = listHero.map {
-            $0.map {
-                HeroItemViewModel(with: $0)
-            }
-        }
     }
     
     func transform(input: Input) -> Output {
@@ -44,15 +30,9 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadStrengthData()
-            }
-            .map {
-                $0.filter {
-                    $0.primaryAttr == "str"
-                }
-            }.map({
-                $0.map { HeroItemViewModel(with: $0) }
-            })
-            .asDriver(onErrorDriveWith: .empty())
+            }.map { $0.filter { $0.primaryAttr == "str" }
+            }.map { $0.map { HeroItemViewModel(with: $0) }
+            }.asDriver(onErrorDriveWith: .empty())
         
         let agibility = input
             .agibilitySelecting
@@ -61,15 +41,9 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadAgibilityData()
-            }
-            .map {
-                $0.filter {
-                    $0.primaryAttr == "agi"
-                }
-            }.map({
-                $0.map { HeroItemViewModel(with: $0) }
-            })
-            .asDriver(onErrorDriveWith: .empty())
+            }.map { $0.filter { $0.primaryAttr == "agi" }
+            }.map { $0.map { HeroItemViewModel(with: $0) }
+            }.asDriver(onErrorDriveWith: .empty())
         
         let intelligent = input
             .intelligentSelecting
@@ -78,15 +52,9 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadIntelligentData()
-            }
-            .map {
-                $0.filter {
-                    $0.primaryAttr == "int"
-                }
-            }.map({
-                $0.map { HeroItemViewModel(with: $0) }
-            })
-            .asDriver(onErrorDriveWith: .empty())
+            }.map { $0.filter { $0.primaryAttr == "int" }
+            }.map { $0.map { HeroItemViewModel(with: $0) }
+            }.asDriver(onErrorDriveWith: .empty())
         
         let triggerOutput = input
             .trigger
@@ -95,16 +63,16 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadStrengthData()
-            }.map({
-                $0.map { HeroItemViewModel(with: $0) }
-            })
-            .asDriver(onErrorDriveWith: .empty())
+            }.map { $0.map { HeroItemViewModel(with: $0) }
+            }.asDriver(onErrorDriveWith: .empty())
         
-        let fetchOutput = Observable.of(strength.asObservable(),
-                                          agibility.asObservable(),
-                                          intelligent.asObservable(),
-                                          triggerOutput.asObservable()).merge()
-        
+        let fetchOutput =
+            Observable
+            .of(strength.asObservable(),
+                agibility.asObservable(),
+                intelligent.asObservable(),
+                triggerOutput.asObservable())
+            .merge()
         return Output(fetchOutput: fetchOutput)
     }
 }

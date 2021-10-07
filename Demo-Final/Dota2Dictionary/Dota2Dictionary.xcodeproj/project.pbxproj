@@ -18,13 +18,10 @@
 		2237445B26FB3FB600CAFF69 /* UseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237445A26FB3FB600CAFF69 /* UseCaseDomain.swift */; };
 		2237445E26FB84AC00CAFF69 /* UseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237445D26FB84AC00CAFF69 /* UseCasePlatform.swift */; };
 		226BBD26270424A500808167 /* HeroItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226BBD25270424A500808167 /* HeroItemViewModel.swift */; };
-		226BBD362704C81400808167 /* UseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226BBD352704C81400808167 /* UseCaseProviderPlatform.swift */; };
 		226F1BA72702C32A008A693D /* AllHeroCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F1BA52702C32A008A693D /* AllHeroCollectionViewCell.swift */; };
 		226F1BA82702C32A008A693D /* AllHeroCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226F1BA62702C32A008A693D /* AllHeroCollectionViewCell.xib */; };
 		226F1BB427031A52008A693D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F1BB327031A52008A693D /* Extension.swift */; };
 		226F1BB627037913008A693D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F1BB527037912008A693D /* Assets.xcassets */; };
-		22785D1426FD6DFA0032131B /* UseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22785D1326FD6DFA0032131B /* UseCaseProviderDomain.swift */; };
-		22785D1826FDAFAB0032131B /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22785D1726FDAFAB0032131B /* Application.swift */; };
 		2286A54726FC78BD0086134D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286A54626FC78BD0086134D /* ViewModelType.swift */; };
 		2294FDA4270DB2D100CEE769 /* PatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2294FDA2270DB2D000CEE769 /* PatchTableViewCell.swift */; };
 		2294FDA5270DB2D100CEE769 /* PatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2294FDA3270DB2D100CEE769 /* PatchTableViewCell.xib */; };
@@ -53,13 +50,10 @@
 		2237445A26FB3FB600CAFF69 /* UseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseDomain.swift; sourceTree = "<group>"; };
 		2237445D26FB84AC00CAFF69 /* UseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasePlatform.swift; sourceTree = "<group>"; };
 		226BBD25270424A500808167 /* HeroItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroItemViewModel.swift; sourceTree = "<group>"; };
-		226BBD352704C81400808167 /* UseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseProviderPlatform.swift; sourceTree = "<group>"; };
 		226F1BA52702C32A008A693D /* AllHeroCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllHeroCollectionViewCell.swift; sourceTree = "<group>"; };
 		226F1BA62702C32A008A693D /* AllHeroCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllHeroCollectionViewCell.xib; sourceTree = "<group>"; };
 		226F1BB327031A52008A693D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		226F1BB527037912008A693D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		22785D1326FD6DFA0032131B /* UseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseProviderDomain.swift; sourceTree = "<group>"; };
-		22785D1726FDAFAB0032131B /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		2286A54626FC78BD0086134D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		2294FDA2270DB2D000CEE769 /* PatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchTableViewCell.swift; sourceTree = "<group>"; };
 		2294FDA3270DB2D100CEE769 /* PatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatchTableViewCell.xib; sourceTree = "<group>"; };
@@ -134,7 +128,6 @@
 		2237444D26FB35CA00CAFF69 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				22785D1726FDAFAB0032131B /* Application.swift */,
 				2237444F26FB35D900CAFF69 /* Common */,
 				2237445026FB35DF00CAFF69 /* Scene */,
 				2237445126FB35FF00CAFF69 /* Ultility */,
@@ -213,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				2237445A26FB3FB600CAFF69 /* UseCaseDomain.swift */,
-				22785D1326FD6DFA0032131B /* UseCaseProviderDomain.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -243,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				2237445D26FB84AC00CAFF69 /* UseCasePlatform.swift */,
-				226BBD352704C81400808167 /* UseCaseProviderPlatform.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -443,7 +434,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A128BA2701AA0100728288 /* HeroViewController.swift in Sources */,
-				22785D1826FDAFAB0032131B /* Application.swift in Sources */,
 				2237445B26FB3FB600CAFF69 /* UseCaseDomain.swift in Sources */,
 				2237445E26FB84AC00CAFF69 /* UseCasePlatform.swift in Sources */,
 				22969787270B00E600E7103E /* PatchDetailViewController.swift in Sources */,
@@ -463,9 +453,7 @@
 				223743DF26FB0A4400CAFF69 /* SceneDelegate.swift in Sources */,
 				223743FC26FB0B9800CAFF69 /* HeroModel.swift in Sources */,
 				223743F926FB0B8400CAFF69 /* PatchViewModel.swift in Sources */,
-				226BBD362704C81400808167 /* UseCaseProviderPlatform.swift in Sources */,
 				226F1BA72702C32A008A693D /* AllHeroCollectionViewCell.swift in Sources */,
-				22785D1426FD6DFA0032131B /* UseCaseProviderDomain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

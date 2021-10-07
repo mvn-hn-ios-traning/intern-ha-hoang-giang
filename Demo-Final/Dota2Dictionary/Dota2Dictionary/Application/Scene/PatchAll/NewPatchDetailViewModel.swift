@@ -22,23 +22,12 @@ final class NewPatchDetailViewModel {
        return newGen
     }
     
-    var itemName: String
-    var newItemName: String
-        
-    var newItemDetail: String {
-        var newItem = ""
-        for item in patch.itemDetail {
-            newItem.append("* " + item + ". \n \n")
-        }
-        return newItem
-    }
-    
     var heroName: String
     var newHeroName: String
         
     var newHeroDetail: String {
         var newHero = ""
-        for hero in patch.heroDetail {
+        for hero in patch.detailHeroItem {
             newHero.append("* " + hero + ". \n \n")
         }
         return newHero
@@ -51,10 +40,8 @@ final class NewPatchDetailViewModel {
         self.patch = patch
         self.patchName = patch.patchName
         self.newPatchName = patch.patchName.replacingOccurrences(of: "_", with: ".")
-        self.itemName = patch.item
-        self.newItemName = patch.item.replacingOccurrences(of: "_", with: " ").uppercased()
-        self.heroName = patch.hero
-        self.newHeroName = patch.hero.replacingOccurrences(of: "_", with: " ").uppercased()
+        self.heroName = patch.nameHeroItem
+        self.newHeroName = patch.nameHeroItem.replacingOccurrences(of: "_", with: " ").uppercased()
         self.imageKey = patch.imageKey
         self.sizeImg = patch.sizeImg
     }
