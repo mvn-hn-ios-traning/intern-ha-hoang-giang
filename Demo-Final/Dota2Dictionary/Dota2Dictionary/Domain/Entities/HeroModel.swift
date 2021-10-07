@@ -7,32 +7,32 @@
 
 import Foundation
 
-class HeroModel: NSObject {
+public class HeroModel: NSObject {
     var theID: Int = 0
     var name: String = ""
     var localizedName: String = ""
     var primaryAttr: String = ""
-    var attackYype: String = ""
+    var attackType: String = ""
     var roles: [String] = [""]
     
     func initLoad(_ json: [String: Any]) -> HeroModel {
-        if let temp = json["id"] as? Int {
-            theID = temp
+        if let result = json["id"] as? Int {
+            theID = result
         }
-        if let temp = json["name"] as? String {
-            name = temp
+        if let result = json["name"] as? String {
+            name = result
         }
-        if let temp = json["localized_name"] as? String {
-            localizedName = temp
+        if let result = json["localized_name"] as? String {
+            localizedName = result
         }
-        if let temp = json["primary_attr"] as? String {
-            primaryAttr = temp
+        if let result = json["primary_attr"] as? String {
+            primaryAttr = result
         }
-        if let temp = json["attack_type"] as? String {
-            attackYype = temp
+        if let result = json["attack_type"] as? String {
+            attackType = result
         }
-        if let temp = json["roles"] as? [String] {
-            roles = temp
+        if let result = json["roles"] as? [String] {
+            roles = result
         }
         return self
     }

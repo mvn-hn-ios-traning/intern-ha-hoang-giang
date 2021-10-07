@@ -8,6 +8,7 @@
 import Foundation
 
 final class HeroItemViewModel {
+    
     let heroAvatar: String
     let heroName: String
     let hero: HeroModel

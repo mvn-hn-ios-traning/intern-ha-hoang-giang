@@ -10,36 +10,11 @@ import RxCocoa
 import RxSwift
 
 typealias ApiCompletion = (_ data: Any?, _ error: Error?) -> Void
-
 typealias ApiParam = [String: Any]
 
 enum ApiMethod: String {
     case GET = "get"
     case POST = "post"
-}
-
-extension String {
-    func addingPercentEncodingForURLQueryValue() -> String? {
-        let allowedCharacters =
-            CharacterSet(charactersIn:
-                            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
-        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
-    }
-}
-
-extension Dictionary {
-    func stringFromHttpParameters() -> String {
-        let parameterArray = self.map { (key, value) -> String in
-            let percentEscapedKey = (key as! String).addingPercentEncodingForURLQueryValue()!
-            if value is String {
-                let percentEscapedValue = (value as! String).addingPercentEncodingForURLQueryValue()!
-                return "\(percentEscapedKey)=\(percentEscapedValue)"
-            } else {
-                return "\(percentEscapedKey)=\(value)"
-            }
-        }
-        return parameterArray.joined(separator: "&")
-    }
 }
 
 class Network: NSObject {
@@ -76,9 +51,7 @@ class Network: NSObject {
         request.httpMethod = method.rawValue
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
             DispatchQueue.main.async {
-                
                 // check for fundamental networking error
                 guard let data = data, error == nil else {
                     completion(nil, error)
@@ -86,10 +59,8 @@ class Network: NSObject {
                 }
                 
                 // check for http errors
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200, let res = response {
-                    print(res)
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200, response != nil {
                 }
-                
                 if let resJson = self.convertToJson(data) {
                     completion(resJson, nil)
                 } else if let resString = String(data: data, encoding: .utf8) {
@@ -109,7 +80,76 @@ class Network: NSObject {
         return nil
     }
     
+    /// call data from https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json
+    /// get Patch data
+    func getPatchAll(closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
+        requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
+                   param: nil,
+                   method: .GET,
+                   loading: true) { (data, _) in
+            if let data = data as? [String: Any] {
+                let sortedPatches = Array(data.keys).sorted(by: >)
+                var listPatch: [PatchModel] = [PatchModel]()
+                for patch in sortedPatches {
+                    let listPatchAdd: PatchModel = PatchModel()
+                    listPatchAdd.patchName = patch
+                    if let details = data[patch] as? [String: Any] {
+                        if let general = details["general"] as? [String] {
+                            listPatchAdd.general = general
+                        }
+                    }
+                    listPatch.append(listPatchAdd)
+                }
+                closure(listPatch, nil)
+            } else {
+                closure(nil, nil)
+            }
+        }
+    }
+    /// get Items and Heroes Patch Data
+    func getDetailsAll(patchName: String, closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
+        requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
+                   param: nil,
+                   method: .GET,
+                   loading: true) { (data, _) in
+            if let data = data as? [String: Any] {
+                var listPatch: [PatchModel] = [PatchModel]()
+                if let details = data[patchName] as? [String: Any] {
+                    /// handle Items Patch Data
+                    if let items = details["items"] as? [String: Any] {
+                        let sortItems = Array(items.keys).sorted(by: >)
+                        for item in sortItems {
+                            let listPatchAdd: PatchModel = PatchModel()
+                            listPatchAdd.item = item
+                            if let itemDetail = items[item] as? [String] {
+                                listPatchAdd.itemDetail = itemDetail
+                            }
+                            listPatch.append(listPatchAdd)
+                        }
+                    }
+                    /// handle Heroes patch data
+                    if let heroes = details["heroes"] as? [String: Any] {
+//                        listPatch.removeAll()
+                        let sortHeroes = Array(heroes.keys).sorted(by: <)
+                        for hero in sortHeroes {
+                            let listPatchAdd: PatchModel = PatchModel()
+                            listPatchAdd.hero = hero
+                            if let heroDetail = heroes[hero] as? [String] {
+                                listPatchAdd.heroDetail = heroDetail
+                            }
+                            listPatch.append(listPatchAdd)
+                        }
+                    }
+                }
+                closure(listPatch, nil)
+            } else {
+                closure(nil, nil)
+            }
+        }
+    }
+    
     /// call data from https://api.opendota.com/api/heroes
+    /// get Heroes All Data
     func getHeroAll(closure: @escaping (_ response: [HeroModel]?, _ error: Error?) -> Void) {
         requestSON("https://api.opendota.com/api/heroes",
                    param: nil,
@@ -118,8 +158,8 @@ class Network: NSObject {
             if let data = data as? [[String: Any]] {
                 var listHero: [HeroModel] = [HeroModel]()
                 for item in data {
-                    let listHeroAdd: HeroModel = HeroModel()
-                    listHeroAdd.initLoad(item)
+                    var listHeroAdd: HeroModel = HeroModel()
+                    listHeroAdd = listHeroAdd.initLoad(item)
                     listHero.append(listHeroAdd)
                 }
                 closure(listHero, nil)
@@ -128,5 +168,29 @@ class Network: NSObject {
             }
         }
     }
-    
+}
+
+extension String {
+    func addingPercentEncodingForURLQueryValue() -> String? {
+        let allowedCharacters =
+            CharacterSet(charactersIn:
+                            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
+        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
+    }
+}
+
+extension Dictionary {
+    func stringFromHttpParameters() -> String {
+        let parameterArray = self.map { (key, value) -> String in
+            
+            let percentEscapedKey = (key as! String).addingPercentEncodingForURLQueryValue()!
+            if value is String {
+                let percentEscapedValue = (value as! String).addingPercentEncodingForURLQueryValue()!
+                return "\(percentEscapedKey)=\(percentEscapedValue)"
+            } else {
+                return "\(percentEscapedKey)=\(value)"
+            }
+        }
+        return parameterArray.joined(separator: "&")
+    }
 }

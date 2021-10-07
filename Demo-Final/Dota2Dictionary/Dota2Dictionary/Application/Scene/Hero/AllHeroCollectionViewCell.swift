@@ -20,18 +20,23 @@ class AllHeroCollectionViewCell: UICollectionViewCell {
     }
     
     func bind(_ viewModel: HeroItemViewModel) {
+        /// hero's name
         self.heroName.text = viewModel.heroName
+        
+        /// hero's avatar
         let url = URL(string: "http://cdn.dota2.com/apps/dota2/images/heroes/\(viewModel.heroAvatar)_full.png")
         let processor = DownsamplingImageProcessor(size: heroAvatar.bounds.size)
-        heroAvatar.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "placeholderImage"),
-            options: [
-                .processor(processor),
-                .scaleFactor(UIScreen.main.scale),
-                .transition(.fade(1)),
-                .cacheOriginalImage
-            ])
+        heroAvatar
+            .kf
+            .setImage(
+                with: url,
+                placeholder: UIImage(named: "placeholderImage"),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
     }
     
 }

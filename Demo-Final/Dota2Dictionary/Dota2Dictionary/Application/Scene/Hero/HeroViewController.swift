@@ -13,6 +13,7 @@ import RxCocoa
 class HeroViewController: UIViewController {
     
     var heroViewModel = HeroViewModel()
+    
     let disposeBag = DisposeBag()
     
     @IBOutlet weak var strengthButton: UIButton!
@@ -23,30 +24,38 @@ class HeroViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         allHeroCollectionView.register(UINib(nibName: "AllHeroCollectionViewCell",
                                              bundle: nil),
                                        forCellWithReuseIdentifier: "AllHeroCollectionViewCell")
-        bindUI()
+        bindViewModel()
         configureNaviBarColor()
     }
-    
-    func bindUI() {
-        heroViewModel
-            .listHeroNew
-            .asObservable()
-            .bind(to: self
-                    .allHeroCollectionView
+
+    func bindViewModel() {
+        let input = HeroViewModel.Input(strengthSelecting: strengthButton.rx.tap.asDriver(),
+                                        agibilitySelecting: agibilityButton.rx.tap.asDriver(),
+                                        intelligentSelecting: intelligentButton.rx.tap.asDriver())
+        
+        let output = heroViewModel.transform(input: input)
+        let strengthOutput = output.selectedStrength
+        let agibilityOutput = output.selectedAgibility
+        let intelligentOutput = output.selectedIntelligent
+        
+        let allOutput = Observable.of(strengthOutput.asObservable(),
+                                      agibilityOutput.asObservable(),
+                                      intelligentOutput.asObservable())
+
+        allOutput
+            .merge()
+            .bind(to: allHeroCollectionView
                     .rx
                     .items(cellIdentifier: "AllHeroCollectionViewCell",
                            cellType: AllHeroCollectionViewCell.self)) { _, hero, cell in
                 cell.bind(hero)
             }
             .disposed(by: disposeBag)
-        
-        allHeroCollectionView
-            .rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
+                
     }
     
     func configureNaviBarColor() {
