@@ -172,16 +172,43 @@ class Network: NSObject {
     
     /// call data from https://api.opendota.com/api/heroes
     /// get Heroes All Data
+//    func getHeroAll(closure: @escaping (_ response: [HeroModel]?, _ error: Error?) -> Void) {
+//        requestSON("https://api.opendota.com/api/heroes",
+//                   param: nil,
+//                   method: .GET,
+//                   loading: true) { (data, _) in
+//            if let data = data as? [[String: Any]] {
+//                var listHero: [HeroModel] = [HeroModel]()
+//                for item in data {
+//                    var listHeroAdd: HeroModel = HeroModel()
+//                    listHeroAdd = listHeroAdd.initLoad(item)
+//                    listHero.append(listHeroAdd)
+//                }
+//                closure(listHero, nil)
+//            } else {
+//                closure(nil, nil)
+//            }
+//        }
+//    }
     func getHeroAll(closure: @escaping (_ response: [HeroModel]?, _ error: Error?) -> Void) {
-        requestSON("https://api.opendota.com/api/heroes",
+        requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/hero_names.json",
                    param: nil,
                    method: .GET,
                    loading: true) { (data, _) in
-            if let data = data as? [[String: Any]] {
+            if let data = data as? [String: Any] {
                 var listHero: [HeroModel] = [HeroModel]()
-                for item in data {
-                    var listHeroAdd: HeroModel = HeroModel()
-                    listHeroAdd = listHeroAdd.initLoad(item)
+                let sortedHeroesAll = Array(data.keys).sorted(by: <)
+                for hero in sortedHeroesAll {
+                    let listHeroAdd = HeroModel()
+                    listHeroAdd.name = hero
+                    if let heroProperties = data[hero] as? [String: Any] {
+                        if let localizedName = heroProperties["localized_name"] as? String {
+                            listHeroAdd.localizedName = localizedName
+                        }
+                        if let primaryAttr = heroProperties["primary_attr"] as? String {
+                            listHeroAdd.primaryAttr = primaryAttr
+                        }
+                    }
                     listHero.append(listHeroAdd)
                 }
                 closure(listHero, nil)

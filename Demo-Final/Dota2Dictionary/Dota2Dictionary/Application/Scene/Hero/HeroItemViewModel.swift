@@ -15,7 +15,10 @@ final class HeroItemViewModel {
     
     init (with hero: HeroModel) {
         self.hero = hero
-        self.heroName = hero.localizedName
+        self.heroName = hero.name
+            .replacingOccurrences(of: "npc_dota_hero_", with: "")
+            .replacingOccurrences(of: "_", with: " ")
+            .capitalized
         self.heroAvatar = hero.name.replacingOccurrences(of: "npc_dota_hero_", with: "")
     }
 }
