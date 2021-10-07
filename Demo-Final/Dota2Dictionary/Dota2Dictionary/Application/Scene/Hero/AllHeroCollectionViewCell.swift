@@ -24,7 +24,9 @@ class AllHeroCollectionViewCell: UICollectionViewCell {
         self.heroName.text = viewModel.heroName
         
         /// hero's avatar
-        let url = URL(string: "http://cdn.dota2.com/apps/dota2/images/heroes/\(viewModel.heroAvatar)_full.png")
+//        let url = URL(string: "http://cdn.dota2.com/apps/dota2/images/heroes/\(viewModel.heroAvatar)_full.png")
+        let url = URL(string: "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/\(viewModel.heroAvatar).png")
+
         let processor = DownsamplingImageProcessor(size: heroAvatar.bounds.size)
         heroAvatar
             .kf
@@ -40,3 +42,4 @@ class AllHeroCollectionViewCell: UICollectionViewCell {
     }
     
 }
+//https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/dawnbreaker.png

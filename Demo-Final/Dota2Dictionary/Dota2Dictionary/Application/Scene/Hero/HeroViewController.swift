@@ -50,7 +50,6 @@ class HeroViewController: UIViewController {
                 cell.bind(hero)
             }
             .disposed(by: disposeBag)
-                
     }
     
     func configureNaviBarColor() {

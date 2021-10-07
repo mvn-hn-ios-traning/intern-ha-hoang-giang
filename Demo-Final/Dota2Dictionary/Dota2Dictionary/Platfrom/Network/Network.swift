@@ -106,6 +106,7 @@ class Network: NSObject {
             }
         }
     }
+    
     /// get Items and Heroes Patch Data
     func getHeroesDetailAll(patchName: String,
                             closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
