@@ -8,7 +8,7 @@
 import Foundation
 
 public class HeroModel: NSObject {
-    var theID: Int = 0
+    var theID: String = ""
     var name: String = ""
     var localizedName: String = ""
     var primaryAttr: String = ""

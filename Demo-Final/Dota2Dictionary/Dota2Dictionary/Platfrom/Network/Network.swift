@@ -202,8 +202,8 @@ class Network: NSObject {
                     let listHeroAdd = HeroModel()
                     listHeroAdd.name = hero
                     if let heroProperties = data[hero] as? [String: Any] {
-                        if let localizedName = heroProperties["localized_name"] as? String {
-                            listHeroAdd.localizedName = localizedName
+                        if let theID = heroProperties["id"] as? String {
+                            listHeroAdd.theID = String(theID)
                         }
                         if let primaryAttr = heroProperties["primary_attr"] as? String {
                             listHeroAdd.primaryAttr = primaryAttr

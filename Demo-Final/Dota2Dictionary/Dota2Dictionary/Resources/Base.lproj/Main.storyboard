@@ -117,6 +117,21 @@
             </objects>
             <point key="canvasLocation" x="-946.37681159420299" y="1589.7321428571429"/>
         </scene>
+        <!--Hero Detail View Controller-->
+        <scene sceneID="zhM-X4-ST2">
+            <objects>
+                <viewController storyboardIdentifier="HeroDetailViewController" id="ccC-lu-x9M" customClass="HeroDetailViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LFz-qh-rbx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ere-kL-IG4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IJ5-n6-xzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="229" y="1590"/>
+        </scene>
         <!--Hero-->
         <scene sceneID="L97-kp-kie">
             <objects>
@@ -326,13 +341,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="agiIcon" width="23" height="24"/>
+        <image name="agiIcon" width="24" height="24"/>
         <image name="book" catalog="system" width="128" height="102"/>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="intelIcon" width="23" height="24"/>
+        <image name="intelIcon" width="24" height="24"/>
         <image name="pencil.slash" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
-        <image name="strengthIcon" width="23" height="24"/>
+        <image name="strengthIcon" width="24" height="24"/>
         <image name="suit.club" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
