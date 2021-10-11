@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -124,13 +125,47 @@
                     <view key="view" contentMode="scaleToFill" id="LFz-qh-rbx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6s-jM-4UE">
+                                <rect key="frame" x="107" y="415.5" width="200" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="QcX-hr-Wm0"/>
+                                    <constraint firstAttribute="width" constant="200" id="dGG-4O-dhi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ere-kL-IG4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="b6s-jM-4UE" firstAttribute="centerX" secondItem="ere-kL-IG4" secondAttribute="centerX" id="a2v-OK-Vsk"/>
+                            <constraint firstItem="b6s-jM-4UE" firstAttribute="centerY" secondItem="ere-kL-IG4" secondAttribute="centerY" id="hfJ-mJ-fF8"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="heroName" destination="b6s-jM-4UE" id="XO8-GF-9uf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJ5-n6-xzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="229" y="1590"/>
+        </scene>
+        <!--Item Detail View Controller-->
+        <scene sceneID="nnZ-uQ-MFJ">
+            <objects>
+                <viewController storyboardIdentifier="ItemDetailViewController" id="R9J-Pg-eZ1" customClass="ItemDetailViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7ha-5a-6y8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="erv-bx-fTc"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KaZ-SC-AaK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1261" y="1590"/>
         </scene>
         <!--Hero-->
         <scene sceneID="L97-kp-kie">
@@ -196,17 +231,48 @@
             </objects>
             <point key="canvasLocation" x="228.98550724637684" y="912.72321428571422"/>
         </scene>
-        <!--View Controller-->
+        <!--Item-->
         <scene sceneID="8N5-5g-NfB">
             <objects>
-                <viewController id="dJb-1D-Gf0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemsViewController" id="dJb-1D-Gf0" customClass="ItemsViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jad-Km-KaE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CpN-wT-mfn">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7ry-XG-HfS">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ARf-z2-ebo">
+                                        <rect key="frame" x="5" y="5" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Hwg-RJ-HDy">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="3JX-b5-r7V"/>
-                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3JX-b5-r7V" firstAttribute="trailing" secondItem="CpN-wT-mfn" secondAttribute="trailing" id="DSW-jC-rUx"/>
+                            <constraint firstItem="CpN-wT-mfn" firstAttribute="leading" secondItem="3JX-b5-r7V" secondAttribute="leading" id="Ipg-Zp-Y24"/>
+                            <constraint firstItem="CpN-wT-mfn" firstAttribute="top" secondItem="3JX-b5-r7V" secondAttribute="top" id="OE0-sM-QTl"/>
+                            <constraint firstItem="3JX-b5-r7V" firstAttribute="bottom" secondItem="CpN-wT-mfn" secondAttribute="bottom" id="rTF-rg-fCR"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4RN-kq-llB"/>
+                    <navigationItem key="navigationItem" title="Item" id="4RN-kq-llB"/>
+                    <connections>
+                        <outlet property="itemAllCollectionView" destination="CpN-wT-mfn" id="90V-yF-UNY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ss-ga-yqC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -351,9 +417,6 @@
         <image name="suit.club" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

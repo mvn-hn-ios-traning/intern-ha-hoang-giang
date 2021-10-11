@@ -16,9 +16,4 @@ public class PatchModel: NSObject {
     var detailHeroItem: [String] = [""]
     var imageKey: String = ""
     var sizeImg: String = ""
-    
-    func initLoad(_ json: [String: Any]) -> PatchModel {
-        
-        return self
-    }
 }

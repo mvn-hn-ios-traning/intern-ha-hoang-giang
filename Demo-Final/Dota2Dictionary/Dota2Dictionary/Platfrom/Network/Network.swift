@@ -80,8 +80,7 @@ class Network: NSObject {
         return nil
     }
     
-    /// call data from https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json
-    /// get Patch data
+    // MARK: get Patch data
     func getPatchAll(closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
         requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
                    param: nil,
@@ -107,7 +106,7 @@ class Network: NSObject {
         }
     }
     
-    /// get Items and Heroes Patch Data
+    // MARK: get Items and Heroes Patch Data
     func getHeroesDetailAll(patchName: String,
                             closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
         requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
@@ -117,7 +116,6 @@ class Network: NSObject {
             if let data = data as? [String: Any] {
                 var listPatch: [PatchModel] = [PatchModel]()
                 if let details = data[patchName] as? [String: Any] {
-                    /// handle Heroes patch data
                     if let heroes = details["heroes"] as? [String: Any] {
                         let sortHeroes = Array(heroes.keys).sorted(by: <)
                         for hero in sortHeroes {
@@ -148,7 +146,6 @@ class Network: NSObject {
             if let data = data as? [String: Any] {
                 var listPatch: [PatchModel] = [PatchModel]()
                 if let details = data[patchName] as? [String: Any] {
-                    /// handle Items Patch Data
                     if let items = details["items"] as? [String: Any] {
                         let sortItems = Array(items.keys).sorted(by: >)
                         for item in sortItems {
@@ -170,26 +167,7 @@ class Network: NSObject {
         }
     }
     
-    /// call data from https://api.opendota.com/api/heroes
-    /// get Heroes All Data
-//    func getHeroAll(closure: @escaping (_ response: [HeroModel]?, _ error: Error?) -> Void) {
-//        requestSON("https://api.opendota.com/api/heroes",
-//                   param: nil,
-//                   method: .GET,
-//                   loading: true) { (data, _) in
-//            if let data = data as? [[String: Any]] {
-//                var listHero: [HeroModel] = [HeroModel]()
-//                for item in data {
-//                    var listHeroAdd: HeroModel = HeroModel()
-//                    listHeroAdd = listHeroAdd.initLoad(item)
-//                    listHero.append(listHeroAdd)
-//                }
-//                closure(listHero, nil)
-//            } else {
-//                closure(nil, nil)
-//            }
-//        }
-//    }
+    // MARK: get Hero All Data
     func getHeroAll(closure: @escaping (_ response: [HeroModel]?, _ error: Error?) -> Void) {
         requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/hero_names.json",
                    param: nil,
@@ -202,8 +180,8 @@ class Network: NSObject {
                     let listHeroAdd = HeroModel()
                     listHeroAdd.name = hero
                     if let heroProperties = data[hero] as? [String: Any] {
-                        if let theID = heroProperties["id"] as? String {
-                            listHeroAdd.theID = String(theID)
+                        if let theID = heroProperties["id"] as? Int {
+                            listHeroAdd.theID = theID
                         }
                         if let primaryAttr = heroProperties["primary_attr"] as? String {
                             listHeroAdd.primaryAttr = primaryAttr

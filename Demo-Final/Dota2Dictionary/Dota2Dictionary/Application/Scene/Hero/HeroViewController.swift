@@ -50,6 +50,23 @@ class HeroViewController: UIViewController {
                 cell.bind(hero)
             }
             .disposed(by: disposeBag)
+        
+        allHeroCollectionView.rx.modelSelected(HeroItemViewModel.self)
+            .subscribe(onNext: { [weak self] object in
+                guard let self = self else { return }
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard let viewController = storyboard
+                        .instantiateViewController(withIdentifier: "HeroDetailViewController")
+                        as? HeroDetailViewController else {
+                    return
+                }
+                viewController.title = "\(object.theID)"
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }).disposed(by: disposeBag)
+        
+        allHeroCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+
     }
     
     func configureNaviBarColor() {
@@ -64,6 +81,6 @@ extension HeroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width/3.35, height: view.frame.size.height/6.5)
+        return CGSize(width: view.frame.size.width/3.5, height: view.frame.size.height/6.5)
     }
 }

@@ -11,7 +11,6 @@ import RxCocoa
 
 // MARK: - Hero
 class HeroUseCasePlatform: HeroUseCaseDomain {
-    let disposeBag = DisposeBag()
         
     func loadStrengthData() -> Observable<[HeroModel]> {
         return Observable.create { observer -> Disposable in
@@ -72,3 +71,5 @@ class PatchDetailUseCasePlatform: PatchDetailUseCaseDomain {
     }
     
 }
+
+// MARK: Hero Detail
