@@ -31,10 +31,10 @@
             </objects>
             <point key="canvasLocation" x="1193" y="-773"/>
         </scene>
-        <!--Patch View Controller-->
+        <!--Patch Notes-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PatchViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatchViewController" id="BYZ-38-t0r" customClass="PatchViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,7 @@
                             <constraint firstItem="mht-Ia-Jwl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tyG-Pf-yfg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Mib-qZ-hVh"/>
+                    <navigationItem key="navigationItem" title="Patch Notes" id="Mib-qZ-hVh"/>
                     <connections>
                         <outlet property="patchTableView" destination="mht-Ia-Jwl" id="cBs-El-G8n"/>
                     </connections>

@@ -18,6 +18,11 @@
 		2237445B26FB3FB600CAFF69 /* UseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237445A26FB3FB600CAFF69 /* UseCaseDomain.swift */; };
 		2237445E26FB84AC00CAFF69 /* UseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237445D26FB84AC00CAFF69 /* UseCasePlatform.swift */; };
 		224C17D82713DC1F00DD4B76 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17D72713DC1F00DD4B76 /* Constants.swift */; };
+		224C17DA2714122100DD4B76 /* DefaultPatchNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17D92714122100DD4B76 /* DefaultPatchNavigator.swift */; };
+		224C17DC271414B500DD4B76 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DB271414B500DD4B76 /* Application.swift */; };
+		224C17DE271416E700DD4B76 /* UseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DD271416E700DD4B76 /* UseCaseProviderDomain.swift */; };
+		224C17E0271419FE00DD4B76 /* UseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DF271419FE00DD4B76 /* UseCaseProviderPlatform.swift */; };
+		224C17E227141A4400DD4B76 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17E127141A4400DD4B76 /* NetworkProvider.swift */; };
 		226B6C6F271297B3001FEAD6 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6C6E271297B3001FEAD6 /* ItemViewModel.swift */; };
 		226B6C722712A2B9001FEAD6 /* ItemsAllCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6C702712A2B9001FEAD6 /* ItemsAllCollectionViewCell.swift */; };
 		226B6C732712A2B9001FEAD6 /* ItemsAllCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226B6C712712A2B9001FEAD6 /* ItemsAllCollectionViewCell.xib */; };
@@ -62,6 +67,11 @@
 		2237445A26FB3FB600CAFF69 /* UseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseDomain.swift; sourceTree = "<group>"; };
 		2237445D26FB84AC00CAFF69 /* UseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasePlatform.swift; sourceTree = "<group>"; };
 		224C17D72713DC1F00DD4B76 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		224C17D92714122100DD4B76 /* DefaultPatchNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatchNavigator.swift; sourceTree = "<group>"; };
+		224C17DB271414B500DD4B76 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		224C17DD271416E700DD4B76 /* UseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseProviderDomain.swift; sourceTree = "<group>"; };
+		224C17DF271419FE00DD4B76 /* UseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseProviderPlatform.swift; sourceTree = "<group>"; };
+		224C17E127141A4400DD4B76 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		226B6C6E271297B3001FEAD6 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		226B6C702712A2B9001FEAD6 /* ItemsAllCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsAllCollectionViewCell.swift; sourceTree = "<group>"; };
 		226B6C712712A2B9001FEAD6 /* ItemsAllCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsAllCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -152,6 +162,7 @@
 		2237444D26FB35CA00CAFF69 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				224C17DB271414B500DD4B76 /* Application.swift */,
 				2237444F26FB35D900CAFF69 /* Common */,
 				2237445026FB35DF00CAFF69 /* Scene */,
 				2237445126FB35FF00CAFF69 /* Ultility */,
@@ -193,6 +204,7 @@
 		2237445226FB367900CAFF69 /* PatchAll */ = {
 			isa = PBXGroup;
 			children = (
+				224C17D92714122100DD4B76 /* DefaultPatchNavigator.swift */,
 				223743E026FB0A4400CAFF69 /* PatchViewController.swift */,
 				223743F826FB0B8400CAFF69 /* PatchViewModel.swift */,
 				22969780270AD35800E7103E /* NewPatchDetailViewModel.swift */,
@@ -237,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				2237445A26FB3FB600CAFF69 /* UseCaseDomain.swift */,
+				224C17DD271416E700DD4B76 /* UseCaseProviderDomain.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -266,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				2237445D26FB84AC00CAFF69 /* UseCasePlatform.swift */,
+				224C17DF271419FE00DD4B76 /* UseCaseProviderPlatform.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -290,6 +304,7 @@
 			children = (
 				22F15F9D2700CACD00CACDE2 /* Network.swift */,
 				22D87C9B270FFFDF00EF116E /* NetworkNew.swift */,
+				224C17E127141A4400DD4B76 /* NetworkProvider.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -494,7 +509,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224C17DA2714122100DD4B76 /* DefaultPatchNavigator.swift in Sources */,
 				22A128BA2701AA0100728288 /* HeroViewController.swift in Sources */,
+				224C17DC271414B500DD4B76 /* Application.swift in Sources */,
+				224C17DE271416E700DD4B76 /* UseCaseProviderDomain.swift in Sources */,
 				2237445B26FB3FB600CAFF69 /* UseCaseDomain.swift in Sources */,
 				226B6C9A271334A5001FEAD6 /* ItemDetailModel.swift in Sources */,
 				22D87C9C270FFFDF00EF116E /* NetworkNew.swift in Sources */,
@@ -504,10 +522,12 @@
 				22969787270B00E600E7103E /* PatchDetailViewController.swift in Sources */,
 				223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */,
 				2296977F270AD0B400E7103E /* PatchModel.swift in Sources */,
+				224C17E0271419FE00DD4B76 /* UseCaseProviderPlatform.swift in Sources */,
 				223743DD26FB0A4400CAFF69 /* AppDelegate.swift in Sources */,
 				22D87CA02710021700EF116E /* HeroDetailViewModel.swift in Sources */,
 				22F15F9E2700CACD00CACDE2 /* Network.swift in Sources */,
 				2294FDA8270DEDE200CEE769 /* PatchDetailTableViewCell.swift in Sources */,
+				224C17E227141A4400DD4B76 /* NetworkProvider.swift in Sources */,
 				22D87C9E2710001F00EF116E /* HeroDetailModel.swift in Sources */,
 				226BBD26270424A500808167 /* HeroItemViewModel.swift in Sources */,
 				2294FDA4270DB2D100CEE769 /* PatchTableViewCell.swift in Sources */,

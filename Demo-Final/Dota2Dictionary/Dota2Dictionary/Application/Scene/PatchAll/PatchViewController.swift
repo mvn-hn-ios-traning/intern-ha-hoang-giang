@@ -14,19 +14,18 @@ class PatchViewController: UIViewController {
         
     @IBOutlet weak var patchTableView: UITableView!
     
-    var patchViewModel = PatchViewModel()
+    var patchViewModel: PatchViewModel!
 
     let disposeBag = DisposeBag()
     let patchTableViewCell = "PatchTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Patch Notes"
-        customTabBarAndNavigation()
         patchTableView.register(UINib(nibName: patchTableViewCell,
                                       bundle: nil),
                                 forCellReuseIdentifier: patchTableViewCell)
         bindUI()
+        customTabBarAndNavigation()
     }
     
     func bindUI() {
