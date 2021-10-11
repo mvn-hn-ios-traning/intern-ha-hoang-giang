@@ -13,22 +13,22 @@ import RxViewController
 
 class HeroViewController: UIViewController {
     
-    var heroViewModel = HeroViewModel()
-    
-    let disposeBag = DisposeBag()
-    
     @IBOutlet weak var strengthButton: UIButton!
     @IBOutlet weak var agibilityButton: UIButton!
     @IBOutlet weak var intelligentButton: UIButton!
-    
     @IBOutlet weak var allHeroCollectionView: UICollectionView!
+        
+    var heroViewModel = HeroViewModel()
+    
+    let disposeBag = DisposeBag()
+    let allHeroCollectionViewCell = "AllHeroCollectionViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        allHeroCollectionView.register(UINib(nibName: "AllHeroCollectionViewCell",
+        allHeroCollectionView.register(UINib(nibName: allHeroCollectionViewCell,
                                              bundle: nil),
-                                       forCellWithReuseIdentifier: "AllHeroCollectionViewCell")
+                                       forCellWithReuseIdentifier: allHeroCollectionViewCell)
         bindViewModel()
         configureNaviBarColor()
     }
@@ -45,7 +45,7 @@ class HeroViewController: UIViewController {
             .fetchOutput
             .bind(to: allHeroCollectionView
                     .rx
-                    .items(cellIdentifier: "AllHeroCollectionViewCell",
+                    .items(cellIdentifier: allHeroCollectionViewCell,
                            cellType: AllHeroCollectionViewCell.self)) { _, hero, cell in
                 cell.bind(hero)
             }
@@ -81,6 +81,11 @@ extension HeroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width/3.5, height: view.frame.size.height/6.5)
+        let columnsSpacing: CGFloat = 20
+        let numberOfColumns: CGFloat = 3
+        let width: CGFloat = (collectionView.bounds.width - (columnsSpacing * (numberOfColumns - 1)))/numberOfColumns
+        
+        return CGSize(width: width,
+                      height: width)
     }
 }

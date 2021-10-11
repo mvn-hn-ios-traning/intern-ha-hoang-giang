@@ -11,19 +11,19 @@ import RxSwift
 
 class ItemsViewController: UIViewController {
     
-    let disposeBag = DisposeBag()
-    
-    let itemViewModel = ItemViewModel()
-    
     @IBOutlet weak var itemAllCollectionView: UICollectionView!
+        
+    let disposeBag = DisposeBag()
+    let itemsAllCollectionViewCell = "ItemsAllCollectionViewCell"
+    let itemViewModel = ItemViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNaviBarColor()
         
-        itemAllCollectionView.register(UINib(nibName: "ItemsAllCollectionViewCell",
+        itemAllCollectionView.register(UINib(nibName: itemsAllCollectionViewCell,
                                              bundle: nil),
-                                       forCellWithReuseIdentifier: "ItemsAllCollectionViewCell")
+                                       forCellWithReuseIdentifier: itemsAllCollectionViewCell)
         
         bindUI()
     }
@@ -32,7 +32,7 @@ class ItemsViewController: UIViewController {
         self.itemViewModel.listArrayItem
             .bind(to: itemAllCollectionView
                     .rx
-                    .items(cellIdentifier: "ItemsAllCollectionViewCell",
+                    .items(cellIdentifier: itemsAllCollectionViewCell,
                            cellType: ItemsAllCollectionViewCell.self)) { (_, element, cell) in
                 cell.bind(element)
             }
@@ -70,6 +70,11 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width/3.5, height: view.frame.size.height/6.5)
+        let columnsSpacing: CGFloat = 20
+        let numberOfColumns: CGFloat = 3
+        let width: CGFloat = (collectionView.bounds.width - (columnsSpacing * (numberOfColumns - 1)))/numberOfColumns
+        
+        return CGSize(width: width,
+                      height: width)
     }
 }

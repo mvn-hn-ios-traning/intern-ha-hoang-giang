@@ -12,19 +12,22 @@ class AllHeroCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var heroAvatar: UIImageView!
     @IBOutlet weak var heroName: UILabel!
-    
-    let urlFirst = "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/"
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         contentView.backgroundColor = .black
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        heroAvatar.image = nil
+    }
+    
     func bind(_ viewModel: HeroItemViewModel) {
         self.heroName.text = viewModel.heroName
         
-        let url = URL(string: "\(urlFirst)\(viewModel.heroAvatar).png")
+        let url = URL(string: "\(Constants.urlForHeroImageHeroVC)\(viewModel.heroAvatar).png")
 
         let processor = DownsamplingImageProcessor(size: heroAvatar.bounds.size)
         heroAvatar

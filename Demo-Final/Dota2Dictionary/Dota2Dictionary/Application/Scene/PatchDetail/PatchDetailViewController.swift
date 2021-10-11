@@ -11,20 +11,22 @@ import RxSwift
 import RxViewController
 
 class PatchDetailViewController: UIViewController {
-    let disposeBag = DisposeBag()
     
-    var patchDetailViewModel: PatchDetailViewModel!
-
     @IBOutlet weak var selectHeroesPatch: UIButton!
     @IBOutlet weak var selectItemsPatch: UIButton!
     @IBOutlet weak var patchDetailTableView: UITableView!
+        
+    var patchDetailViewModel: PatchDetailViewModel!
+
+    let disposeBag = DisposeBag()
+    let patchDetailTableViewCell = "PatchDetailTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        patchDetailTableView.register(UINib(nibName: "PatchDetailTableViewCell",
+        patchDetailTableView.register(UINib(nibName: patchDetailTableViewCell,
                                             bundle: nil),
-                                      forCellReuseIdentifier: "PatchDetailTableViewCell")
+                                      forCellReuseIdentifier: patchDetailTableViewCell)
         bindViewModel()
     }
     
@@ -44,7 +46,7 @@ class PatchDetailViewController: UIViewController {
         output.fetchOutput
             .bind(to: patchDetailTableView
                     .rx
-                    .items(cellIdentifier: "PatchDetailTableViewCell",
+                    .items(cellIdentifier: patchDetailTableViewCell,
                            cellType: PatchDetailTableViewCell.self)) {  _, detail, cell in
                 cell.configure(model: detail)
             }

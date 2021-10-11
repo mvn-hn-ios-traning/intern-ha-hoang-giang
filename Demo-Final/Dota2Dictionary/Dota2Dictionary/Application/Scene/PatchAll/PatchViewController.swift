@@ -11,19 +11,21 @@ import RxCocoa
 import RxDataSources
 
 class PatchViewController: UIViewController {
-    let disposeBag = DisposeBag()
-    
-    var patchViewModel = PatchViewModel()
         
     @IBOutlet weak var patchTableView: UITableView!
+    
+    var patchViewModel = PatchViewModel()
+
+    let disposeBag = DisposeBag()
+    let patchTableViewCell = "PatchTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Patch Notes"
         customTabBarAndNavigation()
-        patchTableView.register(UINib(nibName: "PatchTableViewCell",
+        patchTableView.register(UINib(nibName: patchTableViewCell,
                                       bundle: nil),
-                                forCellReuseIdentifier: "PatchTableViewCell")
+                                forCellReuseIdentifier: patchTableViewCell)
         bindUI()
     }
     
@@ -32,7 +34,7 @@ class PatchViewController: UIViewController {
             .listPatchNew
             .bind(to: patchTableView
                     .rx
-                    .items(cellIdentifier: "PatchTableViewCell",
+                    .items(cellIdentifier: patchTableViewCell,
                            cellType: PatchTableViewCell.self)) { (_, element, cell) in
                 cell.patchName.text = "Version: " + element.newPatchName
                 cell.generalDetail.text = element.newGeneral

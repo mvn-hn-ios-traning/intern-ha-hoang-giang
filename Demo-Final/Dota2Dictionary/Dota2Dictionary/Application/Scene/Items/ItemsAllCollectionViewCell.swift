@@ -17,12 +17,17 @@ class ItemsAllCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        itemAvatar.image = nil
+    }
 
     func bind(_ itemKey: String) {
         self.itemName.text = itemKey.replacingOccurrences(of: "_", with: " ").capitalized
         
         let url = URL(string:
-                        "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/\(itemKey).png")
+                        "\(Constants.urlForImageItemVC)\(itemKey).png")
         let processor = DownsamplingImageProcessor(size: itemAvatar.bounds.size)
         itemAvatar
             .kf

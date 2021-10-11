@@ -8,10 +8,10 @@
 import UIKit
 
 class ItemDetailViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
 }

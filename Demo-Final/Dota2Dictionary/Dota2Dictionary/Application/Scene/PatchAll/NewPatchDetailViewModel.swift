@@ -22,10 +22,10 @@ final class NewPatchDetailViewModel {
        return newGen
     }
     
-    var heroName: String
-    var newHeroName: String
+    var nameHeroItem: String
+    var newHeroItemName: String
         
-    var newHeroDetail: String {
+    var newHeroItemDetail: String {
         var newHero = ""
         for hero in patch.detailHeroItem {
             newHero.append("* " + hero + ". \n \n")
@@ -40,8 +40,8 @@ final class NewPatchDetailViewModel {
         self.patch = patch
         self.patchName = patch.patchName
         self.newPatchName = patch.patchName.replacingOccurrences(of: "_", with: ".")
-        self.heroName = patch.nameHeroItem
-        self.newHeroName = patch.nameHeroItem.replacingOccurrences(of: "_", with: " ").uppercased()
+        self.nameHeroItem = patch.nameHeroItem
+        self.newHeroItemName = patch.nameHeroItem.replacingOccurrences(of: "_", with: " ").uppercased()
         self.imageKey = patch.imageKey
         self.sizeImg = patch.sizeImg
     }
