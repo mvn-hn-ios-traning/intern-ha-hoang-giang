@@ -11,12 +11,7 @@ import RxCocoa
 
 class PatchDetailViewModel: ViewModelType {
     
-    let disposeBag = DisposeBag()
-
     var patchName: String
-    
-    var listDetails = BehaviorRelay<[PatchModel]>(value: [])
-    var listDetailsNew = Observable<[NewPatchDetailViewModel]>.from([])
     
     private let useCase: PatchDetailUseCasePlatform
 
@@ -26,8 +21,8 @@ class PatchDetailViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-        let trigger = input
-            .trigger
+        let firstLoadingOutput = input
+            .firstLoading
             .asObservable()
             .flatMapLatest {
                 return self
@@ -63,7 +58,7 @@ class PatchDetailViewModel: ViewModelType {
             .asDriver(onErrorDriveWith: .empty())
         
         let fetch = Observable
-            .of(trigger.asObservable(),
+            .of(firstLoadingOutput.asObservable(),
                 heroesPatch.asObservable(),
                 itemsPatch.asObservable())
             .merge()
@@ -77,7 +72,7 @@ extension PatchDetailViewModel {
     struct Input {
         let heroesPatchSelecting: Driver<Void>
         let itemsPatchSelecting: Driver<Void>
-        let trigger: Driver<Void>
+        let firstLoading: Driver<Void>
     }
     
     struct Output {

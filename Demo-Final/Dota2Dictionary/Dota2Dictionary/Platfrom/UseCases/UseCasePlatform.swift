@@ -44,7 +44,8 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
         return Observable.create { observer -> Disposable in
             Network.shared.getHeroAll { data, _ in
                 if let data = data {
-                    observer.onNext(data)
+                    let newData = data.filter { $0.primaryAttr == "str" }
+                    observer.onNext(newData)
                 }
             }
             return Disposables.create()
@@ -55,7 +56,8 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
         return Observable.create { observer -> Disposable in
             Network.shared.getHeroAll {  data, _ in
                 if let data = data {
-                    observer.onNext(data)
+                    let newData = data.filter { $0.primaryAttr == "agi" }
+                    observer.onNext(newData)
                 }
             }
             return Disposables.create()
@@ -66,7 +68,8 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
         return Observable.create { observer -> Disposable in
             Network.shared.getHeroAll {  data, _ in
                 if let data = data {
-                    observer.onNext(data)
+                    let newData = data.filter { $0.primaryAttr == "int" }
+                    observer.onNext(newData)
                 }
             }
             return Disposables.create()
@@ -75,3 +78,8 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
 }
 
 // MARK: Hero Detail
+
+// MARK: - Item
+class ItemUseCasePlatform: ItemUseCaseDomain {
+ 
+}

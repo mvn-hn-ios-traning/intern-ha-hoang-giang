@@ -38,7 +38,7 @@ class PatchDetailViewController: UIViewController {
         
         let input = PatchDetailViewModel.Input(heroesPatchSelecting: selectHeroesPatch.rx.tap.asDriver(),
                                                itemsPatchSelecting: selectItemsPatch.rx.tap.asDriver(),
-                                               trigger: self.rx.viewWillAppear.map({ _ in
+                                               firstLoading: self.rx.viewWillAppear.map({ _ in
                                                }).asDriver(onErrorJustReturn: Void()))
         
         let output = patchDetailViewModel.transform(input: input)

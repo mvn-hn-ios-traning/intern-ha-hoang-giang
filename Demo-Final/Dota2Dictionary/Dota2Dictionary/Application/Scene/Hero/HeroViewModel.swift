@@ -11,12 +11,7 @@ import RxSwift
 
 class HeroViewModel: ViewModelType {
     
-    let disposeBag = DisposeBag()
-    
-    var listHero = BehaviorRelay<[HeroModel]>(value: [])
-    var listHeroNew = Observable<[HeroItemViewModel]>.from([])
-    
-    private let useCase: HeroUseCasePlatform
+    private let useCase: HeroUseCaseDomain
     
     init() {
         self.useCase = HeroUseCasePlatform()
@@ -30,7 +25,6 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadStrengthData()
-            }.map { $0.filter { $0.primaryAttr == "str" }
             }.map { $0.map { HeroItemViewModel(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
@@ -41,7 +35,6 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadAgibilityData()
-            }.map { $0.filter { $0.primaryAttr == "agi" }
             }.map { $0.map { HeroItemViewModel(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
@@ -52,12 +45,11 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadIntelligentData()
-            }.map { $0.filter { $0.primaryAttr == "int" }
             }.map { $0.map { HeroItemViewModel(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
-        let triggerOutput = input
-            .trigger
+        let firstLoadingOutput = input
+            .firstLoading
             .asObservable()
             .flatMapLatest {
                 return self
@@ -71,7 +63,7 @@ class HeroViewModel: ViewModelType {
             .of(strength.asObservable(),
                 agibility.asObservable(),
                 intelligent.asObservable(),
-                triggerOutput.asObservable())
+                firstLoadingOutput.asObservable())
             .merge()
         return Output(fetchOutput: fetchOutput)
     }
@@ -82,7 +74,7 @@ extension HeroViewModel {
         let strengthSelecting: Driver<Void>
         let agibilitySelecting: Driver<Void>
         let intelligentSelecting: Driver<Void>
-        let trigger: Driver<Void>
+        let firstLoading: Driver<Void>
     }
     
     struct Output {

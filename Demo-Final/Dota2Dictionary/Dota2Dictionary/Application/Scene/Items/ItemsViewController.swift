@@ -14,9 +14,9 @@ class ItemsViewController: UIViewController {
     @IBOutlet weak var itemAllCollectionView: UICollectionView!
         
     let disposeBag = DisposeBag()
+    var itemViewModel: ItemViewModel!
     let itemsAllCollectionViewCell = "ItemsAllCollectionViewCell"
-    let itemViewModel = ItemViewModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNaviBarColor()
@@ -24,7 +24,6 @@ class ItemsViewController: UIViewController {
         itemAllCollectionView.register(UINib(nibName: itemsAllCollectionViewCell,
                                              bundle: nil),
                                        forCellWithReuseIdentifier: itemsAllCollectionViewCell)
-        
         bindUI()
     }
     

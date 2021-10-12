@@ -8,6 +8,13 @@
 import Foundation
 
 public protocol PatchUseCaseProviderDomain {
-    
     func makePatchUseCase() -> PatchDetailUseCaseDomain
+}
+
+public protocol HeroUseCaseProviderDomain {
+    func makeHeroUseCase() -> HeroUseCaseDomain
+}
+
+public protocol ItemUseCaseProviderDomain {
+    func makeItemUseCase() -> ItemUseCaseDomain
 }

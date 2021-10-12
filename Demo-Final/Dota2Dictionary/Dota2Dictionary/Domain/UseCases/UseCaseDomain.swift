@@ -20,3 +20,8 @@ public protocol HeroUseCaseDomain {
     func loadAgibilityData() -> Observable<[HeroModel]>
     func loadIntelligentData() -> Observable<[HeroModel]>
 }
+
+// MARK: - Item
+public protocol ItemUseCaseDomain {
+    
+}

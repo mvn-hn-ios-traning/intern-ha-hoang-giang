@@ -13,10 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
-        Application.shared.configureMainInterface()
-                
+//        let window = UIWindow(frame: UIScreen.main.bounds)
+//        
+//        Application.shared.configureMainInterface(in: window)
+//        
+//        self.window = window
+        
         return true
     }
 

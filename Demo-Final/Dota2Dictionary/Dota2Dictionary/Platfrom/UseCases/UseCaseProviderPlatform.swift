@@ -9,14 +9,24 @@ import Foundation
 
 public final class PatchUseCaseProviderPlatform: PatchUseCaseProviderDomain {
     
-    private let networkProvider: NetworkProvider
-    
-    public init() {
-        networkProvider = NetworkProvider()
-    }
-    
     public func makePatchUseCase() -> PatchDetailUseCaseDomain {
         return PatchDetailUseCasePlatform()
+    }
+    
+}
+
+public final class HeroUseCaseProviderPlatform: HeroUseCaseProviderDomain {
+    
+    public func makeHeroUseCase() -> HeroUseCaseDomain {
+        return HeroUseCasePlatform()
+    }
+    
+}
+
+public final class ItemUseCaseProviderPlatform: ItemUseCaseProviderDomain {
+    
+    public func makeItemUseCase() -> ItemUseCaseDomain {
+        return ItemUseCasePlatform()
     }
     
 }

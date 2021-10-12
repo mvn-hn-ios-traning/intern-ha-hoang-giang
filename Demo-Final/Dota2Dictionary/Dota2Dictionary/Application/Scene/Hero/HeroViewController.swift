@@ -18,7 +18,7 @@ class HeroViewController: UIViewController {
     @IBOutlet weak var intelligentButton: UIButton!
     @IBOutlet weak var allHeroCollectionView: UICollectionView!
         
-    var heroViewModel = HeroViewModel()
+    var heroViewModel: HeroViewModel!
     
     let disposeBag = DisposeBag()
     let allHeroCollectionViewCell = "AllHeroCollectionViewCell"
@@ -34,10 +34,11 @@ class HeroViewController: UIViewController {
     }
 
     func bindViewModel() {
+        
         let input = HeroViewModel.Input(strengthSelecting: strengthButton.rx.tap.asDriver(),
                                         agibilitySelecting: agibilityButton.rx.tap.asDriver(),
                                         intelligentSelecting: intelligentButton.rx.tap.asDriver(),
-                                        trigger: self.rx.viewWillAppear.map({ _ in
+                                        firstLoading: self.rx.viewWillAppear.map({ _ in
                                         }).asDriver(onErrorJustReturn: Void()))
         
         let output = heroViewModel.transform(input: input)

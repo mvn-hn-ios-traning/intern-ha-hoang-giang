@@ -7,11 +7,12 @@
 
 import UIKit
 
-protocol PatchNavigator {
+protocol DefaultPatchNavigator {
     func toPatch()
+    func toPatchDetail()
 }
 
-class DefaultPatchNavigator: PatchNavigator {
+class PatchNavigator: DefaultPatchNavigator {
     
     private let storyBoard: UIStoryboard
     private let navigationController: UINavigationController
@@ -35,4 +36,7 @@ class DefaultPatchNavigator: PatchNavigator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    func toPatchDetail() {
+        
+    }
 }
