@@ -17,6 +17,7 @@ enum ApiMethod: String {
     case POST = "post"
 }
 
+// MARK: - Patch and Hero API
 class Network: NSObject {
     static let shared: Network = Network()
     func requestSON(_ url: String,
@@ -80,7 +81,7 @@ class Network: NSObject {
         return nil
     }
     
-    // MARK: get Patch data
+    // get Patch data
     func getPatchAll(closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
         requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
                    param: nil,
@@ -106,7 +107,7 @@ class Network: NSObject {
         }
     }
     
-    // MARK: get Items and Heroes Patch Data
+    // get Items and Heroes Patch Data
     func getHeroesDetailAll(patchName: String,
                             closure: @escaping (_ response: [PatchModel]?, _ error: Error?) -> Void) {
         requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/patchnotes.json",
@@ -167,7 +168,7 @@ class Network: NSObject {
         }
     }
     
-    // MARK: get Hero All Data
+    // get Hero All Data
     func getHeroAll(closure: @escaping (_ response: [HeroModel]?, _ error: Error?) -> Void) {
         requestSON("https://raw.githubusercontent.com/odota/dotaconstants/master/build/hero_names.json",
                    param: nil,
@@ -193,6 +194,83 @@ class Network: NSObject {
             } else {
                 closure(nil, nil)
             }
+        }
+    }
+}
+
+// MARK: - Item
+class ItemAPIService {
+    
+    static let shared = ItemAPIService()
+    
+    func parse(jsonData: Data) -> Observable<[String]> {
+        return Observable.create { observer -> Disposable in
+            do {
+                let decodedData = try JSONDecoder().decode(ItemModel.self,
+                                                           from: jsonData)
+                observer.onNext(decodedData.array.sorted())
+            } catch {
+                print("decode error")
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadJson(fromURLString urlString: String,
+                  completion: @escaping (Result<Data, Error>) -> Void) {
+        if let url = URL(string: urlString) {
+            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                
+                if let data = data {
+                    completion(.success(data))
+                }
+            }
+            urlSession.resume()
+        }
+    }
+}
+
+// MARK: Item Detail
+class ItemDetailAPIService {
+    
+    static let shared = ItemDetailAPIService()
+    
+    func parse(itemKey: String, jsonData: Data) -> Observable<ItemDetailModel> {
+        return Observable.create { observer -> Disposable in
+            do {
+                let decodedData = try JSONDecoder().decode(ItemDetailDecodeArray.self,
+                                                           from: jsonData)
+                let arayINeed = decodedData
+                    .array
+                    .filter {
+                        $0.itemID == itemKey
+                    }
+                if let elementINeed = arayINeed.first {
+                    observer.onNext(elementINeed)
+                }
+            } catch {
+                print("error: ", error)
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadJson(fromURLString urlString: String,
+                  completion: @escaping (Result<Data, Error>) -> Void) {
+        if let url = URL(string: urlString) {
+            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                
+                if let data = data {
+                    completion(.success(data))
+                }
+            }
+            urlSession.resume()
         }
     }
 }

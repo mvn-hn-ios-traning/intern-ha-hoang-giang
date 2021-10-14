@@ -8,15 +8,16 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import RxViewController
 
 class ItemsViewController: UIViewController {
     
     @IBOutlet weak var itemAllCollectionView: UICollectionView!
-        
+    
     let disposeBag = DisposeBag()
     var itemViewModel: ItemViewModel!
     let itemsAllCollectionViewCell = "ItemsAllCollectionViewCell"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNaviBarColor()
@@ -24,11 +25,20 @@ class ItemsViewController: UIViewController {
         itemAllCollectionView.register(UINib(nibName: itemsAllCollectionViewCell,
                                              bundle: nil),
                                        forCellWithReuseIdentifier: itemsAllCollectionViewCell)
-        bindUI()
+        bindViewModel()
     }
     
-    func bindUI() {
-        self.itemViewModel.listArrayItem
+    func bindViewModel() {
+        
+        let input = ItemViewModel.Input(firstLoading: self
+                                            .rx
+                                            .viewWillAppear
+                                            .map({ _ in })
+                                            .asDriver(onErrorJustReturn: Void()),
+                                        selection: itemAllCollectionView.rx.itemSelected.asDriver())
+        let output = itemViewModel.transform(input: input)
+        output
+            .fetchOutput.asObservable()
             .bind(to: itemAllCollectionView
                     .rx
                     .items(cellIdentifier: itemsAllCollectionViewCell,
@@ -37,22 +47,11 @@ class ItemsViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        itemAllCollectionView.rx.modelSelected(String.self)
-            .subscribe(onNext: { [weak self] object in
-                
-                guard let self = self else { return }
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard
-                        .instantiateViewController(withIdentifier: "ItemDetailViewController")
-                        as? ItemDetailViewController else {
-                    return
-                }
-                viewController.title = object.replacingOccurrences(of: "_", with: " ").capitalized
-                self.navigationController?.pushViewController(viewController, animated: true)
-                
-            }).disposed(by: disposeBag)
-                
+        output
+            .selectedItem
+            .drive()
+            .disposed(by: disposeBag)
+        
         itemAllCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     

@@ -32,7 +32,7 @@ class HeroNavigator: DefaultHeroNavigator {
                 as? HeroViewController else {
             return
         }
-        viewController.heroViewModel = HeroViewModel()
+        viewController.heroViewModel = HeroViewModel(useCase: services.makeHeroUseCase())
         navigationController.pushViewController(viewController, animated: true)
     }
     

@@ -13,8 +13,8 @@ class HeroViewModel: ViewModelType {
     
     private let useCase: HeroUseCaseDomain
     
-    init() {
-        self.useCase = HeroUseCasePlatform()
+    init(useCase: HeroUseCaseDomain) {
+        self.useCase = useCase
     }
     
     func transform(input: Input) -> Output {
@@ -65,6 +65,7 @@ class HeroViewModel: ViewModelType {
                 intelligent.asObservable(),
                 firstLoadingOutput.asObservable())
             .merge()
+        
         return Output(fetchOutput: fetchOutput)
     }
 }

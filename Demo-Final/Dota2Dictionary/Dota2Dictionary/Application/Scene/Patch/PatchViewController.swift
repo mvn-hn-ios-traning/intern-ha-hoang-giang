@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 class PatchViewController: UIViewController {
         
@@ -24,11 +23,11 @@ class PatchViewController: UIViewController {
         patchTableView.register(UINib(nibName: patchTableViewCell,
                                       bundle: nil),
                                 forCellReuseIdentifier: patchTableViewCell)
-        bindUI()
+        bindViewModel()
         customTabBarAndNavigation()
     }
     
-    func bindUI() {
+    func bindViewModel() {
         patchViewModel
             .listPatchNew
             .bind(to: patchTableView

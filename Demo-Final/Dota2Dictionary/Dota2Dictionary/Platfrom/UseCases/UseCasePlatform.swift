@@ -39,7 +39,7 @@ class PatchDetailUseCasePlatform: PatchDetailUseCaseDomain {
 
 // MARK: - Hero
 class HeroUseCasePlatform: HeroUseCaseDomain {
-        
+    
     func loadStrengthData() -> Observable<[HeroModel]> {
         return Observable.create { observer -> Disposable in
             Network.shared.getHeroAll { data, _ in
@@ -81,5 +81,50 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
 
 // MARK: - Item
 class ItemUseCasePlatform: ItemUseCaseDomain {
- 
+    func loadItemDataAtFirst() -> Observable<[String]> {
+        return Observable.create { observer -> Disposable in
+            let urlString = Constants.urlJsonForItemViewModel
+            let bag = DisposeBag()
+            
+            ItemAPIService.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let data = ItemAPIService.shared.parse(jsonData: data)
+                    data
+                        .subscribe { element in
+                            observer.onNext(element)
+                        }
+                        .disposed(by: bag)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+}
+
+// MARK: - Item Detail
+class ItemDetailUseCasePlatform: ItemDetailUseCaseDomain {
+    func loadItemDetailDataAtFirst(itemKey: String) -> Observable<ItemDetailModel> {
+        return Observable.create { observer -> Disposable in
+            let urlString = Constants.urlJsonForItemDetailViewModel
+            let bag = DisposeBag()
+            
+            ItemDetailAPIService.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let data = ItemDetailAPIService.shared.parse(itemKey: itemKey, jsonData: data)
+                    data
+                        .subscribe { element in
+                            observer.onNext(element)
+                        }
+                        .disposed(by: bag)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
 }

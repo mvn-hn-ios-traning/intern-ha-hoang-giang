@@ -13,11 +13,13 @@ final class Application {
     private let patchUseCaseProvider: PatchUseCaseProviderDomain
     private let heroUseCaseProvider: HeroUseCaseProviderDomain
     private let itemUseCaseProvider: ItemUseCaseProviderDomain
+    private let itemDetailUseCaseProvider: ItemDetailUseCaseProviderDomain
     
     private init() {
         self.patchUseCaseProvider = PatchUseCaseProviderPlatform()
         self.heroUseCaseProvider = HeroUseCaseProviderPlatform()
         self.itemUseCaseProvider = ItemUseCaseProviderPlatform()
+        self.itemDetailUseCaseProvider = ItemDetailUseCaseProviderPlatform()
     }
     
     func configureMainInterface(in window: UIWindow) {
@@ -44,6 +46,7 @@ final class Application {
                                                             image: UIImage(systemName: "pencil.slash"),
                                                             selectedImage: nil)
         let itemNavigator = ItemNavigator(services: itemUseCaseProvider,
+                                          servicesDetail: itemDetailUseCaseProvider,
                                           navigationController: itemNavigationController,
                                           storyBoard: storyboard)
         

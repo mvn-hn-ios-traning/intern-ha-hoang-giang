@@ -9,26 +9,48 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ItemViewModel {
-    let disposeBag = DisposeBag()
-
-    let urlString = "https://raw.githubusercontent.com/odota/dotaconstants/master/build/item_ids.json"
-
-    var listArrayItem = Observable<[String]>.just([])
+class ItemViewModel: ViewModelType {
     
-    init() {
-        bindingData()
+    private let useCase: ItemUseCaseDomain
+    private let navigator: DefaultItemNavigator
+    
+    init(useCase: ItemUseCaseDomain, navigator: DefaultItemNavigator) {
+        self.useCase = useCase
+        self.navigator = navigator
     }
     
-    func bindingData() {
-        ItemAPIService.shared.loadJson(fromURLString: urlString) { [weak self] (result) in
-            switch result {
-            case .success(let data):
-                self?.listArrayItem = ItemAPIService.shared.parse(jsonData: data)
-            case .failure(let error):
-                print(error)
+    func transform(input: Input) -> Output {
+        let firstLoadingOutput = input
+            .firstLoading
+            .asObservable()
+            .flatMapLatest {
+                return self
+                    .useCase
+                    .loadItemDataAtFirst()
+            }.asDriver(onErrorDriveWith: .empty())
+        
+        let selectedItem = input
+            .selection
+            .withLatestFrom(firstLoadingOutput) { (indexPath, first) -> String in
+                return first[indexPath.row]
             }
-        }
+            .do(onNext: navigator.toItemDetail)
+        
+        return Output(fetchOutput: firstLoadingOutput,
+                      selectedItem: selectedItem)
+    }
+    
+}
+
+extension ItemViewModel {
+    struct Input {
+        let firstLoading: Driver<Void>
+        let selection: Driver<IndexPath>
+    }
+    
+    struct Output {
+        let fetchOutput: Driver<[String]>
+        let selectedItem: Driver<String>
     }
     
 }

@@ -18,3 +18,7 @@ public protocol HeroUseCaseProviderDomain {
 public protocol ItemUseCaseProviderDomain {
     func makeItemUseCase() -> ItemUseCaseDomain
 }
+
+public protocol ItemDetailUseCaseProviderDomain {
+    func makeItemDetailUseCase() -> ItemDetailUseCaseDomain
+}

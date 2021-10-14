@@ -38,8 +38,7 @@ class PatchDetailViewController: UIViewController {
         
         let input = PatchDetailViewModel.Input(heroesPatchSelecting: selectHeroesPatch.rx.tap.asDriver(),
                                                itemsPatchSelecting: selectItemsPatch.rx.tap.asDriver(),
-                                               firstLoading: self.rx.viewWillAppear.map({ _ in
-                                               }).asDriver(onErrorJustReturn: Void()))
+                                               firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
         
         let output = patchDetailViewModel.transform(input: input)
         

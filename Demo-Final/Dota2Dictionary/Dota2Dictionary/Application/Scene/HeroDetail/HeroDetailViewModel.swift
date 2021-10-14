@@ -10,9 +10,4 @@ import RxSwift
 
 class HeroDetailViewModel {
     
-//    func fetchHeroDetailViewModelPlus() -> Observable<HeroDetailViewModelPlus> {
-//        return heroDetailService.fetchHeroDetail().map {
-//            HeroDetailViewModelPlus(with: $0)
-//        }
-//    }
 }

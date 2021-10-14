@@ -23,5 +23,10 @@ public protocol HeroUseCaseDomain {
 
 // MARK: - Item
 public protocol ItemUseCaseDomain {
-    
+    func loadItemDataAtFirst() -> Observable<[String]>
+}
+
+// MARK: - Item Detail
+public protocol ItemDetailUseCaseDomain {
+    func loadItemDetailDataAtFirst(itemKey: String) -> Observable<ItemDetailModel>
 }
