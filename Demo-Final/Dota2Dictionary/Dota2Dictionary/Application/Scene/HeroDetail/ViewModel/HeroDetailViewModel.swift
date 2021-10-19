@@ -13,7 +13,7 @@ import RxDataSources
 class HeroDetailViewModel: ViewModelType {
     
     let heroID: String
-        
+    
     private let useCase: HeroDetailUseCaseDomain
     
     init(heroID: String,
@@ -34,14 +34,22 @@ class HeroDetailViewModel: ViewModelType {
             .map { HeroDetailViewModelPlus(with: $0) }
             .asDriver(onErrorDriveWith: .empty())
         
-        let items = BehaviorSubject<[HeroDetailTableViewSection]>(value: [
-            .infoSection(items: [.heroInfoTableViewItem(info: HeroDetailViewModelPlus)])
-        ])
-        
-        let dataSource = HeroDetailDataSource.dataSource()
+        let items = firstLoadingOutput
+            .asObservable()
+            .map {
+                BehaviorSubject<[HeroDetailTableViewSection]>(value: [
+                    .infoSection(items: [.heroInfoTableViewItem(info: $0)]),
+                    .rolesSection(items: [.heroRolesTableViewItem(roles: $0)]),
+                    .languageSection(items: [.heroLanguageTableViewItem(language: $0)]),
+                    .statSection(items: [.heroStatTableViewItem(stat: $0)]),
+                    .abilitiesSection(items: [.heroAbilitiesTableViewItem(abilities: $0)]),
+                    .talentsSection(items: [.heroTalentsTableViewItem(talents: $0)])
+                ])
+            }
+            .flatMap { $0 }
         
         return Output(firstLoadingOutput: firstLoadingOutput,
-                      dataSource: dataSource)
+                      cellDatas: items)
     }
 }
 
@@ -52,7 +60,6 @@ extension HeroDetailViewModel {
     
     struct Output {
         let firstLoadingOutput: Driver<HeroDetailViewModelPlus>
-        
-        let dataSource: RxTableViewSectionedReloadDataSource<HeroDetailTableViewSection>
+        let cellDatas: Observable<[HeroDetailTableViewSection]>
     }
 }

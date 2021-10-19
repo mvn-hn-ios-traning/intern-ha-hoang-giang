@@ -10,6 +10,8 @@ import RxSwift
 
 class HeroInfoTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var heroName: UILabel!
+    
     private let disposeBag = DisposeBag()
 
     override func awakeFromNib() {
@@ -23,10 +25,8 @@ class HeroInfoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-}
-
-extension HeroInfoTableViewCell {
-    private func configure() {
-        
+    func configure(_ viewModel: HeroDetailViewModelPlus) {
+        heroName.text = viewModel.displayName
     }
+    
 }

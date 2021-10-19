@@ -17,9 +17,15 @@ class HeroDetailViewController: UIViewController {
     let disposeBag = DisposeBag()
 
     var heroDetailViewModel: HeroDetailViewModel!
+    
+    let dataSource = HeroDetailDataSource.dataSource()
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        heroDetailTableView.register(UINib(nibName: "HeroInfoTableViewCell",
+//                                           bundle: nil),
+//                                     forCellReuseIdentifier: "HeroInfoTableViewCell")
         
         let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
         
@@ -27,6 +33,7 @@ class HeroDetailViewController: UIViewController {
         
         output.firstLoadingOutput.drive().disposed(by: disposeBag)
         
+        output.cellDatas.bind(to: heroDetailTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
     }
 
 }

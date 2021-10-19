@@ -33,8 +33,9 @@ class ItemsViewController: UIViewController {
                                         selection: itemAllCollectionView.rx.itemSelected.asDriver(),
                                         searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver())
         let output = itemViewModel.transform(input: input)
+        
         output
-            .firstLoadingOutput
+            .searchOutput
             .bind(to: itemAllCollectionView
                     .rx
                     .items(cellIdentifier: itemsAllCollectionViewCell,

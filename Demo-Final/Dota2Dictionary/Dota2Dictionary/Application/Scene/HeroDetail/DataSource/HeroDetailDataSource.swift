@@ -10,11 +10,11 @@ import RxDataSources
 
 enum HeroDetailTableViewItem {
     case heroInfoTableViewItem(info: HeroDetailViewModelPlus)
-    case heroRolesTableViewItem
-    case heroLanguageTableViewItem
-    case heroStatTableViewItem
-    case heroAbilitiesTableViewItem
-    case heroTalentsTableViewItem
+    case heroRolesTableViewItem(roles: HeroDetailViewModelPlus)
+    case heroLanguageTableViewItem(language: HeroDetailViewModelPlus)
+    case heroStatTableViewItem(stat: HeroDetailViewModelPlus)
+    case heroAbilitiesTableViewItem(abilities: HeroDetailViewModelPlus)
+    case heroTalentsTableViewItem(talents: HeroDetailViewModelPlus)
 }
 
 enum HeroDetailTableViewSection {
@@ -72,28 +72,37 @@ struct HeroDetailDataSource {
     typealias DataSource = RxTableViewSectionedReloadDataSource
     
     static func dataSource() -> DataSource<HeroDetailTableViewSection> {
-        return .init { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+        
+        return .init (configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
             
             switch dataSource[indexPath] {
-            case .heroInfoTableViewItem:
+            case let .heroInfoTableViewItem(info):
                 let cell = HeroInfoTableViewCell()
+                cell.configure(info)
                 return cell
-            case .heroRolesTableViewItem:
+            case let .heroRolesTableViewItem(roles):
                 let cell = HeroInfoTableViewCell()
+                cell.configure(roles)
                 return cell
-            case .heroLanguageTableViewItem:
+            case let .heroLanguageTableViewItem(language):
                 let cell = HeroInfoTableViewCell()
+                cell.configure(language)
                 return cell
-            case .heroStatTableViewItem:
+            case let .heroStatTableViewItem(stat):
                 let cell = HeroInfoTableViewCell()
+                cell.configure(stat)
                 return cell
-            case .heroAbilitiesTableViewItem:
+            case let .heroAbilitiesTableViewItem(abilities):
                 let cell = HeroInfoTableViewCell()
+                cell.configure(abilities)
                 return cell
-            case .heroTalentsTableViewItem:
+            case let .heroTalentsTableViewItem(talents):
                 let cell = HeroInfoTableViewCell()
+                cell.configure(talents)
                 return cell
             }
-        }
+        }, titleForHeaderInSection: { dataSource, index in // bỏ titleForHeaderInSection sẽ mất tên của section ^^
+            return dataSource.sectionModels[index].header
+        })
     }
 }

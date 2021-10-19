@@ -50,9 +50,11 @@ class ItemViewModel: ViewModelType {
                         }
                     }
             }
+            .flatMap { $0 }
             
         return Output(firstLoadingOutput: firstLoadingOutput,
-                      selectedItem: selectedItem)
+                      selectedItem: selectedItem,
+                      searchOutput: searchOutput)
     }
     
 }
@@ -67,7 +69,7 @@ extension ItemViewModel {
     struct Output {
         let firstLoadingOutput: Observable<[String]>
         let selectedItem: Driver<String>
-//        let searchOutput: Observable<[String]>
+        let searchOutput: Observable<[String]>
     }
     
 }
