@@ -27,16 +27,31 @@ class ItemViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadItemDataAtFirst()
-            }.asDriver(onErrorDriveWith: .empty())
+            }
         
         let selectedItem = input
             .selection
-            .withLatestFrom(firstLoadingOutput) { (indexPath, first) -> String in
+            .withLatestFrom(firstLoadingOutput.asDriver(onErrorDriveWith: .empty())) { (indexPath, first) -> String in
                 return first[indexPath.row]
             }
             .do(onNext: navigator.toItemDetail)
         
-        return Output(fetchOutput: firstLoadingOutput,
+        let searchOutput = input
+            .searchTrigger
+            .asObservable()
+            .throttle(.milliseconds(300),
+                      scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .map { query in
+                firstLoadingOutput
+                    .map {
+                        $0.filter { item in
+                            query.isEmpty || item.lowercased().contains(query.lowercased())
+                        }
+                    }
+            }
+            
+        return Output(firstLoadingOutput: firstLoadingOutput,
                       selectedItem: selectedItem)
     }
     
@@ -46,11 +61,13 @@ extension ItemViewModel {
     struct Input {
         let firstLoading: Driver<Void>
         let selection: Driver<IndexPath>
+        let searchTrigger: Driver<String>
     }
     
     struct Output {
-        let fetchOutput: Driver<[String]>
+        let firstLoadingOutput: Observable<[String]>
         let selectedItem: Driver<String>
+//        let searchOutput: Observable<[String]>
     }
     
 }

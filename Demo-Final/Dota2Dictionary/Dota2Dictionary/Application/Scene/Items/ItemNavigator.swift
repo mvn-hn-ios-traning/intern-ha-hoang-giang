@@ -41,7 +41,6 @@ class ItemNavigator: DefaultItemNavigator {
     }
     
     func toItemDetail(_ string: String) {
-//        let navigator = ItemDetailNavigator(navigationController: navigationController)
         let viewModel = ItemDetailViewModel(itemKey: string,
                                             useCase: servicesDetail.makeItemDetailUseCase())
         guard let viewController = storyBoard
@@ -50,7 +49,6 @@ class ItemNavigator: DefaultItemNavigator {
             return
         }
         viewController.itemDetailViewModel = viewModel
-        viewController.title = string
         navigationController.pushViewController(viewController, animated: true)
     }
 }

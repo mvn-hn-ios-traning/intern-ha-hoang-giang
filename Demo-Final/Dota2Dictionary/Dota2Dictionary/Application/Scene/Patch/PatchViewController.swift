@@ -24,12 +24,18 @@ class PatchViewController: UIViewController {
                                       bundle: nil),
                                 forCellReuseIdentifier: patchTableViewCell)
         bindViewModel()
-        customTabBarAndNavigation()
     }
     
     func bindViewModel() {
-        patchViewModel
-            .listPatchNew
+        
+        let input = PatchViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
+                                         selection: patchTableView.rx.itemSelected.asDriver())
+        
+        let output = patchViewModel.transform(input: input)
+        
+        output
+            .firstLoadingOutput
+            .asObservable()
             .bind(to: patchTableView
                     .rx
                     .items(cellIdentifier: patchTableViewCell,
@@ -39,38 +45,8 @@ class PatchViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        patchTableView
-            .rx
-            .modelSelected(NewPatchDetailViewModel.self)
-            .subscribe(onNext: { [weak self] object in
-                guard let self = self else { return }
-                
-                if let selectedRowIndexPath = self.patchTableView.indexPathForSelectedRow {
-                    self.patchTableView.deselectRow(at: selectedRowIndexPath, animated: true)
-                }
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard
-                        .instantiateViewController(withIdentifier: "PatchDetailViewController")
-                        as? PatchDetailViewController else {
-                    return
-                }
-                viewController.title = object.newPatchName
-                viewController.patchDetailViewModel = PatchDetailViewModel(patchName: object.patchName)
-                self.navigationController?.pushViewController(viewController, animated: true)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func customTabBarAndNavigation() {
-        // Navigation Bar:
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        // Navigation Bar Text:
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        // Tab Bar:
-        tabBarController?.tabBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        // Tab Bar Text:
-        tabBarController?.tabBar.tintColor = UIColor.link
+        output.selectedOutput.drive().disposed(by: disposeBag)
+        
     }
     
 }

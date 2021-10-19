@@ -9,21 +9,25 @@ import UIKit
 
 protocol DefaultHeroNavigator {
     func toHero()
-    func toHeroDetail()
+    func toHeroDetail(_ viewModel: HeroViewModelPlus)
 }
 
 class HeroNavigator: DefaultHeroNavigator {
     
+    private let services: HeroUseCaseProviderDomain
+    private let servicesDetail: HeroDetailUseCaseProviderDomain
     private let storyBoard: UIStoryboard
     private let navigationController: UINavigationController
-    private let services: HeroUseCaseProviderDomain
     
     init(services: HeroUseCaseProviderDomain,
+         servicesDetail: HeroDetailUseCaseProviderDomain,
          navigationController: UINavigationController,
          storyBoard: UIStoryboard) {
         self.services = services
+        self.servicesDetail = servicesDetail
         self.navigationController = navigationController
         self.storyBoard = storyBoard
+        
     }
     
     func toHero() {
@@ -32,11 +36,19 @@ class HeroNavigator: DefaultHeroNavigator {
                 as? HeroViewController else {
             return
         }
-        viewController.heroViewModel = HeroViewModel(useCase: services.makeHeroUseCase())
+        viewController.heroViewModel = HeroViewModel(useCase: services.makeHeroUseCase(),
+                                                     navigator: self)
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func toHeroDetail() {
-        
+    func toHeroDetail(_ viewModel: HeroViewModelPlus) {
+        guard let viewController = storyBoard
+                .instantiateViewController(withIdentifier: "HeroDetailViewController")
+                as? HeroDetailViewController else {
+            return
+        }
+        viewController.heroDetailViewModel = HeroDetailViewModel(heroID: viewModel.newID,
+                                                                 useCase: servicesDetail.makeHeroDetailUseCase())
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

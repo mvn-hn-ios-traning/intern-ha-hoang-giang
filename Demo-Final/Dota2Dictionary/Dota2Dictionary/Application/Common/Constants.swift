@@ -17,6 +17,9 @@ struct Constants {
     static let urlForImageItemVC =
         "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/"
     
+    static let urlForHeroDetailJson =
+        "https://api.stratz.com/api/v1/Hero"
+    
     static let urlJsonForItemViewModel =
         "https://raw.githubusercontent.com/odota/dotaconstants/master/build/item_ids.json"
     

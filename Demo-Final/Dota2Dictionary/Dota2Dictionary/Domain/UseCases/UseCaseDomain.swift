@@ -8,6 +8,11 @@
 import Foundation
 import RxSwift
 
+// MARK: - Patch
+public protocol PatchUseCaseDomain {
+    func loadPatchDataAllFirst() -> Observable<[PatchModel]>
+}
+
 // MARK: - PatchDetail
 public protocol PatchDetailUseCaseDomain {
     func loadHeroesPatchData(patchVersion: String) -> Observable<[PatchModel]>
@@ -16,9 +21,15 @@ public protocol PatchDetailUseCaseDomain {
 
 // MARK: - Hero
 public protocol HeroUseCaseDomain {
+    func loadFirstAllData() -> Observable<[HeroModel]>
     func loadStrengthData() -> Observable<[HeroModel]>
     func loadAgibilityData() -> Observable<[HeroModel]>
     func loadIntelligentData() -> Observable<[HeroModel]>
+}
+
+// MARK: Hero Detail
+public protocol HeroDetailUseCaseDomain {
+    func loadHeroDetailDataAtFirst(heroID: String) -> Observable<HeroDetailModel>
 }
 
 // MARK: - Item

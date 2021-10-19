@@ -30,16 +30,15 @@ class HeroViewController: UIViewController {
                                              bundle: nil),
                                        forCellWithReuseIdentifier: allHeroCollectionViewCell)
         bindViewModel()
-        configureNaviBarColor()
     }
-
+    
     func bindViewModel() {
         
         let input = HeroViewModel.Input(strengthSelecting: strengthButton.rx.tap.asDriver(),
                                         agibilitySelecting: agibilityButton.rx.tap.asDriver(),
                                         intelligentSelecting: intelligentButton.rx.tap.asDriver(),
-                                        firstLoading: self.rx.viewWillAppear.map({ _ in
-                                        }).asDriver(onErrorJustReturn: Void()))
+                                        firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
+                                        selection: allHeroCollectionView.rx.itemSelected.asDriver())
         
         let output = heroViewModel.transform(input: input)
         output
@@ -52,30 +51,12 @@ class HeroViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        allHeroCollectionView.rx.modelSelected(HeroItemViewModel.self)
-            .subscribe(onNext: { [weak self] object in
-                guard let self = self else { return }
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard
-                        .instantiateViewController(withIdentifier: "HeroDetailViewController")
-                        as? HeroDetailViewController else {
-                    return
-                }
-                viewController.title = "\(object.theID)"
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }).disposed(by: disposeBag)
+        output.selectedOutput.drive().disposed(by: disposeBag)
         
         allHeroCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-
+        
     }
     
-    func configureNaviBarColor() {
-        // Navigation Bar:
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        // Navigation Bar Text:
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-    }
 }
 
 extension HeroViewController: UICollectionViewDelegateFlowLayout {

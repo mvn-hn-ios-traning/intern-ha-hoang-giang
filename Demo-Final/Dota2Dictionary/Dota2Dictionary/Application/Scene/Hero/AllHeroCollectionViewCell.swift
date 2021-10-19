@@ -24,7 +24,7 @@ class AllHeroCollectionViewCell: UICollectionViewCell {
         heroAvatar.image = nil
     }
     
-    func bind(_ viewModel: HeroItemViewModel) {
+    func bind(_ viewModel: HeroViewModelPlus) {
         self.heroName.text = viewModel.heroName
         
         let url = URL(string: "\(Constants.urlForHeroImageHeroVC)\(viewModel.heroAvatar).png")

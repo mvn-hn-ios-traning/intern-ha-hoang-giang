@@ -15,7 +15,7 @@ struct Attribute: Codable {
 }
 
 public struct ItemDetailModel: Codable {
-    let itemID: String
+    let itemKey: String
 
     let hint: [String]?
     let dname: String?
@@ -45,15 +45,15 @@ public struct ItemDetailModel: Codable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        itemID = container.codingPath.first!.stringValue
+        itemKey = container.codingPath.first!.stringValue
         
         hint = try container.decodeIfPresent([String].self, forKey: .hint)
         
-        dname = try container.decodeIfPresent(String.self, forKey: .dname) ?? "N/A"
+        dname = try container.decodeIfPresent(String.self, forKey: .dname)
         
-        qual = try container.decodeIfPresent(String.self, forKey: .qual) ?? "N/A"
+        qual = try container.decodeIfPresent(String.self, forKey: .qual)
         
-        cost = try container.decodeIfPresent(Int.self, forKey: .cost) ?? 0
+        cost = try container.decodeIfPresent(Int.self, forKey: .cost)
         
         notes = try container.decode(String.self, forKey: .notes)
         

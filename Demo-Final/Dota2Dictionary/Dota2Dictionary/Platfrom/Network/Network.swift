@@ -181,8 +181,8 @@ class Network: NSObject {
                     let listHeroAdd = HeroModel()
                     listHeroAdd.name = hero
                     if let heroProperties = data[hero] as? [String: Any] {
-                        if let theID = heroProperties["id"] as? Int {
-                            listHeroAdd.theID = theID
+                        if let heroID = heroProperties["id"] as? Int {
+                            listHeroAdd.heroID = heroID
                         }
                         if let primaryAttr = heroProperties["primary_attr"] as? String {
                             listHeroAdd.primaryAttr = primaryAttr
@@ -194,6 +194,47 @@ class Network: NSObject {
             } else {
                 closure(nil, nil)
             }
+        }
+    }
+}
+
+// MARK: - Hero Detail
+class HeroDetailAPISevice {
+    
+    static let shared = HeroDetailAPISevice()
+    
+    func parse(heroID: String, jsonData: Data) -> Observable<HeroDetailModel> {
+        return Observable.create { observer -> Disposable in
+            do {
+                let decodedData = try JSONDecoder().decode(HeroDetailDecodeArray.self,
+                                                           from: jsonData)
+                let arrayINeed = decodedData.array.filter {
+                    $0.heroID == heroID
+                }
+                if let elementINeed = arrayINeed.first {
+                    observer.onNext(elementINeed)
+                    print(elementINeed)
+                }
+            } catch {
+                print("error: ", error)
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadJson(fromURLString urlString: String,
+                  completion: @escaping (Result<Data, Error>) -> Void) {
+        if let url = URL(string: urlString) {
+            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                
+                if let data = data {
+                    completion(.success(data))
+                }
+            }
+            urlSession.resume()
         }
     }
 }
@@ -246,7 +287,7 @@ class ItemDetailAPIService {
                 let arayINeed = decodedData
                     .array
                     .filter {
-                        $0.itemID == itemKey
+                        $0.itemKey == itemKey
                     }
                 if let elementINeed = arayINeed.first {
                     observer.onNext(elementINeed)

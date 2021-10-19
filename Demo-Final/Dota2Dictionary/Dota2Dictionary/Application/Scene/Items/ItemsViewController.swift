@@ -13,15 +13,14 @@ import RxViewController
 class ItemsViewController: UIViewController {
     
     @IBOutlet weak var itemAllCollectionView: UICollectionView!
+    @IBOutlet weak var itemSearchBar: UISearchBar!
     
     let disposeBag = DisposeBag()
     var itemViewModel: ItemViewModel!
     let itemsAllCollectionViewCell = "ItemsAllCollectionViewCell"
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        configureNaviBarColor()
-        
+        super.viewDidLoad()        
         itemAllCollectionView.register(UINib(nibName: itemsAllCollectionViewCell,
                                              bundle: nil),
                                        forCellWithReuseIdentifier: itemsAllCollectionViewCell)
@@ -30,15 +29,12 @@ class ItemsViewController: UIViewController {
     
     func bindViewModel() {
         
-        let input = ItemViewModel.Input(firstLoading: self
-                                            .rx
-                                            .viewWillAppear
-                                            .map({ _ in })
-                                            .asDriver(onErrorJustReturn: Void()),
-                                        selection: itemAllCollectionView.rx.itemSelected.asDriver())
+        let input = ItemViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
+                                        selection: itemAllCollectionView.rx.itemSelected.asDriver(),
+                                        searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver())
         let output = itemViewModel.transform(input: input)
         output
-            .fetchOutput.asObservable()
+            .firstLoadingOutput
             .bind(to: itemAllCollectionView
                     .rx
                     .items(cellIdentifier: itemsAllCollectionViewCell,
@@ -53,13 +49,6 @@ class ItemsViewController: UIViewController {
             .disposed(by: disposeBag)
         
         itemAllCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-    }
-    
-    func configureNaviBarColor() {
-        // Navigation Bar:
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        // Navigation Bar Text:
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
 }

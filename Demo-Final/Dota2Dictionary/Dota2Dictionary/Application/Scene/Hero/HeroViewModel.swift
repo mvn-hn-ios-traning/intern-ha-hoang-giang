@@ -12,9 +12,11 @@ import RxSwift
 class HeroViewModel: ViewModelType {
     
     private let useCase: HeroUseCaseDomain
+    private let navigator: DefaultHeroNavigator
     
-    init(useCase: HeroUseCaseDomain) {
+    init(useCase: HeroUseCaseDomain, navigator: DefaultHeroNavigator) {
         self.useCase = useCase
+        self.navigator = navigator
     }
     
     func transform(input: Input) -> Output {
@@ -25,7 +27,7 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadStrengthData()
-            }.map { $0.map { HeroItemViewModel(with: $0) }
+            }.map { $0.map { HeroViewModelPlus(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
         let agibility = input
@@ -35,7 +37,7 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadAgibilityData()
-            }.map { $0.map { HeroItemViewModel(with: $0) }
+            }.map { $0.map { HeroViewModelPlus(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
         let intelligent = input
@@ -45,7 +47,7 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadIntelligentData()
-            }.map { $0.map { HeroItemViewModel(with: $0) }
+            }.map { $0.map { HeroViewModelPlus(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
         let firstLoadingOutput = input
@@ -54,8 +56,8 @@ class HeroViewModel: ViewModelType {
             .flatMapLatest {
                 return self
                     .useCase
-                    .loadStrengthData()
-            }.map { $0.map { HeroItemViewModel(with: $0) }
+                    .loadFirstAllData()
+            }.map { $0.map { HeroViewModelPlus(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
         let fetchOutput =
@@ -66,7 +68,15 @@ class HeroViewModel: ViewModelType {
                 firstLoadingOutput.asObservable())
             .merge()
         
-        return Output(fetchOutput: fetchOutput)
+        let selectedOutput = input
+            .selection
+            .withLatestFrom(firstLoadingOutput) { (indexPath, first) -> HeroViewModelPlus in
+                return first[indexPath.row]
+            }
+            .do(onNext: navigator.toHeroDetail)
+        
+        return Output(fetchOutput: fetchOutput,
+                      selectedOutput: selectedOutput)
     }
 }
 
@@ -76,9 +86,11 @@ extension HeroViewModel {
         let agibilitySelecting: Driver<Void>
         let intelligentSelecting: Driver<Void>
         let firstLoading: Driver<Void>
+        let selection: Driver<IndexPath>
     }
     
     struct Output {
-        let fetchOutput: Observable<[HeroItemViewModel]>
+        let fetchOutput: Observable<[HeroViewModelPlus]>
+        let selectedOutput: Driver<HeroViewModelPlus>
     }
 }
