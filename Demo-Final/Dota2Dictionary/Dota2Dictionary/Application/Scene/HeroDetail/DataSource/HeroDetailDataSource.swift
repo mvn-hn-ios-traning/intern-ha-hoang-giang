@@ -10,7 +10,7 @@ import RxDataSources
 
 enum HeroDetailTableViewItem {
     case heroInfoTableViewItem(info: HeroDetailViewModelPlus)
-    case heroRolesTableViewItem(roles: HeroDetailViewModelPlus)
+    case heroRolesTableViewItem(roles: Roles)
     case heroLanguageTableViewItem(language: HeroDetailViewModelPlus)
     case heroStatTableViewItem(stat: HeroDetailViewModelPlus)
     case heroAbilitiesTableViewItem(abilities: HeroDetailViewModelPlus)
@@ -73,36 +73,61 @@ struct HeroDetailDataSource {
     
     static func dataSource() -> DataSource<HeroDetailTableViewSection> {
         
-        return .init (configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+        return .init(configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+                        
+            tableView.register(UINib(nibName: "HeroInfoTableViewCell",
+                                     bundle: nil),
+                               forCellReuseIdentifier: "HeroInfoTableViewCell")
+            
+            tableView.register(UINib(nibName: "HeroRolesTableViewCell",
+                                     bundle: nil),
+                               forCellReuseIdentifier: "HeroRolesTableViewCell")
             
             switch dataSource[indexPath] {
-            case let .heroInfoTableViewItem(info):
-                let cell = HeroInfoTableViewCell()
+            case .heroInfoTableViewItem(let info):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "HeroInfoTableViewCell",
+                                                               for: indexPath) as? HeroInfoTableViewCell else {
+                    return UITableViewCell()
+                }
                 cell.configure(info)
                 return cell
-            case let .heroRolesTableViewItem(roles):
-                let cell = HeroInfoTableViewCell()
+            case .heroRolesTableViewItem(let roles):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "HeroRolesTableViewCell",
+                                                               for: indexPath) as? HeroRolesTableViewCell else {
+                    return UITableViewCell()
+                }
                 cell.configure(roles)
+                
                 return cell
-            case let .heroLanguageTableViewItem(language):
-                let cell = HeroInfoTableViewCell()
+            case .heroLanguageTableViewItem(let language):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "HeroInfoTableViewCell",
+                                                               for: indexPath) as? HeroInfoTableViewCell else {
+                    return UITableViewCell()
+                }
                 cell.configure(language)
                 return cell
-            case let .heroStatTableViewItem(stat):
-                let cell = HeroInfoTableViewCell()
+            case .heroStatTableViewItem(let stat):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "HeroInfoTableViewCell",
+                                                               for: indexPath) as? HeroInfoTableViewCell else {
+                    return UITableViewCell()
+                }
                 cell.configure(stat)
                 return cell
-            case let .heroAbilitiesTableViewItem(abilities):
-                let cell = HeroInfoTableViewCell()
+            case .heroAbilitiesTableViewItem(let abilities):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "HeroInfoTableViewCell",
+                                                               for: indexPath) as? HeroInfoTableViewCell else {
+                    return UITableViewCell()
+                }
                 cell.configure(abilities)
                 return cell
-            case let .heroTalentsTableViewItem(talents):
-                let cell = HeroInfoTableViewCell()
+            case .heroTalentsTableViewItem(let talents):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "HeroInfoTableViewCell",
+                                                               for: indexPath) as? HeroInfoTableViewCell else {
+                    return UITableViewCell()
+                }
                 cell.configure(talents)
                 return cell
             }
-        }, titleForHeaderInSection: { dataSource, index in // bỏ titleForHeaderInSection sẽ mất tên của section ^^
-            return dataSource.sectionModels[index].header
         })
     }
 }

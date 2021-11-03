@@ -18,25 +18,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mA3-2S-DgB">
-                        <rect key="frame" x="0.0" y="0.0" width="391" height="239"/>
+                        <rect key="frame" x="195.5" y="0.0" width="195.5" height="239"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qq3-8m-vk9">
+                        <rect key="frame" x="0.0" y="0.0" width="195.5" height="239"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="mA3-2S-DgB" secondAttribute="trailing" id="EoK-wh-vSi"/>
-                    <constraint firstItem="mA3-2S-DgB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="eFh-Mn-RIX"/>
-                    <constraint firstItem="mA3-2S-DgB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="o7A-ow-IrG"/>
-                    <constraint firstAttribute="bottom" secondItem="mA3-2S-DgB" secondAttribute="bottom" id="qaL-ju-Fit"/>
+                    <constraint firstItem="Qq3-8m-vk9" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="2pg-vb-dIx"/>
+                    <constraint firstItem="Qq3-8m-vk9" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="BSW-X3-zXi"/>
+                    <constraint firstItem="mA3-2S-DgB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="EpZ-ku-TlN"/>
+                    <constraint firstItem="Qq3-8m-vk9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XW1-WI-0xT"/>
+                    <constraint firstAttribute="trailing" secondItem="mA3-2S-DgB" secondAttribute="trailing" id="bau-OA-leB"/>
+                    <constraint firstItem="mA3-2S-DgB" firstAttribute="leading" secondItem="Qq3-8m-vk9" secondAttribute="trailing" id="jfN-na-xte"/>
+                    <constraint firstItem="Qq3-8m-vk9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qR5-Kv-YSF"/>
+                    <constraint firstAttribute="bottom" secondItem="mA3-2S-DgB" secondAttribute="bottom" id="rdv-fY-YQr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="heroAvatar" destination="Qq3-8m-vk9" id="xs1-nj-J2I"/>
                 <outlet property="heroName" destination="mA3-2S-DgB" id="Oxb-M2-rh2"/>
             </connections>
-            <point key="canvasLocation" x="-185" y="128"/>
+            <point key="canvasLocation" x="-186.23188405797103" y="127.56696428571428"/>
         </tableViewCell>
     </objects>
 </document>

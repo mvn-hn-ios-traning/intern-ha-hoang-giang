@@ -56,7 +56,7 @@ final class ItemDetailViewModelPlus {
     let lore: String
     
     let components: [String]
-
+    
     private let itemDetail: ItemDetailModel
     
     init(with item: ItemDetailModel) {

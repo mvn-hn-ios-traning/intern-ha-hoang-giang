@@ -30,6 +30,7 @@ public protocol HeroUseCaseDomain {
 // MARK: Hero Detail
 public protocol HeroDetailUseCaseDomain {
     func loadHeroDetailDataAtFirst(heroID: String) -> Observable<HeroDetailModel>
+    func loadHeroDetailRoles() -> Observable<[RolesDetail]>
 }
 
 // MARK: - Item

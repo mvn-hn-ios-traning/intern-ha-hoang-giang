@@ -16,13 +16,12 @@ class PatchViewController: UIViewController {
     var patchViewModel: PatchViewModel!
 
     let disposeBag = DisposeBag()
-    let patchTableViewCell = "PatchTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        patchTableView.register(UINib(nibName: patchTableViewCell,
+        patchTableView.register(UINib(nibName: ConstantsForCell.patchTableViewCell,
                                       bundle: nil),
-                                forCellReuseIdentifier: patchTableViewCell)
+                                forCellReuseIdentifier: ConstantsForCell.patchTableViewCell)
         bindViewModel()
     }
     
@@ -38,10 +37,9 @@ class PatchViewController: UIViewController {
             .asObservable()
             .bind(to: patchTableView
                     .rx
-                    .items(cellIdentifier: patchTableViewCell,
+                    .items(cellIdentifier: ConstantsForCell.patchTableViewCell,
                            cellType: PatchTableViewCell.self)) { (_, element, cell) in
-                cell.patchName.text = "Version: " + element.newPatchName
-                cell.generalDetail.text = element.newGeneral
+                cell.configure(element)
             }
             .disposed(by: disposeBag)
         

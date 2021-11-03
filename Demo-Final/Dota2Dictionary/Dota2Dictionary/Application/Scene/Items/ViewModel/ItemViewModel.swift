@@ -29,17 +29,10 @@ class ItemViewModel: ViewModelType {
                     .loadItemDataAtFirst()
             }
         
-        let selectedItem = input
-            .selection
-            .withLatestFrom(firstLoadingOutput.asDriver(onErrorDriveWith: .empty())) { (indexPath, first) -> String in
-                return first[indexPath.row]
-            }
-            .do(onNext: navigator.toItemDetail)
-        
         let searchOutput = input
             .searchTrigger
             .asObservable()
-            .throttle(.milliseconds(300),
+            .throttle(RxTimeInterval.milliseconds(300),
                       scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .map { query in
@@ -51,12 +44,18 @@ class ItemViewModel: ViewModelType {
                     }
             }
             .flatMap { $0 }
+        
+        let selectedItem = input
+            .selection
+            .withLatestFrom(searchOutput.asDriver(onErrorDriveWith: .empty())) { (indexPath, first) -> String in
+                return first[indexPath.row]
+            }
+            .do(onNext: navigator.toItemDetail)
             
         return Output(firstLoadingOutput: firstLoadingOutput,
                       selectedItem: selectedItem,
                       searchOutput: searchOutput)
     }
-    
 }
 
 extension ItemViewModel {

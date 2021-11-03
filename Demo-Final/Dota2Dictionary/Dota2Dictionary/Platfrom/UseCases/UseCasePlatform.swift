@@ -104,7 +104,7 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
 class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
     func loadHeroDetailDataAtFirst(heroID: String) -> Observable<HeroDetailModel> {
         return Observable.create { observer -> Disposable in
-            let urlString = Constants.urlForHeroDetailJson
+            let urlString = ConstantsForJsonUrl.heroDetailAllInfo
             let bag = DisposeBag()
             
             HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
@@ -123,13 +123,35 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
             return Disposables.create()
         }
     }
+    
+    func loadHeroDetailRoles() -> Observable<[RolesDetail]> {
+        return Observable.create { observer -> Disposable in
+            let urlString = ConstantsForJsonUrl.heroDetailRole
+            let bag = DisposeBag()
+            
+            HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let newdata = HeroDetailAPISevice.shared.parseRoles(jsonData: data)
+                    newdata
+                        .subscribe { element in
+                            observer.onNext(element)
+                        }
+                        .disposed(by: bag)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
 }
 
 // MARK: - Item
 class ItemUseCasePlatform: ItemUseCaseDomain {
     func loadItemDataAtFirst() -> Observable<[String]> {
         return Observable.create { observer -> Disposable in
-            let urlString = Constants.urlJsonForItemViewModel
+            let urlString = ConstantsForJsonUrl.itemViewModelLink
             let bag = DisposeBag()
             
             ItemAPIService.shared.loadJson(fromURLString: urlString) { (result) in
@@ -154,7 +176,7 @@ class ItemUseCasePlatform: ItemUseCaseDomain {
 class ItemDetailUseCasePlatform: ItemDetailUseCaseDomain {
     func loadItemDetailDataAtFirst(itemKey: String) -> Observable<ItemDetailModel> {
         return Observable.create { observer -> Disposable in
-            let urlString = Constants.urlJsonForItemDetailViewModel
+            let urlString = ConstantsForJsonUrl.itemDetailViewModelLink
             let bag = DisposeBag()
             
             ItemDetailAPIService.shared.loadJson(fromURLString: urlString) { (result) in

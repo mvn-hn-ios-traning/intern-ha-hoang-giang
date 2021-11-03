@@ -213,10 +213,22 @@ class HeroDetailAPISevice {
                 }
                 if let elementINeed = arrayINeed.first {
                     observer.onNext(elementINeed)
-                    print(elementINeed)
                 }
             } catch {
-                print("error: ", error)
+                print("parseAll error: ", error)
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func parseRoles(jsonData: Data) -> Observable<[RolesDetail]> {
+        return Observable.create { (observer) -> Disposable in
+            do {
+                let decodedData = try JSONDecoder().decode([RolesDetail].self, from: jsonData)
+                observer.onNext(decodedData)
+                print(decodedData)
+            } catch {
+                print("parseRoles error: ", error)
             }
             return Disposables.create()
         }

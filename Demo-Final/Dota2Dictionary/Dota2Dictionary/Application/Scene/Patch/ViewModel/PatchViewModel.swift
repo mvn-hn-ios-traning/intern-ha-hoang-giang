@@ -15,28 +15,11 @@ class PatchViewModel: ViewModelType {
     private let useCase: PatchUseCaseDomain
     private let navigator: PatchNavigator
     
-//    var listPatch = BehaviorRelay<[PatchModel]>(value: [])
-//    var listPatchNew = Observable<[NewPatchDetailViewModel]>.from([])
-    
     init(useCase: PatchUseCaseDomain,
          navigator: PatchNavigator) {
         self.useCase = useCase
         self.navigator = navigator
-//        bindingData()
     }
-    
-//    func bindingData() {
-//        Network.shared.getPatchAll { [weak self] data, _ in
-//            if let data = data {
-//                self?.listPatch.accept(data)
-//            }
-//        }
-//        listPatchNew = listPatch.map {
-//            $0.map {
-//                NewPatchDetailViewModel(with: $0)
-//            }
-//        }
-//    }
     
     func transform(input: Input) -> Output {
         let firstLoadingOutput = input

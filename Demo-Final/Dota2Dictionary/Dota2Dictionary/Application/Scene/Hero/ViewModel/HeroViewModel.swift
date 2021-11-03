@@ -23,7 +23,7 @@ class HeroViewModel: ViewModelType {
         let strength = input
             .strengthSelecting
             .asObservable()
-            .flatMapLatest {
+            .flatMap {
                 return self
                     .useCase
                     .loadStrengthData()
@@ -33,7 +33,7 @@ class HeroViewModel: ViewModelType {
         let agibility = input
             .agibilitySelecting
             .asObservable()
-            .flatMapLatest {
+            .flatMap {
                 return self
                     .useCase
                     .loadAgibilityData()
@@ -43,7 +43,7 @@ class HeroViewModel: ViewModelType {
         let intelligent = input
             .intelligentSelecting
             .asObservable()
-            .flatMapLatest {
+            .flatMap {
                 return self
                     .useCase
                     .loadIntelligentData()
@@ -53,15 +53,14 @@ class HeroViewModel: ViewModelType {
         let firstLoadingOutput = input
             .firstLoading
             .asObservable()
-            .flatMapLatest {
+            .flatMap {
                 return self
                     .useCase
                     .loadFirstAllData()
             }.map { $0.map { HeroViewModelPlus(with: $0) }
             }.asDriver(onErrorDriveWith: .empty())
         
-        let fetchOutput =
-            Observable
+        let fetchOutput = Observable
             .of(strength.asObservable(),
                 agibility.asObservable(),
                 intelligent.asObservable(),
@@ -70,7 +69,8 @@ class HeroViewModel: ViewModelType {
         
         let selectedOutput = input
             .selection
-            .withLatestFrom(firstLoadingOutput) { (indexPath, first) -> HeroViewModelPlus in
+            .withLatestFrom(fetchOutput
+                                .asDriver(onErrorDriveWith: .empty())) { (indexPath, first) -> HeroViewModelPlus in
                 return first[indexPath.row]
             }
             .do(onNext: navigator.toHeroDetail)

@@ -22,4 +22,9 @@ class PatchTableViewCell: UITableViewCell {
         
     }
     
+    func configure(_ viewModel: NewPatchDetailViewModel) {
+        patchName.text = "Version: " + viewModel.newPatchName
+        generalDetail.text = viewModel.newGeneral
+    }
+    
 }

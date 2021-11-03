@@ -10,21 +10,25 @@ import RxCocoa
 import RxSwift
 import RxViewController
 
-class ItemsViewController: UIViewController {
+class ItemsViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var itemAllCollectionView: UICollectionView!
     @IBOutlet weak var itemSearchBar: UISearchBar!
     
     let disposeBag = DisposeBag()
     var itemViewModel: ItemViewModel!
-    let itemsAllCollectionViewCell = "ItemsAllCollectionViewCell"
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
-        itemAllCollectionView.register(UINib(nibName: itemsAllCollectionViewCell,
+        super.viewDidLoad()
+        itemSearchBar.delegate = self
+        itemAllCollectionView.register(UINib(nibName: ConstantsForCell.itemsAllCollectionViewCell,
                                              bundle: nil),
-                                       forCellWithReuseIdentifier: itemsAllCollectionViewCell)
+                                       forCellWithReuseIdentifier: ConstantsForCell.itemsAllCollectionViewCell)
         bindViewModel()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.itemSearchBar.endEditing(true)
     }
     
     func bindViewModel() {
@@ -38,7 +42,7 @@ class ItemsViewController: UIViewController {
             .searchOutput
             .bind(to: itemAllCollectionView
                     .rx
-                    .items(cellIdentifier: itemsAllCollectionViewCell,
+                    .items(cellIdentifier: ConstantsForCell.itemsAllCollectionViewCell,
                            cellType: ItemsAllCollectionViewCell.self)) { (_, element, cell) in
                 cell.bind(element)
             }
@@ -49,7 +53,10 @@ class ItemsViewController: UIViewController {
             .drive()
             .disposed(by: disposeBag)
         
-        itemAllCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        itemAllCollectionView
+            .rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
     }
     
 }

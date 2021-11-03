@@ -27,7 +27,7 @@ class AllHeroCollectionViewCell: UICollectionViewCell {
     func bind(_ viewModel: HeroViewModelPlus) {
         self.heroName.text = viewModel.heroName
         
-        let url = URL(string: "\(Constants.urlForHeroImageHeroVC)\(viewModel.heroAvatar).png")
+        let url = URL(string: "\(ConstantsForImageURL.heroImageForHeroVC)\(viewModel.heroAvatar).png")
 
         let processor = DownsamplingImageProcessor(size: heroAvatar.bounds.size)
         heroAvatar

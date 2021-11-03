@@ -21,14 +21,13 @@ class HeroViewController: UIViewController {
     var heroViewModel: HeroViewModel!
     
     let disposeBag = DisposeBag()
-    let allHeroCollectionViewCell = "AllHeroCollectionViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        allHeroCollectionView.register(UINib(nibName: allHeroCollectionViewCell,
+        allHeroCollectionView.register(UINib(nibName: ConstantsForCell.allHeroCollectionViewCell,
                                              bundle: nil),
-                                       forCellWithReuseIdentifier: allHeroCollectionViewCell)
+                                       forCellWithReuseIdentifier: ConstantsForCell.allHeroCollectionViewCell)
         bindViewModel()
     }
     
@@ -45,15 +44,21 @@ class HeroViewController: UIViewController {
             .fetchOutput
             .bind(to: allHeroCollectionView
                     .rx
-                    .items(cellIdentifier: allHeroCollectionViewCell,
+                    .items(cellIdentifier: ConstantsForCell.allHeroCollectionViewCell,
                            cellType: AllHeroCollectionViewCell.self)) { _, hero, cell in
                 cell.bind(hero)
             }
             .disposed(by: disposeBag)
         
-        output.selectedOutput.drive().disposed(by: disposeBag)
+        output
+            .selectedOutput
+            .drive()
+            .disposed(by: disposeBag)
         
-        allHeroCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        allHeroCollectionView
+            .rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
         
     }
     

@@ -27,18 +27,19 @@ class ItemsAllCollectionViewCell: UICollectionViewCell {
         self.itemName.text = itemKey.replacingOccurrences(of: "_", with: " ").capitalized
         
         let url = URL(string:
-                        "\(Constants.urlForImageItemVC)\(itemKey).png")
+                        "\(ConstantsForImageURL.itemImageForItemVC)\(itemKey).png")
         let processor = DownsamplingImageProcessor(size: itemAvatar.bounds.size)
-        itemAvatar
-            .kf
-            .setImage(
-                with: url,
-                placeholder: UIImage(named: "placeholderImage"),
-                options: [
-                    .processor(processor),
-                    .scaleFactor(UIScreen.main.scale),
-                    .transition(.fade(1)),
-                    .cacheOriginalImage
-                ])
+        
+        KF.url(url)
+          .placeholder(UIImage(named: "placeholderImage"))
+          .setProcessor(processor)
+          .loadDiskFileSynchronously()
+          .cacheMemoryOnly()
+          .fade(duration: 0.25)
+          .onProgress { _, _ in  }
+          .onSuccess { _ in  }
+          .onFailure { _ in }
+          .set(to: itemAvatar)
+        
     }
 }

@@ -16,6 +16,7 @@ class HeroDetailViewModelPlus {
     
     let abilities: [Abilities]
     let roles: [Roles]
+        
     let talents: [Talents]
     let stat: Stat
     let language: Language

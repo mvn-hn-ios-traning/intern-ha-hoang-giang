@@ -37,7 +37,7 @@ class PatchDetailTableViewCell: UITableViewCell {
         let imageKey = model.imageKey
         let nameHeroItem = model.nameHeroItem
         let sizeImg = model.sizeImg
-        let url = URL(string: "\(Constants.urlForPatchImage)\(imageKey)/\(nameHeroItem)_\(sizeImg).png")
+        let url = URL(string: "\(ConstantsForImageURL.patchImage)\(imageKey)/\(nameHeroItem)_\(sizeImg).png")
         let processor = DownsamplingImageProcessor(size: avatar.bounds.size)
         avatar
             .kf
