@@ -42,7 +42,10 @@ class HeroDetailViewModel: ViewModelType {
             }
             .asDriver(onErrorDriveWith: .empty())
         
-        let items = firstLoadingOutput
+        let zipData = Observable.zip(firstLoadingOutput.asObservable(),
+                                     loadingRolesData.asObservable())
+        
+        let items = firstLoadingOutput  
             .asObservable()
             .map {
                 [HeroDetailTableViewSection](arrayLiteral:

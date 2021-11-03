@@ -46,12 +46,10 @@ class PatchDetailUseCasePlatform: PatchDetailUseCaseDomain {
             return Disposables.create()
         }
     }
-    
 }
 
 // MARK: - Hero
 class HeroUseCasePlatform: HeroUseCaseDomain {
-    
     func loadFirstAllData() -> Observable<[HeroModel]> {
         return Observable.create { observer -> Disposable in
             Network.shared.getHeroAll { data, _ in
@@ -77,7 +75,7 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
     
     func loadAgibilityData() -> Observable<[HeroModel]> {
         return Observable.create { observer -> Disposable in
-            Network.shared.getHeroAll {  data, _ in
+            Network.shared.getHeroAll { data, _ in
                 if let data = data {
                     let newData = data.filter { $0.primaryAttr == "agi" }
                     observer.onNext(newData)

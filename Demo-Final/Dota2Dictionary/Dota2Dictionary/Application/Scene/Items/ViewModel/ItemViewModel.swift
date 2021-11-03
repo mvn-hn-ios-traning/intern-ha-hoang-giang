@@ -32,7 +32,7 @@ class ItemViewModel: ViewModelType {
         let searchOutput = input
             .searchTrigger
             .asObservable()
-            .throttle(RxTimeInterval.milliseconds(300),
+            .throttle(.milliseconds(300),
                       scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .map { query in

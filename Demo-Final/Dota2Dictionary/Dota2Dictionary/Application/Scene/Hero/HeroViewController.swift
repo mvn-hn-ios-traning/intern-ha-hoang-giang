@@ -42,6 +42,7 @@ class HeroViewController: UIViewController {
         let output = heroViewModel.transform(input: input)
         output
             .fetchOutput
+            .asObservable()
             .bind(to: allHeroCollectionView
                     .rx
                     .items(cellIdentifier: ConstantsForCell.allHeroCollectionViewCell,

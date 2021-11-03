@@ -20,6 +20,15 @@ class HeroViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
+        let firstLoadingOutput = input
+            .firstLoading
+            .asObservable()
+            .flatMap {
+                return self
+                    .useCase
+                    .loadFirstAllData()
+            }
+        
         let strength = input
             .strengthSelecting
             .asObservable()
@@ -27,8 +36,7 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadStrengthData()
-            }.map { $0.map { HeroViewModelPlus(with: $0) }
-            }.asDriver(onErrorDriveWith: .empty())
+            }
         
         let agibility = input
             .agibilitySelecting
@@ -37,8 +45,7 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadAgibilityData()
-            }.map { $0.map { HeroViewModelPlus(with: $0) }
-            }.asDriver(onErrorDriveWith: .empty())
+            }
         
         let intelligent = input
             .intelligentSelecting
@@ -47,30 +54,20 @@ class HeroViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadIntelligentData()
-            }.map { $0.map { HeroViewModelPlus(with: $0) }
-            }.asDriver(onErrorDriveWith: .empty())
-        
-        let firstLoadingOutput = input
-            .firstLoading
-            .asObservable()
-            .flatMap {
-                return self
-                    .useCase
-                    .loadFirstAllData()
-            }.map { $0.map { HeroViewModelPlus(with: $0) }
-            }.asDriver(onErrorDriveWith: .empty())
+            }
         
         let fetchOutput = Observable
-            .of(strength.asObservable(),
-                agibility.asObservable(),
-                intelligent.asObservable(),
-                firstLoadingOutput.asObservable())
+            .of(strength,
+                agibility,
+                intelligent,
+                firstLoadingOutput)
             .merge()
+            .map { $0.map { HeroViewModelPlus(with: $0) } }
+            .asDriver(onErrorDriveWith: .empty())
         
         let selectedOutput = input
             .selection
-            .withLatestFrom(fetchOutput
-                                .asDriver(onErrorDriveWith: .empty())) { (indexPath, first) -> HeroViewModelPlus in
+            .withLatestFrom(fetchOutput) { (indexPath, first) -> HeroViewModelPlus in
                 return first[indexPath.row]
             }
             .do(onNext: navigator.toHeroDetail)
@@ -90,7 +87,7 @@ extension HeroViewModel {
     }
     
     struct Output {
-        let fetchOutput: Observable<[HeroViewModelPlus]>
+        let fetchOutput: Driver<[HeroViewModelPlus]>
         let selectedOutput: Driver<HeroViewModelPlus>
     }
 }
