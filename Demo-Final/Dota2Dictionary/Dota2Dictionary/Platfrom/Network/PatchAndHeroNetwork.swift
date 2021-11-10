@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import RxCocoa
-import RxSwift
 
 typealias ApiCompletion = (_ data: Any?, _ error: Error?) -> Void
 typealias ApiParam = [String: Any]
@@ -58,7 +56,6 @@ class Network: NSObject {
                     completion(nil, error)
                     return
                 }
-                
                 // check for http errors
                 if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200, response != nil {
                 }
@@ -194,136 +191,6 @@ class Network: NSObject {
             } else {
                 closure(nil, nil)
             }
-        }
-    }
-}
-
-// MARK: - Hero Detail
-class HeroDetailAPISevice {
-    
-    static let shared = HeroDetailAPISevice()
-    
-    func parse(heroID: String, jsonData: Data) -> Observable<HeroDetailModel> {
-        return Observable.create { observer -> Disposable in
-            do {
-                let decodedData = try JSONDecoder().decode(HeroDetailDecodeArray.self,
-                                                           from: jsonData)
-                let arrayINeed = decodedData.array.filter {
-                    $0.heroID == heroID
-                }
-                if let elementINeed = arrayINeed.first {
-                    observer.onNext(elementINeed)
-                }
-            } catch {
-                print("parseAll error: ", error)
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func parseRoles(jsonData: Data) -> Observable<[RolesDetail]> {
-        return Observable.create { (observer) -> Disposable in
-            do {
-                let decodedData = try JSONDecoder().decode([RolesDetail].self, from: jsonData)
-                observer.onNext(decodedData)
-                print(decodedData)
-            } catch {
-                print("parseRoles error: ", error)
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func loadJson(fromURLString urlString: String,
-                  completion: @escaping (Result<Data, Error>) -> Void) {
-        if let url = URL(string: urlString) {
-            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
-                if let error = error {
-                    completion(.failure(error))
-                }
-                
-                if let data = data {
-                    completion(.success(data))
-                }
-            }
-            urlSession.resume()
-        }
-    }
-}
-
-// MARK: - Item
-class ItemAPIService {
-    
-    static let shared = ItemAPIService()
-    
-    func parse(jsonData: Data) -> Observable<[String]> {
-        return Observable.create { observer -> Disposable in
-            do {
-                let decodedData = try JSONDecoder().decode(ItemModel.self,
-                                                           from: jsonData)
-                observer.onNext(decodedData.array.sorted())
-            } catch {
-                print("decode error")
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func loadJson(fromURLString urlString: String,
-                  completion: @escaping (Result<Data, Error>) -> Void) {
-        if let url = URL(string: urlString) {
-            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
-                if let error = error {
-                    completion(.failure(error))
-                }
-                
-                if let data = data {
-                    completion(.success(data))
-                }
-            }
-            urlSession.resume()
-        }
-    }
-}
-
-// MARK: Item Detail
-class ItemDetailAPIService {
-    
-    static let shared = ItemDetailAPIService()
-    
-    func parse(itemKey: String, jsonData: Data) -> Observable<ItemDetailModel> {
-        return Observable.create { observer -> Disposable in
-            do {
-                let decodedData = try JSONDecoder().decode(ItemDetailDecodeArray.self,
-                                                           from: jsonData)
-                let arayINeed = decodedData
-                    .array
-                    .filter {
-                        $0.itemKey == itemKey
-                    }
-                if let elementINeed = arayINeed.first {
-                    observer.onNext(elementINeed)
-                }
-            } catch {
-                print("error: ", error)
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func loadJson(fromURLString urlString: String,
-                  completion: @escaping (Result<Data, Error>) -> Void) {
-        if let url = URL(string: urlString) {
-            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
-                if let error = error {
-                    completion(.failure(error))
-                }
-                
-                if let data = data {
-                    completion(.success(data))
-                }
-            }
-            urlSession.resume()
         }
     }
 }

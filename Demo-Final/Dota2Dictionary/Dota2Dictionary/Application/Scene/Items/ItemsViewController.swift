@@ -18,6 +18,7 @@ class ItemsViewController: UIViewController, UISearchBarDelegate {
     let disposeBag = DisposeBag()
     var itemViewModel: ItemViewModel!
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         itemSearchBar.delegate = self
@@ -32,7 +33,6 @@ class ItemsViewController: UIViewController, UISearchBarDelegate {
     }
     
     func bindViewModel() {
-        
         let input = ItemViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
                                         selection: itemAllCollectionView.rx.itemSelected.asDriver(),
                                         searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver())
@@ -61,6 +61,7 @@ class ItemsViewController: UIViewController, UISearchBarDelegate {
     
 }
 
+// MARK: - DelegateFlowLayout
 extension ItemsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

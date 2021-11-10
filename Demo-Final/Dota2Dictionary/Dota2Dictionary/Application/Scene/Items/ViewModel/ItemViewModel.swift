@@ -19,6 +19,7 @@ class ItemViewModel: ViewModelType {
         self.navigator = navigator
     }
     
+    // MARK: - Transform
     func transform(input: Input) -> Output {
         let firstLoadingOutput = input
             .firstLoading
@@ -58,6 +59,7 @@ class ItemViewModel: ViewModelType {
     }
 }
 
+// MARK: - Input Output
 extension ItemViewModel {
     struct Input {
         let firstLoading: Driver<Void>

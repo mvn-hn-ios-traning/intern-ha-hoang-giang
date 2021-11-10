@@ -8,6 +8,7 @@
 import Foundation
 import RxDataSources
 
+// MARK: Item
 enum HeroDetailTableViewItem {
     case heroInfoTableViewItem(info: HeroDetailViewModelPlus)
     case heroRolesTableViewItem(roles: Roles)
@@ -17,6 +18,7 @@ enum HeroDetailTableViewItem {
     case heroTalentsTableViewItem(talents: HeroDetailViewModelPlus)
 }
 
+// MARK: Section
 enum HeroDetailTableViewSection {
     case infoSection(items: [HeroDetailTableViewItem])
     case rolesSection(items: [HeroDetailTableViewItem])
@@ -28,23 +30,6 @@ enum HeroDetailTableViewSection {
 
 extension HeroDetailTableViewSection: SectionModelType {
     typealias Item = HeroDetailTableViewItem
-    
-    var header: String {
-        switch self {
-        case .infoSection:
-            return "InfoSection"
-        case .rolesSection:
-            return "RolesSection"
-        case .languageSection:
-            return "LanguageSection"
-        case .statSection:
-            return "StatSection"
-        case .abilitiesSection:
-            return "AbilitiesSection"
-        case .talentsSection:
-            return "TalentsSection"
-        }
-    }
     
     var items: [HeroDetailTableViewItem] {
         switch self {
@@ -68,21 +53,14 @@ extension HeroDetailTableViewSection: SectionModelType {
     }
 }
 
+// MARK: - DataSource
 struct HeroDetailDataSource {
     typealias DataSource = RxTableViewSectionedReloadDataSource
     
     static func dataSource() -> DataSource<HeroDetailTableViewSection> {
         
-        return .init(configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
-                        
-            tableView.register(UINib(nibName: "HeroInfoTableViewCell",
-                                     bundle: nil),
-                               forCellReuseIdentifier: "HeroInfoTableViewCell")
-            
-            tableView.register(UINib(nibName: "HeroRolesTableViewCell",
-                                     bundle: nil),
-                               forCellReuseIdentifier: "HeroRolesTableViewCell")
-            
+        return .init(configureCell: { (dataSource, tableView, indexPath, _) -> UITableViewCell in
+                                    
             switch dataSource[indexPath] {
             case .heroInfoTableViewItem(let info):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "HeroInfoTableViewCell",

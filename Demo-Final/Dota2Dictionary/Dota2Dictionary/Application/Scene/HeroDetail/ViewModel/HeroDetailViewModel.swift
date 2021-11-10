@@ -22,6 +22,7 @@ class HeroDetailViewModel: ViewModelType {
         self.useCase = useCase
     }
     
+    // MARK: - Life Cycle
     func transform(input: Input) -> Output {
         let firstLoading = input
             .firstLoading
@@ -63,6 +64,7 @@ class HeroDetailViewModel: ViewModelType {
     }
 }
 
+// MARK: - Input Output
 extension HeroDetailViewModel {
     struct Input {
         let firstLoading: Driver<Void>

@@ -20,9 +20,24 @@ class HeroDetailViewController: UIViewController {
     
     let dataSource = HeroDetailDataSource.dataSource()
         
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerCell()
+        bindViewModel()
+    }
+    
+    func registerCell() {
+        heroDetailTableView.register(UINib(nibName: ConstantsForCell.heroInfoTableViewCell,
+                                 bundle: nil),
+                           forCellReuseIdentifier: ConstantsForCell.heroInfoTableViewCell)
         
+        heroDetailTableView.register(UINib(nibName: ConstantsForCell.heroRolesTableViewCell,
+                                 bundle: nil),
+                           forCellReuseIdentifier: ConstantsForCell.heroRolesTableViewCell)
+    }
+    
+    func bindViewModel() {
         let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
         
         let output = heroDetailViewModel.transform(input: input)

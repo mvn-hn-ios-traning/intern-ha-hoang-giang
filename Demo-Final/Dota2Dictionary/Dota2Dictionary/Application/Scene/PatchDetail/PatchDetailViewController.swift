@@ -20,21 +20,16 @@ class PatchDetailViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         patchDetailTableView.register(UINib(nibName: ConstantsForCell.patchDetailTableViewCell,
                                             bundle: nil),
                                       forCellReuseIdentifier: ConstantsForCell.patchDetailTableViewCell)
         bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     func bindViewModel() {
-        
         let input = PatchDetailViewModel.Input(heroesPatchSelecting: selectHeroesPatch.rx.tap.asDriver(),
                                                itemsPatchSelecting: selectItemsPatch.rx.tap.asDriver(),
                                                firstLoading: Observable
@@ -43,7 +38,8 @@ class PatchDetailViewController: UIViewController {
         
         let output = patchDetailViewModel.transform(input: input)
         
-        output.fetchOutput
+        output
+            .fetchOutput
             .bind(to: patchDetailTableView
                     .rx
                     .items(cellIdentifier: ConstantsForCell.patchDetailTableViewCell,

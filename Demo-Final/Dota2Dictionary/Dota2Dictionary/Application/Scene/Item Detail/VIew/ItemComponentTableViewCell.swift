@@ -25,11 +25,6 @@ class ItemComponentTableViewCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-    
     func registerCell() {
         itemComponentCollectionView.register(UINib(nibName: "ComponentCollectionViewCell",
                                                    bundle: nil),
@@ -47,7 +42,10 @@ class ItemComponentTableViewCell: UITableViewCell {
             }
             .disposed(by: disposeBag)
         
-        itemComponentCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        itemComponentCollectionView
+            .rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
     }
 }
 

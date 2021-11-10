@@ -8,18 +8,8 @@
 import UIKit
 
 class ItemAttribTableViewCell: UITableViewCell {
-    @IBOutlet weak var attribLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    @IBOutlet weak var attribLabel: UILabel!
     
     func configure(_ viewModel: ItemDetailViewModelPlus) {
         attribLabel.text = viewModel.newAttrib

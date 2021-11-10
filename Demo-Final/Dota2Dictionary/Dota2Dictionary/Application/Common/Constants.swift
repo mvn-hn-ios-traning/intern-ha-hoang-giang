@@ -49,6 +49,10 @@ struct ConstantsForCell {
     // Hero ViewController
     static let allHeroCollectionViewCell = "AllHeroCollectionViewCell"
     
+    // Hero Detail VC
+    static let heroInfoTableViewCell = "HeroInfoTableViewCell"
+    static let heroRolesTableViewCell = "HeroRolesTableViewCell"
+    
     // Item ViewController
     static let itemsAllCollectionViewCell = "ItemsAllCollectionViewCell"
     

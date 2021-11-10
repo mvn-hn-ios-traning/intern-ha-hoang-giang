@@ -22,9 +22,9 @@ class HeroViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         allHeroCollectionView.register(UINib(nibName: ConstantsForCell.allHeroCollectionViewCell,
                                              bundle: nil),
                                        forCellWithReuseIdentifier: ConstantsForCell.allHeroCollectionViewCell)
@@ -32,7 +32,6 @@ class HeroViewController: UIViewController {
     }
     
     func bindViewModel() {
-        
         let input = HeroViewModel.Input(strengthSelecting: strengthButton.rx.tap.asDriver(),
                                         agibilitySelecting: agibilityButton.rx.tap.asDriver(),
                                         intelligentSelecting: intelligentButton.rx.tap.asDriver(),
@@ -42,6 +41,7 @@ class HeroViewController: UIViewController {
         let output = heroViewModel.transform(input: input)
         output
             .fetchOutput
+            .asObservable()
             .bind(to: allHeroCollectionView
                     .rx
                     .items(cellIdentifier: ConstantsForCell.allHeroCollectionViewCell,
@@ -59,11 +59,11 @@ class HeroViewController: UIViewController {
             .rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-        
     }
     
 }
 
+// MARK: - DelegateFlowLayout
 extension HeroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

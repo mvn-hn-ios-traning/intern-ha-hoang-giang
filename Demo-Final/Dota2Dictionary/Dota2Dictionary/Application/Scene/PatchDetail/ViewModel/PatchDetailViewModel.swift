@@ -13,13 +13,15 @@ class PatchDetailViewModel: ViewModelType {
     
     var patchName: String
     
-    private let useCase: PatchDetailUseCasePlatform
+    private let useCase: PatchDetailUseCaseDomain
 
-    init(patchName: String) {
+    init(patchName: String,
+         useCase: PatchDetailUseCaseDomain) {
         self.patchName = patchName
-        self.useCase = PatchDetailUseCasePlatform()
+        self.useCase = useCase
     }
     
+    // MARK: - Transform
     func transform(input: Input) -> Output {
         let firstLoadingOutput = input
             .firstLoading
@@ -28,10 +30,7 @@ class PatchDetailViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadHeroesPatchData(patchVersion: self.patchName)
-            }.map({
-                $0.map { NewPatchDetailViewModel(with: $0) }
-            })
-            .asDriver(onErrorDriveWith: .empty())
+            }
         
         let heroesPatch = input
             .heroesPatchSelecting
@@ -40,10 +39,7 @@ class PatchDetailViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadHeroesPatchData(patchVersion: self.patchName)
-            }.map({
-                $0.map { NewPatchDetailViewModel(with: $0) }
-            })
-            .asDriver(onErrorDriveWith: .empty())
+            }
         
         let itemsPatch = input
             .itemsPatchSelecting
@@ -52,22 +48,23 @@ class PatchDetailViewModel: ViewModelType {
                 return self
                     .useCase
                     .loadItemsPatchData(patchVersion: self.patchName)
-            }.map({
-                $0.map { NewPatchDetailViewModel(with: $0) }
-            })
-            .asDriver(onErrorDriveWith: .empty())
+            }
         
         let fetch = Observable
-            .of(firstLoadingOutput.asObservable(),
-                heroesPatch.asObservable(),
-                itemsPatch.asObservable())
+            .of(firstLoadingOutput,
+                heroesPatch,
+                itemsPatch)
             .merge()
+            .map({
+                $0.map { NewPatchDetailViewModel(with: $0) }
+            })
         
         return Output(fetchOutput: fetch)
     }
     
 }
 
+// MARK: - Input Output
 extension PatchDetailViewModel {
     struct Input {
         let heroesPatchSelecting: Driver<Void>

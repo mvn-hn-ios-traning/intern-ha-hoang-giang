@@ -12,9 +12,9 @@ class ComponentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemName: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        itemImage.image = nil
     }
     
     func configure(_ element: String) {

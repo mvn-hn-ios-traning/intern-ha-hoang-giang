@@ -13,14 +13,10 @@ class InfoTopTableViewCell: UITableViewCell {
     @IBOutlet weak var itemAvatar: UIImageView!
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var itemCost: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        itemAvatar.image = nil
     }
     
     func configure(_ info: ItemDetailViewModelPlus) {
