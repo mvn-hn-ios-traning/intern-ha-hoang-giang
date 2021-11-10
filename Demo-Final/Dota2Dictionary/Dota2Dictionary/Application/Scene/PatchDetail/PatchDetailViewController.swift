@@ -35,8 +35,8 @@ class PatchDetailViewController: UIViewController {
     
     func bindViewModel() {
         
-        let input = PatchDetailViewModel.Input(heroesPatchSelecting: selectHeroesPatch.rx.tap.asDriver(),
-                                               itemsPatchSelecting: selectItemsPatch.rx.tap.asDriver(),
+        let input = PatchDetailViewModel.Input(selectHeroPatch: selectHeroesPatch.rx.tap.asDriver(),
+                                               selectItemPatch: selectItemsPatch.rx.tap.asDriver(),
                                                firstLoading: Observable
                                                 .just(Void())
                                                 .asDriver(onErrorJustReturn: Void()))

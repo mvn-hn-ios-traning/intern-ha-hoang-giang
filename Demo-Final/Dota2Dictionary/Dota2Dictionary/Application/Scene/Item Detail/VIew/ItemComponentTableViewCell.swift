@@ -11,6 +11,7 @@ import RxCocoa
 
 class ItemComponentTableViewCell: UITableViewCell {
     @IBOutlet weak var itemComponentCollectionView: UICollectionView!
+    @IBOutlet weak var componentsTitle: UILabel!
     
     var components = BehaviorSubject<[String]>(value: [])
     var disposeBag = DisposeBag()
@@ -25,11 +26,6 @@ class ItemComponentTableViewCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-    
     func registerCell() {
         itemComponentCollectionView.register(UINib(nibName: "ComponentCollectionViewCell",
                                                    bundle: nil),
@@ -37,6 +33,10 @@ class ItemComponentTableViewCell: UITableViewCell {
     }
     
     func configure(_ viewModel: ItemDetailViewModelPlus) {
+        if viewModel.components.isEmpty {
+            componentsTitle.isHidden = true
+        }
+        
         components.onNext(viewModel.components)
         components
             .bind(to: itemComponentCollectionView
@@ -47,7 +47,10 @@ class ItemComponentTableViewCell: UITableViewCell {
             }
             .disposed(by: disposeBag)
         
-        itemComponentCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        itemComponentCollectionView
+            .rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
     }
 }
 

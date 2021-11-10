@@ -50,7 +50,7 @@ class PatchDetailUseCasePlatform: PatchDetailUseCaseDomain {
 
 // MARK: - Hero
 class HeroUseCasePlatform: HeroUseCaseDomain {
-    func loadFirstAllData() -> Observable<[HeroModel]> {
+    func loadDataAtFirst() -> Observable<[HeroModel]> {
         return Observable.create { observer -> Disposable in
             Network.shared.getHeroAll { data, _ in
                 if let data = data {
@@ -60,60 +60,23 @@ class HeroUseCasePlatform: HeroUseCaseDomain {
             return Disposables.create()
         }
     }
-    
-    func loadStrengthData() -> Observable<[HeroModel]> {
-        return Observable.create { observer -> Disposable in
-            Network.shared.getHeroAll { data, _ in
-                if let data = data {
-                    let newData = data.filter { $0.primaryAttr == "str" }
-                    observer.onNext(newData)
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func loadAgibilityData() -> Observable<[HeroModel]> {
-        return Observable.create { observer -> Disposable in
-            Network.shared.getHeroAll { data, _ in
-                if let data = data {
-                    let newData = data.filter { $0.primaryAttr == "agi" }
-                    observer.onNext(newData)
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func loadIntelligentData() -> Observable<[HeroModel]> {
-        return Observable.create { observer -> Disposable in
-            Network.shared.getHeroAll {  data, _ in
-                if let data = data {
-                    let newData = data.filter { $0.primaryAttr == "int" }
-                    observer.onNext(newData)
-                }
-            }
-            return Disposables.create()
-        }
-    }
 }
 
 // MARK: Hero Detail
 class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
+    
     func loadHeroDetailDataAtFirst(heroID: String) -> Observable<HeroDetailModel> {
         return Observable.create { observer -> Disposable in
             let urlString = ConstantsForJsonUrl.heroDetailAllInfo
-            let bag = DisposeBag()
             
             HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
                 switch result {
                 case .success(let data):
-                    let newdata = HeroDetailAPISevice.shared.parse(heroID: heroID, jsonData: data)
-                    newdata
-                        .subscribe { element in
-                            observer.onNext(element)
-                        }
-                        .disposed(by: bag)
+                    let data = HeroDetailAPISevice.shared.parse(heroID: heroID, jsonData: data)
+                    guard let newdata = data else {
+                        return
+                    }
+                    observer.onNext(newdata)
                 case .failure(let error):
                     print(error)
                 }
@@ -125,17 +88,55 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
     func loadHeroDetailRoles() -> Observable<[RolesDetail]> {
         return Observable.create { observer -> Disposable in
             let urlString = ConstantsForJsonUrl.heroDetailRole
-            let bag = DisposeBag()
             
             HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
                 switch result {
                 case .success(let data):
-                    let newdata = HeroDetailAPISevice.shared.parseRoles(jsonData: data)
-                    newdata
-                        .subscribe { element in
-                            observer.onNext(element)
-                        }
-                        .disposed(by: bag)
+                    let data = HeroDetailAPISevice.shared.parseRoles(jsonData: data)
+                    guard let newdata = data else {
+                        return
+                    }
+                    observer.onNext(newdata)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadHeroAbilityId() -> Observable<[String: String]> {
+        return Observable.create { observer -> Disposable in
+            let urlString = ConstantsForJsonUrl.heroAbilitiesId
+            
+            HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let data = HeroDetailAPISevice.shared.parseAbilityId(jsonData: data)
+                    guard let newdata = data else {
+                        return
+                    }
+                    observer.onNext(newdata)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadHeroAbilities() -> Observable<[HeroDetailAbilitiesModel]> {
+        return Observable.create { observer -> Disposable in
+            let urlString = ConstantsForJsonUrl.heroDetailAbilities
+            
+            HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let data = HeroDetailAPISevice.shared.parseHeroAbilities(jsonData: data)
+                    guard let newdata = data else {
+                        return
+                    }
+                    observer.onNext(newdata)
                 case .failure(let error):
                     print(error)
                 }
@@ -150,17 +151,12 @@ class ItemUseCasePlatform: ItemUseCaseDomain {
     func loadItemDataAtFirst() -> Observable<[String]> {
         return Observable.create { observer -> Disposable in
             let urlString = ConstantsForJsonUrl.itemViewModelLink
-            let bag = DisposeBag()
             
             ItemAPIService.shared.loadJson(fromURLString: urlString) { (result) in
                 switch result {
                 case .success(let data):
                     let data = ItemAPIService.shared.parse(jsonData: data)
-                    data
-                        .subscribe { element in
-                            observer.onNext(element)
-                        }
-                        .disposed(by: bag)
+                    observer.onNext(data)
                 case .failure(let error):
                     print(error)
                 }
@@ -175,17 +171,13 @@ class ItemDetailUseCasePlatform: ItemDetailUseCaseDomain {
     func loadItemDetailDataAtFirst(itemKey: String) -> Observable<ItemDetailModel> {
         return Observable.create { observer -> Disposable in
             let urlString = ConstantsForJsonUrl.itemDetailViewModelLink
-            let bag = DisposeBag()
             
             ItemDetailAPIService.shared.loadJson(fromURLString: urlString) { (result) in
                 switch result {
                 case .success(let data):
                     let newdata = ItemDetailAPIService.shared.parse(itemKey: itemKey, jsonData: data)
-                    newdata
-                        .subscribe { element in
-                            observer.onNext(element)
-                        }
-                        .disposed(by: bag)
+                    guard let newdata2 = newdata else { return }
+                    observer.onNext(newdata2)
                 case .failure(let error):
                     print(error)
                 }

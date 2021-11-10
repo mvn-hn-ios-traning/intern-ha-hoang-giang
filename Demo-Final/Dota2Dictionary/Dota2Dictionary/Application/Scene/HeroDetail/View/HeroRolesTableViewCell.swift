@@ -6,26 +6,59 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class HeroRolesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var roleID: UILabel!
-    @IBOutlet weak var roleLevel: UILabel!
+    @IBOutlet weak var rolesCollectionView: UICollectionView!
+    
+    var roles = BehaviorSubject<[RolesDetail]>(value: [])
+    var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        registerCell()
     }
     
-    func configure(_ viewModel: Roles) {
-        roleID.text = String(viewModel.roleId)
-        roleLevel.text = String(viewModel.level)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
+    func registerCell() {
+        rolesCollectionView.register(UINib(nibName: ConstantsForCell.rolesCollectionViewCell,
+                                           bundle: nil),
+                                     forCellWithReuseIdentifier: ConstantsForCell.rolesCollectionViewCell)
+    }
+    
+    func configure(_ viewModel: HeroDetailViewModelPlus) {
+        roles.onNext(viewModel.resulrRolesDetail)
+        
+        roles
+            .asObserver()
+            .bind(to: rolesCollectionView
+                    .rx
+                    .items(cellIdentifier: ConstantsForCell.rolesCollectionViewCell,
+                           cellType: RolesCollectionViewCell.self)) { _, element, cell in
+                cell.configure(role: element)
+            }
+            .disposed(by: disposeBag)
+        
+        rolesCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+    }
+    
+}
+
+extension HeroRolesTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let columnsSpacing: CGFloat = 20
+        let numberOfColumns: CGFloat = 3
+        let width: CGFloat = (collectionView.bounds.width - (columnsSpacing * (numberOfColumns - 1)))/numberOfColumns
+        
+        return CGSize(width: width,
+                      height: 50)
+    }
 }

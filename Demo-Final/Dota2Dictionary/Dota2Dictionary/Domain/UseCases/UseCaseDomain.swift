@@ -21,16 +21,15 @@ public protocol PatchDetailUseCaseDomain {
 
 // MARK: - Hero
 public protocol HeroUseCaseDomain {
-    func loadFirstAllData() -> Observable<[HeroModel]>
-    func loadStrengthData() -> Observable<[HeroModel]>
-    func loadAgibilityData() -> Observable<[HeroModel]>
-    func loadIntelligentData() -> Observable<[HeroModel]>
+    func loadDataAtFirst() -> Observable<[HeroModel]>
 }
 
 // MARK: Hero Detail
 public protocol HeroDetailUseCaseDomain {
     func loadHeroDetailDataAtFirst(heroID: String) -> Observable<HeroDetailModel>
     func loadHeroDetailRoles() -> Observable<[RolesDetail]>
+    func loadHeroAbilityId() -> Observable<[String: String]>
+    func loadHeroAbilities() -> Observable<[HeroDetailAbilitiesModel]>
 }
 
 // MARK: - Item

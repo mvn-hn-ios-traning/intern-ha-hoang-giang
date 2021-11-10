@@ -33,9 +33,9 @@ class HeroViewController: UIViewController {
     
     func bindViewModel() {
         
-        let input = HeroViewModel.Input(strengthSelecting: strengthButton.rx.tap.asDriver(),
-                                        agibilitySelecting: agibilityButton.rx.tap.asDriver(),
-                                        intelligentSelecting: intelligentButton.rx.tap.asDriver(),
+        let input = HeroViewModel.Input(selectStrength: strengthButton.rx.tap.asDriver(),
+                                        selectAbility: agibilityButton.rx.tap.asDriver(),
+                                        selectIntelligent: intelligentButton.rx.tap.asDriver(),
                                         firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
                                         selection: allHeroCollectionView.rx.itemSelected.asDriver())
         

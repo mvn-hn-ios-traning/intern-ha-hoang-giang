@@ -26,35 +26,35 @@ class HeroViewModel: ViewModelType {
             .flatMap {
                 return self
                     .useCase
-                    .loadFirstAllData()
+                    .loadDataAtFirst()
             }
         
         let strength = input
-            .strengthSelecting
+            .selectStrength
             .asObservable()
             .flatMap {
                 return self
                     .useCase
-                    .loadStrengthData()
-            }
+                    .loadDataAtFirst()
+            }.map { $0.filter { $0.primaryAttr == "str" } }
         
         let agibility = input
-            .agibilitySelecting
+            .selectAbility
             .asObservable()
             .flatMap {
                 return self
                     .useCase
-                    .loadAgibilityData()
-            }
+                    .loadDataAtFirst()
+            }.map { $0.filter { $0.primaryAttr == "agi" } }
         
         let intelligent = input
-            .intelligentSelecting
+            .selectIntelligent
             .asObservable()
             .flatMap {
                 return self
                     .useCase
-                    .loadIntelligentData()
-            }
+                    .loadDataAtFirst()
+            }.map { $0.filter { $0.primaryAttr == "int" } }
         
         let fetchOutput = Observable
             .of(strength,
@@ -79,9 +79,9 @@ class HeroViewModel: ViewModelType {
 
 extension HeroViewModel {
     struct Input {
-        let strengthSelecting: Driver<Void>
-        let agibilitySelecting: Driver<Void>
-        let intelligentSelecting: Driver<Void>
+        let selectStrength: Driver<Void>
+        let selectAbility: Driver<Void>
+        let selectIntelligent: Driver<Void>
         let firstLoading: Driver<Void>
         let selection: Driver<IndexPath>
     }

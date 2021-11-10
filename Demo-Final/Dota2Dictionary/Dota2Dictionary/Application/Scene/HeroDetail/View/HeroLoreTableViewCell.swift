@@ -1,32 +1,27 @@
 //
-//  HeroInfoTableViewCell.swift
+//  HeroLoreTableViewCell.swift
 //  Dota2Dictionary
 //
-//  Created by MacOS on 18/10/2021.
+//  Created by MacOS on 09/11/2021.
 //
 
 import UIKit
-import RxSwift
 import Kingfisher
 
-class HeroInfoTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var heroAvatar: UIImageView!
-    @IBOutlet weak var heroName: UILabel!
-    
-    private let disposeBag = DisposeBag()
+class HeroLoreTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var heroSefie: UIImageView!
+    @IBOutlet weak var loreLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     func configure(_ viewModel: HeroDetailViewModelPlus) {
-        heroName.text = viewModel.displayName
-                
         // download image from url with kingfisher
-        let url = URL(string: ConstantsForImageURL.heroDetailAvatarImage + "\(viewModel.shortName).png")
-        let processor = DownsamplingImageProcessor(size: heroAvatar.bounds.size)
+        let url = URL(string: ConstantsForImageURL.heroSelfie + viewModel.shortName + ".jpg")
+        let processor = DownsamplingImageProcessor(size: heroSefie.bounds.size)
         KF.url(url)
           .placeholder(UIImage(named: "placeholderImage"))
           .setProcessor(processor)
@@ -36,6 +31,9 @@ class HeroInfoTableViewCell: UITableViewCell {
           .onProgress { _, _ in  }
           .onSuccess { _ in  }
           .onFailure { _ in }
-          .set(to: heroAvatar)
+          .set(to: heroSefie)
+        
+        loreLabel.text = viewModel.language.bio.htmlToString
     }
+    
 }

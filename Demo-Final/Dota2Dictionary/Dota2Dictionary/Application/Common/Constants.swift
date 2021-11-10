@@ -20,6 +20,10 @@ struct ConstantsForImageURL {
     static let heroDetailAvatarImage =
         "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/crops/"
     
+    static let heroAbilityImage =
+        "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/abilities/"
+    static let heroSelfie =
+    "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/social/"
 }
 
 struct ConstantsForJsonUrl {
@@ -29,6 +33,12 @@ struct ConstantsForJsonUrl {
     
     static let heroDetailRole =
         "https://api.stratz.com/api/v1/Hero/roles"
+    
+    static let heroAbilitiesId =
+        "https://raw.githubusercontent.com/odota/dotaconstants/master/build/ability_ids.json"
+    
+    static let heroDetailAbilities =
+        "https://raw.githubusercontent.com/odota/dotaconstants/master/build/abilities.json"
     
     // Item
     static let itemViewModelLink =
@@ -48,6 +58,16 @@ struct ConstantsForCell {
     
     // Hero ViewController
     static let allHeroCollectionViewCell = "AllHeroCollectionViewCell"
+    
+    // HeroDetail
+    static let heroInfoTableViewCell = "HeroInfoTableViewCell"
+    static let heroRolesTableViewCell = "HeroRolesTableViewCell"
+    static let rolesCollectionViewCell = "RolesCollectionViewCell"
+    static let heroLanguageTableViewCell = "HeroLanguageTableViewCell"
+    static let heroStatTableViewCell = "HeroStatTableViewCell"
+    static let heroAbilitiesTableViewCell = "HeroAbilitiesTableViewCell"
+    static let heroTalentsTableViewCell = "HeroTalentsTableViewCell"
+    static let heroLoreTableViewCell = "HeroLoreTableViewCell"
     
     // Item ViewController
     static let itemsAllCollectionViewCell = "ItemsAllCollectionViewCell"

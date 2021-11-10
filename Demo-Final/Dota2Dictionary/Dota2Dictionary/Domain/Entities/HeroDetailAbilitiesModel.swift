@@ -1,78 +1,61 @@
 //
-//  ItemDetailModel.swift
+//  HeroDetailAbilitiesModel.swift
 //  Dota2Dictionary
 //
-//  Created by MacOS on 10/10/2021.
+//  Created by MacOS on 07/11/2021.
 //
 
 import Foundation
 
-struct Attribute: Codable {
-    let key: String
-    let header: String
-    let value: String
-    let footer: String?
+struct AttributeSkill: Codable {
+    var key: String
+    var header: String
+    var value: ValueWrapper
+    var generated: Bool?
 }
 
-public struct ItemDetailModel: Codable {
-    let itemKey: String
+public struct HeroDetailAbilitiesModel: Codable {
+    let abilitiesKey: String
     
-    let hint: [String]?
     let dname: String?
-    let qual: String?
-    let cost: Int?
-    let notes: String
-    let attrib: [Attribute]?
+    let desc: String?
+    let behavior: ValueWrapper?
     let manaCost: ValueWrapper?
     let coldown: ValueWrapper?
-    let lore: String
-    let components: [String]?
+    let dmgType: String?
+    let bkbPierce: String?
+    let attrib: [AttributeSkill]?
     
     enum CodingKeys: String, CodingKey {
-        case hint
         case dname
-        case qual
-        case cost
-        case notes
-        case attrib
+        case desc
+        case behavior
         case manaCost = "mc"
         case coldown = "cd"
-        case lore
-        case components
+        case dmgType = "dmg_type"
+        case bkbPierce = "bkbpierce"
+        case attrib
     }
     
     public init(from decoder: Decoder) throws {
-        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        itemKey = container.codingPath.first!.stringValue
-        
-        hint = try container.decodeIfPresent([String].self, forKey: .hint)
+        abilitiesKey = container.codingPath.first!.stringValue
         
         dname = try container.decodeIfPresent(String.self, forKey: .dname)
-        
-        qual = try container.decodeIfPresent(String.self, forKey: .qual)
-        
-        cost = try container.decodeIfPresent(Int.self, forKey: .cost)
-        
-        notes = try container.decode(String.self, forKey: .notes)
-        
-        let attributeNull = try container.decodeIfPresent([OptionalObject<Attribute>].self, forKey: .attrib)
-        attrib = attributeNull?.compactMap({ $0.value })
-        
+        desc  = try container.decodeIfPresent(String.self, forKey: .desc)
+        behavior = try container.decodeIfPresent(ValueWrapper.self, forKey: .behavior)
         manaCost = try container.decodeIfPresent(ValueWrapper.self, forKey: .manaCost)
-        
-        coldown = try container.decodeIfPresent(ValueWrapper.self, forKey: .coldown)
-        
-        lore = try container.decode(String.self, forKey: .lore)
-        
-        components = try container.decodeIfPresent([String].self, forKey: .components)
-        
+        coldown  = try container.decodeIfPresent(ValueWrapper.self, forKey: .coldown)
+        dmgType = try container.decodeIfPresent(String.self, forKey: .dmgType)
+        bkbPierce = try container.decodeIfPresent(String.self, forKey: .bkbPierce)
+        let attributeNull = try container.decodeIfPresent([OptionalObject<AttributeSkill>].self, forKey: .attrib)
+        attrib = attributeNull?.compactMap({ $0.value })
     }
 }
 
-struct ItemDetailDecodeArray: Codable {
-    var array: [ItemDetailModel]
+struct HeroAbilitiesArratDecoded: Codable {
+    var array: [HeroDetailAbilitiesModel]
     
     private struct DynamicCodingKeys: CodingKey {
         // Use for string-keyed dictionary
@@ -80,7 +63,6 @@ struct ItemDetailDecodeArray: Codable {
         init?(stringValue: String) {
             self.stringValue = stringValue
         }
-        
         // Use for integer-keyed dictionary
         var intValue: Int?
         init?(intValue: Int) {
@@ -95,13 +77,13 @@ struct ItemDetailDecodeArray: Codable {
         // The container will contain all the JSON first level key
         let container = try decoder.container(keyedBy: DynamicCodingKeys.self)
         
-        var tempArray = [ItemDetailModel]()
+        var tempArray = [HeroDetailAbilitiesModel]()
         // 2
         // Loop through each key (item ID) in container
         for key in container.allKeys {
             
             // Decode using key & keep decoded object in tempArray
-            let decodedObject = try container.decode(ItemDetailModel.self,
+            let decodedObject = try container.decode(HeroDetailAbilitiesModel.self,
                                                      forKey: DynamicCodingKeys(stringValue: key.stringValue)!)
             tempArray.append(decodedObject)
         }

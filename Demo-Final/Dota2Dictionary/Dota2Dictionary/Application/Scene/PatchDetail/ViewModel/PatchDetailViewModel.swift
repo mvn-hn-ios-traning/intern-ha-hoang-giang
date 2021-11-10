@@ -31,7 +31,7 @@ class PatchDetailViewModel: ViewModelType {
             }
         
         let heroesPatch = input
-            .heroesPatchSelecting
+            .selectHeroPatch
             .asObservable()
             .flatMapLatest {
                 return self
@@ -40,7 +40,7 @@ class PatchDetailViewModel: ViewModelType {
             }
         
         let itemsPatch = input
-            .itemsPatchSelecting
+            .selectItemPatch
             .asObservable()
             .flatMapLatest {
                 return self
@@ -64,8 +64,8 @@ class PatchDetailViewModel: ViewModelType {
 
 extension PatchDetailViewModel {
     struct Input {
-        let heroesPatchSelecting: Driver<Void>
-        let itemsPatchSelecting: Driver<Void>
+        let selectHeroPatch: Driver<Void>
+        let selectItemPatch: Driver<Void>
         let firstLoading: Driver<Void>
     }
     

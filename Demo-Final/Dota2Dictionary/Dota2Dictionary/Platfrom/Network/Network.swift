@@ -203,8 +203,7 @@ class HeroDetailAPISevice {
     
     static let shared = HeroDetailAPISevice()
     
-    func parse(heroID: String, jsonData: Data) -> Observable<HeroDetailModel> {
-        return Observable.create { observer -> Disposable in
+    func parse(heroID: String, jsonData: Data) -> HeroDetailModel? {
             do {
                 let decodedData = try JSONDecoder().decode(HeroDetailDecodeArray.self,
                                                            from: jsonData)
@@ -212,26 +211,57 @@ class HeroDetailAPISevice {
                     $0.heroID == heroID
                 }
                 if let elementINeed = arrayINeed.first {
-                    observer.onNext(elementINeed)
+//                    print(elementINeed)
+                    return elementINeed
                 }
             } catch {
                 print("parseAll error: ", error)
             }
-            return Disposables.create()
-        }
+        return nil
     }
     
-    func parseRoles(jsonData: Data) -> Observable<[RolesDetail]> {
-        return Observable.create { (observer) -> Disposable in
+    func parseRoles(jsonData: Data) -> [RolesDetail]? {
             do {
                 let decodedData = try JSONDecoder().decode([RolesDetail].self, from: jsonData)
-                observer.onNext(decodedData)
-                print(decodedData)
+//                print(decodedData)
+                return decodedData
             } catch {
                 print("parseRoles error: ", error)
             }
-            return Disposables.create()
+        return nil
+    }
+    
+    func parseAbilityId(jsonData: Data) -> [String: String]? {
+        do {
+            let decodedData = try JSONDecoder().decode([String: String].self, from: jsonData)
+//            print(decodedData)
+            return decodedData
+        } catch {
+            print("error: ", error)
         }
+        return nil
+    }
+    
+    func parseHeroAbilities(jsonData: Data) -> [HeroDetailAbilitiesModel]? {
+        do {
+            let decodedData = try JSONDecoder().decode(HeroAbilitiesArratDecoded.self, from: jsonData)
+            print(decodedData.array.filter { $0.abilitiesKey == "antimage_mana_break" })
+            return decodedData.array
+        } catch let DecodingError.dataCorrupted(context) {
+            print(context)
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.typeMismatch(type, context) {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch {
+            print("error: ", error)
+        }
+        return nil
     }
     
     func loadJson(fromURLString urlString: String,
@@ -256,16 +286,14 @@ class ItemAPIService {
     
     static let shared = ItemAPIService()
     
-    func parse(jsonData: Data) -> Observable<[String]> {
-        return Observable.create { observer -> Disposable in
-            do {
-                let decodedData = try JSONDecoder().decode(ItemModel.self,
-                                                           from: jsonData)
-                observer.onNext(decodedData.array.sorted())
-            } catch {
-                print("decode error")
-            }
-            return Disposables.create()
+    func parse(jsonData: Data) -> [String] {
+        do {
+            let decodedData = try JSONDecoder().decode(ItemModel.self,
+                                                       from: jsonData)
+            return decodedData.array.sorted().filter { !$0.contains("recipe") }
+        } catch {
+            print("decode error")
+            return [""]
         }
     }
     
@@ -288,27 +316,25 @@ class ItemAPIService {
 
 // MARK: Item Detail
 class ItemDetailAPIService {
-    
     static let shared = ItemDetailAPIService()
     
-    func parse(itemKey: String, jsonData: Data) -> Observable<ItemDetailModel> {
-        return Observable.create { observer -> Disposable in
-            do {
-                let decodedData = try JSONDecoder().decode(ItemDetailDecodeArray.self,
-                                                           from: jsonData)
-                let arayINeed = decodedData
-                    .array
-                    .filter {
-                        $0.itemKey == itemKey
-                    }
-                if let elementINeed = arayINeed.first {
-                    observer.onNext(elementINeed)
+    func parse(itemKey: String, jsonData: Data) -> ItemDetailModel? {
+        do {
+            let decodedData = try JSONDecoder().decode(ItemDetailDecodeArray.self,
+                                                       from: jsonData)
+            let arayINeed = decodedData
+                .array
+                .filter {
+                    $0.itemKey == itemKey
                 }
-            } catch {
-                print("error: ", error)
+            
+            if let elementINeed = arayINeed.first {
+                return elementINeed
             }
-            return Disposables.create()
+        } catch {
+            print("error: ", error)
         }
+        return nil
     }
     
     func loadJson(fromURLString urlString: String,
