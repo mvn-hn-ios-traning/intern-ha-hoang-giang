@@ -51,7 +51,7 @@ class ItemViewModel: ViewModelType {
         let searchOutput = input
             .searchTrigger
             .asObservable()
-            .throttle(RxTimeInterval.milliseconds(300),
+            .debounce(RxTimeInterval.milliseconds(300),
                       scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .map {
@@ -59,7 +59,7 @@ class ItemViewModel: ViewModelType {
             }
             .withLatestFrom(firstLoadingOutput) { searchText, items -> [String] in
                 if searchText.isEmpty {
-                    return items.filter {!$0.isEmpty}
+                    return items
                 } else {
                    return items.filter { item in
                         item.lowercased().contains(searchText)
