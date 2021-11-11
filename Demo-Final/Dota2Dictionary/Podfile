@@ -13,5 +13,7 @@ pod 'SwiftLint'
 #Rx
 pod 'RxSwift'
 pod 'RxCocoa'
+pod 'RxDataSources'
+pod 'RxViewController'
 
 end
