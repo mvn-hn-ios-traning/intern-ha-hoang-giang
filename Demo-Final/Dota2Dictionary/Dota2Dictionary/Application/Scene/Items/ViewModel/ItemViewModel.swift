@@ -21,14 +21,6 @@ class ItemViewModel: ViewModelType {
     
     // MARK: - Transform
     func transform(input: Input) -> Output {
-        let firstLoadingOutput = input
-            .firstLoading
-            .asObservable()
-            .flatMapLatest {
-                return self
-                    .useCase
-                    .loadItemDataAtFirst()
-            }
         
         let searchOutput = input
             .searchTrigger
@@ -36,15 +28,16 @@ class ItemViewModel: ViewModelType {
             .throttle(RxTimeInterval.milliseconds(300),
                       scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .map { query in
-                firstLoadingOutput
+            .flatMapLatest { query in
+                self
+                    .useCase
+                    .loadItemDataAtFirst()
                     .map {
                         $0.filter { item in
                             query.isEmpty || item.lowercased().contains(query.lowercased())
                         }
                     }
             }
-            .flatMap { $0 }
         
         let selectedItem = input
             .selection
@@ -52,9 +45,8 @@ class ItemViewModel: ViewModelType {
                 return first[indexPath.row]
             }
             .do(onNext: navigator.toItemDetail)
-            
-        return Output(firstLoadingOutput: firstLoadingOutput,
-                      selectedItem: selectedItem,
+        
+        return Output(selectedItem: selectedItem,
                       searchOutput: searchOutput)
     }
 }
@@ -62,13 +54,11 @@ class ItemViewModel: ViewModelType {
 // MARK: - Input Output
 extension ItemViewModel {
     struct Input {
-        let firstLoading: Driver<Void>
         let selection: Driver<IndexPath>
         let searchTrigger: Driver<String>
     }
     
     struct Output {
-        let firstLoadingOutput: Observable<[String]>
         let selectedItem: Driver<String>
         let searchOutput: Observable<[String]>
     }

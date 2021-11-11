@@ -22,71 +22,66 @@ class HeroViewModel: ViewModelType {
     
     // MARK: - Transform
     func transform(input: Input) -> Output {
-            let firstLoadingOutput = input
-                .firstLoading
-                .asObservable()
-                .flatMap {
-                    return self
-                        .useCase
-                        .loadDataAtFirst()
+        let firstLoadingOutput = input
+            .firstLoading
+            .asObservable()
+            .flatMap {
+                return self
+                    .useCase
+                    .loadDataAtFirst()
+            }
+        
+        let fetchBtnOut = input
+            .fetchBtn
+            .map { element -> Observable<[HeroModel]> in
+                switch element {
+                case .str:
+                    return input
+                        .fetchBtn
+                        .withLatestFrom(firstLoadingOutput) { button, heroes in
+                            heroes.filter { $0.primaryAttr == button.rawValue }
+                        }
+                case .agi:
+                    return input
+                        .fetchBtn
+                        .withLatestFrom(firstLoadingOutput) { button, heroes in
+                            heroes.filter { $0.primaryAttr == button.rawValue }
+                        }
+                case .int:
+                    return input
+                        .fetchBtn
+                        .withLatestFrom(firstLoadingOutput) { button, heroes in
+                            heroes.filter { $0.primaryAttr == button.rawValue }
+                        }
                 }
-            
-            let strength = input
-                .strengthSelecting
-                .asObservable()
-                .flatMap {
-                    return self
-                        .useCase
-                        .loadDataAtFirst()
-                }.map { $0.filter { $0.primaryAttr == "str" } }
-            
-            let agibility = input
-                .agibilitySelecting
-                .asObservable()
-                .flatMap {
-                    return self
-                        .useCase
-                        .loadDataAtFirst()
-                }.map { $0.filter { $0.primaryAttr == "agi" } }
-            
-            let intelligent = input
-                .intelligentSelecting
-                .asObservable()
-                .flatMap {
-                    return self
-                        .useCase
-                        .loadDataAtFirst()
-                }.map { $0.filter { $0.primaryAttr == "int" } }
-            
-            let fetchOutput = Observable
-                .of(strength,
-                    agibility,
-                    intelligent,
-                    firstLoadingOutput)
-                .merge()
-                .map { $0.map { HeroViewModelPlus(with: $0) } }
-                .asDriver(onErrorDriveWith: .empty())
-            
-            let selectedOutput = input
-                .selection
-                .withLatestFrom(fetchOutput) { (indexPath, first) -> HeroViewModelPlus in
-                    return first[indexPath.row]
-                }
-                .do(onNext: navigator.toHeroDetail)
-            
-            return Output(fetchOutput: fetchOutput,
-                          selectedOutput: selectedOutput)
-        }
+            }
+            .flatMap { $0 }
+        
+        let fetchOutput = Observable
+            .of(fetchBtnOut,
+                firstLoadingOutput)
+            .merge()
+            .map { $0.map { HeroViewModelPlus(with: $0) } }
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let selectedOutput = input
+            .selection
+            .withLatestFrom(fetchOutput) { (indexPath, first) -> HeroViewModelPlus in
+                return first[indexPath.row]
+            }
+            .do(onNext: navigator.toHeroDetail(_:))
+        
+        return Output(fetchOutput: fetchOutput,
+                      selectedOutput: selectedOutput)
+    }
 }
 
 // MARK: Input Output
 extension HeroViewModel {
     struct Input {
-        let strengthSelecting: Driver<Void>
-        let agibilitySelecting: Driver<Void>
-        let intelligentSelecting: Driver<Void>
         let firstLoading: Driver<Void>
         let selection: Driver<IndexPath>
+        let fetchBtn: Observable<HeroAttributeButton>
     }
     
     struct Output {

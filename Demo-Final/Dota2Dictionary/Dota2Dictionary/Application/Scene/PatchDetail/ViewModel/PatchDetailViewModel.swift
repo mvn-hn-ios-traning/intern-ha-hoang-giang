@@ -23,18 +23,10 @@ class PatchDetailViewModel: ViewModelType {
     
     // MARK: - Transform
     func transform(input: Input) -> Output {
-        let firstLoadingOutput = input
-            .firstLoading
-            .asObservable()
-            .flatMapLatest {
-                return self
-                    .useCase
-                    .loadHeroesPatchData(patchVersion: self.patchName)
-            }
-        
-        let heroesPatch = input
-            .heroesPatchSelecting
-            .asObservable()
+        let loadingFirstAndHeroPatch = Observable
+            .of(input.firstLoading.asObservable(),
+                input.heroesPatchSelecting.asObservable())
+            .merge()
             .flatMapLatest {
                 return self
                     .useCase
@@ -51,8 +43,7 @@ class PatchDetailViewModel: ViewModelType {
             }
         
         let fetch = Observable
-            .of(firstLoadingOutput,
-                heroesPatch,
+            .of(loadingFirstAndHeroPatch,
                 itemsPatch)
             .merge()
             .map({

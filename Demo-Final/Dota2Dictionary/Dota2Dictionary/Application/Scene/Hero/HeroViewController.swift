@@ -6,10 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
 import RxSwift
 import RxCocoa
-import RxViewController
 
 class HeroViewController: UIViewController {
     
@@ -32,11 +30,15 @@ class HeroViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let input = HeroViewModel.Input(strengthSelecting: strengthButton.rx.tap.asDriver(),
-                                        agibilitySelecting: agibilityButton.rx.tap.asDriver(),
-                                        intelligentSelecting: intelligentButton.rx.tap.asDriver(),
-                                        firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
-                                        selection: allHeroCollectionView.rx.itemSelected.asDriver())
+        let strBtn = strengthButton.rx.tap.map {HeroAttributeButton.str}
+        let agiBtn = agibilityButton.rx.tap.map {HeroAttributeButton.agi}
+        let intBtn = intelligentButton.rx.tap.map {HeroAttributeButton.int}
+        
+        let fetchBtn = Observable.of(strBtn, agiBtn, intBtn).merge()
+        
+        let input = HeroViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
+                                        selection: allHeroCollectionView.rx.itemSelected.asDriver(),
+                                        fetchBtn: fetchBtn)
         
         let output = heroViewModel.transform(input: input)
         output
@@ -75,4 +77,11 @@ extension HeroViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width,
                       height: width)
     }
+}
+
+// MARK: - HeroAttributeButton
+enum HeroAttributeButton: String {
+    case str
+    case agi
+    case int
 }
