@@ -27,6 +27,7 @@ class HeroDetailViewModel: ViewModelType {
         let firstLoading = input
             .firstLoading
             .asObservable()
+            .share()
         
         let firstLoadingOutput = firstLoading
             .flatMapLatest {

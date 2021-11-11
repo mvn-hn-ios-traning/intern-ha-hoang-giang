@@ -34,9 +34,10 @@ class ItemsViewController: UIViewController, UISearchBarDelegate {
     
     func bindViewModel() {
         let input = ItemViewModel.Input(selection: itemAllCollectionView.rx.itemSelected.asDriver(),
-                                        searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver())
+                                        searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver(),
+                                        firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
         let output = itemViewModel.transform(input: input)
-        
+                
         output
             .searchOutput
             .bind(to: itemAllCollectionView
