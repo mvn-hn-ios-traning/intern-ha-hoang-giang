@@ -33,27 +33,12 @@ class HeroViewModel: ViewModelType {
         
         let fetchBtnOut = input
             .fetchBtn
-            .map { element -> Observable<[HeroModel]> in
-                switch element {
-                case .str:
-                    return input
-                        .fetchBtn
-                        .withLatestFrom(firstLoadingOutput) { button, heroes in
-                            heroes.filter { $0.primaryAttr == button.rawValue }
-                        }
-                case .agi:
-                    return input
-                        .fetchBtn
-                        .withLatestFrom(firstLoadingOutput) { button, heroes in
-                            heroes.filter { $0.primaryAttr == button.rawValue }
-                        }
-                case .int:
-                    return input
-                        .fetchBtn
-                        .withLatestFrom(firstLoadingOutput) { button, heroes in
-                            heroes.filter { $0.primaryAttr == button.rawValue }
-                        }
-                }
+            .map { _ in
+                 input
+                    .fetchBtn
+                    .withLatestFrom(firstLoadingOutput) { button, heroes in
+                        heroes.filter { $0.primaryAttr == button.rawValue }
+                    }
             }
             .flatMap { $0 }
         
