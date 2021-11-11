@@ -33,14 +33,9 @@ class HeroViewModel: ViewModelType {
         
         let fetchBtnOut = input
             .fetchBtn
-            .map { _ in
-                 input
-                    .fetchBtn
-                    .withLatestFrom(firstLoadingOutput) { button, heroes in
-                        heroes.filter { $0.primaryAttr == button.rawValue }
-                    }
+            .withLatestFrom(firstLoadingOutput) { button, heroes in
+                heroes.filter { $0.primaryAttr == button.rawValue }
             }
-            .flatMap { $0 }
         
         let fetchOutput = Observable
             .of(fetchBtnOut,
