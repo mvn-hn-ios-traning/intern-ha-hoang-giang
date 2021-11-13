@@ -7,7 +7,7 @@ target 'Dota2Dictionary' do
 
   # Pods for Dota2Dictionary
 
-pod 'Kingfisher'
+pod 'Kingfisher', '~> 6.3.1'
 pod 'SwiftLint'
 
 #Rx

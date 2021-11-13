@@ -59,68 +59,68 @@ struct ItemDetailDataSource {
     typealias DataSource = RxTableViewSectionedReloadDataSource
     
     static func dataSource() -> DataSource<ItemDetailTableViewSection> {
-        return .init { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+        return .init(configureCell: { (dataSource, tableView, indexPath, _) -> UITableViewCell in
             
             switch dataSource[indexPath] {
             case .itemInfoTopItem(let info):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.infoTopTableViewCell,
                                                                for: indexPath)
-                        as? InfoTopTableViewCell else {
-                    return UITableViewCell()
+                    as? InfoTopTableViewCell else {
+                        return UITableViewCell()
                 }
                 cell.configure(info)
                 return cell
             case .itemHintItem(let hint):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.itemHintTableViewCell,
                                                                for: indexPath)
-                        as? ItemHintTableViewCell else {
-                    return UITableViewCell()
+                    as? ItemHintTableViewCell else {
+                        return UITableViewCell()
                 }
                 cell.configure(hint)
                 return cell
             case .itemManaColdownItem(let manacd):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell
-                                                                .manaColdownTableViewCell,
+                    .manaColdownTableViewCell,
                                                                for: indexPath)
-                        as? ManaColdownTableViewCell else {
-                    return UITableViewCell()
+                    as? ManaColdownTableViewCell else {
+                        return UITableViewCell()
                 }
                 cell.configure(manacd)
                 return cell
             case .itemNotesItem(let notes):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.itemNotesTableViewCell,
                                                                for: indexPath)
-                        as? ItemNotesTableViewCell else {
-                    return UITableViewCell()
+                    as? ItemNotesTableViewCell else {
+                        return UITableViewCell()
                 }
                 cell.configure(notes)
                 return cell
             case.itemAttribItem(let attrib):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.itemAttribTableViewCell,
                                                                for: indexPath)
-                        as? ItemAttribTableViewCell else {
-                    return UITableViewCell()
+                    as? ItemAttribTableViewCell else {
+                        return UITableViewCell()
                 }
                 cell.configure(attrib)
                 return cell
             case .itemLoreItem(let lore):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.itemLoreTableViewCell,
                                                                for: indexPath)
-                        as? ItemLoreTableViewCell else {
-                    return UITableViewCell()
+                    as? ItemLoreTableViewCell else {
+                        return UITableViewCell()
                 }
                 cell.configure(lore)
                 return cell
             case .itemComponentsItem(let components):
                 guard let cell = tableView
-                        .dequeueReusableCell(withIdentifier: ConstantsForCell.itemComponentTableViewCell,
-                                                               for: indexPath)
-                        as? ItemComponentTableViewCell else {
-                    return UITableViewCell()
+                    .dequeueReusableCell(withIdentifier: ConstantsForCell.itemComponentTableViewCell,
+                                         for: indexPath)
+                    as? ItemComponentTableViewCell else {
+                        return UITableViewCell()
                 }
                 cell.configure(components)
                 return cell
             }
-        }
+        })
     }
 }
