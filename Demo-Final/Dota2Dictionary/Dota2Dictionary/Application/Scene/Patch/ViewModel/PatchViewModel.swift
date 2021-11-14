@@ -10,7 +10,6 @@ import RxCocoa
 import RxSwift
 
 class PatchViewModel: ViewModelType {
-    let disposeBag = DisposeBag()
     
     private let useCase: PatchUseCaseDomain
     private let navigator: PatchNavigator
@@ -21,6 +20,7 @@ class PatchViewModel: ViewModelType {
         self.navigator = navigator
     }
     
+    // MARK: Transform
     func transform(input: Input) -> Output {
         let firstLoadingOutput = input
             .firstLoading
@@ -37,13 +37,15 @@ class PatchViewModel: ViewModelType {
             .selection
             .withLatestFrom(firstLoadingOutput) { (indexPath, first) -> NewPatchDetailViewModel in
                 return first[indexPath.row]
-            }.do(onNext: navigator.toPatchDetail)
+            }
+            .do(onNext: navigator.toPatchDetail)
         
         return Output(firstLoadingOutput: firstLoadingOutput,
                       selectedOutput: selectedOutput)
     }
 }
 
+// MARK: - Input Output
 extension PatchViewModel {
     struct Input {
         let firstLoading: Driver<Void>

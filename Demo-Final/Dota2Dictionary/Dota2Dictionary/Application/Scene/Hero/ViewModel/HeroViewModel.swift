@@ -14,11 +14,13 @@ class HeroViewModel: ViewModelType {
     private let useCase: HeroUseCaseDomain
     private let navigator: DefaultHeroNavigator
     
-    init(useCase: HeroUseCaseDomain, navigator: DefaultHeroNavigator) {
+    init(useCase: HeroUseCaseDomain,
+         navigator: DefaultHeroNavigator) {
         self.useCase = useCase
         self.navigator = navigator
     }
     
+    // MARK: - Transform
     func transform(input: Input) -> Output {
         let firstLoadingOutput = input
             .firstLoading
@@ -29,37 +31,14 @@ class HeroViewModel: ViewModelType {
                     .loadDataAtFirst()
             }
         
-        let strength = input
-            .selectStrength
-            .asObservable()
-            .flatMap {
-                return self
-                    .useCase
-                    .loadDataAtFirst()
-            }.map { $0.filter { $0.primaryAttr == "str" } }
-        
-        let agibility = input
-            .selectAbility
-            .asObservable()
-            .flatMap {
-                return self
-                    .useCase
-                    .loadDataAtFirst()
-            }.map { $0.filter { $0.primaryAttr == "agi" } }
-        
-        let intelligent = input
-            .selectIntelligent
-            .asObservable()
-            .flatMap {
-                return self
-                    .useCase
-                    .loadDataAtFirst()
-            }.map { $0.filter { $0.primaryAttr == "int" } }
+        let fetchBtnOut = input
+            .fetchBtn
+            .withLatestFrom(firstLoadingOutput) { button, heroes in
+                heroes.filter { $0.primaryAttr == button.rawValue }
+            }
         
         let fetchOutput = Observable
-            .of(strength,
-                agibility,
-                intelligent,
+            .of(fetchBtnOut,
                 firstLoadingOutput)
             .merge()
             .map { $0.map { HeroViewModelPlus(with: $0) } }
@@ -70,20 +49,19 @@ class HeroViewModel: ViewModelType {
             .withLatestFrom(fetchOutput) { (indexPath, first) -> HeroViewModelPlus in
                 return first[indexPath.row]
             }
-            .do(onNext: navigator.toHeroDetail)
+            .do(onNext: navigator.toHeroDetail(_:))
         
         return Output(fetchOutput: fetchOutput,
                       selectedOutput: selectedOutput)
     }
 }
 
+// MARK: Input Output
 extension HeroViewModel {
     struct Input {
-        let selectStrength: Driver<Void>
-        let selectAbility: Driver<Void>
-        let selectIntelligent: Driver<Void>
         let firstLoading: Driver<Void>
         let selection: Driver<IndexPath>
+        let fetchBtn: Observable<HeroAttributeButton>
     }
     
     struct Output {

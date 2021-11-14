@@ -16,9 +16,9 @@ class HeroInfoTableViewCell: UITableViewCell {
     
     private let disposeBag = DisposeBag()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        heroAvatar.image = nil
     }
     
     func configure(_ viewModel: HeroDetailViewModelPlus) {

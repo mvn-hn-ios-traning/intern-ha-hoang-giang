@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import RxCocoa
-import RxSwift
 
 typealias ApiCompletion = (_ data: Any?, _ error: Error?) -> Void
 typealias ApiParam = [String: Any]
@@ -58,7 +56,6 @@ class Network: NSObject {
                     completion(nil, error)
                     return
                 }
-                
                 // check for http errors
                 if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200, response != nil {
                 }
@@ -194,162 +191,6 @@ class Network: NSObject {
             } else {
                 closure(nil, nil)
             }
-        }
-    }
-}
-
-// MARK: - Hero Detail
-class HeroDetailAPISevice {
-    
-    static let shared = HeroDetailAPISevice()
-    
-    func parse(heroID: String, jsonData: Data) -> HeroDetailModel? {
-            do {
-                let decodedData = try JSONDecoder().decode(HeroDetailDecodeArray.self,
-                                                           from: jsonData)
-                let arrayINeed = decodedData.array.filter {
-                    $0.heroID == heroID
-                }
-                if let elementINeed = arrayINeed.first {
-//                    print(elementINeed)
-                    return elementINeed
-                }
-            } catch {
-                print("parseAll error: ", error)
-            }
-        return nil
-    }
-    
-    func parseRoles(jsonData: Data) -> [RolesDetail]? {
-            do {
-                let decodedData = try JSONDecoder().decode([RolesDetail].self, from: jsonData)
-//                print(decodedData)
-                return decodedData
-            } catch {
-                print("parseRoles error: ", error)
-            }
-        return nil
-    }
-    
-    func parseAbilityId(jsonData: Data) -> [String: String]? {
-        do {
-            let decodedData = try JSONDecoder().decode([String: String].self, from: jsonData)
-//            print(decodedData)
-            return decodedData
-        } catch {
-            print("error: ", error)
-        }
-        return nil
-    }
-    
-    func parseHeroAbilities(jsonData: Data) -> [HeroDetailAbilitiesModel]? {
-        do {
-            let decodedData = try JSONDecoder().decode(HeroAbilitiesArratDecoded.self, from: jsonData)
-            print(decodedData.array.filter { $0.abilitiesKey == "antimage_mana_break" })
-            return decodedData.array
-        } catch let DecodingError.dataCorrupted(context) {
-            print(context)
-        } catch let DecodingError.keyNotFound(key, context) {
-            print("Key '\(key)' not found:", context.debugDescription)
-            print("codingPath:", context.codingPath)
-        } catch let DecodingError.valueNotFound(value, context) {
-            print("Value '\(value)' not found:", context.debugDescription)
-            print("codingPath:", context.codingPath)
-        } catch let DecodingError.typeMismatch(type, context) {
-            print("Type '\(type)' mismatch:", context.debugDescription)
-            print("codingPath:", context.codingPath)
-        } catch {
-            print("error: ", error)
-        }
-        return nil
-    }
-    
-    func loadJson(fromURLString urlString: String,
-                  completion: @escaping (Result<Data, Error>) -> Void) {
-        if let url = URL(string: urlString) {
-            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
-                if let error = error {
-                    completion(.failure(error))
-                }
-                
-                if let data = data {
-                    completion(.success(data))
-                }
-            }
-            urlSession.resume()
-        }
-    }
-}
-
-// MARK: - Item
-class ItemAPIService {
-    
-    static let shared = ItemAPIService()
-    
-    func parse(jsonData: Data) -> [String] {
-        do {
-            let decodedData = try JSONDecoder().decode(ItemModel.self,
-                                                       from: jsonData)
-            return decodedData.array.sorted().filter { !$0.contains("recipe") }
-        } catch {
-            print("decode error")
-            return [""]
-        }
-    }
-    
-    func loadJson(fromURLString urlString: String,
-                  completion: @escaping (Result<Data, Error>) -> Void) {
-        if let url = URL(string: urlString) {
-            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
-                if let error = error {
-                    completion(.failure(error))
-                }
-                
-                if let data = data {
-                    completion(.success(data))
-                }
-            }
-            urlSession.resume()
-        }
-    }
-}
-
-// MARK: Item Detail
-class ItemDetailAPIService {
-    static let shared = ItemDetailAPIService()
-    
-    func parse(itemKey: String, jsonData: Data) -> ItemDetailModel? {
-        do {
-            let decodedData = try JSONDecoder().decode(ItemDetailDecodeArray.self,
-                                                       from: jsonData)
-            let arayINeed = decodedData
-                .array
-                .filter {
-                    $0.itemKey == itemKey
-                }
-            
-            if let elementINeed = arayINeed.first {
-                return elementINeed
-            }
-        } catch {
-            print("error: ", error)
-        }
-        return nil
-    }
-    
-    func loadJson(fromURLString urlString: String,
-                  completion: @escaping (Result<Data, Error>) -> Void) {
-        if let url = URL(string: urlString) {
-            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, _, error) in
-                if let error = error {
-                    completion(.failure(error))
-                }
-                
-                if let data = data {
-                    completion(.success(data))
-                }
-            }
-            urlSession.resume()
         }
     }
 }

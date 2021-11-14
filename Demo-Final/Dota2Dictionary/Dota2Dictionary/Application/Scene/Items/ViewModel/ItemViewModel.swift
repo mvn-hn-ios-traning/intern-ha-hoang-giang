@@ -19,12 +19,31 @@ class ItemViewModel: ViewModelType {
         self.navigator = navigator
     }
     
+    // MARK: - Transform
     func transform(input: Input) -> Output {
+        
+//        let searchOutput = input
+//            .searchTrigger
+//            .asObservable()
+//            .throttle(RxTimeInterval.milliseconds(300),
+//                      scheduler: MainScheduler.instance)
+//            .distinctUntilChanged()
+//            .flatMapLatest { query in
+//                self
+//                    .useCase
+//                    .loadItemDataAtFirst()
+//                    .map {
+//                        $0.filter { item in
+//                            query.isEmpty || item.lowercased().contains(query.lowercased())
+//                        }
+//                    }
+//            }
+        
         let firstLoadingOutput = input
             .firstLoading
             .asObservable()
             .flatMapLatest {
-                return self
+                self
                     .useCase
                     .loadItemDataAtFirst()
             }
@@ -32,41 +51,45 @@ class ItemViewModel: ViewModelType {
         let searchOutput = input
             .searchTrigger
             .asObservable()
-            .throttle(.milliseconds(300),
+            .debounce(RxTimeInterval.milliseconds(300),
                       scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .map { query in
-                firstLoadingOutput
-                    .map {
-                        $0.filter { item in
-                            query.isEmpty || item.lowercased().contains(query.lowercased())
-                        }
-                    }
+            .map {
+                $0.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
             }
-            .flatMap { $0 }
+            .withLatestFrom(firstLoadingOutput) { searchText, items -> [String] in
+                if searchText.isEmpty {
+                    return items
+                } else {
+                   return items.filter { item in
+                        item.lowercased().contains(searchText)
+                    }
+                }
+            }
+        
+        let fetchOutput = Observable.of(firstLoadingOutput, searchOutput).merge()
         
         let selectedItem = input
             .selection
-            .withLatestFrom(searchOutput.asDriver(onErrorDriveWith: .empty())) { (indexPath, first) -> String in
+            .withLatestFrom(fetchOutput.asDriver(onErrorDriveWith: .empty())) { (indexPath, first) -> String in
                 return first[indexPath.row]
             }
             .do(onNext: navigator.toItemDetail)
-            
-        return Output(firstLoadingOutput: firstLoadingOutput,
-                      selectedItem: selectedItem,
-                      searchOutput: searchOutput)
+        
+        return Output(selectedItem: selectedItem,
+                      searchOutput: fetchOutput)
     }
 }
 
+// MARK: - Input Output
 extension ItemViewModel {
     struct Input {
-        let firstLoading: Driver<Void>
         let selection: Driver<IndexPath>
         let searchTrigger: Driver<String>
+        let firstLoading: Driver<Void>
     }
     
     struct Output {
-        let firstLoadingOutput: Observable<[String]>
         let selectedItem: Driver<String>
         let searchOutput: Observable<[String]>
     }

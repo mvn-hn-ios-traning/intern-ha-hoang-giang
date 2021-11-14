@@ -13,26 +13,20 @@ class PatchDetailViewModel: ViewModelType {
     
     var patchName: String
     
-    private let useCase: PatchDetailUseCasePlatform
+    private let useCase: PatchDetailUseCaseDomain
 
-    init(patchName: String) {
+    init(patchName: String,
+         useCase: PatchDetailUseCaseDomain) {
         self.patchName = patchName
-        self.useCase = PatchDetailUseCasePlatform()
+        self.useCase = useCase
     }
     
+    // MARK: - Transform
     func transform(input: Input) -> Output {
-        let firstLoadingOutput = input
-            .firstLoading
-            .asObservable()
-            .flatMapLatest {
-                return self
-                    .useCase
-                    .loadHeroesPatchData(patchVersion: self.patchName)
-            }
-        
-        let heroesPatch = input
-            .selectHeroPatch
-            .asObservable()
+        let loadingFirstAndHeroPatch = Observable
+            .of(input.firstLoading.asObservable(),
+                input.heroesPatchSelecting.asObservable())
+            .merge()
             .flatMapLatest {
                 return self
                     .useCase
@@ -49,8 +43,7 @@ class PatchDetailViewModel: ViewModelType {
             }
         
         let fetch = Observable
-            .of(firstLoadingOutput,
-                heroesPatch,
+            .of(loadingFirstAndHeroPatch,
                 itemsPatch)
             .merge()
             .map({
@@ -62,6 +55,7 @@ class PatchDetailViewModel: ViewModelType {
     
 }
 
+// MARK: - Input Output
 extension PatchDetailViewModel {
     struct Input {
         let selectHeroPatch: Driver<Void>

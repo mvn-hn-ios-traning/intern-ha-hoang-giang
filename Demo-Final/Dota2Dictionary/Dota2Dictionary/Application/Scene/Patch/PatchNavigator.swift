@@ -47,7 +47,8 @@ class PatchNavigator: DefaultPatchNavigator {
                 as? PatchDetailViewController else {
             return
         }
-        viewController.patchDetailViewModel = PatchDetailViewModel(patchName: viewModel.patchName)
+        viewController.patchDetailViewModel = PatchDetailViewModel(patchName: viewModel.patchName,
+                                                                   useCase: servicesDetail.makePatchDetailUseCase())
         navigationController.pushViewController(viewController, animated: true)
     }
 }

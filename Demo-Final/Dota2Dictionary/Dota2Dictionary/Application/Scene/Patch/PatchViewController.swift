@@ -17,6 +17,7 @@ class PatchViewController: UIViewController {
 
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         patchTableView.register(UINib(nibName: ConstantsForCell.patchTableViewCell,
@@ -26,7 +27,6 @@ class PatchViewController: UIViewController {
     }
     
     func bindViewModel() {
-        
         let input = PatchViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
                                          selection: patchTableView.rx.itemSelected.asDriver())
         
@@ -43,8 +43,10 @@ class PatchViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.selectedOutput.drive().disposed(by: disposeBag)
-        
+        output
+            .selectedOutput
+            .drive()
+            .disposed(by: disposeBag)
     }
     
 }

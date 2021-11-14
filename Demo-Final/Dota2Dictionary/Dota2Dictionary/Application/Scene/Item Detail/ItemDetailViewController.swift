@@ -66,7 +66,6 @@ class ItemDetailViewController: UIViewController {
                     .items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        itemDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 }
 

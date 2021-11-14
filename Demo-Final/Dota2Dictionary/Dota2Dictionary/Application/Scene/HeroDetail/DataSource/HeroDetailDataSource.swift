@@ -8,6 +8,7 @@
 import Foundation
 import RxDataSources
 
+// MARK: Item
 enum HeroDetailTableViewItem {
     case heroInfoTableViewItem(info: HeroDetailViewModelPlus)
     case heroRolesTableViewItem(roles: HeroDetailViewModelPlus)
@@ -18,6 +19,7 @@ enum HeroDetailTableViewItem {
     case heroLoreTableViewItem(lore: HeroDetailViewModelPlus)
 }
 
+// MARK: Section
 enum HeroDetailTableViewSection {
     case infoSection(items: [HeroDetailTableViewItem])
     case rolesSection(items: [HeroDetailTableViewItem])
@@ -55,6 +57,7 @@ extension HeroDetailTableViewSection: SectionModelType {
     }
 }
 
+// MARK: - DataSource
 struct HeroDetailDataSource {
     typealias DataSource = RxTableViewSectionedReloadDataSource
     

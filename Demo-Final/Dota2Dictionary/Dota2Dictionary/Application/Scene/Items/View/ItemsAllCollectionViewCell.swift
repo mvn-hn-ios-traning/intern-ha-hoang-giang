@@ -13,11 +13,6 @@ class ItemsAllCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var itemAvatar: UIImageView!
     @IBOutlet weak var itemName: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         itemAvatar.image = nil

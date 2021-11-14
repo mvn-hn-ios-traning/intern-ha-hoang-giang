@@ -6,10 +6,8 @@
 //
 
 import UIKit
-import Kingfisher
 import RxSwift
 import RxCocoa
-import RxViewController
 
 class HeroViewController: UIViewController {
     
@@ -22,9 +20,9 @@ class HeroViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         allHeroCollectionView.register(UINib(nibName: ConstantsForCell.allHeroCollectionViewCell,
                                              bundle: nil),
                                        forCellWithReuseIdentifier: ConstantsForCell.allHeroCollectionViewCell)
@@ -32,12 +30,15 @@ class HeroViewController: UIViewController {
     }
     
     func bindViewModel() {
+        let strBtn = strengthButton.rx.tap.map {HeroAttributeButton.str}
+        let agiBtn = agibilityButton.rx.tap.map {HeroAttributeButton.agi}
+        let intBtn = intelligentButton.rx.tap.map {HeroAttributeButton.int}
         
-        let input = HeroViewModel.Input(selectStrength: strengthButton.rx.tap.asDriver(),
-                                        selectAbility: agibilityButton.rx.tap.asDriver(),
-                                        selectIntelligent: intelligentButton.rx.tap.asDriver(),
-                                        firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
-                                        selection: allHeroCollectionView.rx.itemSelected.asDriver())
+        let fetchBtn = Observable.of(strBtn, agiBtn, intBtn).merge()
+        
+        let input = HeroViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
+                                        selection: allHeroCollectionView.rx.itemSelected.asDriver(),
+                                        fetchBtn: fetchBtn)
         
         let output = heroViewModel.transform(input: input)
         output
@@ -60,11 +61,11 @@ class HeroViewController: UIViewController {
             .rx
             .setDelegate(self)
             .disposed(by: disposeBag)
-        
     }
     
 }
 
+// MARK: - DelegateFlowLayout
 extension HeroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -76,4 +77,11 @@ extension HeroViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width,
                       height: width)
     }
+}
+
+// MARK: - HeroAttributeButton
+enum HeroAttributeButton: String {
+    case str
+    case agi
+    case int
 }
