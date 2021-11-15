@@ -9,11 +9,16 @@ target 'Dota2Dictionary' do
 
 pod 'Kingfisher', '~> 6.3.1'
 pod 'SwiftLint'
+pod 'Toast-Swift'
 
 #Rx
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RxDataSources'
 pod 'RxViewController'
+
+#Firebase
+pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
 
 end
