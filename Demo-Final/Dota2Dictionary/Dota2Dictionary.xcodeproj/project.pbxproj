@@ -115,6 +115,10 @@
 		22D87CA02710021700EF116E /* HeroDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D87C9F2710021700EF116E /* HeroDetailViewModel.swift */; };
 		22D87CA22710023200EF116E /* HeroDetailViewModelPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D87CA12710023200EF116E /* HeroDetailViewModelPlus.swift */; };
 		22D94E062742426B00C55BA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E052742426B00C55BA1 /* GoogleService-Info.plist */; };
+		22D94E0827424E7200C55BA1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E0727424E7200C55BA1 /* ProfileViewController.swift */; };
+		22D94E0A2742508F00C55BA1 /* ProfileNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E092742508F00C55BA1 /* ProfileNavigator.swift */; };
+		22D94E0D2742569300C55BA1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E0C2742569300C55BA1 /* LoginViewController.swift */; };
+		22D94E1027425C2600C55BA1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D94E0F27425C2600C55BA1 /* ProfileViewModel.swift */; };
 		22F15F9E2700CACD00CACDE2 /* PatchAndHeroNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F15F9D2700CACD00CACDE2 /* PatchAndHeroNetwork.swift */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +232,10 @@
 		22D87C9F2710021700EF116E /* HeroDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewModel.swift; sourceTree = "<group>"; };
 		22D87CA12710023200EF116E /* HeroDetailViewModelPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewModelPlus.swift; sourceTree = "<group>"; };
 		22D94E052742426B00C55BA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		22D94E0727424E7200C55BA1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		22D94E092742508F00C55BA1 /* ProfileNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigator.swift; sourceTree = "<group>"; };
+		22D94E0C2742569300C55BA1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		22D94E0F27425C2600C55BA1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		22F15F9D2700CACD00CACDE2 /* PatchAndHeroNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchAndHeroNetwork.swift; sourceTree = "<group>"; };
 		2E0ED97453E69538AAEA2281 /* Pods-Dota2Dictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dota2Dictionary.release.xcconfig"; path = "Target Support Files/Pods-Dota2Dictionary/Pods-Dota2Dictionary.release.xcconfig"; sourceTree = "<group>"; };
 		9060517D75F65B71F1F43B2A /* Pods-Dota2Dictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dota2Dictionary.debug.xcconfig"; path = "Target Support Files/Pods-Dota2Dictionary/Pods-Dota2Dictionary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -290,6 +298,7 @@
 		2237444D26FB35CA00CAFF69 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				22902E6C2715399C006A96D8 /* Main.storyboard */,
 				224C17DB271414B500DD4B76 /* Application.swift */,
 				2237444F26FB35D900CAFF69 /* Common */,
 				2237445026FB35DF00CAFF69 /* Scene */,
@@ -318,6 +327,7 @@
 				227B60382710968500DF2463 /* Items */,
 				226B6C742712A83D001FEAD6 /* Item Detail */,
 				22A128B82701A9A300728288 /* Profile */,
+				22D94E0B2742567B00C55BA1 /* Login */,
 				22A128B72701A95A00728288 /* Favorite */,
 			);
 			path = Scene;
@@ -392,7 +402,6 @@
 				223743EA26FB0A4800CAFF69 /* Info.plist */,
 				22D94E052742426B00C55BA1 /* GoogleService-Info.plist */,
 				223743E726FB0A4800CAFF69 /* LaunchScreen.storyboard */,
-				22902E6C2715399C006A96D8 /* Main.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -688,8 +697,27 @@
 		22A128B82701A9A300728288 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				22D94E092742508F00C55BA1 /* ProfileNavigator.swift */,
+				22D94E0727424E7200C55BA1 /* ProfileViewController.swift */,
+				22D94E0E27425BF900C55BA1 /* VIewModel */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		22D94E0B2742567B00C55BA1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				22D94E0C2742569300C55BA1 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		22D94E0E27425BF900C55BA1 /* VIewModel */ = {
+			isa = PBXGroup;
+			children = (
+				22D94E0F27425C2600C55BA1 /* ProfileViewModel.swift */,
+			);
+			path = VIewModel;
 			sourceTree = "<group>";
 		};
 		AFE26C9B9C5A26508871DF59 /* Frameworks */ = {
@@ -869,6 +897,7 @@
 				228CCC5F272FA16600001A1C /* ItemLoreTableViewCell.swift in Sources */,
 				224C17DC271414B500DD4B76 /* Application.swift in Sources */,
 				224C17DE271416E700DD4B76 /* PatchUseCaseProviderDomain.swift in Sources */,
+				22D94E0827424E7200C55BA1 /* ProfileViewController.swift in Sources */,
 				2270A978273B668300EADBE4 /* HeroDetailUseCaseProviderDomain.swift in Sources */,
 				2270A996273B7E2900EADBE4 /* PatchDetailUseCaseProviderPlatform.swift in Sources */,
 				226D8BAB272F8EC6004C76EA /* ManaColdownTableViewCell.swift in Sources */,
@@ -923,7 +952,9 @@
 				224C17D82713DC1F00DD4B76 /* Constants.swift in Sources */,
 				22969781270AD35800E7103E /* NewPatchDetailViewModel.swift in Sources */,
 				2270A999273B7E4200EADBE4 /* HeroUseCaseProviderPlatform.swift in Sources */,
+				22D94E1027425C2600C55BA1 /* ProfileViewModel.swift in Sources */,
 				2294FDAB270E0C9700CEE769 /* PatchDetailViewModel.swift in Sources */,
+				22D94E0D2742569300C55BA1 /* LoginViewController.swift in Sources */,
 				229C9CB2272EE4CA007384AD /* InfoTopTableViewCell.swift in Sources */,
 				226B6C762712A87A001FEAD6 /* ItemDetailViewController.swift in Sources */,
 				2270AC2F2741F58C00802F72 /* String+Extension.swift in Sources */,
@@ -940,6 +971,7 @@
 				223743F926FB0B8400CAFF69 /* PatchViewModel.swift in Sources */,
 				2270A9B9273B7FC500EADBE4 /* HeroDetailNetwork.swift in Sources */,
 				228C4865273183A500FED6A6 /* HeroDetailRolesModel.swift in Sources */,
+				22D94E0A2742508F00C55BA1 /* ProfileNavigator.swift in Sources */,
 				2270A990273B688000EADBE4 /* ItemDetailUseCasePlatform.swift in Sources */,
 				2270A9BC273B7FF000EADBE4 /* ItemNetwork.swift in Sources */,
 				2270A99F273B7E8B00EADBE4 /* ItemUseCaseProviderPlatform.swift in Sources */,

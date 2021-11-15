@@ -69,10 +69,21 @@ final class Application {
                                           navigationController: itemNavigationController,
                                           storyBoard: storyboard)
         
+        let profileNavigationController = UINavigationController()
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile",
+                                                              image: UIImage(named: "profile_icon"),
+                                                              selectedImage: nil)
+        profileNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+        profileNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        let profileNavigator = ProfileNavigator(storyBoard: storyboard,
+                                                navigationController: profileNavigationController)
+        
         let tabbarController = UITabBarController()
         tabbarController.viewControllers = [patchNavigationController,
                                             heroNavigationController,
-                                            itemNavigationController]
+                                            itemNavigationController,
+                                            profileNavigationController]
         
         window.rootViewController = tabbarController
         
@@ -82,6 +93,7 @@ final class Application {
         patchNavigator.toPatch()
         heroNavigator.toHero()
         itemNavigator.toItem()
+        profileNavigator.toProfile()
     }
     
 }
