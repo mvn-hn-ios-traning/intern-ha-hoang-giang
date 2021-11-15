@@ -19,7 +19,9 @@ class ProfileViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
-        let tappedLoginOutput = input.tappedLogin.do(onNext: navigator.toLoginScreen)
+        let tappedLoginOutput = input
+            .tappedLogin
+            .do(onNext: navigator.toLoginScreen)
         
         return Output(tappedLoginOutput: tappedLoginOutput)
     }

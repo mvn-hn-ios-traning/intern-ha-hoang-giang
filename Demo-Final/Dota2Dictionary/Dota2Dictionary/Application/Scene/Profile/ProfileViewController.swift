@@ -27,7 +27,10 @@ class ProfileViewController: UIViewController {
         
         let output = profileViewModel.transform(input: input)
         
-        output.tappedLoginOutput.drive().disposed(by: disposeBag)
+        output
+            .tappedLoginOutput
+            .drive()
+            .disposed(by: disposeBag)
     }
     
 }
