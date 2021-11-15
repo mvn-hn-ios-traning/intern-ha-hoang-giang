@@ -53,7 +53,7 @@ class ItemDetailViewModel: ViewModelType {
     
 }
 
-// MARK - Input Output
+// MARK: - Input Output
 extension ItemDetailViewModel {
     struct Input {
         let loadAllDataAfterFilter: Driver<Void>
