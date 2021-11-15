@@ -7,7 +7,12 @@
 
 import UIKit
 
-class ProfileNavigator {
+protocol DefaultProfileNavigator {
+    func toProfile()
+    func toLoginScreen()
+}
+
+class ProfileNavigator: DefaultProfileNavigator {
     
     private let storyBoard: UIStoryboard
     private let navigationController: UINavigationController

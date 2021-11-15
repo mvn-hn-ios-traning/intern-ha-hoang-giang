@@ -11,9 +11,9 @@ import RxCocoa
 
 class ProfileViewModel: ViewModelType {
     
-    private let navigator: ProfileNavigator
+    private let navigator: DefaultProfileNavigator
     
-    init(navigator: ProfileNavigator) {
+    init(navigator: DefaultProfileNavigator) {
         self.navigator = navigator
     }
     
