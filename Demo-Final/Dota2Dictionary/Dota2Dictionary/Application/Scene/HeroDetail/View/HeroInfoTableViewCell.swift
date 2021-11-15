@@ -23,20 +23,19 @@ class HeroInfoTableViewCell: UITableViewCell {
     
     func configure(_ viewModel: HeroDetailViewModelPlus) {
         heroName.text = viewModel.displayName
-        
+                
+        // download image from url with kingfisher
         let url = URL(string: ConstantsForImageURL.heroDetailAvatarImage + "\(viewModel.shortName).png")
-
         let processor = DownsamplingImageProcessor(size: heroAvatar.bounds.size)
-        heroAvatar
-            .kf
-            .setImage(
-                with: url,
-                placeholder: UIImage(named: "placeholderImage"),
-                options: [
-                    .processor(processor),
-                    .scaleFactor(UIScreen.main.scale),
-                    .transition(.fade(1)),
-                    .cacheOriginalImage
-                ])
+        KF.url(url)
+          .placeholder(UIImage(named: "placeholderImage"))
+          .setProcessor(processor)
+          .loadDiskFileSynchronously()
+          .cacheMemoryOnly()
+          .fade(duration: 0.25)
+          .onProgress { _, _ in  }
+          .onSuccess { _ in  }
+          .onFailure { _ in }
+          .set(to: heroAvatar)
     }
 }

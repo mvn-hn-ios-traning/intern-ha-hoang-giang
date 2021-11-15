@@ -66,5 +66,20 @@ class ItemDetailViewController: UIViewController {
                     .items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        itemDetailTableView
+            .rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
+        
+    }
+}
+
+extension ItemDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 6 {
+            return CGFloat(250)
+        } else {
+            return UITableView.automaticDimension
+        }
     }
 }

@@ -63,10 +63,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="coldownIcon" destination="V8V-Cs-heQ" id="ttQ-px-Evt"/>
                 <outlet property="coldownLabel" destination="EwO-GO-r8H" id="bOw-k5-U4g"/>
+                <outlet property="manaIcon" destination="DmD-ec-9N6" id="U12-hc-cg0"/>
                 <outlet property="manaLabel" destination="U3I-Oy-nmL" id="v4O-lv-Jcy"/>
             </connections>
-            <point key="canvasLocation" x="-26.811594202898554" y="53.236607142857139"/>
+            <point key="canvasLocation" x="-82" y="54"/>
         </tableViewCell>
     </objects>
     <resources>

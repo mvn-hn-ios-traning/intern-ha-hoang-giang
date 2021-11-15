@@ -22,23 +22,6 @@ class ItemViewModel: ViewModelType {
     // MARK: - Transform
     func transform(input: Input) -> Output {
         
-//        let searchOutput = input
-//            .searchTrigger
-//            .asObservable()
-//            .throttle(RxTimeInterval.milliseconds(300),
-//                      scheduler: MainScheduler.instance)
-//            .distinctUntilChanged()
-//            .flatMapLatest { query in
-//                self
-//                    .useCase
-//                    .loadItemDataAtFirst()
-//                    .map {
-//                        $0.filter { item in
-//                            query.isEmpty || item.lowercased().contains(query.lowercased())
-//                        }
-//                    }
-//            }
-        
         let firstLoadingOutput = input
             .firstLoading
             .asObservable()

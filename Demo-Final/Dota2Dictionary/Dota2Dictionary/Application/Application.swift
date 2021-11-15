@@ -47,7 +47,7 @@ final class Application {
         
         let heroNavigationController = UINavigationController()
         heroNavigationController.tabBarItem = UITabBarItem(title: "Hero",
-                                                           image: UIImage(systemName: "face.smiling"),
+                                                           image: UIImage(named: "hero_icon"),
                                                            selectedImage: nil)
         heroNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
         heroNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]

@@ -16,7 +16,7 @@ class ItemAPIService {
             do {
                 let decodedData = try JSONDecoder().decode(ItemModel.self,
                                                            from: jsonData)
-                return decodedData.array.sorted()
+                return decodedData.array.sorted().filter {!$0.contains("recipe")}
             } catch {
                 print("decode error")
             }

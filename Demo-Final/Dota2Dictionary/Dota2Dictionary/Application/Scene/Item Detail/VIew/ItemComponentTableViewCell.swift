@@ -11,6 +11,7 @@ import RxCocoa
 
 class ItemComponentTableViewCell: UITableViewCell {
     @IBOutlet weak var itemComponentCollectionView: UICollectionView!
+    @IBOutlet weak var componentsTitle: UILabel!
     
     var components = BehaviorSubject<[String]>(value: [])
     var disposeBag = DisposeBag()
@@ -32,6 +33,10 @@ class ItemComponentTableViewCell: UITableViewCell {
     }
     
     func configure(_ viewModel: ItemDetailViewModelPlus) {
+        if viewModel.components.isEmpty {
+            componentsTitle.isHidden = true
+        }
+        
         components.onNext(viewModel.components)
         components
             .bind(to: itemComponentCollectionView

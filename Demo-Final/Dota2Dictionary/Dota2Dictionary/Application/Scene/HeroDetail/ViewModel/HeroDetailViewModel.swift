@@ -24,44 +24,32 @@ class HeroDetailViewModel: ViewModelType {
     
     // MARK: - Life Cycle
     func transform(input: Input) -> Output {
-        let firstLoading = input
-            .firstLoading
-            .asObservable()
-            .share()
         
-        let firstLoadingOutput = firstLoading
-            .flatMapLatest {
-                return self
-                    .useCase
-                    .loadHeroDetailDataAtFirst(heroID: self.heroID)
-            }
-            .map { HeroDetailViewModelPlus(with: $0) }
-            .asDriver(onErrorDriveWith: .empty())
-        
-        let loadingRolesData = firstLoading
-            .flatMapLatest {
-                return self.useCase.loadHeroDetailRoles()
-            }
-            .asDriver(onErrorDriveWith: .empty())
-        
-        let items = firstLoadingOutput
+        let loadingALlData = Observable
+            .zip(self.useCase.loadHeroDetailDataAtFirst(heroID: self.heroID),
+                 self.useCase.loadHeroDetailRoles(),
+                 self.useCase.loadHeroAbilityId(),
+                 self.useCase.loadHeroAbilities())
+            .map { HeroDetailViewModelPlus(hero: $0.0,
+                                           roles: $0.1,
+                                           abilityIDs: $0.2,
+                                           abilitiesDetail: $0.3)}
+                                    
+        let cellDatas = loadingALlData
             .asObservable()
             .map {
                 [HeroDetailTableViewSection](arrayLiteral:
                                                 .infoSection(items: [.heroInfoTableViewItem(info: $0)]),
-                                             .rolesSection(items: $0
-                                                            .roles
-                                                            .map { HeroDetailTableViewItem
-                                                                .heroRolesTableViewItem(roles: $0)}),
+                                             .rolesSection(items: [.heroRolesTableViewItem(roles: $0)]),
                                              .languageSection(items: [.heroLanguageTableViewItem(language: $0)]),
                                              .statSection(items: [.heroStatTableViewItem(stat: $0)]),
-                                             .abilitiesSection(items: [.heroAbilitiesTableViewItem(abilities: $0)]),
-                                             .talentsSection(items: [.heroTalentsTableViewItem(talents: $0)]))
+                                             .abilitiesSection(items: $0.abilitiesDetailResult
+                                                                .map { .heroAbilitiesTableViewItem(abilities: $0) }),
+                                             .talentsSection(items: [.heroTalentsTableViewItem(talents: $0)]),
+                                             .loreSection(items: [.heroLoreTableViewItem(lore: $0)]))
             }
         
-        return Output(firstLoadingOutput: firstLoadingOutput,
-                      cellDatas: items,
-                      rolesData: loadingRolesData)
+        return Output(cellDatas: cellDatas)
     }
 }
 
@@ -72,8 +60,6 @@ extension HeroDetailViewModel {
     }
     
     struct Output {
-        let firstLoadingOutput: Driver<HeroDetailViewModelPlus>
         let cellDatas: Observable<[HeroDetailTableViewSection]>
-        let rolesData: Driver<[RolesDetail]>
     }
 }

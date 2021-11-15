@@ -12,7 +12,7 @@ struct Abilities: Codable {
     let abilityId: Int
 }
 
-struct Roles: Codable {
+public struct Roles: Codable {
     let roleId: Int
     let level: Int
 }

@@ -18,7 +18,7 @@ class ComponentCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(_ element: String) {
-        itemName.text = element
+        itemName.text = element.replacingOccurrences(of: "_", with: " ").capitalized
         
         // download image from url with kingfisher
         let url = URL(string: ConstantsForImageURL.itemImageForItemVC + "\(element).png")

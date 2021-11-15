@@ -16,7 +16,7 @@ struct Attribute: Codable {
 
 public struct ItemDetailModel: Codable {
     let itemKey: String
-
+    
     let hint: [String]?
     let dname: String?
     let qual: String?
