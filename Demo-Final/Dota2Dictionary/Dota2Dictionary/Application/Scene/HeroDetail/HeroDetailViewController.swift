@@ -23,18 +23,8 @@ class HeroDetailViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerCell()
-        bindViewModel()
-    }
-    
-    func registerCell() {
-        heroDetailTableView.register(UINib(nibName: ConstantsForCell.heroInfoTableViewCell,
-                                 bundle: nil),
-                           forCellReuseIdentifier: ConstantsForCell.heroInfoTableViewCell)
-        
         tableViewRegister()
         bindViewModel()
-        
     }
     
     func tableViewRegister() {

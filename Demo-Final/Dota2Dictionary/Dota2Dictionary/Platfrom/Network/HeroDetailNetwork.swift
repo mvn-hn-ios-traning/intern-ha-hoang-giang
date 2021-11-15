@@ -38,6 +38,27 @@ class HeroDetailAPISevice {
         return nil
     }
     
+    func parseAbilityId(jsonData: Data) -> [String: String]? {
+        do {
+            let decodedData = try JSONDecoder().decode([String: String].self, from: jsonData)
+            return decodedData
+        } catch {
+            print("error: ", error)
+        }
+        return nil
+    }
+    
+    func parseHeroAbilities(jsonData: Data) -> [HeroDetailAbilitiesModel]? {
+        do {
+            let decodedData = try JSONDecoder().decode(HeroAbilitiesArratDecoded.self, from: jsonData)
+            print(decodedData.array.filter { $0.abilitiesKey == "antimage_mana_break" })
+            return decodedData.array
+        } catch {
+            print("error: ", error)
+        }
+        return nil
+    }
+    
     func loadJson(fromURLString urlString: String,
                   completion: @escaping (Result<Data, Error>) -> Void) {
         if let url = URL(string: urlString) {

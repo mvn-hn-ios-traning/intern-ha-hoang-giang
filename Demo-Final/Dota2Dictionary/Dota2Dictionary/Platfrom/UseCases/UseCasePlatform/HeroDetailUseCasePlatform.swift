@@ -45,4 +45,44 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
             return Disposables.create()
         }
     }
+    
+    func loadHeroAbilityId() -> Observable<[String: String]> {
+        return Observable.create { observer -> Disposable in
+            let urlString = ConstantsForJsonUrl.heroAbilitiesId
+            
+            HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let data = HeroDetailAPISevice.shared.parseAbilityId(jsonData: data)
+                    guard let newdata = data else {
+                        return
+                    }
+                    observer.onNext(newdata)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadHeroAbilities() -> Observable<[HeroDetailAbilitiesModel]> {
+        return Observable.create { observer -> Disposable in
+            let urlString = ConstantsForJsonUrl.heroDetailAbilities
+            
+            HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let data = HeroDetailAPISevice.shared.parseHeroAbilities(jsonData: data)
+                    guard let newdata = data else {
+                        return
+                    }
+                    observer.onNext(newdata)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
 }

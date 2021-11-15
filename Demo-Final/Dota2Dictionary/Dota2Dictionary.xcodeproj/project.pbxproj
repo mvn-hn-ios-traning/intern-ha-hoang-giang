@@ -24,7 +24,6 @@
 		22682A02271DAC2000E99D64 /* HeroDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22682A01271DAC2000E99D64 /* HeroDetailDataSource.swift */; };
 		22682A0E271DB49D00E99D64 /* HeroInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22682A0C271DB49D00E99D64 /* HeroInfoTableViewCell.swift */; };
 		22682A0F271DB49D00E99D64 /* HeroInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22682A0D271DB49D00E99D64 /* HeroInfoTableViewCell.xib */; };
-		226B19C12734D12800A95FB5 /* HeroAbilitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B19BF2734D12800A95FB5 /* HeroAbilitiesTableViewCell.swift */; };
 		226B19C22734D12800A95FB5 /* HeroAbilitiesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226B19C02734D12800A95FB5 /* HeroAbilitiesTableViewCell.xib */; };
 		226B6C6F271297B3001FEAD6 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6C6E271297B3001FEAD6 /* ItemViewModel.swift */; };
 		226B6C722712A2B9001FEAD6 /* ItemsAllCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6C702712A2B9001FEAD6 /* ItemsAllCollectionViewCell.swift */; };
@@ -73,6 +72,8 @@
 		2270A9B9273B7FC500EADBE4 /* HeroDetailNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270A9B8273B7FC500EADBE4 /* HeroDetailNetwork.swift */; };
 		2270A9BC273B7FF000EADBE4 /* ItemNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270A9BB273B7FF000EADBE4 /* ItemNetwork.swift */; };
 		2270A9BF273B800800EADBE4 /* ItemDetailNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270A9BE273B800800EADBE4 /* ItemDetailNetwork.swift */; };
+		2270AC2B2741EE0C00802F72 /* HeroAbilitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B19BF2734D12800A95FB5 /* HeroAbilitiesTableViewCell.swift */; };
+		2270AC2C2741EE1D00802F72 /* HeroTalentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A19FDD27382B7200EA928B /* HeroTalentsTableViewCell.swift */; };
 		227B603A271096A400DF2463 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B6039271096A400DF2463 /* ItemsViewController.swift */; };
 		227D6B21270F69590037B901 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D6B20270F69590037B901 /* HeroDetailViewController.swift */; };
 		227F326B2712163D005DF2CD /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F326A2712163D005DF2CD /* ItemModel.swift */; };
@@ -108,7 +109,6 @@
 		22A128BA2701AA0100728288 /* HeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A128B92701AA0100728288 /* HeroViewController.swift */; };
 		22A128BC2701AA2D00728288 /* HeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A128BB2701AA2D00728288 /* HeroViewModel.swift */; };
 		22A19FDA273816B600EA928B /* HeroDetailAbilitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A19FD9273816B600EA928B /* HeroDetailAbilitiesModel.swift */; };
-		22A19FDF27382B7200EA928B /* HeroTalentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A19FDD27382B7200EA928B /* HeroTalentsTableViewCell.swift */; };
 		22A19FE027382B7200EA928B /* HeroTalentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A19FDE27382B7200EA928B /* HeroTalentsTableViewCell.xib */; };
 		22D87C9E2710001F00EF116E /* HeroDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D87C9D2710001F00EF116E /* HeroDetailModel.swift */; };
 		22D87CA02710021700EF116E /* HeroDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D87C9F2710021700EF116E /* HeroDetailViewModel.swift */; };
@@ -877,7 +877,9 @@
 				2270A97B273B669400EADBE4 /* ItemUseCaseProviderDomain.swift in Sources */,
 				2270A967273B65A300EADBE4 /* HeroDetailUseCaseDomain.swift in Sources */,
 				223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */,
+				2270AC2B2741EE0C00802F72 /* HeroAbilitiesTableViewCell.swift in Sources */,
 				2270A975273B664000EADBE4 /* HeroUseCaseProviderDomain.swift in Sources */,
+				2270AC2C2741EE1D00802F72 /* HeroTalentsTableViewCell.swift in Sources */,
 				2270A99C273B7E7800EADBE4 /* HeroDetailUseCaseProviderPlatform.swift in Sources */,
 				226FA97B27173BF700633AD4 /* ValueWrapper.swift in Sources */,
 				2296977F270AD0B400E7103E /* PatchModel.swift in Sources */,

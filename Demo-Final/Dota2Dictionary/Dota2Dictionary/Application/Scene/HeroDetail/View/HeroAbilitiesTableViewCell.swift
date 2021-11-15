@@ -27,7 +27,6 @@ class HeroAbilitiesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
     }
 
     func configure(_ viewModel: HeroDetailAbilitiesModel) {
