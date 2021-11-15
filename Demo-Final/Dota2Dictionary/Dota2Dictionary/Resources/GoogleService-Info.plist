@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>606801045420-nkehscf35pfjdcgmmif1elqajnc75i8r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.606801045420-nkehscf35pfjdcgmmif1elqajnc75i8r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAwTKc_tKW0Mo318RRUEpC_zP9CM9y5xw8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>606801045420</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hahoanggiang.Dota2Dictionary</string>
+	<key>PROJECT_ID</key>
+	<string>dota-2-guide-43444</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dota-2-guide-43444.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:606801045420:ios:3b8610cd33e07f75abbc09</string>
+</dict>
+</plist>

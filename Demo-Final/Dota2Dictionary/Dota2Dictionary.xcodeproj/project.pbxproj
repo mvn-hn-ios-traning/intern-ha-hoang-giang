@@ -114,6 +114,7 @@
 		22D87C9E2710001F00EF116E /* HeroDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D87C9D2710001F00EF116E /* HeroDetailModel.swift */; };
 		22D87CA02710021700EF116E /* HeroDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D87C9F2710021700EF116E /* HeroDetailViewModel.swift */; };
 		22D87CA22710023200EF116E /* HeroDetailViewModelPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D87CA12710023200EF116E /* HeroDetailViewModelPlus.swift */; };
+		22D94E062742426B00C55BA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22D94E052742426B00C55BA1 /* GoogleService-Info.plist */; };
 		22F15F9E2700CACD00CACDE2 /* PatchAndHeroNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F15F9D2700CACD00CACDE2 /* PatchAndHeroNetwork.swift */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +227,7 @@
 		22D87C9D2710001F00EF116E /* HeroDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailModel.swift; sourceTree = "<group>"; };
 		22D87C9F2710021700EF116E /* HeroDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewModel.swift; sourceTree = "<group>"; };
 		22D87CA12710023200EF116E /* HeroDetailViewModelPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewModelPlus.swift; sourceTree = "<group>"; };
+		22D94E052742426B00C55BA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22F15F9D2700CACD00CACDE2 /* PatchAndHeroNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchAndHeroNetwork.swift; sourceTree = "<group>"; };
 		2E0ED97453E69538AAEA2281 /* Pods-Dota2Dictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dota2Dictionary.release.xcconfig"; path = "Target Support Files/Pods-Dota2Dictionary/Pods-Dota2Dictionary.release.xcconfig"; sourceTree = "<group>"; };
 		9060517D75F65B71F1F43B2A /* Pods-Dota2Dictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dota2Dictionary.debug.xcconfig"; path = "Target Support Files/Pods-Dota2Dictionary/Pods-Dota2Dictionary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 			children = (
 				226F1BB527037912008A693D /* Assets.xcassets */,
 				223743EA26FB0A4800CAFF69 /* Info.plist */,
+				22D94E052742426B00C55BA1 /* GoogleService-Info.plist */,
 				223743E726FB0A4800CAFF69 /* LaunchScreen.storyboard */,
 				22902E6C2715399C006A96D8 /* Main.storyboard */,
 			);
@@ -783,6 +786,7 @@
 				229C9CB3272EE4CA007384AD /* InfoTopTableViewCell.xib in Resources */,
 				228CCC60272FA16600001A1C /* ItemLoreTableViewCell.xib in Resources */,
 				228CCC5B272F9FB900001A1C /* ItemAttribTableViewCell.xib in Resources */,
+				22D94E062742426B00C55BA1 /* GoogleService-Info.plist in Resources */,
 				226B9F372733929100CD3042 /* RolesCollectionViewCell.xib in Resources */,
 				226F1BB627037913008A693D /* Assets.xcassets in Resources */,
 				2294FDA9270DEDE200CEE769 /* PatchDetailTableViewCell.xib in Resources */,
