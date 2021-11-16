@@ -28,8 +28,6 @@ class RegisterViewModel: ViewModelType {
             .combineLatest(input.enteredEmail,
                            input.enteredPassword) {
                             return !$0.isEmpty
-                                && $0.contains("@")
-                                && $0.contains(".com")
                                 && !$1.isEmpty
                                 && $1.count >= 8
         }
@@ -46,14 +44,21 @@ class RegisterViewModel: ViewModelType {
                 ToastManager.shared.style = style
                 
                 self.viewController.view.endEditing(true)
-                Auth.auth().createUser(withEmail: text.0, password: text.1) { (_, error) in
+                
+                Auth.auth().createUser(withEmail: text.0, password: text.1) { (authData, error) in
                     if error != nil {
                         self.viewController.view.makeToast(error!.localizedDescription,
                                                            position: .top)
-                    } else {
-                        self.viewController.view.makeToast("Sign up successful",
-                                                           position: .top)
                     }
+                    authData?.user.sendEmailVerification(completion: { (error) in
+                        if error != nil {
+                            self.viewController.view.makeToast(error!.localizedDescription,
+                                                               position: .top)
+                        } else {
+                            self.viewController.view.makeToast("Sent verification mail",
+                                                               position: .top)
+                        }
+                    })
                 }
         }
         
