@@ -34,11 +34,14 @@ class ProfileNavigator: DefaultProfileNavigator {
     }
     
     func toLoginScreen() {
+        let navigator = LoginNavigator(storyBoard: storyBoard,
+                                       navigationController: navigationController)
         guard let viewController = storyBoard
-                .instantiateViewController(withIdentifier: "LoginViewController")
-                as? LoginViewController else {
-            return
+            .instantiateViewController(withIdentifier: "LoginViewController")
+            as? LoginViewController else {
+                return
         }
+        viewController.loginViewModel = LoginViewModel(navigator: navigator)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

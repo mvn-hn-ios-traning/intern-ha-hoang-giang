@@ -12,10 +12,10 @@ import RxSwift
 class PatchViewModel: ViewModelType {
     
     private let useCase: PatchUseCaseDomain
-    private let navigator: PatchNavigator
+    private let navigator: DefaultPatchNavigator
     
     init(useCase: PatchUseCaseDomain,
-         navigator: PatchNavigator) {
+         navigator: DefaultPatchNavigator) {
         self.useCase = useCase
         self.navigator = navigator
     }
