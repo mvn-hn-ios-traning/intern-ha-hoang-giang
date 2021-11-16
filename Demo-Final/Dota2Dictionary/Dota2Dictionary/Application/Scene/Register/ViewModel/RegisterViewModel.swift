@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Toast_Swift
+import Firebase
 
 class RegisterViewModel: ViewModelType {
     
@@ -19,12 +19,32 @@ class RegisterViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-        let tappedRegisterOutput = Driver.combineLatest(input.enteredEmail,
-                                                        input.enteredPassword) {
-                                                            return !$0.isEmpty && !$1.isEmpty
+        let enableRegister =
+            Driver
+                .combineLatest(input.enteredEmail,
+                               input.enteredPassword) {
+                                return !$0.isEmpty
+                                    && $0.contains("@")
+                                    && $0.contains(".com")
+                                    && !$1.isEmpty
         }
         
-        return Output(tappedRegisterOutput: tappedRegisterOutput)
+        let tappedRegister = Driver
+            .combineLatest(input.enteredEmail,
+                           input.enteredPassword)
+            .withLatestFrom(input.tappedRegister) { text, _ in
+                
+                Auth.auth().createUser(withEmail: text.0, password: text.1) { (_, error) in
+                    if error != nil {
+                        print(error!.localizedDescription)
+                    } else {
+                        print("Register success")
+                    }
+                }
+        }
+        
+        return Output(enableRegister: enableRegister,
+                      tappedRegister: tappedRegister)
     }
 }
 
@@ -36,6 +56,7 @@ extension RegisterViewModel {
     }
     
     struct Output {
-        let tappedRegisterOutput: Driver<Bool>
+        let enableRegister: Driver<Bool>
+        let tappedRegister: Driver<Void>
     }
 }

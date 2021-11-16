@@ -31,13 +31,14 @@ class RegisterViewController: UIViewController {
         let output = registerViewModel.transform(input: input)
         
         output
-            .tappedRegisterOutput
+            .enableRegister
             .drive(registerButton.rx.isEnabled)
             .disposed(by: disposeBag)
-    }
-    
-    @IBAction func tapOnRegister(_ sender: Any) {
-        print("Register clicked")
+        
+        output
+            .tappedRegister
+            .drive()
+            .disposed(by: disposeBag)
     }
     
 }
