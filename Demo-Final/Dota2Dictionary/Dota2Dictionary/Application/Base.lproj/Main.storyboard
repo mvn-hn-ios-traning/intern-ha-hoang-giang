@@ -155,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="1261" y="1590"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="mwn-I2-Mfg">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="vJf-Zd-hFi" customClass="LoginViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="Login" id="vJf-Zd-hFi" customClass="LoginViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zJW-Gz-NuW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,10 +209,28 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jJN-rn-asv"/>
                     </view>
+                    <connections>
+                        <outlet property="registerButton" destination="CCo-Xo-cd4" id="6M5-kU-1wS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMJ-Wg-RcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2280" y="1590"/>
+        </scene>
+        <!--Register-->
+        <scene sceneID="dCN-EL-ecL">
+            <objects>
+                <viewController storyboardIdentifier="RegisterViewController" title="Register" id="nYG-38-6dl" customClass="RegisterViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4V3-et-b6X">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="OAP-Gq-v8h"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bpg-WJ-D0W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2280" y="2306"/>
         </scene>
         <!--Hero-->
         <scene sceneID="L97-kp-kie">
