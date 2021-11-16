@@ -29,7 +29,8 @@ class LoginNavigator: DefaultLoginNavigator {
                 as? RegisterViewController else {
             return
         }
-        viewController.registerViewModel = RegisterViewModel(navigator: navigator)
+        viewController.registerViewModel = RegisterViewModel(navigator: navigator,
+                                                             viewController: viewController)
         navigationController.pushViewController(viewController, animated: true)
     }
 }
