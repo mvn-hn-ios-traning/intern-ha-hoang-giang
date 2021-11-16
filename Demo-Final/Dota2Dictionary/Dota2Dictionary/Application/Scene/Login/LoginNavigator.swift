@@ -23,11 +23,13 @@ class LoginNavigator: DefaultLoginNavigator {
     }
     
     func toRegister() {
+        let navigator = RegisterNavigator(navigationController: navigationController)
         guard let viewController = storyBoard
                 .instantiateViewController(withIdentifier: "RegisterViewController")
                 as? RegisterViewController else {
             return
         }
+        viewController.registerViewModel = RegisterViewModel(navigator: navigator)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

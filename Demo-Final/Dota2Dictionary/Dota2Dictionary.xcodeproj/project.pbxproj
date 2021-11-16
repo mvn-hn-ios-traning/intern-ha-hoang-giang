@@ -109,6 +109,7 @@
 		229C9CB3272EE4CA007384AD /* InfoTopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229C9CB1272EE4CA007384AD /* InfoTopTableViewCell.xib */; };
 		229DBD7727433C5200409C34 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229DBD7627433C5200409C34 /* RegisterViewModel.swift */; };
 		229DBD7A27433CC600409C34 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229DBD7927433CC600409C34 /* LoginViewModel.swift */; };
+		229DBD7C2743531200409C34 /* RegisterNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229DBD7B2743531200409C34 /* RegisterNavigator.swift */; };
 		22A128BA2701AA0100728288 /* HeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A128B92701AA0100728288 /* HeroViewController.swift */; };
 		22A128BC2701AA2D00728288 /* HeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A128BB2701AA2D00728288 /* HeroViewModel.swift */; };
 		22A19FDA273816B600EA928B /* HeroDetailAbilitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A19FD9273816B600EA928B /* HeroDetailAbilitiesModel.swift */; };
@@ -229,6 +230,7 @@
 		229C9CB1272EE4CA007384AD /* InfoTopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTopTableViewCell.xib; sourceTree = "<group>"; };
 		229DBD7627433C5200409C34 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		229DBD7927433CC600409C34 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		229DBD7B2743531200409C34 /* RegisterNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNavigator.swift; sourceTree = "<group>"; };
 		22A128B92701AA0100728288 /* HeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroViewController.swift; sourceTree = "<group>"; };
 		22A128BB2701AA2D00728288 /* HeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroViewModel.swift; sourceTree = "<group>"; };
 		22A19FD9273816B600EA928B /* HeroDetailAbilitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailAbilitiesModel.swift; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 		22D94E1127426A0900C55BA1 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				229DBD7B2743531200409C34 /* RegisterNavigator.swift */,
 				22D94E1227426A2400C55BA1 /* RegisterViewController.swift */,
 				229DBD7527433C4000409C34 /* ViewModel */,
 			);
@@ -1017,6 +1020,7 @@
 				2270A99F273B7E8B00EADBE4 /* ItemUseCaseProviderPlatform.swift in Sources */,
 				228CCC6C272FC57100001A1C /* ComponentCollectionViewCell.swift in Sources */,
 				2270A98D273B685700EADBE4 /* ItemUseCasePlatform.swift in Sources */,
+				229DBD7C2743531200409C34 /* RegisterNavigator.swift in Sources */,
 				226F1BA72702C32A008A693D /* AllHeroCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
