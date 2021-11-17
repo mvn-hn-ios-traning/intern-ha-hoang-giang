@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Firebase
 
 class RegisterViewController: UIViewController {
     
@@ -37,7 +38,10 @@ class RegisterViewController: UIViewController {
         
         output
             .tappedRegister
-            .drive()
+            .drive(onNext: { [weak self] text in
+                guard let self = self else { return }
+                self.view.endEditing(true)
+            })
             .disposed(by: disposeBag)
     }
     

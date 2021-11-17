@@ -19,6 +19,8 @@ final class Application {
     private let itemUseCaseProvider: ItemUseCaseProviderDomain
     private let itemDetailUseCaseProvider: ItemDetailUseCaseProviderDomain
     
+    private let registerUseCaseProvider: RegisterUseCaseProviderDomain
+    
     private init() {
         self.patchUseCaseProvider = PatchUseCaseProviderPlatform()
         self.patchDetailUseCaseProvider = PatchDetailUseCaseProviderPlatform()
@@ -28,6 +30,8 @@ final class Application {
         
         self.itemUseCaseProvider = ItemUseCaseProviderPlatform()
         self.itemDetailUseCaseProvider = ItemDetailUseCaseProviderPlatform()
+        
+        self.registerUseCaseProvider = RegisterUseCaseProviderPlatform()
     }
     
     func configureMainInterface(in window: UIWindow) {
@@ -76,7 +80,8 @@ final class Application {
         profileNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
         profileNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        let profileNavigator = ProfileNavigator(storyBoard: storyboard,
+        let profileNavigator = ProfileNavigator(registerService: registerUseCaseProvider,
+                                                storyBoard: storyboard,
                                                 navigationController: profileNavigationController)
         
         let tabbarController = UITabBarController()

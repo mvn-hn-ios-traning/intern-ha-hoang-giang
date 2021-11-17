@@ -9,17 +9,16 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Firebase
-import Toast_Swift
 
 class RegisterViewModel: ViewModelType {
     
+    private let useCase: RegisterUseCaseDomain
     private let navigator: DefaultRegisterNavigator
-    private let viewController: RegisterViewController
     
-    init(navigator: DefaultRegisterNavigator,
-         viewController: RegisterViewController) {
+    init(useCase: RegisterUseCaseDomain,
+         navigator: DefaultRegisterNavigator) {
+        self.useCase = useCase
         self.navigator = navigator
-        self.viewController = viewController
     }
     
     func transform(input: Input) -> Output {
@@ -37,29 +36,8 @@ class RegisterViewModel: ViewModelType {
         
         let tappedRegister = input
             .tappedRegister
-            .withLatestFrom(mergeText) { [weak self] _, text in
-                guard let self = self else {return}
-                var style = ToastStyle()
-                style.backgroundColor = .darkGray
-                ToastManager.shared.style = style
-                
-                self.viewController.view.endEditing(true)
-                
-                Auth.auth().createUser(withEmail: text.0, password: text.1) { (authData, error) in
-                    if error != nil {
-                        self.viewController.view.makeToast(error!.localizedDescription,
-                                                           position: .top)
-                    }
-                    authData?.user.sendEmailVerification(completion: { (error) in
-                        if error != nil {
-                            self.viewController.view.makeToast(error!.localizedDescription,
-                                                               position: .top)
-                        } else {
-                            self.viewController.view.makeToast("Sent verification mail",
-                                                               position: .top)
-                        }
-                    })
-                }
+            .withLatestFrom(mergeText) { _, text in 
+                self.useCase.register(email: text.0, password: text.1)
         }
         
         return Output(enableRegister: enableRegister,
