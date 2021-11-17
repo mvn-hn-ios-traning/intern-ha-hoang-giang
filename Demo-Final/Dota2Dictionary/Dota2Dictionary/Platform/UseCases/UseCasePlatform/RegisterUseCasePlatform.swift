@@ -27,6 +27,5 @@ class RegisterUseCasePlatform: RegisterUseCaseDomain {
             return Disposables.create()
         }
         
-        
     }
 }
