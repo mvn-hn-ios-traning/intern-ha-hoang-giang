@@ -32,18 +32,10 @@ class RegisterViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let registerTrigger = registerButton.rx.tap.flatMap {
-            return Observable<Void>.create { observer -> Disposable in
-                self.view.makeToast("Success", position: .top) { _ in
-                    observer.onNext(())
-                }
-                return Disposables.create()
-            }
-        }
         
         let input = RegisterViewModel.Input(enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
                                             enteredPassword: passwordTextField.rx.text.orEmpty.asDriver(),
-                                            tappedRegister: registerTrigger.asDriver(onErrorJustReturn: Void()))
+                                            tappedRegister: registerButton.rx.tap.asDriver())
         let output = registerViewModel.transform(input: input)
         
         output
@@ -53,9 +45,11 @@ class RegisterViewController: UIViewController {
         
         output
             .tappedRegister
-            .drive(onNext: { [weak self] _ in
+            .bind(onNext: { [weak self] text in
                 guard let self = self else { return }
+                
                 self.view.endEditing(true)
+                self.view.makeToast(text, position: .top)
             })
             .disposed(by: disposeBag)
     }
