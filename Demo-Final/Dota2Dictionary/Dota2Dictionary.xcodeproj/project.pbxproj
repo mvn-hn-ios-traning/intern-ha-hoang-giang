@@ -49,9 +49,6 @@
 		226F0A532744A6C700A02E73 /* RegisterUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A522744A6C700A02E73 /* RegisterUseCaseProviderDomain.swift */; };
 		226F0A552744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A542744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift */; };
 		226F0A572744A78400A02E73 /* RegisterUseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A562744A78400A02E73 /* RegisterUseCasePlatform.swift */; };
-		226F0A5A2744FE9100A02E73 /* ResetPasswordNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A592744FE9100A02E73 /* ResetPasswordNavigator.swift */; };
-		226F0A5C2744FEA600A02E73 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A5B2744FEA600A02E73 /* ResetPasswordViewController.swift */; };
-		226F0A5F2744FEBC00A02E73 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A5E2744FEBC00A02E73 /* ResetPasswordViewModel.swift */; };
 		226F0A61274503C400A02E73 /* LoginUseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A60274503C400A02E73 /* LoginUseCaseDomain.swift */; };
 		226F0A632745040B00A02E73 /* LoginUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A622745040B00A02E73 /* LoginUseCaseProviderDomain.swift */; };
 		226F0A652745047300A02E73 /* LoginUseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A642745047300A02E73 /* LoginUseCaseProviderPlatform.swift */; };
@@ -183,9 +180,6 @@
 		226F0A522744A6C700A02E73 /* RegisterUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCaseProviderDomain.swift; sourceTree = "<group>"; };
 		226F0A542744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCaseProviderPlatform.swift; sourceTree = "<group>"; };
 		226F0A562744A78400A02E73 /* RegisterUseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCasePlatform.swift; sourceTree = "<group>"; };
-		226F0A592744FE9100A02E73 /* ResetPasswordNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordNavigator.swift; sourceTree = "<group>"; };
-		226F0A5B2744FEA600A02E73 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
-		226F0A5E2744FEBC00A02E73 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		226F0A60274503C400A02E73 /* LoginUseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseDomain.swift; sourceTree = "<group>"; };
 		226F0A622745040B00A02E73 /* LoginUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseProviderDomain.swift; sourceTree = "<group>"; };
 		226F0A642745047300A02E73 /* LoginUseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseProviderPlatform.swift; sourceTree = "<group>"; };
@@ -360,7 +354,6 @@
 				226B6C742712A83D001FEAD6 /* Item Detail */,
 				22A128B82701A9A300728288 /* Profile */,
 				22D94E0B2742567B00C55BA1 /* Login */,
-				226F0A582744FE6B00A02E73 /* ResetPassword */,
 				22D94E1127426A0900C55BA1 /* Register */,
 				22A128B72701A95A00728288 /* Favorite */,
 			);
@@ -598,24 +591,6 @@
 			children = (
 				22902E7727159289006A96D8 /* ItemDetailViewModel.swift */,
 				226EEBF02717CC1800219FC9 /* ItemDetailViewModelPlus.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		226F0A582744FE6B00A02E73 /* ResetPassword */ = {
-			isa = PBXGroup;
-			children = (
-				226F0A592744FE9100A02E73 /* ResetPasswordNavigator.swift */,
-				226F0A5B2744FEA600A02E73 /* ResetPasswordViewController.swift */,
-				226F0A5D2744FEAA00A02E73 /* ViewModel */,
-			);
-			path = ResetPassword;
-			sourceTree = "<group>";
-		};
-		226F0A5D2744FEAA00A02E73 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				226F0A5E2744FEBC00A02E73 /* ResetPasswordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -983,7 +958,6 @@
 				22A19FDA273816B600EA928B /* HeroDetailAbilitiesModel.swift in Sources */,
 				22A128BA2701AA0100728288 /* HeroViewController.swift in Sources */,
 				228CCC5F272FA16600001A1C /* ItemLoreTableViewCell.swift in Sources */,
-				226F0A5F2744FEBC00A02E73 /* ResetPasswordViewModel.swift in Sources */,
 				224C17DC271414B500DD4B76 /* Application.swift in Sources */,
 				224C17DE271416E700DD4B76 /* PatchUseCaseProviderDomain.swift in Sources */,
 				22D94E0827424E7200C55BA1 /* ProfileViewController.swift in Sources */,
@@ -1001,7 +975,6 @@
 				226B9F422733CB5600CD3042 /* HeroLanguageTableViewCell.swift in Sources */,
 				227D6B21270F69590037B901 /* HeroDetailViewController.swift in Sources */,
 				2270A98A273B683400EADBE4 /* HeroDetailUseCasePlatform.swift in Sources */,
-				226F0A5A2744FE9100A02E73 /* ResetPasswordNavigator.swift in Sources */,
 				22969787270B00E600E7103E /* PatchDetailViewController.swift in Sources */,
 				2270A964273B658800EADBE4 /* HeroUseCaseDomain.swift in Sources */,
 				226F0A512744A4DA00A02E73 /* RegisterUseCaseDomain.swift in Sources */,
@@ -1016,7 +989,6 @@
 				223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */,
 				2270AC2B2741EE0C00802F72 /* HeroAbilitiesTableViewCell.swift in Sources */,
 				2270A975273B664000EADBE4 /* HeroUseCaseProviderDomain.swift in Sources */,
-				226F0A5C2744FEA600A02E73 /* ResetPasswordViewController.swift in Sources */,
 				2270AC2C2741EE1D00802F72 /* HeroTalentsTableViewCell.swift in Sources */,
 				2270A99C273B7E7800EADBE4 /* HeroDetailUseCaseProviderPlatform.swift in Sources */,
 				226FA97B27173BF700633AD4 /* ValueWrapper.swift in Sources */,
