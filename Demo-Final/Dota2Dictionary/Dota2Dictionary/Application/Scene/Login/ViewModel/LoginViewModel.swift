@@ -11,9 +11,12 @@ import RxCocoa
 
 class LoginViewModel: ViewModelType {
     
+    private let useCase: LoginUseCaseDomain
     private let navigator: DefaultLoginNavigator
     
-    init(navigator: DefaultLoginNavigator) {
+    init(useCase: LoginUseCaseDomain,
+         navigator: DefaultLoginNavigator) {
+        self.useCase = useCase
         self.navigator = navigator
     }
     
@@ -24,7 +27,13 @@ class LoginViewModel: ViewModelType {
                 self.navigator.toRegister()
             })
         
-        return Output(tappedRegisterOutput: tappedRegisterOutput)
+        let resetPassword = input
+            .forgotTrigger
+            .asObservable()
+            .flatMap { self.useCase.resetPassword(email: $0) }
+        
+        return Output(tappedRegisterOutput: tappedRegisterOutput,
+                      resetOuput: resetPassword)
     }
     
 }
@@ -32,9 +41,11 @@ class LoginViewModel: ViewModelType {
 extension LoginViewModel {
     struct Input {
         let tappedRegister: Driver<Void>
+        let forgotTrigger: Driver<String>
     }
     
     struct Output {
         let tappedRegisterOutput: Driver<Void>
+        let resetOuput: Observable<String>
     }
 }

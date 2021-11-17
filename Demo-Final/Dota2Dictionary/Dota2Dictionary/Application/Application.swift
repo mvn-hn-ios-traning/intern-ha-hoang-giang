@@ -19,6 +19,7 @@ final class Application {
     private let itemUseCaseProvider: ItemUseCaseProviderDomain
     private let itemDetailUseCaseProvider: ItemDetailUseCaseProviderDomain
     
+    private let loginUseCaseProvider: LoginUseCaseProviderDomain
     private let registerUseCaseProvider: RegisterUseCaseProviderDomain
     
     private init() {
@@ -31,6 +32,7 @@ final class Application {
         self.itemUseCaseProvider = ItemUseCaseProviderPlatform()
         self.itemDetailUseCaseProvider = ItemDetailUseCaseProviderPlatform()
         
+        self.loginUseCaseProvider = LoginUseCaseProviderPlatform()
         self.registerUseCaseProvider = RegisterUseCaseProviderPlatform()
     }
     
@@ -80,7 +82,8 @@ final class Application {
         profileNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
         profileNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        let profileNavigator = ProfileNavigator(registerService: registerUseCaseProvider,
+        let profileNavigator = ProfileNavigator(loginService: loginUseCaseProvider,
+                                                registerService: registerUseCaseProvider,
                                                 storyBoard: storyboard,
                                                 navigationController: profileNavigationController)
         

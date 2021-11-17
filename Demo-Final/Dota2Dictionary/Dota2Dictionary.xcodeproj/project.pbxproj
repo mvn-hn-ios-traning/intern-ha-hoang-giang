@@ -49,6 +49,10 @@
 		226F0A532744A6C700A02E73 /* RegisterUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A522744A6C700A02E73 /* RegisterUseCaseProviderDomain.swift */; };
 		226F0A552744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A542744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift */; };
 		226F0A572744A78400A02E73 /* RegisterUseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A562744A78400A02E73 /* RegisterUseCasePlatform.swift */; };
+		226F0A61274503C400A02E73 /* LoginUseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A60274503C400A02E73 /* LoginUseCaseDomain.swift */; };
+		226F0A632745040B00A02E73 /* LoginUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A622745040B00A02E73 /* LoginUseCaseProviderDomain.swift */; };
+		226F0A652745047300A02E73 /* LoginUseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A642745047300A02E73 /* LoginUseCaseProviderPlatform.swift */; };
+		226F0A672745049D00A02E73 /* LoginUseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F0A662745049D00A02E73 /* LoginUseCasePlatform.swift */; };
 		226F1BA72702C32A008A693D /* AllHeroCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F1BA52702C32A008A693D /* AllHeroCollectionViewCell.swift */; };
 		226F1BA82702C32A008A693D /* AllHeroCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226F1BA62702C32A008A693D /* AllHeroCollectionViewCell.xib */; };
 		226F1BB627037913008A693D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F1BB527037912008A693D /* Assets.xcassets */; };
@@ -176,6 +180,10 @@
 		226F0A522744A6C700A02E73 /* RegisterUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCaseProviderDomain.swift; sourceTree = "<group>"; };
 		226F0A542744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCaseProviderPlatform.swift; sourceTree = "<group>"; };
 		226F0A562744A78400A02E73 /* RegisterUseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCasePlatform.swift; sourceTree = "<group>"; };
+		226F0A60274503C400A02E73 /* LoginUseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseDomain.swift; sourceTree = "<group>"; };
+		226F0A622745040B00A02E73 /* LoginUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseProviderDomain.swift; sourceTree = "<group>"; };
+		226F0A642745047300A02E73 /* LoginUseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseProviderPlatform.swift; sourceTree = "<group>"; };
+		226F0A662745049D00A02E73 /* LoginUseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCasePlatform.swift; sourceTree = "<group>"; };
 		226F1BA52702C32A008A693D /* AllHeroCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllHeroCollectionViewCell.swift; sourceTree = "<group>"; };
 		226F1BA62702C32A008A693D /* AllHeroCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllHeroCollectionViewCell.xib; sourceTree = "<group>"; };
 		226F1BB527037912008A693D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -596,6 +604,7 @@
 				2270A966273B65A300EADBE4 /* HeroDetailUseCaseDomain.swift */,
 				2270A969273B65BA00EADBE4 /* ItemUseCaseDomain.swift */,
 				2270A96C273B65DB00EADBE4 /* ItemDetailUseCaseDomain.swift */,
+				226F0A60274503C400A02E73 /* LoginUseCaseDomain.swift */,
 				226F0A502744A4DA00A02E73 /* RegisterUseCaseDomain.swift */,
 			);
 			path = UseCaseDomain;
@@ -610,6 +619,7 @@
 				2270A977273B668300EADBE4 /* HeroDetailUseCaseProviderDomain.swift */,
 				2270A97A273B669400EADBE4 /* ItemUseCaseProviderDomain.swift */,
 				2270A97D273B66A800EADBE4 /* ItemDetailUseCaseProviderDomain.swift */,
+				226F0A622745040B00A02E73 /* LoginUseCaseProviderDomain.swift */,
 				226F0A522744A6C700A02E73 /* RegisterUseCaseProviderDomain.swift */,
 			);
 			path = UseCaseProviderDomain;
@@ -624,6 +634,7 @@
 				2270A989273B683400EADBE4 /* HeroDetailUseCasePlatform.swift */,
 				2270A98C273B685700EADBE4 /* ItemUseCasePlatform.swift */,
 				2270A98F273B688000EADBE4 /* ItemDetailUseCasePlatform.swift */,
+				226F0A662745049D00A02E73 /* LoginUseCasePlatform.swift */,
 				226F0A562744A78400A02E73 /* RegisterUseCasePlatform.swift */,
 			);
 			path = UseCasePlatform;
@@ -638,6 +649,7 @@
 				2270A99B273B7E7800EADBE4 /* HeroDetailUseCaseProviderPlatform.swift */,
 				2270A99E273B7E8B00EADBE4 /* ItemUseCaseProviderPlatform.swift */,
 				2270A9A1273B7E9C00EADBE4 /* ItemDetailUseCaseProviderPlatform.swift */,
+				226F0A642745047300A02E73 /* LoginUseCaseProviderPlatform.swift */,
 				226F0A542744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift */,
 			);
 			path = UseCaseProviderPlatform;
@@ -971,6 +983,7 @@
 				22682A0E271DB49D00E99D64 /* HeroInfoTableViewCell.swift in Sources */,
 				226EEBEF2717C9AC00219FC9 /* OptionalObject.swift in Sources */,
 				229DBD7A27433CC600409C34 /* LoginViewModel.swift in Sources */,
+				226F0A652745047300A02E73 /* LoginUseCaseProviderPlatform.swift in Sources */,
 				2270A97B273B669400EADBE4 /* ItemUseCaseProviderDomain.swift in Sources */,
 				2270A967273B65A300EADBE4 /* HeroDetailUseCaseDomain.swift in Sources */,
 				223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */,
@@ -995,6 +1008,7 @@
 				2270A987273B67C400EADBE4 /* HeroUseCasePlatform.swift in Sources */,
 				226BBD26270424A500808167 /* HeroViewModelPlus.swift in Sources */,
 				22682A02271DAC2000E99D64 /* HeroDetailDataSource.swift in Sources */,
+				226F0A61274503C400A02E73 /* LoginUseCaseDomain.swift in Sources */,
 				226BB804271ECAD6000EC3F9 /* HeroRolesTableViewCell.swift in Sources */,
 				2270A9A2273B7E9C00EADBE4 /* ItemDetailUseCaseProviderPlatform.swift in Sources */,
 				2294FDA4270DB2D100CEE769 /* PatchTableViewCell.swift in Sources */,
@@ -1004,11 +1018,13 @@
 				2270A961273B656400EADBE4 /* PatchDetailUseCaseDomain.swift in Sources */,
 				226EEBF12717CC1800219FC9 /* ItemDetailViewModelPlus.swift in Sources */,
 				226F0A552744A74A00A02E73 /* RegisterUseCaseProviderPlatform.swift in Sources */,
+				226F0A672745049D00A02E73 /* LoginUseCasePlatform.swift in Sources */,
 				224C17D82713DC1F00DD4B76 /* Constants.swift in Sources */,
 				226F0A572744A78400A02E73 /* RegisterUseCasePlatform.swift in Sources */,
 				22969781270AD35800E7103E /* NewPatchDetailViewModel.swift in Sources */,
 				2270A999273B7E4200EADBE4 /* HeroUseCaseProviderPlatform.swift in Sources */,
 				22D94E1027425C2600C55BA1 /* ProfileViewModel.swift in Sources */,
+				226F0A632745040B00A02E73 /* LoginUseCaseProviderDomain.swift in Sources */,
 				2294FDAB270E0C9700CEE769 /* PatchDetailViewModel.swift in Sources */,
 				22D94E0D2742569300C55BA1 /* LoginViewController.swift in Sources */,
 				22D94E1327426A2400C55BA1 /* RegisterViewController.swift in Sources */,

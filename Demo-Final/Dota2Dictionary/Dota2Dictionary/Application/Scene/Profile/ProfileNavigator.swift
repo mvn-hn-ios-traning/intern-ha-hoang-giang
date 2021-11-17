@@ -14,13 +14,16 @@ protocol DefaultProfileNavigator {
 
 class ProfileNavigator: DefaultProfileNavigator {
     
+    private let loginService: LoginUseCaseProviderDomain
     private let registerService: RegisterUseCaseProviderDomain
     private let storyBoard: UIStoryboard
     private let navigationController: UINavigationController
     
-    init(registerService: RegisterUseCaseProviderDomain,
+    init(loginService: LoginUseCaseProviderDomain,
+         registerService: RegisterUseCaseProviderDomain,
          storyBoard: UIStoryboard,
          navigationController: UINavigationController) {
+        self.loginService = loginService
         self.registerService = registerService
         self.storyBoard = storyBoard
         self.navigationController = navigationController
@@ -45,7 +48,8 @@ class ProfileNavigator: DefaultProfileNavigator {
             as? LoginViewController else {
                 return
         }
-        viewController.loginViewModel = LoginViewModel(navigator: navigator)
+        viewController.loginViewModel = LoginViewModel(useCase: loginService.makeLoginUseCase(),
+                                                       navigator: navigator)
         navigationController.pushViewController(viewController, animated: true)
     }
 }
