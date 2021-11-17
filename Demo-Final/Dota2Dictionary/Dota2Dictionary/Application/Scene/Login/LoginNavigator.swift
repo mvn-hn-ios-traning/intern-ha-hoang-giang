@@ -13,21 +13,27 @@ protocol DefaultLoginNavigator {
 
 class LoginNavigator: DefaultLoginNavigator {
     
+    private let registerService: RegisterUseCaseProviderDomain
     private let storyBoard: UIStoryboard
     private let navigationController: UINavigationController
     
-    init(storyBoard: UIStoryboard,
+    init(registerService: RegisterUseCaseProviderDomain,
+         storyBoard: UIStoryboard,
          navigationController: UINavigationController) {
+        self.registerService = registerService
         self.storyBoard = storyBoard
         self.navigationController = navigationController
     }
     
     func toRegister() {
+        let navigator = RegisterNavigator(navigationController: navigationController)
         guard let viewController = storyBoard
                 .instantiateViewController(withIdentifier: "RegisterViewController")
                 as? RegisterViewController else {
             return
         }
+        viewController.registerViewModel = RegisterViewModel(useCase: registerService.makeRegisterUseCase(),
+                                                             navigator: navigator)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

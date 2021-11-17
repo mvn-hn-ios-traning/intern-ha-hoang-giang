@@ -20,7 +20,9 @@ class LoginViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let tappedRegisterOutput = input
             .tappedRegister
-            .do(onNext: navigator.toRegister)
+            .do(onNext: {
+                self.navigator.toRegister()
+            })
         
         return Output(tappedRegisterOutput: tappedRegisterOutput)
     }

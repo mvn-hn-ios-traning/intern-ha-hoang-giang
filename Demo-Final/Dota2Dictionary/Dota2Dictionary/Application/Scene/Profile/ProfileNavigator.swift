@@ -14,11 +14,14 @@ protocol DefaultProfileNavigator {
 
 class ProfileNavigator: DefaultProfileNavigator {
     
+    private let registerService: RegisterUseCaseProviderDomain
     private let storyBoard: UIStoryboard
     private let navigationController: UINavigationController
     
-    init(storyBoard: UIStoryboard,
+    init(registerService: RegisterUseCaseProviderDomain,
+         storyBoard: UIStoryboard,
          navigationController: UINavigationController) {
+        self.registerService = registerService
         self.storyBoard = storyBoard
         self.navigationController = navigationController
     }
@@ -34,7 +37,8 @@ class ProfileNavigator: DefaultProfileNavigator {
     }
     
     func toLoginScreen() {
-        let navigator = LoginNavigator(storyBoard: storyBoard,
+        let navigator = LoginNavigator(registerService: registerService,
+                                       storyBoard: storyBoard,
                                        navigationController: navigationController)
         guard let viewController = storyBoard
             .instantiateViewController(withIdentifier: "LoginViewController")

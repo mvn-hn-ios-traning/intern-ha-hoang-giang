@@ -224,13 +224,50 @@
                     <view key="view" contentMode="scaleToFill" id="4V3-et-b6X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="69J-RC-TVW">
+                                <rect key="frame" x="50" y="294" width="314" height="103"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6BA-C3-cdV">
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="username"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password must contain 8 character at least" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJJ-Yp-HQk">
+                                        <rect key="frame" x="0.0" y="69" width="314" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dma-MG-IZE">
+                                <rect key="frame" x="94.5" y="472" width="225" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="fyb-3s-eJV"/>
+                                    <constraint firstAttribute="width" constant="225" id="ksR-4p-o4W"/>
+                                </constraints>
+                                <state key="normal" image="sign_up_button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OAP-Gq-v8h" firstAttribute="trailing" secondItem="69J-RC-TVW" secondAttribute="trailing" constant="50" id="FaR-eY-mdv"/>
+                            <constraint firstItem="69J-RC-TVW" firstAttribute="top" secondItem="OAP-Gq-v8h" secondAttribute="top" constant="250" id="gQI-Li-Ta4"/>
+                            <constraint firstItem="Dma-MG-IZE" firstAttribute="top" secondItem="69J-RC-TVW" secondAttribute="bottom" constant="75" id="hbD-Zg-Ivu"/>
+                            <constraint firstItem="69J-RC-TVW" firstAttribute="leading" secondItem="OAP-Gq-v8h" secondAttribute="leading" constant="50" id="kmh-0d-CwL"/>
+                            <constraint firstItem="Dma-MG-IZE" firstAttribute="centerX" secondItem="69J-RC-TVW" secondAttribute="centerX" id="s96-Oj-uGR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="OAP-Gq-v8h"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="6BA-C3-cdV" id="K5q-8R-EgU"/>
+                        <outlet property="passwordTextField" destination="aJJ-Yp-HQk" id="Wm5-Ox-SEO"/>
+                        <outlet property="registerButton" destination="Dma-MG-IZE" id="eJs-9c-uPA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bpg-WJ-D0W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2280" y="2306"/>
+            <point key="canvasLocation" x="2279.7101449275365" y="2304.9107142857142"/>
         </scene>
         <!--Hero-->
         <scene sceneID="L97-kp-kie">
@@ -404,6 +441,7 @@
     <resources>
         <image name="agiIcon" width="24" height="24"/>
         <image name="intelIcon" width="24" height="24"/>
+        <image name="sign_up_button" width="259" height="63"/>
         <image name="strengthIcon" width="24" height="24"/>
     </resources>
 </document>
