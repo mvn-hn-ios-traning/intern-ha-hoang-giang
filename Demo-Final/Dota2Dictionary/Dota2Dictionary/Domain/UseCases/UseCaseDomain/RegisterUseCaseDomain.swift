@@ -10,5 +10,5 @@ import RxSwift
 
 // MARK: - Register
 public protocol RegisterUseCaseDomain {
-    func register(email: String, password: String) 
+    func register(email: String, password: String) -> Observable<String>
 }

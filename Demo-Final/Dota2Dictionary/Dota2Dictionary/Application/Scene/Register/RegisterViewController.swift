@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Firebase
+import Toast_Swift
 
 class RegisterViewController: UIViewController {
     
@@ -17,15 +17,22 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     
     let disposeBag = DisposeBag()
+    var style: ToastStyle {
+        var style = ToastStyle()
+        style.backgroundColor = .darkGray
+        return style
+    }
     
     var registerViewModel: RegisterViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ToastManager.shared.style = style
         bindViewModel()
     }
     
     func bindViewModel() {
+        
         let input = RegisterViewModel.Input(enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
                                             enteredPassword: passwordTextField.rx.text.orEmpty.asDriver(),
                                             tappedRegister: registerButton.rx.tap.asDriver())
@@ -38,9 +45,11 @@ class RegisterViewController: UIViewController {
         
         output
             .tappedRegister
-            .drive(onNext: { [weak self] text in
+            .bind(onNext: { [weak self] text in
                 guard let self = self else { return }
+                
                 self.view.endEditing(true)
+                self.view.makeToast(text, position: .top)
             })
             .disposed(by: disposeBag)
     }

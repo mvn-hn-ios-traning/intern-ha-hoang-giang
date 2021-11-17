@@ -36,9 +36,10 @@ class RegisterViewModel: ViewModelType {
         
         let tappedRegister = input
             .tappedRegister
-            .withLatestFrom(mergeText) { _, text in 
-                self.useCase.register(email: text.0, password: text.1)
-        }
+            .withLatestFrom(mergeText) { _, text -> Observable<String> in
+                self.useCase.register(email: text.0, password: text.1) }
+            .asObservable()
+            .flatMap {$0}
         
         return Output(enableRegister: enableRegister,
                       tappedRegister: tappedRegister)
@@ -54,6 +55,6 @@ extension RegisterViewModel {
     
     struct Output {
         let enableRegister: Driver<Bool>
-        let tappedRegister: Driver<Void>
+        let tappedRegister: Observable<String>
     }
 }
