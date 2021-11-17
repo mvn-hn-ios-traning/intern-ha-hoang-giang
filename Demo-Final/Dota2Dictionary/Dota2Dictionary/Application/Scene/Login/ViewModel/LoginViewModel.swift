@@ -21,6 +21,16 @@ class LoginViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
+        
+        let mergeText = Driver.combineLatest(input.enteredEmail, input.enteredPassword)
+        
+        let tappedLoginOutput = input
+            .tappedLogin
+            .withLatestFrom(mergeText) { _, text in
+                self.useCase.login(email: text.0, password: text.1) }
+            .asObservable()
+            .flatMap {$0}
+        
         let tappedRegisterOutput = input
             .tappedRegister
             .do(onNext: {
@@ -32,7 +42,8 @@ class LoginViewModel: ViewModelType {
             .asObservable()
             .flatMap { self.useCase.resetPassword(email: $0) }
         
-        return Output(tappedRegisterOutput: tappedRegisterOutput,
+        return Output(tappedLoginOutput: tappedLoginOutput,
+                      tappedRegisterOutput: tappedRegisterOutput,
                       resetOuput: resetPassword)
     }
     
@@ -40,11 +51,15 @@ class LoginViewModel: ViewModelType {
 
 extension LoginViewModel {
     struct Input {
+        let enteredEmail: Driver<String>
+        let enteredPassword: Driver<String>
+        let tappedLogin: Driver<Void>
         let tappedRegister: Driver<Void>
         let forgotTrigger: Driver<String>
     }
     
     struct Output {
+        let tappedLoginOutput: Observable<String>
         let tappedRegisterOutput: Driver<Void>
         let resetOuput: Observable<String>
     }
