@@ -12,6 +12,8 @@ import Toast_Swift
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var forgotButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
@@ -47,7 +49,8 @@ class LoginViewController: UIViewController {
                 })
                 
                 alert.addAction(UIAlertAction(title: "OK",
-                                              style: .default, handler: { _ in
+                                              style: .default,
+                                              handler: { _ in
                                                 if let name = alert.textFields?.first?.text {
                                                     observer.onNext(name)
                                                 }
@@ -57,10 +60,23 @@ class LoginViewController: UIViewController {
             }
         }
         
-        let input = LoginViewModel.Input(tappedRegister: registerButton.rx.tap.asDriver(),
+        let input = LoginViewModel.Input(enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
+                                         enteredPassword: passwordTextField.rx.text.orEmpty.asDriver(),
+                                         tappedLogin: loginButton.rx.tap.asDriver(),
+                                         tappedRegister: registerButton.rx.tap.asDriver(),
                                          forgotTrigger: forgotTrigger.asDriver(onErrorJustReturn: String()))
         
         let output = loginViewModel.transform(input: input)
+        
+        output
+            .tappedLoginOutput
+            .drive(onNext: { [weak self] text in
+                guard let self = self else { return }
+                
+                self.view.endEditing(true)
+                self.view.makeToast(text, position: .top)
+            })
+            .disposed(by: disposeBag)
         
         output
             .tappedRegisterOutput
