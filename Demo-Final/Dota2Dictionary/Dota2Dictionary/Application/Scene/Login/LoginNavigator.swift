@@ -9,6 +9,7 @@ import UIKit
 
 protocol DefaultLoginNavigator {
     func toRegister()
+    func toProfile()
 }
 
 class LoginNavigator: DefaultLoginNavigator {
@@ -35,5 +36,9 @@ class LoginNavigator: DefaultLoginNavigator {
         viewController.registerViewModel = RegisterViewModel(useCase: registerService.makeRegisterUseCase(),
                                                              navigator: navigator)
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func toProfile() {
+        navigationController.popViewController(animated: true)
     }
 }

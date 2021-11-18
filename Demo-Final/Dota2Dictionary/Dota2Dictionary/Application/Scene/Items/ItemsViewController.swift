@@ -32,6 +32,10 @@ class ItemsViewController: UIViewController, UISearchBarDelegate {
         self.itemSearchBar.endEditing(true)
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.itemSearchBar.endEditing(true)
+    }
+    
     func bindViewModel() {
         let input = ItemViewModel.Input(selection: itemAllCollectionView.rx.itemSelected.asDriver(),
                                         searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver(),

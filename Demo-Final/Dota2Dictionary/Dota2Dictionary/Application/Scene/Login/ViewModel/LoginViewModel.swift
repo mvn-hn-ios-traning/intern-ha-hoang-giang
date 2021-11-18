@@ -30,6 +30,12 @@ class LoginViewModel: ViewModelType {
                 self.useCase.login(email: text.0, password: text.1) }
             .asObservable()
             .flatMap {$0}
+            .asDriver(onErrorDriveWith: .empty())
+            .do(onNext: { text in
+                if text == "Login successfully" {
+                    self.navigator.toProfile()
+                }
+            })
         
         let tappedRegisterOutput = input
             .tappedRegister
@@ -59,7 +65,7 @@ extension LoginViewModel {
     }
     
     struct Output {
-        let tappedLoginOutput: Observable<String>
+        let tappedLoginOutput: Driver<String>
         let tappedRegisterOutput: Driver<Void>
         let resetOuput: Observable<String>
     }

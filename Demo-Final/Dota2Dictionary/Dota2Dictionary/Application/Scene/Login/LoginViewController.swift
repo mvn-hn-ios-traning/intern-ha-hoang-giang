@@ -49,7 +49,8 @@ class LoginViewController: UIViewController {
                 })
                 
                 alert.addAction(UIAlertAction(title: "OK",
-                                              style: .default, handler: { _ in
+                                              style: .default,
+                                              handler: { _ in
                                                 if let name = alert.textFields?.first?.text {
                                                     observer.onNext(name)
                                                 }
@@ -69,7 +70,7 @@ class LoginViewController: UIViewController {
         
         output
             .tappedLoginOutput
-            .bind(onNext:{ [weak self] text in
+            .drive(onNext: { [weak self] text in
                 guard let self = self else { return }
                 
                 self.view.endEditing(true)
