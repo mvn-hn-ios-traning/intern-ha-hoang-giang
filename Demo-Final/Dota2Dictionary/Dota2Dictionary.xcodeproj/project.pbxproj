@@ -82,6 +82,7 @@
 		227B603A271096A400DF2463 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B6039271096A400DF2463 /* ItemsViewController.swift */; };
 		227D6B21270F69590037B901 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D6B20270F69590037B901 /* HeroDetailViewController.swift */; };
 		227F326B2712163D005DF2CD /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F326A2712163D005DF2CD /* ItemModel.swift */; };
+		228089F4274A7E6600FF5CF2 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */; };
 		2284BC3B27463869009FBA6B /* ProfileUseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC3A27463869009FBA6B /* ProfileUseCaseDomain.swift */; };
 		2284BC3D27463884009FBA6B /* ProfileUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC3C27463884009FBA6B /* ProfileUseCaseProviderDomain.swift */; };
 		2284BC3F27463898009FBA6B /* ProfileUseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC3E27463898009FBA6B /* ProfileUseCasePlatform.swift */; };
@@ -208,6 +209,7 @@
 		227B6039271096A400DF2463 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		227D6B20270F69590037B901 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
 		227F326A2712163D005DF2CD /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		2284BC3A27463869009FBA6B /* ProfileUseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseDomain.swift; sourceTree = "<group>"; };
 		2284BC3C27463884009FBA6B /* ProfileUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseProviderDomain.swift; sourceTree = "<group>"; };
 		2284BC3E27463898009FBA6B /* ProfileUseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCasePlatform.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				22A19FD9273816B600EA928B /* HeroDetailAbilitiesModel.swift */,
 				227F326A2712163D005DF2CD /* ItemModel.swift */,
 				226B6C99271334A5001FEAD6 /* ItemDetailModel.swift */,
+				228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1017,6 +1020,7 @@
 				2270A9B9273B7FC500EADBE4 /* HeroDetailNetwork.swift in Sources */,
 				228C4865273183A500FED6A6 /* HeroDetailRolesModel.swift in Sources */,
 				22D94E0A2742508F00C55BA1 /* ProfileNavigator.swift in Sources */,
+				228089F4274A7E6600FF5CF2 /* DatabaseManager.swift in Sources */,
 				2270A990273B688000EADBE4 /* ItemDetailUseCasePlatform.swift in Sources */,
 				2270A9BC273B7FF000EADBE4 /* ItemNetwork.swift in Sources */,
 				229DBD7727433C5200409C34 /* RegisterViewModel.swift in Sources */,

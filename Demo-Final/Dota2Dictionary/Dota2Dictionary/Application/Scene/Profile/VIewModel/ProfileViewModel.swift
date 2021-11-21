@@ -26,15 +26,19 @@ class ProfileViewModel: ViewModelType {
         let tappedLoginOutput = input
             .tappedLogin
             .withLatestFrom(mergeText) { _, text in
-                self.useCase.login(email: text.0, password: text.1) }
+                self.useCase.login(email: text.0,
+                                   password: text.1) }
             .asObservable()
             .flatMap {$0}
             .asDriver(onErrorDriveWith: .empty())
-            .do(onNext: { text in
-                if text == "Login successfully" {
-                    self.navigator.toProfile()
-                }
-            })
+        
+        let loginSuccess = tappedLoginOutput.map { text -> Bool in
+            if text == "Your account have not verified yet" {
+                return true
+            } else {
+                return false
+            }
+        }
         
         let tappedRegisterOutput = input
             .tappedRegister
@@ -49,7 +53,8 @@ class ProfileViewModel: ViewModelType {
         
         return Output(tappedLoginOutput: tappedLoginOutput,
                       tappedRegisterOutput: tappedRegisterOutput,
-                      resetPasswordOuput: resetPassword)
+                      resetPasswordOuput: resetPassword,
+                      loginSuccess: loginSuccess)
     }
     
 }
@@ -67,5 +72,6 @@ extension ProfileViewModel {
         let tappedLoginOutput: Driver<String>
         let tappedRegisterOutput: Driver<Void>
         let resetPasswordOuput: Observable<String>
+        let loginSuccess: Driver<Bool>
     }
 }

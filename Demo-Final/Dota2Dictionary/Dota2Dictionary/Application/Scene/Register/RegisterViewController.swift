@@ -12,6 +12,8 @@ import Toast_Swift
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var firstNameTF: UITextField!
+    @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
@@ -33,7 +35,9 @@ class RegisterViewController: UIViewController {
     
     func bindViewModel() {
         
-        let input = RegisterViewModel.Input(enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
+        let input = RegisterViewModel.Input(enteredFirstName: firstNameTF.rx.text.orEmpty.asDriver(),
+                                            enteredLastName: lastNameTF.rx.text.orEmpty.asDriver(),
+                                            enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
                                             enteredPassword: passwordTextField.rx.text.orEmpty.asDriver(),
                                             tappedRegister: registerButton.rx.tap.asDriver())
         let output = registerViewModel.transform(input: input)

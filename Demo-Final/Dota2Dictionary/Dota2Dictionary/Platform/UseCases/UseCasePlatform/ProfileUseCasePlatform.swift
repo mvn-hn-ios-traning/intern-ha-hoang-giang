@@ -20,11 +20,11 @@ class ProfileUseCasePlatform: ProfileUseCaseDomain {
                 if error != nil {
                     observer.onNext(error!.localizedDescription)
                 } else {
-                    if (authData?.user.isEmailVerified) == true {
-                        observer.onNext("Login successfully")
-                    } else {
+//                    if (authData?.user.isEmailVerified) == true {
+//                        observer.onNext("Login successfully")
+//                    } else {
                         observer.onNext("Your account have not verified yet")
-                    }
+//                    }
                 }
             }
             return Disposables.create()

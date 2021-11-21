@@ -23,20 +23,28 @@ class RegisterViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         
         let enableRegister = Driver
-            .combineLatest(input.enteredEmail,
+            .combineLatest(input.enteredFirstName,
+                           input.enteredLastName,
+                           input.enteredEmail,
                            input.enteredPassword) {
                             return !$0.isEmpty
                                 && !$1.isEmpty
-                                && $1.count >= 8
+                                && !$2.isEmpty
+                                && !$3.isEmpty
         }
         
-        let mergeText = Driver.combineLatest(input.enteredEmail,
+        let mergeText = Driver.combineLatest(input.enteredFirstName,
+                                             input.enteredLastName,
+                                             input.enteredEmail,
                                              input.enteredPassword)
         
         let tappedRegister = input
             .tappedRegister
             .withLatestFrom(mergeText) { _, text -> Observable<String> in
-                self.useCase.register(email: text.0, password: text.1) }
+                self.useCase.register(firstName: text.0,
+                                      lastName: text.1,
+                                      email: text.2,
+                                      password: text.3) }
             .asObservable()
             .flatMap {$0}
         
@@ -47,6 +55,8 @@ class RegisterViewModel: ViewModelType {
 
 extension RegisterViewModel {
     struct Input {
+        let enteredFirstName: Driver<String>
+        let enteredLastName: Driver<String>
         let enteredEmail: Driver<String>
         let enteredPassword: Driver<String>
         let tappedRegister: Driver<Void>

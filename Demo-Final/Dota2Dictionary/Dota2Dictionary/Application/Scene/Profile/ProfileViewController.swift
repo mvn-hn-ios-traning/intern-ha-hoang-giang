@@ -24,14 +24,16 @@ class ProfileViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         autoLogin()
         bindViewModel()
+        
     }
     
+    // MARK: - Bind ViewModel
     func bindViewModel() {
-        
         let forgotTrigger = forgotButton.rx.tap.flatMap {
             return Observable<String>.create { (observer) -> Disposable in
                 let alert = UIAlertController(title: "Enter your email here",
@@ -86,11 +88,20 @@ class ProfileViewController: UIViewController {
             .bind { self.view.makeToast($0, position: .top) }
             .disposed(by: disposeBag)
         
+        output
+            .loginSuccess
+            .asObservable()
+            .bind { self.loginView.isHidden = $0 }
+            .disposed(by: disposeBag)
+        
     }
+    
+    // MARK: - Test signOut and autoLogin
     
     @IBAction func signOut(_ sender: Any) {
         try? Auth.auth().signOut()
         loginView.isHidden = false
+        signOutButton.title = ""
     }
     
     func autoLogin() {
@@ -98,6 +109,7 @@ class ProfileViewController: UIViewController {
         if currentUserId != nil {
             print("auto login")
             loginView.isHidden = true
+            signOutButton.title = "Sign Out"
         }
     }
     
