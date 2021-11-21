@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DefaultRegisterNavigator {
-    
+    func toLogin()
 }
 
 class RegisterNavigator: DefaultRegisterNavigator {
@@ -20,6 +20,6 @@ class RegisterNavigator: DefaultRegisterNavigator {
     }
     
     func toLogin() {
-        navigationController.popViewController(animated: true)
+        navigationController.dismiss(animated: true)
     }
 }

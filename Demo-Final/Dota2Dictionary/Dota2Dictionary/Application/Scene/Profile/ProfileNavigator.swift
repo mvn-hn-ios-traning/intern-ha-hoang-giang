@@ -9,21 +9,21 @@ import UIKit
 
 protocol DefaultProfileNavigator {
     func toProfile()
-    func toLoginScreen()
+    func toRegister()
 }
 
 class ProfileNavigator: DefaultProfileNavigator {
     
-    private let loginService: LoginUseCaseProviderDomain
+    private let profileService: ProfileUseCaseProviderDomain
     private let registerService: RegisterUseCaseProviderDomain
     private let storyBoard: UIStoryboard
     private let navigationController: UINavigationController
     
-    init(loginService: LoginUseCaseProviderDomain,
+    init(profileService: ProfileUseCaseProviderDomain,
          registerService: RegisterUseCaseProviderDomain,
          storyBoard: UIStoryboard,
          navigationController: UINavigationController) {
-        self.loginService = loginService
+        self.profileService = profileService
         self.registerService = registerService
         self.storyBoard = storyBoard
         self.navigationController = navigationController
@@ -35,21 +35,20 @@ class ProfileNavigator: DefaultProfileNavigator {
                 as? ProfileViewController else {
             return
         }
-        viewController.profileViewModel = ProfileViewModel(navigator: self)
+        viewController.profileViewModel = ProfileViewModel(useCase: profileService.makeProfileUseCase(),
+                                                           navigator: self)
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func toLoginScreen() {
-        let navigator = LoginNavigator(registerService: registerService,
-                                       storyBoard: storyBoard,
-                                       navigationController: navigationController)
+    func toRegister() {
+        let navigator = RegisterNavigator(navigationController: navigationController)
         guard let viewController = storyBoard
-            .instantiateViewController(withIdentifier: "LoginViewController")
-            as? LoginViewController else {
-                return
+                .instantiateViewController(withIdentifier: "RegisterViewController")
+                as? RegisterViewController else {
+            return
         }
-        viewController.loginViewModel = LoginViewModel(useCase: loginService.makeLoginUseCase(),
-                                                       navigator: navigator)
-        navigationController.pushViewController(viewController, animated: true)
+        viewController.registerViewModel = RegisterViewModel(useCase: registerService.makeRegisterUseCase(),
+                                                             navigator: navigator)
+        navigationController.present(viewController, animated: true)
     }
 }

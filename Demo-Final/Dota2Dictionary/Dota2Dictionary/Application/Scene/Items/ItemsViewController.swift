@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import RxViewController
 
-class ItemsViewController: UIViewController, UISearchBarDelegate {
+class ItemsViewController: UIViewController {
     
     @IBOutlet weak var itemAllCollectionView: UICollectionView!
     @IBOutlet weak var itemSearchBar: UISearchBar!
@@ -28,14 +28,7 @@ class ItemsViewController: UIViewController, UISearchBarDelegate {
         bindViewModel()
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.itemSearchBar.endEditing(true)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.itemSearchBar.endEditing(true)
-    }
-    
+    // MARK: - bind View Model
     func bindViewModel() {
         let input = ItemViewModel.Input(selection: itemAllCollectionView.rx.itemSelected.asDriver(),
                                         searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver(),
@@ -76,5 +69,23 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width,
                       height: width)
+    }
+}
+
+// MARK: - Configure search bar
+extension ItemsViewController: UISearchBarDelegate {
+        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.itemSearchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.itemSearchBar.endEditing(true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.itemSearchBar.text = ""
+        self.itemSearchBar.endEditing(true)
     }
 }
