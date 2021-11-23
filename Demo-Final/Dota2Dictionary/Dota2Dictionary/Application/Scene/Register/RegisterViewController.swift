@@ -38,16 +38,12 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ToastManager.shared.style = style
-        self.avatarPicture.isUserInteractionEnabled = true
-        self.avatarPicture.addGestureRecognizer(tap)
         
         tapEvent()
         bindViewModel()
-        
     }
     
     func bindViewModel() {
-        
         
         let input = RegisterViewModel.Input(imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
                                             enteredFirstName: firstNameTF.rx.text.orEmpty.asDriver(),
@@ -84,6 +80,9 @@ class RegisterViewController: UIViewController {
     }
     
     func chooseAvatar() {
+        self.avatarPicture.isUserInteractionEnabled = true
+        self.avatarPicture.addGestureRecognizer(tap)
+        
         let alert = UIAlertController(title: nil,
                                       message: "Choose options",
                                       preferredStyle: .actionSheet)

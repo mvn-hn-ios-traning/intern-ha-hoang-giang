@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         tableViewRegister()
         bindViewModel()
-        autoLogin()
         
     }
     
@@ -109,21 +108,6 @@ class ProfileViewController: UIViewController {
             .bind { self.loginView.isHidden = $0 }
             .disposed(by: disposeBag)
         
-    }
-    
-    // MARK: - Test signOut and autoLogin
-    @IBAction func signOut(_ sender: Any) {
-        try? Auth.auth().signOut()
-        loginView.isHidden = false
-        signOutButton.title = ""
-    }
-    
-    func autoLogin() {
-        if Auth.auth().currentUser != nil {
-            print("auto login")
-            loginView.isHidden = true
-            signOutButton.title = "Sign Out"
-        }
     }
     
 }
