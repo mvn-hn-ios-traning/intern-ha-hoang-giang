@@ -21,7 +21,6 @@
 		224C17DC271414B500DD4B76 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DB271414B500DD4B76 /* Application.swift */; };
 		224C17DE271416E700DD4B76 /* PatchUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DD271416E700DD4B76 /* PatchUseCaseProviderDomain.swift */; };
 		224C17E0271419FE00DD4B76 /* PatchUseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DF271419FE00DD4B76 /* PatchUseCaseProviderPlatform.swift */; };
-		225E0B8B274A9E7E00749219 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225E0B8A274A9E7E00749219 /* StorageManager.swift */; };
 		22682A02271DAC2000E99D64 /* HeroDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22682A01271DAC2000E99D64 /* HeroDetailDataSource.swift */; };
 		22682A0E271DB49D00E99D64 /* HeroInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22682A0C271DB49D00E99D64 /* HeroInfoTableViewCell.swift */; };
 		22682A0F271DB49D00E99D64 /* HeroInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22682A0D271DB49D00E99D64 /* HeroInfoTableViewCell.xib */; };
@@ -83,7 +82,14 @@
 		227B603A271096A400DF2463 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B6039271096A400DF2463 /* ItemsViewController.swift */; };
 		227D6B21270F69590037B901 /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227D6B20270F69590037B901 /* HeroDetailViewController.swift */; };
 		227F326B2712163D005DF2CD /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F326A2712163D005DF2CD /* ItemModel.swift */; };
-		228089F4274A7E6600FF5CF2 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */; };
+		22834411274CC4D900DC7A55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22834410274CC4D900DC7A55 /* User.swift */; };
+		22834415274CC72000DC7A55 /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22834414274CC72000DC7A55 /* ProfileDataSource.swift */; };
+		22834418274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22834416274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift */; };
+		22834419274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22834417274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib */; };
+		2283441C274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283441A274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift */; };
+		2283441D274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2283441B274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib */; };
+		22834420274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283441E274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift */; };
+		22834421274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2283441F274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib */; };
 		2284BC3B27463869009FBA6B /* ProfileUseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC3A27463869009FBA6B /* ProfileUseCaseDomain.swift */; };
 		2284BC3D27463884009FBA6B /* ProfileUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC3C27463884009FBA6B /* ProfileUseCaseProviderDomain.swift */; };
 		2284BC3F27463898009FBA6B /* ProfileUseCasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC3E27463898009FBA6B /* ProfileUseCasePlatform.swift */; };
@@ -150,7 +156,6 @@
 		224C17DB271414B500DD4B76 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		224C17DD271416E700DD4B76 /* PatchUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUseCaseProviderDomain.swift; sourceTree = "<group>"; };
 		224C17DF271419FE00DD4B76 /* PatchUseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUseCaseProviderPlatform.swift; sourceTree = "<group>"; };
-		225E0B8A274A9E7E00749219 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		22682A01271DAC2000E99D64 /* HeroDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailDataSource.swift; sourceTree = "<group>"; };
 		22682A0C271DB49D00E99D64 /* HeroInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroInfoTableViewCell.swift; sourceTree = "<group>"; };
 		22682A0D271DB49D00E99D64 /* HeroInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeroInfoTableViewCell.xib; sourceTree = "<group>"; };
@@ -211,7 +216,14 @@
 		227B6039271096A400DF2463 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		227D6B20270F69590037B901 /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
 		227F326A2712163D005DF2CD /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
-		228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		22834410274CC4D900DC7A55 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		22834414274CC72000DC7A55 /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
+		22834416274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoTableViewCell.swift; sourceTree = "<group>"; };
+		22834417274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileInfoTableViewCell.xib; sourceTree = "<group>"; };
+		2283441A274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSignOutTableViewCell.swift; sourceTree = "<group>"; };
+		2283441B274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSignOutTableViewCell.xib; sourceTree = "<group>"; };
+		2283441E274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLikeTableViewCell.swift; sourceTree = "<group>"; };
+		2283441F274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileLikeTableViewCell.xib; sourceTree = "<group>"; };
 		2284BC3A27463869009FBA6B /* ProfileUseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseDomain.swift; sourceTree = "<group>"; };
 		2284BC3C27463884009FBA6B /* ProfileUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseProviderDomain.swift; sourceTree = "<group>"; };
 		2284BC3E27463898009FBA6B /* ProfileUseCasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCasePlatform.swift; sourceTree = "<group>"; };
@@ -397,6 +409,7 @@
 				22A19FD9273816B600EA928B /* HeroDetailAbilitiesModel.swift */,
 				227F326A2712163D005DF2CD /* ItemModel.swift */,
 				226B6C99271334A5001FEAD6 /* ItemDetailModel.swift */,
+				22834410274CC4D900DC7A55 /* User.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -426,8 +439,6 @@
 				223743EA26FB0A4800CAFF69 /* Info.plist */,
 				22D94E052742426B00C55BA1 /* GoogleService-Info.plist */,
 				223743E726FB0A4800CAFF69 /* LaunchScreen.storyboard */,
-				228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */,
-				225E0B8A274A9E7E00749219 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -702,6 +713,27 @@
 			path = HeroDetail;
 			sourceTree = "<group>";
 		};
+		22834412274CC68500DC7A55 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22834416274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift */,
+				22834417274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib */,
+				2283441A274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift */,
+				2283441B274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib */,
+				2283441E274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift */,
+				2283441F274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		22834413274CC68900DC7A55 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				22834414274CC72000DC7A55 /* ProfileDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		229C9CA9272ECC77007384AD /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +774,8 @@
 				22D94E092742508F00C55BA1 /* ProfileNavigator.swift */,
 				22D94E0727424E7200C55BA1 /* ProfileViewController.swift */,
 				22D94E0E27425BF900C55BA1 /* VIewModel */,
+				22834412274CC68500DC7A55 /* View */,
+				22834413274CC68900DC7A55 /* DataSource */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -841,11 +875,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22834421274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib in Resources */,
 				2294FDA5270DB2D100CEE769 /* PatchTableViewCell.xib in Resources */,
 				226F1BA82702C32A008A693D /* AllHeroCollectionViewCell.xib in Resources */,
 				226BB805271ECAD6000EC3F9 /* HeroRolesTableViewCell.xib in Resources */,
 				22902E6E2715399C006A96D8 /* Main.storyboard in Resources */,
 				228CCC65272FC14700001A1C /* ItemComponentTableViewCell.xib in Resources */,
+				2283441D274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib in Resources */,
 				22682A0F271DB49D00E99D64 /* HeroInfoTableViewCell.xib in Resources */,
 				226D8BA6272F8402004C76EA /* ItemHintTableViewCell.xib in Resources */,
 				2284F22A273A7AAF00F75368 /* HeroLoreTableViewCell.xib in Resources */,
@@ -854,6 +890,7 @@
 				228CCC56272F9B3C00001A1C /* ItemNotesTableViewCell.xib in Resources */,
 				223743E926FB0A4800CAFF69 /* LaunchScreen.storyboard in Resources */,
 				228CCC6D272FC57100001A1C /* ComponentCollectionViewCell.xib in Resources */,
+				22834419274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib in Resources */,
 				226B9F482733D25A00CD3042 /* HeroStatTableViewCell.xib in Resources */,
 				229C9CB3272EE4CA007384AD /* InfoTopTableViewCell.xib in Resources */,
 				228CCC60272FA16600001A1C /* ItemLoreTableViewCell.xib in Resources */,
@@ -961,10 +998,10 @@
 				2270A964273B658800EADBE4 /* HeroUseCaseDomain.swift in Sources */,
 				226F0A512744A4DA00A02E73 /* RegisterUseCaseDomain.swift in Sources */,
 				226D8BA5272F8402004C76EA /* ItemHintTableViewCell.swift in Sources */,
+				2283441C274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift in Sources */,
 				2270A9BF273B800800EADBE4 /* ItemDetailNetwork.swift in Sources */,
 				22682A0E271DB49D00E99D64 /* HeroInfoTableViewCell.swift in Sources */,
 				226EEBEF2717C9AC00219FC9 /* OptionalObject.swift in Sources */,
-				225E0B8B274A9E7E00749219 /* StorageManager.swift in Sources */,
 				2270A97B273B669400EADBE4 /* ItemUseCaseProviderDomain.swift in Sources */,
 				2270A967273B65A300EADBE4 /* HeroDetailUseCaseDomain.swift in Sources */,
 				223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */,
@@ -973,9 +1010,11 @@
 				2270AC2C2741EE1D00802F72 /* HeroTalentsTableViewCell.swift in Sources */,
 				2270A99C273B7E7800EADBE4 /* HeroDetailUseCaseProviderPlatform.swift in Sources */,
 				226FA97B27173BF700633AD4 /* ValueWrapper.swift in Sources */,
+				22834411274CC4D900DC7A55 /* User.swift in Sources */,
 				2296977F270AD0B400E7103E /* PatchModel.swift in Sources */,
 				224C17E0271419FE00DD4B76 /* PatchUseCaseProviderPlatform.swift in Sources */,
 				223743DD26FB0A4400CAFF69 /* AppDelegate.swift in Sources */,
+				22834415274CC72000DC7A55 /* ProfileDataSource.swift in Sources */,
 				22D87CA02710021700EF116E /* HeroDetailViewModel.swift in Sources */,
 				22902E7827159289006A96D8 /* ItemDetailViewModel.swift in Sources */,
 				228CCC5A272F9FB900001A1C /* ItemAttribTableViewCell.swift in Sources */,
@@ -1021,10 +1060,10 @@
 				22902E74271563BA006A96D8 /* ItemNavigator.swift in Sources */,
 				223743FC26FB0B9800CAFF69 /* HeroModel.swift in Sources */,
 				223743F926FB0B8400CAFF69 /* PatchViewModel.swift in Sources */,
+				22834420274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift in Sources */,
 				2270A9B9273B7FC500EADBE4 /* HeroDetailNetwork.swift in Sources */,
 				228C4865273183A500FED6A6 /* HeroDetailRolesModel.swift in Sources */,
 				22D94E0A2742508F00C55BA1 /* ProfileNavigator.swift in Sources */,
-				228089F4274A7E6600FF5CF2 /* DatabaseManager.swift in Sources */,
 				2270A990273B688000EADBE4 /* ItemDetailUseCasePlatform.swift in Sources */,
 				2270A9BC273B7FF000EADBE4 /* ItemNetwork.swift in Sources */,
 				229DBD7727433C5200409C34 /* RegisterViewModel.swift in Sources */,
@@ -1032,6 +1071,7 @@
 				228CCC6C272FC57100001A1C /* ComponentCollectionViewCell.swift in Sources */,
 				2270A98D273B685700EADBE4 /* ItemUseCasePlatform.swift in Sources */,
 				229DBD7C2743531200409C34 /* RegisterNavigator.swift in Sources */,
+				22834418274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift in Sources */,
 				226F1BA72702C32A008A693D /* AllHeroCollectionViewCell.swift in Sources */,
 				2284BC3B27463869009FBA6B /* ProfileUseCaseDomain.swift in Sources */,
 			);

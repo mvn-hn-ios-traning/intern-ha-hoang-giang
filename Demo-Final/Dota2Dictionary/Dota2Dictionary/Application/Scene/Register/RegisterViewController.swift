@@ -38,21 +38,16 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ToastManager.shared.style = style
-        
         self.avatarPicture.isUserInteractionEnabled = true
         self.avatarPicture.addGestureRecognizer(tap)
         
+        tapEvent()
         bindViewModel()
         
     }
     
     func bindViewModel() {
         
-        tap.rx.event
-            .subscribe(onNext: { [weak self] _ in
-                self?.chooseAvatar()
-            })
-            .disposed(by: disposeBag)
         
         let input = RegisterViewModel.Input(imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
                                             enteredFirstName: firstNameTF.rx.text.orEmpty.asDriver(),
@@ -80,6 +75,14 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Setup Avatar
+    func tapEvent() {
+        tap.rx.event
+        .subscribe(onNext: { [weak self] _ in
+            self?.chooseAvatar()
+        })
+        .disposed(by: disposeBag)
+    }
+    
     func chooseAvatar() {
         let alert = UIAlertController(title: nil,
                                       message: "Choose options",

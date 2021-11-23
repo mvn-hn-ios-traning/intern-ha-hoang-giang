@@ -29,9 +29,22 @@ class ProfileViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableViewRegister()
         bindViewModel()
         autoLogin()
-
+        
+    }
+    
+    func tableViewRegister() {
+        profileTableView.register(UINib(nibName: ConstantsForCell.profileInfoTableViewCell,
+                                        bundle: nil),
+                                  forCellReuseIdentifier: ConstantsForCell.profileInfoTableViewCell)
+        profileTableView.register(UINib(nibName: ConstantsForCell.profileSignOutTableViewCell,
+                                        bundle: nil),
+                                  forCellReuseIdentifier: ConstantsForCell.profileSignOutTableViewCell)
+        profileTableView.register(UINib(nibName: ConstantsForCell.profileLikeTableViewCell,
+                                        bundle: nil),
+                                  forCellReuseIdentifier: ConstantsForCell.profileLikeTableViewCell)
     }
     
     // MARK: - Bind ViewModel
@@ -106,9 +119,8 @@ class ProfileViewController: UIViewController {
     }
     
     func autoLogin() {
-        let currentUserId = Auth.auth().currentUser?.uid
-        if currentUserId != nil {
-            print("auto login \(String(describing: currentUserId))")
+        if Auth.auth().currentUser != nil {
+            print("auto login")
             loginView.isHidden = true
             signOutButton.title = "Sign Out"
         }
