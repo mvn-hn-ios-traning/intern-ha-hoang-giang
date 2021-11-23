@@ -378,12 +378,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Success" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzs-Nk-Fjq">
-                                <rect key="frame" x="125.5" y="244" width="163" height="29"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iRp-G2-YJD">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNb-MS-0AF">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
@@ -452,11 +450,13 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XQw-ep-HGg" firstAttribute="trailing" secondItem="gNb-MS-0AF" secondAttribute="trailing" id="1Or-pU-zfI"/>
+                            <constraint firstItem="iRp-G2-YJD" firstAttribute="leading" secondItem="XQw-ep-HGg" secondAttribute="leading" id="9VN-bj-qsq"/>
                             <constraint firstItem="gNb-MS-0AF" firstAttribute="leading" secondItem="XQw-ep-HGg" secondAttribute="leading" id="BJL-CL-F68"/>
+                            <constraint firstItem="XQw-ep-HGg" firstAttribute="bottom" secondItem="iRp-G2-YJD" secondAttribute="bottom" id="DKj-Bn-BOm"/>
+                            <constraint firstItem="iRp-G2-YJD" firstAttribute="top" secondItem="XQw-ep-HGg" secondAttribute="top" id="Gbq-w0-VuV"/>
                             <constraint firstItem="gNb-MS-0AF" firstAttribute="top" secondItem="XQw-ep-HGg" secondAttribute="top" id="SXu-JF-QfQ"/>
                             <constraint firstItem="XQw-ep-HGg" firstAttribute="bottom" secondItem="gNb-MS-0AF" secondAttribute="bottom" id="WhV-gM-bmf"/>
-                            <constraint firstItem="Jzs-Nk-Fjq" firstAttribute="centerX" secondItem="XQw-ep-HGg" secondAttribute="centerX" id="uQ2-0i-zl2"/>
-                            <constraint firstItem="Jzs-Nk-Fjq" firstAttribute="top" secondItem="XQw-ep-HGg" secondAttribute="top" constant="200" id="vdw-zO-mmE"/>
+                            <constraint firstItem="XQw-ep-HGg" firstAttribute="trailing" secondItem="iRp-G2-YJD" secondAttribute="trailing" id="XDz-op-UIf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XQw-ep-HGg"/>
                     </view>
@@ -473,6 +473,7 @@
                         <outlet property="loginButton" destination="ds9-Lz-Uj2" id="JEx-fa-T7e"/>
                         <outlet property="loginView" destination="gNb-MS-0AF" id="rr5-Vj-wW9"/>
                         <outlet property="passwordTextField" destination="I3W-Sa-0BN" id="FI4-9h-X5j"/>
+                        <outlet property="profileTableView" destination="iRp-G2-YJD" id="IbG-bt-dkn"/>
                         <outlet property="registerButton" destination="4GQ-aN-3Se" id="NcB-9X-DvG"/>
                         <outlet property="signOutButton" destination="WA7-aK-g0T" id="vW4-w7-Uq4"/>
                     </connections>

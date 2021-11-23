@@ -12,6 +12,8 @@ import Firebase
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var profileTableView: UITableView!
+    
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var signOutButton: UIBarButtonItem!
     @IBOutlet weak var emailTextField: UITextField!
@@ -106,7 +108,7 @@ class ProfileViewController: UIViewController {
     func autoLogin() {
         let currentUserId = Auth.auth().currentUser?.uid
         if currentUserId != nil {
-            print("auto login")
+            print("auto login \(String(describing: currentUserId))")
             loginView.isHidden = true
             signOutButton.title = "Sign Out"
         }
