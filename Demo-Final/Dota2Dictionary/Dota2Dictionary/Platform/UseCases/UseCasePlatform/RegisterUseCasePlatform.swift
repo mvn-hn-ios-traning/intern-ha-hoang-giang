@@ -11,37 +11,43 @@ import Firebase
 
 class RegisterUseCasePlatform: RegisterUseCaseDomain {
     
-    func register(firstName: String,
+    func register(avatar: UIImage?,
+                  firstName: String,
                   lastName: String,
                   email: String,
                   password: String) -> Observable<String> {
         return Observable<String>.create { (observer) -> Disposable in
             
-            DatabaseManager.shared.userExists(with: email) { (exist) in
-                guard exist == false else {
-                    // user already exists
-                    observer.onNext("Look like a user account for that email address already exists")
-                    return
-                }
-                
-                Auth.auth().createUser(withEmail: email, password: password) { (authData, error) in
-                    if error != nil {
-                        observer.onNext(error!.localizedDescription)
-                        //                }
-                        //                authData?.user.sendEmailVerification(completion: { (error) in
-                        //                    if error != nil {
-                        //                        observer.onNext(error!.localizedDescription)
-                    } else {
-                        observer.onNext("Sent verification email")
-                        
-                        DatabaseManager.shared.insertUser(with: User(firstName: firstName,
-                                                                     lastName: lastName,
-                                                                     emailAddress: email))
-                        
+            Auth.auth().createUser(withEmail: email, password: password) { (authData, error) in
+                if error != nil {
+                    observer.onNext(error!.localizedDescription)
+                    //                }
+                    //                authData?.user.sendEmailVerification(completion: { (error) in
+                    //                    if error != nil {
+                    //                        observer.onNext(error!.localizedDescription)
+                } else {
+                    observer.onNext("Sent verification email")
+                    if let userData = authData {
+                        let imageName = userData.user.uid
+                        if let imageUpload = avatar {
+                            if let imgData = imageUpload.jpegData(compressionQuality: 0.5) {
+                                let storageRef = Storage.storage().reference()
+                                let uploadStorage = storageRef.child("Avatar").child(imageName)
+                                uploadStorage.putData(imgData,
+                                                      metadata: nil,
+                                                      completion: { (_, error) in
+                                                        if error != nil {
+                                                            observer.onNext(error!.localizedDescription)
+                                                            print("putData failed: \(error!.localizedDescription)")
+                                                        } else {
+                                                            observer.onNext("Uploaded avatar success")
+                                                        }
+                                })
+                            }
+                        }
                     }
-                    //                })
                 }
-                
+                //                })
             }
             return Disposables.create()
         }

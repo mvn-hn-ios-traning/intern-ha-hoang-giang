@@ -27,9 +27,9 @@ class ProfileViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        autoLogin()
         bindViewModel()
-        
+        autoLogin()
+
     }
     
     // MARK: - Bind ViewModel
@@ -97,7 +97,6 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Test signOut and autoLogin
-    
     @IBAction func signOut(_ sender: Any) {
         try? Auth.auth().signOut()
         loginView.isHidden = false

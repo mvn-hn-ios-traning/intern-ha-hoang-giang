@@ -21,6 +21,7 @@
 		224C17DC271414B500DD4B76 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DB271414B500DD4B76 /* Application.swift */; };
 		224C17DE271416E700DD4B76 /* PatchUseCaseProviderDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DD271416E700DD4B76 /* PatchUseCaseProviderDomain.swift */; };
 		224C17E0271419FE00DD4B76 /* PatchUseCaseProviderPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C17DF271419FE00DD4B76 /* PatchUseCaseProviderPlatform.swift */; };
+		225E0B8B274A9E7E00749219 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225E0B8A274A9E7E00749219 /* StorageManager.swift */; };
 		22682A02271DAC2000E99D64 /* HeroDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22682A01271DAC2000E99D64 /* HeroDetailDataSource.swift */; };
 		22682A0E271DB49D00E99D64 /* HeroInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22682A0C271DB49D00E99D64 /* HeroInfoTableViewCell.swift */; };
 		22682A0F271DB49D00E99D64 /* HeroInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22682A0D271DB49D00E99D64 /* HeroInfoTableViewCell.xib */; };
@@ -149,6 +150,7 @@
 		224C17DB271414B500DD4B76 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		224C17DD271416E700DD4B76 /* PatchUseCaseProviderDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUseCaseProviderDomain.swift; sourceTree = "<group>"; };
 		224C17DF271419FE00DD4B76 /* PatchUseCaseProviderPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUseCaseProviderPlatform.swift; sourceTree = "<group>"; };
+		225E0B8A274A9E7E00749219 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		22682A01271DAC2000E99D64 /* HeroDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailDataSource.swift; sourceTree = "<group>"; };
 		22682A0C271DB49D00E99D64 /* HeroInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroInfoTableViewCell.swift; sourceTree = "<group>"; };
 		22682A0D271DB49D00E99D64 /* HeroInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeroInfoTableViewCell.xib; sourceTree = "<group>"; };
@@ -395,7 +397,6 @@
 				22A19FD9273816B600EA928B /* HeroDetailAbilitiesModel.swift */,
 				227F326A2712163D005DF2CD /* ItemModel.swift */,
 				226B6C99271334A5001FEAD6 /* ItemDetailModel.swift */,
-				228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -425,6 +426,8 @@
 				223743EA26FB0A4800CAFF69 /* Info.plist */,
 				22D94E052742426B00C55BA1 /* GoogleService-Info.plist */,
 				223743E726FB0A4800CAFF69 /* LaunchScreen.storyboard */,
+				228089F3274A7E6600FF5CF2 /* DatabaseManager.swift */,
+				225E0B8A274A9E7E00749219 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -961,6 +964,7 @@
 				2270A9BF273B800800EADBE4 /* ItemDetailNetwork.swift in Sources */,
 				22682A0E271DB49D00E99D64 /* HeroInfoTableViewCell.swift in Sources */,
 				226EEBEF2717C9AC00219FC9 /* OptionalObject.swift in Sources */,
+				225E0B8B274A9E7E00749219 /* StorageManager.swift in Sources */,
 				2270A97B273B669400EADBE4 /* ItemUseCaseProviderDomain.swift in Sources */,
 				2270A967273B65A300EADBE4 /* HeroDetailUseCaseDomain.swift in Sources */,
 				223743E126FB0A4400CAFF69 /* PatchViewController.swift in Sources */,

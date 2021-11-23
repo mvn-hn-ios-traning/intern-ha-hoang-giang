@@ -18,29 +18,20 @@ final class DatabaseManager {
 
 // MARK: - Account Manager
 extension DatabaseManager {
-    
-    public func userExists(with email: String,
-                           completion: @escaping ((Bool) -> Void)) {
-        
-        let safeEmail = email
-            .replacingOccurrences(of: "@", with: "-")
-            .replacingOccurrences(of: ".", with: "-")
-        
-        database.child(safeEmail).observeSingleEvent(of: .value) { (snapshot) in
-            guard snapshot.value as? String != nil else {
-                completion(false)
-                return
-            }
-            completion(true)
-        }
-    }
-    
     // insert new user to database
-    public func insertUser(with user: User) {
+    public func insertUser(with user: User,
+                           completion: @escaping (Bool) -> Void) {
         database.child(user.safeEmail).setValue([
             "firstName": user.firstName,
             "lastName": user.lastName
-        ])
+            ], withCompletionBlock: { (error, _) in
+                guard error == nil else {
+                    print("failed to write to database")
+                    completion(false)
+                    return
+                }
+                completion(true)
+        })
     }
 }
 
@@ -50,9 +41,14 @@ struct User {
     let emailAddress: String
     
     var safeEmail: String {
-        var safeEmail = emailAddress
+        let safeEmail = emailAddress
             .replacingOccurrences(of: "@", with: "-")
             .replacingOccurrences(of: ".", with: "-")
         return safeEmail
+    }
+    
+    var profilePictureFileName: String {
+       // /images/giang113-gmail-com_profile_picture_png
+        return "\(safeEmail)_profile_picture_png"
     }
 }

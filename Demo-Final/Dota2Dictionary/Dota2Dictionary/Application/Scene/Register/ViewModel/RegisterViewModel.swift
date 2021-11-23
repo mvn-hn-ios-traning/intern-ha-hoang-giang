@@ -33,18 +33,23 @@ class RegisterViewModel: ViewModelType {
                                 && !$3.isEmpty
         }
         
-        let mergeText = Driver.combineLatest(input.enteredFirstName,
-                                             input.enteredLastName,
-                                             input.enteredEmail,
-                                             input.enteredPassword)
+        let mergeText = Driver
+            .combineLatest(input.imageTrigger,
+                           input.enteredFirstName,
+                           input.enteredLastName,
+                           input.enteredEmail,
+                           input.enteredPassword)
+            .debug("mergeText")
         
         let tappedRegister = input
             .tappedRegister
             .withLatestFrom(mergeText) { _, text -> Observable<String> in
-                self.useCase.register(firstName: text.0,
-                                      lastName: text.1,
-                                      email: text.2,
-                                      password: text.3) }
+                self.useCase.register(avatar: text.0,
+                                      firstName: text.1,
+                                      lastName: text.2,
+                                      email: text.3,
+                                      password: text.4) }
+            .debug("mergeText in tapped")
             .asObservable()
             .flatMap {$0}
         
@@ -55,6 +60,7 @@ class RegisterViewModel: ViewModelType {
 
 extension RegisterViewModel {
     struct Input {
+        let imageTrigger: Driver<UIImage?>
         let enteredFirstName: Driver<String>
         let enteredLastName: Driver<String>
         let enteredEmail: Driver<String>
