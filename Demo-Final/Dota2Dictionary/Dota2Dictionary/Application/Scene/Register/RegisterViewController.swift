@@ -72,6 +72,10 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Setup Avatar
     func tapEvent() {
+        
+        self.avatarPicture.isUserInteractionEnabled = true
+        self.avatarPicture.addGestureRecognizer(tap)
+        
         tap.rx.event
         .subscribe(onNext: { [weak self] _ in
             self?.chooseAvatar()
@@ -80,8 +84,6 @@ class RegisterViewController: UIViewController {
     }
     
     func chooseAvatar() {
-        self.avatarPicture.isUserInteractionEnabled = true
-        self.avatarPicture.addGestureRecognizer(tap)
         
         let alert = UIAlertController(title: nil,
                                       message: "Choose options",

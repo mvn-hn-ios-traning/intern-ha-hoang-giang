@@ -21,53 +21,54 @@ class RegisterUseCasePlatform: RegisterUseCaseDomain {
             Auth.auth().createUser(withEmail: email, password: password) { (authData, error) in
                 if error != nil {
                     observer.onNext(error!.localizedDescription)
-                                    }
-                                    authData?.user.sendEmailVerification(completion: { (error) in
-                                        if error != nil {
-                                            observer.onNext(error!.localizedDescription)
-                } else {
-                    observer.onNext("Sent verification email")
-                    if let userData = authData {
-                        let imageName = userData.user.uid
-                        if let imageUpload = avatar {
-                            if let imgData = imageUpload.jpegData(compressionQuality: 0.25) {
-                                let storageRef = Storage.storage().reference()
-                                let uploadStorage = storageRef.child("Avatar").child(imageName)
-                                uploadStorage.putData(imgData,
-                                                      metadata: nil,
-                                                      completion: { (_, error) in
-                                                        if error != nil {
-                                                            observer.onNext(error!.localizedDescription)
-                                                        } else {
-                                                            observer.onNext("Uploaded avatar success")
-                                                            // downloading image after uploading
-                                                            uploadStorage.downloadURL(completion: { (url, error) in
-                                                                if error != nil {
-                                                                    observer.onNext(error!.localizedDescription)
-                                                                } else {
-                                                                    // Save url in database
-                                                                    guard let avatarUrl = url else {return}
-                                                                    let databaseRef = Database.database().reference()
-                                                                    let value: [String: Any] = [
-                                                                        "avatar": "\(avatarUrl)",
-                                                                        "firstName": firstName,
-                                                                        "lastName": lastName,
-                                                                        "email": email,
-                                                                        "id": userData.user.uid
-                                                                    ]
-                                                                    databaseRef
-                                                                        .child("User")
-                                                                        .child(userData.user.uid)
-                                                                        .setValue(value)
-                                                                }
-                                                            })
-                                                        }
-                                })
-                            }
-                        }
-                    }
                 }
-                                })
+                authData?.user.sendEmailVerification(completion: { (error) in
+                    if error != nil {
+                        observer.onNext(error!.localizedDescription)
+                    } else {
+                        observer.onNext("Sent verification email")
+                        
+                        guard
+                            let authData = authData,
+                            let imageUpload = avatar
+                            else {
+                                print("profileImage = avatar error")
+                                observer.onNext("profileImage = avatar error")
+                                return
+                        }
+                        
+                        let imageName = authData.user.uid
+                        guard let imageData = imageUpload.jpegData(compressionQuality: 0.5) else {
+                            return
+                        }
+                        let storageRef = Storage.storage().reference()
+                        let uploadStorage = storageRef.child("Avatar").child(imageName)
+                        uploadStorage.putData(imageData,
+                                              metadata: nil,
+                                              completion: { (_, error) in
+                                                if error != nil {
+                                                    print(error!.localizedDescription)
+                                                } else {
+                                                    uploadStorage.downloadURL(completion: { (url, error) in
+                                                        guard error == nil else { return }
+                                                        let changeRequest =
+                                                            Auth.auth().currentUser?.createProfileChangeRequest()
+                                                        changeRequest?.displayName = firstName + lastName
+                                                        changeRequest?.photoURL = url
+                                                        
+                                                        changeRequest?.commitChanges(completion: { error in
+                                                            if error != nil {
+                                                                observer.onNext(error!.localizedDescription)
+                                                            } else {
+                                                                observer.onNext("commit success")
+                                                            }
+                                                        })
+                                                    })
+                                                }
+                        })
+                        
+                    }
+                })
             }
             return Disposables.create()
         }

@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Firebase
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     
@@ -31,7 +32,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         tableViewRegister()
         bindViewModel()
-        
     }
     
     func tableViewRegister() {

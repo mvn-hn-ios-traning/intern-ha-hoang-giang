@@ -461,11 +461,7 @@
                         <viewLayoutGuide key="safeArea" id="XQw-ep-HGg"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Zgj-Q7-bk7">
-                        <barButtonItem key="rightBarButtonItem" id="WA7-aK-g0T">
-                            <connections>
-                                <action selector="signOut:" destination="5og-LV-0u8" id="NEY-HO-K8L"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="WA7-aK-g0T"/>
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="pCO-ua-Z1m" id="re0-M4-bn5"/>
@@ -480,7 +476,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vuc-J9-fS2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2280" y="913"/>
+            <point key="canvasLocation" x="2279.7101449275365" y="912.72321428571422"/>
         </scene>
     </scenes>
     <resources>
