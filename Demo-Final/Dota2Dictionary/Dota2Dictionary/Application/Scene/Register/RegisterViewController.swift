@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Toast_Swift
+import Photos
 
 class RegisterViewController: UIViewController {
     
@@ -34,6 +35,7 @@ class RegisterViewController: UIViewController {
     var registerViewModel: RegisterViewModel!
     
     let imagePicker = UIImagePickerController()
+    let status = PHPhotoLibrary.authorizationStatus()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +74,6 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Setup Avatar
     func tapEvent() {
-        
         self.avatarPicture.isUserInteractionEnabled = true
         self.avatarPicture.addGestureRecognizer(tap)
         
@@ -98,12 +99,9 @@ class RegisterViewController: UIViewController {
         
         let takeLibrary = UIAlertAction(title: "Photo Library",
                                         style: .default) { (_) in
-                                            self.imagePicker.sourceType = .photoLibrary
-                                            self.imagePicker.delegate = self
-                                            self.present(self.imagePicker,
-                                                         animated: true,
-                                                         completion: nil) }
-        
+                                            self.photoAuthorisationStatus()
+        }
+                                            
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.addAction(takePhoto)
@@ -111,8 +109,69 @@ class RegisterViewController: UIViewController {
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
+    
+    // when user choose photo library
+    func photoAuthorisationStatus() {
+        switch self.status {
+        case .authorized:
+            self.photoLibrary()
+        case .notDetermined:
+            print("Permission not determined")
+            PHPhotoLibrary.requestAuthorization({ status in
+                if status == PHAuthorizationStatus.authorized {
+                    self.photoLibrary()
+                } else {
+                    self.addAlertForSettings()
+                }
+            })
+        case .restricted:
+            print("Permission not determined")
+            self.addAlertForSettings()
+        case .denied:
+            print("Permission not determined")
+            self.addAlertForSettings()
+        @unknown default:
+            break
+        }
+    }
+    
+    // Go to photo libary
+    func photoLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    // popup alert when user dont allow access photo library
+    func addAlertForSettings() {
+        DispatchQueue.main.async {
+            let photoUnavailableAlert = UIAlertController(title: "App does not have access to your photos",
+                                                          message: nil,
+                                                          preferredStyle: .alert)
+            let settingAction = UIAlertAction(title: "Go to Setting",
+                                              style: .destructive,
+                                              handler: {(_) -> Void in
+                                                let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
+                                                if let url = settingsUrl {
+                                                    UIApplication
+                                                        .shared
+                                                        .open(url as URL, options: [:], completionHandler: nil)
+                                                }
+            })
+            let cancelAction = UIAlertAction(title: "Cancel",
+                                             style: .cancel,
+                                             handler: nil)
+            photoUnavailableAlert.addAction(settingAction)
+            photoUnavailableAlert.addAction(cancelAction)
+            self.present(photoUnavailableAlert, animated: true, completion: nil)
+        }
+    }
+    
 }
 
+// MARK: - UIImagePickerControllerDelegate
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {

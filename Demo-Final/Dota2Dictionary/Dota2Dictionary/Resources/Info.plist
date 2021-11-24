@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app want to use photo library to upload image</string>
+	<string>This app wants to use your photos</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app want to use camera to take photo</string>
+	<string>This app want to use your camera</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
