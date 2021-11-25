@@ -115,8 +115,10 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     func currentUser() {
         Auth.auth().addStateDidChangeListener { (auth, user) in
+            self.loginView.isHidden = true
             print(user?.displayName)
             print(user?.photoURL)
+            print(user?.email)
         }
     }
 }
