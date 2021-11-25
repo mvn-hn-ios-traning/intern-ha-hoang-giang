@@ -80,4 +80,10 @@ struct ConstantsForCell {
     static let itemAttribTableViewCell = "ItemAttribTableViewCell"
     static let itemLoreTableViewCell = "ItemLoreTableViewCell"
     static let itemComponentTableViewCell = "ItemComponentTableViewCell"
+    
+    // Profile
+    static let profileInfoTableViewCell = "ProfileInfoTableViewCell"
+    static let profileSignOutTableViewCell  = "ProfileSignOutTableViewCell"
+    static let profileLikeTableViewCell  = "ProfileLikeTableViewCell"
+
 }

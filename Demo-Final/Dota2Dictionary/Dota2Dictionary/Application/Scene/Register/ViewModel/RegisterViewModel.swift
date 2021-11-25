@@ -23,20 +23,33 @@ class RegisterViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         
         let enableRegister = Driver
-            .combineLatest(input.enteredEmail,
+            .combineLatest(input.enteredFirstName,
+                           input.enteredLastName,
+                           input.enteredEmail,
                            input.enteredPassword) {
                             return !$0.isEmpty
                                 && !$1.isEmpty
-                                && $1.count >= 8
+                                && !$2.isEmpty
+                                && !$3.isEmpty
         }
         
-        let mergeText = Driver.combineLatest(input.enteredEmail,
-                                             input.enteredPassword)
+        let mergeText = Driver
+            .combineLatest(input.imageTrigger,
+                           input.enteredFirstName,
+                           input.enteredLastName,
+                           input.enteredEmail,
+                           input.enteredPassword)
+            .debug("mergeText")
         
         let tappedRegister = input
             .tappedRegister
             .withLatestFrom(mergeText) { _, text -> Observable<String> in
-                self.useCase.register(email: text.0, password: text.1) }
+                self.useCase.register(avatar: text.0,
+                                      firstName: text.1,
+                                      lastName: text.2,
+                                      email: text.3,
+                                      password: text.4) }
+            .debug("mergeText in tapped")
             .asObservable()
             .flatMap {$0}
         
@@ -47,6 +60,9 @@ class RegisterViewModel: ViewModelType {
 
 extension RegisterViewModel {
     struct Input {
+        let imageTrigger: Driver<UIImage?>
+        let enteredFirstName: Driver<String>
+        let enteredLastName: Driver<String>
         let enteredEmail: Driver<String>
         let enteredPassword: Driver<String>
         let tappedRegister: Driver<Void>

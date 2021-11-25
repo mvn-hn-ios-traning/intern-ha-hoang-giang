@@ -1,15 +1,19 @@
 //
-//  LoginUseCasePlatform.swift
+//  ProfileUseCasePlatform.swift
 //  Dota2Dictionary
 //
-//  Created by MacOS on 17/11/2021.
+//  Created by MacOS on 18/11/2021.
 //
 
 import Foundation
 import RxSwift
 import Firebase
 
-class LoginUseCasePlatform: LoginUseCaseDomain {
+class ProfileUseCasePlatform: ProfileUseCaseDomain {
+    func signout() {
+        try? Auth.auth().signOut()
+    }
+    
     func login(email: String, password: String) -> Observable<String> {
         return Observable<String>.create { (observer) -> Disposable in
             Auth.auth().signIn(withEmail: email, password: password) { (authData, error) in
@@ -39,5 +43,4 @@ class LoginUseCasePlatform: LoginUseCaseDomain {
             return Disposables.create()
         }
     }
-    
 }

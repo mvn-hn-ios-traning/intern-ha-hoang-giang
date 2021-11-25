@@ -10,5 +10,9 @@ import RxSwift
 
 // MARK: - Register
 public protocol RegisterUseCaseDomain {
-    func register(email: String, password: String) -> Observable<String>
+    func register(avatar: UIImage?,
+                  firstName: String,
+                  lastName: String,
+                  email: String,
+                  password: String) -> Observable<String>
 }
