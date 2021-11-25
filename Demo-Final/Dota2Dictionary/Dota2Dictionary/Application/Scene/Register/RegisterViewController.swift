@@ -22,6 +22,8 @@ class RegisterViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    var registerViewModel: RegisterViewModel!
+    
     let tap = UITapGestureRecognizer()
     
     let imageSubject = BehaviorSubject<UIImage?>(value: nil)
@@ -31,8 +33,6 @@ class RegisterViewController: UIViewController {
         style.backgroundColor = .darkGray
         return style
     }
-    
-    var registerViewModel: RegisterViewModel!
     
     let imagePicker = UIImagePickerController()
     let status = PHPhotoLibrary.authorizationStatus()
@@ -85,7 +85,6 @@ class RegisterViewController: UIViewController {
     }
     
     func chooseAvatar() {
-        
         let alert = UIAlertController(title: nil,
                                       message: "Choose options",
                                       preferredStyle: .actionSheet)

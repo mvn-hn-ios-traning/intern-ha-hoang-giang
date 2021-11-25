@@ -22,7 +22,7 @@ class RegisterUseCasePlatform: RegisterUseCaseDomain {
                 if error != nil {
                     observer.onNext(error!.localizedDescription)
                 }
-                authData?.user.sendEmailVerification(completion: { (error) in
+                authData?.user.sendEmailVerification(completion: { error in
                     if error != nil {
                         observer.onNext(error!.localizedDescription)
                     } else {
@@ -49,26 +49,29 @@ class RegisterUseCasePlatform: RegisterUseCaseDomain {
                                                 if error != nil {
                                                     print(error!.localizedDescription)
                                                 } else {
-                                                    uploadStorage.downloadURL(completion: { (url, error) in
-                                                        guard error == nil else { return }
-                                                        let changeRequest =
-                                                            Auth.auth().currentUser?.createProfileChangeRequest()
-                                                        changeRequest?.displayName = firstName + lastName
-                                                        changeRequest?.photoURL = url
-                                                        
-                                                        changeRequest?.commitChanges(completion: { error in
-                                                            if error != nil {
-                                                                observer.onNext(error!.localizedDescription)
-                                                            } else {
-                                                                observer.onNext("commit success")
-                                                            }
-                                                        })
-                                                    })
+                                                    uploadStorage.downloadURL(completion: changeProfile)
                                                 }
                         })
                     }
                 })
             }
+            
+            func changeProfile(url: URL?, error: Error?) {
+                guard error == nil else { return }
+                let changeRequest =
+                    Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = firstName + lastName
+                changeRequest?.photoURL = url
+                
+                changeRequest?.commitChanges(completion: { error in
+                    if error != nil {
+                        observer.onNext(error!.localizedDescription)
+                    } else {
+                        observer.onNext("Successful")
+                    }
+                })
+            }
+            
             return Disposables.create()
         }
     }

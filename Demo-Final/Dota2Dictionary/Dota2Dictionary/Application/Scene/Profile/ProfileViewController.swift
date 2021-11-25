@@ -32,6 +32,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         tableViewRegister()
         bindViewModel()
+        currentUser()
     }
     
     func tableViewRegister() {
@@ -109,5 +110,13 @@ class ProfileViewController: UIViewController {
             .disposed(by: disposeBag)
         
     }
-    
+}
+
+extension ProfileViewController {
+    func currentUser() {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            print(user?.displayName)
+            print(user?.photoURL)
+        }
+    }
 }
