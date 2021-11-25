@@ -461,7 +461,11 @@
                         <viewLayoutGuide key="safeArea" id="XQw-ep-HGg"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Zgj-Q7-bk7">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="WA7-aK-g0T"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="WA7-aK-g0T">
+                            <connections>
+                                <action selector="signOut:" destination="5og-LV-0u8" id="byM-Hq-kOM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="pCO-ua-Z1m" id="re0-M4-bn5"/>
