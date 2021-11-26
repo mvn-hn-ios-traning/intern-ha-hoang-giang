@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 import Firebase
 import Kingfisher
 
@@ -27,12 +28,14 @@ class ProfileViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    let dataSource = ProfileDataSource.dataSource()
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRegister()
         bindViewModel()
-        currentUser()
+        checkUserLoggedIn()
     }
     
     func tableViewRegister() {
@@ -87,7 +90,6 @@ class ProfileViewController: UIViewController {
             .tappedLoginOutput
             .drive(onNext: { [weak self] text in
                 guard let self = self else { return }
-                
                 self.view.endEditing(true)
                 self.view.makeToast(text, position: .top)
             })
@@ -109,14 +111,32 @@ class ProfileViewController: UIViewController {
             .bind { self.loginView.isHidden = $0 }
             .disposed(by: disposeBag)
         
+        output
+            .cellItems
+            .bind(to: profileTableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
     }
-}
-
-extension ProfileViewController {
-    func currentUser() {
+    
+    func checkUserLoggedIn() {
         Auth.auth().addStateDidChangeListener { (auth, user) in
-            print(user?.displayName)
-            print(user?.photoURL)
+            if user?.isEmailVerified == true {
+                if Auth.auth().currentUser != nil {
+                    // User is signed in.
+                    self.loginView.isHidden = true
+                } else {
+                    // No user is signed in.
+                    self.loginView.isHidden = false
+                }
+            } else {
+                self.loginView.isHidden = false
+            }
         }
+    }
+    
+    @IBAction func signOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch { print("error in signout") }
     }
 }

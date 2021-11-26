@@ -33,11 +33,7 @@ class ProfileViewModel: ViewModelType {
             .asDriver(onErrorDriveWith: .empty())
         
         let loginSuccess = tappedLoginOutput.map { text -> Bool in
-            if text == "Your account have not verified yet" {
-                return true
-            } else {
-                return false
-            }
+            return text == "Login successfully"
         }
         
         let tappedRegisterOutput = input
@@ -51,10 +47,17 @@ class ProfileViewModel: ViewModelType {
             .asObservable()
             .flatMap { self.useCase.resetPassword(email: $0) }
         
+        let items = BehaviorSubject<[ProfileTableViewSection]>(value: [
+            .infoSection(items: [.profileInfoItem(info: "")]),
+            .signoutSection(items: [.profileSignOutItem(signout: "")]),
+            .likeSection(items: [.profileLikeItem(like: ["1", "2", "3"])])
+        ])
+        
         return Output(tappedLoginOutput: tappedLoginOutput,
                       tappedRegisterOutput: tappedRegisterOutput,
                       resetPasswordOuput: resetPassword,
-                      loginSuccess: loginSuccess)
+                      loginSuccess: loginSuccess,
+                      cellItems: items)
     }
     
 }
@@ -73,5 +76,6 @@ extension ProfileViewModel {
         let tappedRegisterOutput: Driver<Void>
         let resetPasswordOuput: Observable<String>
         let loginSuccess: Driver<Bool>
+        let cellItems: BehaviorSubject<[ProfileTableViewSection]>
     }
 }

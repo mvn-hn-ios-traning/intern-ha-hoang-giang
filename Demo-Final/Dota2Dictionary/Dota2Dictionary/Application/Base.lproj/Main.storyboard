@@ -380,7 +380,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iRp-G2-YJD">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNb-MS-0AF">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
@@ -461,7 +461,11 @@
                         <viewLayoutGuide key="safeArea" id="XQw-ep-HGg"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Zgj-Q7-bk7">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="WA7-aK-g0T"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="WA7-aK-g0T">
+                            <connections>
+                                <action selector="signOut:" destination="5og-LV-0u8" id="byM-Hq-kOM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="pCO-ua-Z1m" id="re0-M4-bn5"/>

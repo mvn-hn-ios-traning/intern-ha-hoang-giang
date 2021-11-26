@@ -9,9 +9,9 @@ import Foundation
 import RxDataSources
 
 enum ProfileTableViewItem {
-    case profileInfoItem(info: User)
+    case profileInfoItem(info: String)
     case profileSignOutItem(signout: String)
-    case profileLikeItem(like: String)
+    case profileLikeItem(like: [String])
 }
 
 enum ProfileTableViewSection {
@@ -54,36 +54,36 @@ struct ProfileDataSource {
     typealias DataSource = RxTableViewSectionedReloadDataSource
     
     static func dataSource() -> DataSource<ProfileTableViewSection> {
-           return .init(configureCell: { (dataSource, tableView, indexPath, _) -> UITableViewCell in
+        return .init(configureCell: { (dataSource, tableView, indexPath, _) -> UITableViewCell in
             
             switch dataSource[indexPath] {
             case .profileInfoItem(let info):
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.profileInfoTableViewCell,
-                                                         for: indexPath) as? ProfileInfoTableViewCell
-                    else {
-                        return UITableViewCell()
-                }
-                
+                guard let cell = tableView
+                    .dequeueReusableCell(withIdentifier: ConstantsForCell.profileInfoTableViewCell,
+                                         for: indexPath) as? ProfileInfoTableViewCell
+                    else { return UITableViewCell() }
+                cell.configure(info)
                 return cell
                 
             case .profileSignOutItem(let signout):
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.profileSignOutTableViewCell,
-                                                         for: indexPath) as? ProfileSignOutTableViewCell
-                    else {
-                        return UITableViewCell()
-                }
-                
+                guard let cell = tableView
+                    .dequeueReusableCell(withIdentifier: ConstantsForCell.profileSignOutTableViewCell,
+                                         for: indexPath) as? ProfileSignOutTableViewCell
+                    else { return UITableViewCell() }
+                cell.configure(signout)
                 return cell
                 
             case .profileLikeItem(let like):
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.profileLikeTableViewCell,
-                                                         for: indexPath) as? ProfileLikeTableViewCell
-                    else {
-                        return UITableViewCell()
-                }
-                
+                guard let cell = tableView
+                    .dequeueReusableCell(withIdentifier: ConstantsForCell.profileLikeTableViewCell,
+                                         for: indexPath) as? ProfileLikeTableViewCell
+                    else { return UITableViewCell() }
+                cell.configure(like)
                 return cell
             }
-        })
+        },
+                     titleForHeaderInSection: { dataSource, index in
+                        return dataSource.sectionModels[index].header }
+        )
     }
 }
