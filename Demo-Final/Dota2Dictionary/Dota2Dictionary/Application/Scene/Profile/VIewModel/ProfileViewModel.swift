@@ -33,11 +33,7 @@ class ProfileViewModel: ViewModelType {
             .asDriver(onErrorDriveWith: .empty())
         
         let loginSuccess = tappedLoginOutput.map { text -> Bool in
-            if text == "Your account have not verified yet" {
-                return false
-            } else {
-                return true
-            }
+            return text != "Your account have not verified yet"
         }
         
         let tappedRegisterOutput = input
