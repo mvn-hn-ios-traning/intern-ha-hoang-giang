@@ -135,12 +135,8 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func signOut(_ sender: Any) {
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            do {
-                try Auth.auth().signOut()
-                self.loginView.isHidden = false
-            }
-            catch { print("error in signout") }
-        }
+        do {
+            try Auth.auth().signOut()
+        } catch { print("error in signout") }
     }
 }
