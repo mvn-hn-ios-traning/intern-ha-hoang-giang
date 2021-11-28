@@ -33,7 +33,7 @@ class HeroLoreTableViewCell: UITableViewCell {
           .onFailure { _ in }
           .set(to: heroSefie)
         
-        loreLabel.text = viewModel.language.bio.htmlToString
+        loreLabel.text = viewModel.bio
     }
     
 }

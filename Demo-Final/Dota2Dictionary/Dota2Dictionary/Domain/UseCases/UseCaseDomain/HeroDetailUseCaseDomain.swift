@@ -11,7 +11,7 @@ import RxSwift
 // MARK: Hero Detail
 public protocol HeroDetailUseCaseDomain {
     func loadHeroDetailDataAtFirst(heroID: String) -> Observable<HeroDetailModel>
-    func loadHeroDetailRoles() -> Observable<[RolesDetail]>
-    func loadHeroAbilityId() -> Observable<[String: String]>
+    func loadHeroAbilityId(heroNameOriginal: String) -> Observable<HeroAbilityMidman>
     func loadHeroAbilities() -> Observable<[HeroDetailAbilitiesModel]>
+    func loadHeroLore() -> Observable<[String: String]>
 }

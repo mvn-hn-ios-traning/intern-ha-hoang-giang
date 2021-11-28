@@ -29,16 +29,19 @@ struct ConstantsForImageURL {
 struct ConstantsForJsonUrl {
     // Hero Detail
     static let heroDetailAllInfo =
-        "https://api.stratz.com/api/v1/Hero"
+        "https://raw.githubusercontent.com/odota/dotaconstants/master/build/heroes.json"
     
     static let heroDetailRole =
         "https://api.stratz.com/api/v1/Hero/roles"
     
     static let heroAbilitiesId =
-        "https://raw.githubusercontent.com/odota/dotaconstants/master/build/ability_ids.json"
+        "https://raw.githubusercontent.com/odota/dotaconstants/master/build/hero_abilities.json"
     
     static let heroDetailAbilities =
         "https://raw.githubusercontent.com/odota/dotaconstants/master/build/abilities.json"
+    
+    static let heroLores =
+        "https://raw.githubusercontent.com/odota/dotaconstants/master/build/hero_lore.json"
     
     // Item
     static let itemViewModelLink =

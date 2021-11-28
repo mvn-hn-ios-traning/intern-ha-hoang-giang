@@ -8,52 +8,48 @@
 import Foundation
 
 class HeroDetailViewModelPlus {    
+    let heroDetail: HeroDetailModel
     
     let heroID: String
     
-    let displayName: String
-    let shortName: String
+    let localizedName: String?
+    let name: String?
     
-    let abilities: [Abilities]
-    let abilityIDs: [String: String]
-    let abilitiesDetail: [HeroDetailAbilitiesModel]
-    
-    var abilityKey: [String] {
-        var abilityKey = [String]()
-        for each in abilities {
-            let result = abilityIDs.filter { $0.key == String(each.abilityId) && $0.key != String(6251) }
-            abilityKey.append(contentsOf: result.values)
-        }
-        return abilityKey
+    var shortName: String {
+        var name = ""
+        guard let newName = self.name else { return "" }
+        name = newName.replacingOccurrences(of: "npc_dota_hero_", with: "")
+        return name
     }
+    
+    let roles: [String]?
+    
+    let ability: HeroAbilityMidman
+    let abilitiesDetail: [HeroDetailAbilitiesModel]
     
     var abilitiesDetailResult: [HeroDetailAbilitiesModel] {
         var result = [HeroDetailAbilitiesModel]()
-        for each in abilityKey {
+        guard let abilities = ability.abilities else { return result }
+        let newAbilities = abilities.filter { $0 != "generic_hidden" }
+        for each in newAbilities {
             let forResult = abilitiesDetail.filter { $0.abilitiesKey == each }
             result.append(forResult.first!)
         }
         return result
     }
     
-    let roles: [Roles]
-    let rolesDetail: [RolesDetail]
-    
-    var resulrRolesDetail: [RolesDetail] {
-        var arrayResult = [RolesDetail]()
-        for each in roles {
-            let result = rolesDetail.filter { $0.roleId == each.roleId }
-            arrayResult.append(result.first!)
-        }
-        return arrayResult
-    }
-    
-    let talents: [Talents]
+    let talents: [Talent]?
     var talentsString: [String] {
         var result = [String]()
+        guard let talents = self.talents else { return [""] }
         for each in talents {
-            let resultNew = abilityIDs.filter { $0.key == String(each.abilityId) }
-            result.append(contentsOf: resultNew.values)
+            var resultNew: String {
+                var talentResult = ""
+                guard let newName = each.name else { return "" }
+                talentResult = newName
+                return talentResult
+            }
+            result.append(resultNew)
         }
         return result
     }
@@ -83,29 +79,38 @@ class HeroDetailViewModelPlus {
         return result
     }
     
-    let stat: Stat
-    let language: Language
+    let heroLore: [String: String]
     
-    private let heroDetail: HeroDetailModel
+    var bio: String {
+        var bio = ""
+        guard let newBio = self.heroLore[shortName] else {
+            return "Not available"
+        }
+        bio = newBio
+        return bio
+    }
     
     init(hero: HeroDetailModel,
-         roles: [RolesDetail],
-         abilityIDs: [String: String],
-         abilitiesDetail: [HeroDetailAbilitiesModel]) {
+         ability: HeroAbilityMidman,
+         abilitiesDetail: [HeroDetailAbilitiesModel],
+         lore: [String: String]) {
+        
         self.heroDetail = hero
         self.heroID = hero.heroID
-        self.displayName = hero.displayName
-        self.shortName = hero.shortName
         
-        self.abilities = hero.abilities
-        self.abilityIDs = abilityIDs
-        self.abilitiesDetail = abilitiesDetail
+        self.localizedName = hero.localizedName
+        
+        self.name = hero.name
         
         self.roles = hero.roles
-        self.rolesDetail = roles
-        self.talents = hero.talents
-        self.stat = hero.stat
-        self.language = hero.language
-    
+        
+        self.ability = ability
+        
+        self.abilitiesDetail = abilitiesDetail
+        
+        self.talents = ability.talents
+        
+        self.heroLore = lore
+        
     }
 }

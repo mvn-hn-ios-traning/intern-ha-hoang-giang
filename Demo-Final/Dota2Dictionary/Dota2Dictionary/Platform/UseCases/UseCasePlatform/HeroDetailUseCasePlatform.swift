@@ -17,7 +17,7 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
             HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
                 switch result {
                 case .success(let data):
-                    let data = HeroDetailAPISevice.shared.parse(heroID: heroID, jsonData: data)
+                    let data = HeroDetailAPISevice.shared.parseInfo(heroID: heroID, jsonData: data)
                     guard let newdata = data else { return }
                     observer.onNext(newdata)
                 case .failure(let error):
@@ -28,32 +28,15 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
         }
     }
     
-    func loadHeroDetailRoles() -> Observable<[RolesDetail]> {
-        return Observable.create { observer -> Disposable in
-            let urlString = ConstantsForJsonUrl.heroDetailRole
-            
-            HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
-                switch result {
-                case .success(let data):
-                    let data = HeroDetailAPISevice.shared.parseRoles(jsonData: data)
-                    guard let newdata = data else { return }
-                    observer.onNext(newdata)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func loadHeroAbilityId() -> Observable<[String: String]> {
+    func loadHeroAbilityId(heroNameOriginal: String) -> Observable<HeroAbilityMidman> {
         return Observable.create { observer -> Disposable in
             let urlString = ConstantsForJsonUrl.heroAbilitiesId
             
             HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
                 switch result {
                 case .success(let data):
-                    let data = HeroDetailAPISevice.shared.parseAbilityId(jsonData: data)
+                    let data = HeroDetailAPISevice.shared.parseAbility(heroNameOriginal: heroNameOriginal,
+                                                                         jsonData: data)
                     guard let newdata = data else {
                         return
                     }
@@ -79,7 +62,27 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                     }
                     observer.onNext(newdata)
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadHeroLore() -> Observable<[String: String]> {
+        return Observable.create { (observer) -> Disposable in
+            let urlString = ConstantsForJsonUrl.heroLores
+            
+            HeroDetailAPISevice.shared.loadJson(fromURLString: urlString) { (result) in
+                switch result {
+                case .success(let data):
+                    let data = HeroDetailAPISevice.shared.parseLores(jsonData: data)
+                    guard let newdata = data else {
+                        return
+                    }
+                    observer.onNext(newdata)
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
             return Disposables.create()

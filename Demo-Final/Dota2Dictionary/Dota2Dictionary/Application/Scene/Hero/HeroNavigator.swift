@@ -48,6 +48,7 @@ class HeroNavigator: DefaultHeroNavigator {
             return
         }
         viewController.heroDetailViewModel = HeroDetailViewModel(heroID: viewModel.newID,
+                                                                 heroNameOriginal: viewModel.heroNameOriginal,
                                                                  useCase: servicesDetail.makeHeroDetailUseCase())
         navigationController.pushViewController(viewController, animated: true)
     }
