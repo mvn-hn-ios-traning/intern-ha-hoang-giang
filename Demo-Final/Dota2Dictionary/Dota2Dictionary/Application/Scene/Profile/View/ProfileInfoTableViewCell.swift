@@ -15,6 +15,11 @@ class ProfileInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var nameUser: UILabel!
     @IBOutlet weak var emailUser: UILabel!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.avatar.image = nil
+    }
+    
     func configure(_ model: String) {
         self.modelAvatar()
         Auth.auth().addStateDidChangeListener { (_, user) in
