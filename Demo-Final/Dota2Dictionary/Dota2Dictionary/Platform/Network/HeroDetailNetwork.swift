@@ -12,7 +12,7 @@ class HeroDetailAPISevice {
     
     static let shared = HeroDetailAPISevice()
     
-    func parse(heroID: String, jsonData: Data) -> HeroDetailModel? {
+    func parseInfo(heroID: String, jsonData: Data) -> HeroDetailModel? {
         do {
             let decodedData = try JSONDecoder().decode(HeroDetailDecodeArray.self,
                                                        from: jsonData)
@@ -28,20 +28,15 @@ class HeroDetailAPISevice {
         return nil
     }
     
-    func parseRoles(jsonData: Data) -> [RolesDetail]? {
+    func parseAbility(heroNameOriginal: String, jsonData: Data) -> HeroAbilityMidman? {
         do {
-            let decodedData = try JSONDecoder().decode([RolesDetail].self, from: jsonData)
-            return decodedData
-        } catch {
-            print("parseRoles error: ", error)
-        }
-        return nil
-    }
-    
-    func parseAbilityId(jsonData: Data) -> [String: String]? {
-        do {
-            let decodedData = try JSONDecoder().decode([String: String].self, from: jsonData)
-            return decodedData
+            let decodedData = try JSONDecoder().decode(AbilityDecodeArray.self, from: jsonData)
+            let arrayINeed = decodedData.array.filter {
+                $0.heroName == heroNameOriginal
+            }
+            if let elementINeed = arrayINeed.first {
+                return elementINeed
+            }
         } catch {
             print("error: ", error)
         }
@@ -51,8 +46,17 @@ class HeroDetailAPISevice {
     func parseHeroAbilities(jsonData: Data) -> [HeroDetailAbilitiesModel]? {
         do {
             let decodedData = try JSONDecoder().decode(HeroAbilitiesArratDecoded.self, from: jsonData)
-            print(decodedData.array.filter { $0.abilitiesKey == "antimage_mana_break" })
             return decodedData.array
+        } catch {
+            print("error: ", error)
+        }
+        return nil
+    }
+    
+    func parseLores(jsonData: Data) -> [String: String]? {
+        do {
+            let decodedData = try JSONDecoder().decode([String: String].self, from: jsonData)
+            return decodedData
         } catch {
             print("error: ", error)
         }

@@ -13,12 +13,15 @@ import RxDataSources
 class HeroDetailViewModel: ViewModelType {
     
     let heroID: String
+    let heroNameOriginal: String
     
     private let useCase: HeroDetailUseCaseDomain
     
     init(heroID: String,
+         heroNameOriginal: String,
          useCase: HeroDetailUseCaseDomain) {
         self.heroID = heroID
+        self.heroNameOriginal = heroNameOriginal
         self.useCase = useCase
     }
     
@@ -27,13 +30,13 @@ class HeroDetailViewModel: ViewModelType {
         
         let loadingALlData = Observable
             .zip(self.useCase.loadHeroDetailDataAtFirst(heroID: self.heroID),
-                 self.useCase.loadHeroDetailRoles(),
-                 self.useCase.loadHeroAbilityId(),
-                 self.useCase.loadHeroAbilities())
+                 self.useCase.loadHeroAbilityId(heroNameOriginal: self.heroNameOriginal),
+                 self.useCase.loadHeroAbilities(),
+                 self.useCase.loadHeroLore())
             .map { HeroDetailViewModelPlus(hero: $0.0,
-                                           roles: $0.1,
-                                           abilityIDs: $0.2,
-                                           abilitiesDetail: $0.3)}
+                                           ability: $0.1,
+                                           abilitiesDetail: $0.2,
+                                           lore: $0.3)}
                                     
         let cellDatas = loadingALlData
             .asObservable()

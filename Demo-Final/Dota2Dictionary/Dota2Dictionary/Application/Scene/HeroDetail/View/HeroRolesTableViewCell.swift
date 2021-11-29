@@ -13,7 +13,7 @@ class HeroRolesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var rolesCollectionView: UICollectionView!
     
-    var roles = BehaviorSubject<[RolesDetail]>(value: [])
+    var roles = BehaviorSubject<[String]>(value: [])
     var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
@@ -33,7 +33,10 @@ class HeroRolesTableViewCell: UITableViewCell {
     }
     
     func configure(_ viewModel: HeroDetailViewModelPlus) {
-        roles.onNext(viewModel.resulrRolesDetail)
+        guard let newRoles = viewModel.roles else {
+            return
+        }
+        roles.onNext(newRoles)
         
         roles
             .asObserver()

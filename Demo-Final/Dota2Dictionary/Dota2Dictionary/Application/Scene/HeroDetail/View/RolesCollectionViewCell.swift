@@ -16,8 +16,8 @@ class RolesCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
-    func configure(role: RolesDetail) {
-        roleName.text = role.roleName
+    func configure(role: String) {
+        roleName.text = role
     }
     
 }

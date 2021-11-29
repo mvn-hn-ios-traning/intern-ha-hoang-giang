@@ -11,12 +11,7 @@ class HeroLanguageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var hypeLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func configure(_ viewModel: HeroDetailViewModelPlus) {
-        hypeLabel.text = viewModel.language.hype.htmlToString
+        self.hypeLabel.text = "Stat"
     }
 }

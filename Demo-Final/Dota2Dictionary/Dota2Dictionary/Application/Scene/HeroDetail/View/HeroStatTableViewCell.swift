@@ -37,36 +37,49 @@ class HeroStatTableViewCell: UITableViewCell {
     }
     
     func statBaseGain(_ viewModel: HeroDetailViewModelPlus) {
-        strengthBaseGain.text = String(Int(viewModel.stat.strengthBase)) + " + " + String(viewModel.stat.strengthGain)
+        guard let baseStr = viewModel.heroDetail.baseStr,
+            let strGain = viewModel.heroDetail.strGain,
+            let agilityBase = viewModel.heroDetail.baseAgi,
+            let agilityGain = viewModel.heroDetail.agiGain,
+            let intelligenceBase = viewModel.heroDetail.baseInt,
+            let intelligenceGain = viewModel.heroDetail.intGain
+            else { return }
         
-        agiBaseGain.text = String(Int(viewModel.stat.agilityBase)) + " + " + String(viewModel.stat.agilityGain)
+        strengthBaseGain.text = String(Int(baseStr)) + " + " + String(strGain)
         
-        intelligentBaseGain.text =
-            String(Int(viewModel.stat.intelligenceBase)) + " + " + String(viewModel.stat.intelligenceGain)
+        agiBaseGain.text = String(Int(agilityBase)) + " + " + String(agilityGain)
+        
+        intelligentBaseGain.text = String(Int(intelligenceBase)) + " + " + String(intelligenceGain)
     }
     
     func attackStat(_ viewModel: HeroDetailViewModelPlus) {
-        dmgLabel.text =
-            String(Int(viewModel.stat.startingDamageMin)) + " - " + String(Int(viewModel.stat.startingDamageMax))
+        guard let startingDamageMin = viewModel.heroDetail.baseAttackMin,
+            let startingDamageMax = viewModel.heroDetail.baseAttackMax,
+            let attackRate = viewModel.heroDetail.attackRate,
+            let attackRange = viewModel.heroDetail.attackRange
+            else { return }
         
-        timeLabel.text = String(Int(viewModel.stat.attackRate))
+        dmgLabel.text = String(Int(startingDamageMin)) + " - " + String(Int(startingDamageMax))
         
-        rangeLabel.text = String(Int(viewModel.stat.attackRange))
+        timeLabel.text = String(Int(attackRate))
+        
+        rangeLabel.text = String(attackRange)
     }
     
     func defense(_ viewModel: HeroDetailViewModelPlus) {
-        armorLabel.text = String(Int(viewModel.stat.startingArmor))
+        guard let startingArmor = viewModel.heroDetail.baseArmor,
+            let startingMagicArmor = viewModel.heroDetail.baseMr
+            else { return }
         
-        resisLabel.text = String(Int(viewModel.stat.startingMagicArmor))
+        armorLabel.text = String(Int(startingArmor))
+        
+        resisLabel.text = String(startingMagicArmor)
     }
     
     func mobility(_ viewModel: HeroDetailViewModelPlus) {
-        moveLabel.text = String(Int(viewModel.stat.moveSpeed))
+        guard let moveSpeed = viewModel.heroDetail.moveSpeed else { return }
         
-        turnLabel.text = String(Int(viewModel.stat.moveTurnRate))
-        
-        visionLabel.text =
-            String(Int(viewModel.stat.visionDaytimeRange)) + "/" + String(Int(viewModel.stat.visionNighttimeRange))
+        moveLabel.text = String(moveSpeed)
     }
     
 }

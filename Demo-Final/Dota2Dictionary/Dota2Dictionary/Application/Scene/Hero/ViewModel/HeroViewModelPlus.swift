@@ -16,11 +16,13 @@ final class HeroViewModelPlus {
     
     let heroAvatar: String
     let heroName: String
+    let heroNameOriginal: String
     let hero: HeroModel
     
     init (with hero: HeroModel) {
         self.hero = hero
         self.heroID = hero.heroID
+        self.heroNameOriginal = hero.name
         self.heroName = hero.name
             .replacingOccurrences(of: "npc_dota_hero_", with: "")
             .replacingOccurrences(of: "_", with: " ")

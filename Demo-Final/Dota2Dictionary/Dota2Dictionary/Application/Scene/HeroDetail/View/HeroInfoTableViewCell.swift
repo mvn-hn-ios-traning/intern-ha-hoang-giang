@@ -22,7 +22,7 @@ class HeroInfoTableViewCell: UITableViewCell {
     }
     
     func configure(_ viewModel: HeroDetailViewModelPlus) {
-        heroName.text = viewModel.displayName
+        heroName.text = viewModel.localizedName
                 
         // download image from url with kingfisher
         let url = URL(string: ConstantsForImageURL.heroDetailAvatarImage + "\(viewModel.shortName).png")
