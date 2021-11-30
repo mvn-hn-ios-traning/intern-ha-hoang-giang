@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Firebase
 
 class HeroDetailViewModel: ViewModelType {
     
@@ -37,22 +38,56 @@ class HeroDetailViewModel: ViewModelType {
                                            ability: $0.1,
                                            abilitiesDetail: $0.2,
                                            lore: $0.3)}
-                                    
+        
         let cellDatas = loadingALlData
             .asObservable()
             .map {
                 [HeroDetailTableViewSection](arrayLiteral:
-                                                .infoSection(items: [.heroInfoTableViewItem(info: $0)]),
+                    .infoSection(items: [.heroInfoTableViewItem(info: $0)]),
                                              .rolesSection(items: [.heroRolesTableViewItem(roles: $0)]),
                                              .languageSection(items: [.heroLanguageTableViewItem(language: $0)]),
                                              .statSection(items: [.heroStatTableViewItem(stat: $0)]),
                                              .abilitiesSection(items: $0.abilitiesDetailResult
-                                                                .map { .heroAbilitiesTableViewItem(abilities: $0) }),
+                                                .map { .heroAbilitiesTableViewItem(abilities: $0) }),
                                              .talentsSection(items: [.heroTalentsTableViewItem(talents: $0)]),
                                              .loreSection(items: [.heroLoreTableViewItem(lore: $0)]))
-            }
+        }
         
-        return Output(cellDatas: cellDatas)
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        var tappedLikeCheck: Driver<Bool>
+        
+        tappedLikeCheck = input.likeTapped
+            .scan(false) { (lastState, _) in
+                return !lastState
+        }
+        
+        let uploadedDataOutput = tappedLikeCheck
+        .debug("tappedLikeCheck")
+            .withLatestFrom(loadingALlData.asDriver(onErrorDriveWith: .empty())) { state, data in
+                    
+                if let user = Auth.auth().currentUser {
+                    guard let name = data.name,
+                        let localizedName = data.localizedName
+                        else {return}
+                    
+                    let value: [String: Any] = [
+                        "name": name,
+                        "localizedName": localizedName,
+                        "id": data.heroID
+                    ]
+                    
+                    if state == true {
+                        ref.child("liked").child(user.uid).child(self.heroID).setValue(value)
+                    } else {
+                        ref.child("liked").child(user.uid).child(self.heroID).removeValue()
+                    }
+                }
+        }
+        
+        return Output(cellDatas: cellDatas,
+                      uploadedData: uploadedDataOutput)
     }
 }
 
@@ -60,9 +95,13 @@ class HeroDetailViewModel: ViewModelType {
 extension HeroDetailViewModel {
     struct Input {
         let firstLoading: Driver<Void>
+        let likeTapped: Driver<Void>
+        let unlikeTapped: Driver<Void>
+        let check: Bool
     }
     
     struct Output {
         let cellDatas: Observable<[HeroDetailTableViewSection]>
+        let uploadedData: Driver<Void>
     }
 }

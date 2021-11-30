@@ -9,12 +9,16 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Firebase
 
 class HeroDetailViewController: UIViewController {
     
     @IBOutlet weak var heroDetailTableView: UITableView!
+    @IBOutlet weak var likeButton: UIBarButtonItem!
     
     let disposeBag = DisposeBag()
+    
+    var checkLike: Bool = false
 
     var heroDetailViewModel: HeroDetailViewModel!
     
@@ -24,6 +28,7 @@ class HeroDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRegister()
+        listenLike()
         bindViewModel()
     }
     
@@ -58,7 +63,11 @@ class HeroDetailViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
+        let unlikeTapped = PublishSubject<Void>()
+        let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
+                                              likeTapped: likeButton.rx.tap.asDriver(),
+                                              unlikeTapped: unlikeTapped.asDriver(onErrorJustReturn: ()),
+                                              check: checkLike)
         
         let output = heroDetailViewModel.transform(input: input)
         
@@ -68,9 +77,35 @@ class HeroDetailViewController: UIViewController {
                     .rx
                     .items(dataSource: dataSource))
             .disposed(by: disposeBag)
+                
+        output.uploadedData.drive()
+            .disposed(by: disposeBag)
         
         heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
+    
+    func listenLike() {
+        let ref = Database.database().reference()
+        
+        if let user = Auth.auth().currentUser {
+            ref.child("liked").child(user.uid).child(heroDetailViewModel.heroID).observeSingleEvent(of: .value) { (snapshot) in
+                if snapshot.exists() {
+                    self.checkLike = true
+                } else {
+                    self.checkLike = false
+                }
+            }
+            
+            ref.child("liked").child(user.uid).child(heroDetailViewModel.heroID).observe(.childAdded) { (_) in
+                self.likeButton.title = "Unlike now"
+            }
+            ref.child("liked").child(user.uid).child(heroDetailViewModel.heroID).observe(.childRemoved) { (_) in
+                self.likeButton.title = "Like pls"
+            }
+        }
+        
+    }
+    
 }
 
 extension HeroDetailViewController: UITableViewDelegate {
@@ -83,4 +118,14 @@ extension HeroDetailViewController: UITableViewDelegate {
             return UITableView.automaticDimension
         }
     }
+}
+
+enum LikeButtonState {
+    case likeState
+    case unlikeState
+}
+
+enum Action {
+    case like
+    case unlike
 }
