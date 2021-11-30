@@ -15,5 +15,5 @@ public protocol HeroDetailUseCaseDomain {
     func loadHeroAbilities() -> Observable<[HeroDetailAbilitiesModel]>
     func loadHeroLore() -> Observable<[String: String]>
     func changeLikeTitle(heroID: String) -> Observable<String>
-    func like(heroID: String, state: Bool, data: HeroDetailViewModelPlus)
+    func like(heroID: String, data: HeroDetailViewModelPlus)
 }

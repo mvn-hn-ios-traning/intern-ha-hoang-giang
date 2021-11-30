@@ -94,7 +94,6 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
         let ref = Database.database().reference()
         
         return Observable.create { (observer) -> Disposable in
-            
             if let user = Auth.auth().currentUser {
                 ref.child("liked").child(user.uid).child(heroID).observe(.childAdded) { (_) in
                     observer.onNext("Unlike now")
@@ -107,7 +106,7 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
         }
     }
     
-    func like(heroID: String, state: Bool, data: HeroDetailViewModelPlus) {
+    func like(heroID: String, data: HeroDetailViewModelPlus) {
         let ref = Database.database().reference()
         
         if let user = Auth.auth().currentUser {
@@ -118,14 +117,10 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
             let value: [String: Any] = [
                 "name": name,
                 "localizedName": localizedName,
-                "id": data.heroID
+                "id": heroID
             ]
             
-            if state == true {
-                ref.child("liked").child(user.uid).child(heroID).setValue(value)
-            } else {
-                ref.child("liked").child(user.uid).child(heroID).removeValue()
-            }
+            ref.child("liked").child(user.uid).child(heroID).setValue(value)
         }
     }
 }

@@ -53,18 +53,18 @@ class HeroDetailViewModel: ViewModelType {
                                              .loreSection(items: [.heroLoreTableViewItem(lore: $0)]))
         }
         
-        let changingLikeTittle = input.firstLoading.asObservable().flatMap {
-            self.useCase.changeLikeTitle(heroID: self.heroID) }
-        
-        let tappedLikeCheck = input.likeTapped
-            .scan(false) { (lastState, _) in
-                return !lastState
+        let changingLikeTittle = input
+            .firstLoading
+            .asObservable()
+            .flatMap {
+                self
+                    .useCase
+                    .changeLikeTitle(heroID: self.heroID)
         }
         
-        let uploadedDataOutput = tappedLikeCheck
-            .withLatestFrom(loadingALlData.asDriver(onErrorDriveWith: .empty())) { state, data in
+        let uploadedDataOutput = input.likeTapped
+            .withLatestFrom(loadingALlData.asDriver(onErrorDriveWith: .empty())) { _, data in
                 self.useCase.like(heroID: self.heroID,
-                                  state: state,
                                   data: data)
         }
         
