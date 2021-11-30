@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Firebase
 
 class HeroDetailViewModel: ViewModelType {
     
@@ -37,22 +38,39 @@ class HeroDetailViewModel: ViewModelType {
                                            ability: $0.1,
                                            abilitiesDetail: $0.2,
                                            lore: $0.3)}
-                                    
+        
         let cellDatas = loadingALlData
             .asObservable()
             .map {
                 [HeroDetailTableViewSection](arrayLiteral:
-                                                .infoSection(items: [.heroInfoTableViewItem(info: $0)]),
+                    .infoSection(items: [.heroInfoTableViewItem(info: $0)]),
                                              .rolesSection(items: [.heroRolesTableViewItem(roles: $0)]),
                                              .languageSection(items: [.heroLanguageTableViewItem(language: $0)]),
                                              .statSection(items: [.heroStatTableViewItem(stat: $0)]),
                                              .abilitiesSection(items: $0.abilitiesDetailResult
-                                                                .map { .heroAbilitiesTableViewItem(abilities: $0) }),
+                                                .map { .heroAbilitiesTableViewItem(abilities: $0) }),
                                              .talentsSection(items: [.heroTalentsTableViewItem(talents: $0)]),
                                              .loreSection(items: [.heroLoreTableViewItem(lore: $0)]))
-            }
+        }
         
-        return Output(cellDatas: cellDatas)
+        let changingLikeTittle = input
+            .firstLoading
+            .asObservable()
+            .flatMap {
+                self
+                    .useCase
+                    .changeLikeTitle(heroID: self.heroID)
+        }
+        
+        let uploadedDataOutput = input.likeTapped
+            .withLatestFrom(loadingALlData.asDriver(onErrorDriveWith: .empty())) { _, data in
+                self.useCase.like(heroID: self.heroID,
+                                  data: data)
+        }
+        
+        return Output(cellDatas: cellDatas,
+                      uploadedData: uploadedDataOutput,
+                      likeTitle: changingLikeTittle)
     }
 }
 
@@ -60,9 +78,12 @@ class HeroDetailViewModel: ViewModelType {
 extension HeroDetailViewModel {
     struct Input {
         let firstLoading: Driver<Void>
+        let likeTapped: Driver<Void>
     }
     
     struct Output {
         let cellDatas: Observable<[HeroDetailTableViewSection]>
+        let uploadedData: Driver<Void>
+        let likeTitle: Observable<String>
     }
 }

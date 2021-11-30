@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import Firebase
 
 // MARK: Hero Detail
 class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
@@ -86,6 +87,40 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 }
             }
             return Disposables.create()
+        }
+    }
+    
+    func changeLikeTitle(heroID: String) -> Observable<String> {
+        let ref = Database.database().reference()
+        
+        return Observable.create { (observer) -> Disposable in
+            if let user = Auth.auth().currentUser {
+                ref.child("liked").child(user.uid).child(heroID).observe(.childAdded) { (_) in
+                    observer.onNext("Unlike now")
+                }
+                ref.child("liked").child(user.uid).child(heroID).observe(.childRemoved) { (_) in
+                   observer.onNext("Like pls")
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func like(heroID: String, data: HeroDetailViewModelPlus) {
+        let ref = Database.database().reference()
+        
+        if let user = Auth.auth().currentUser {
+            guard let name = data.name,
+                let localizedName = data.localizedName
+                else { return }
+            
+            let value: [String: Any] = [
+                "name": name,
+                "localizedName": localizedName,
+                "id": heroID
+            ]
+            
+            ref.child("liked").child(user.uid).child(heroID).setValue(value)
         }
     }
 }

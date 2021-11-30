@@ -9,13 +9,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Firebase
 
 class HeroDetailViewController: UIViewController {
     
     @IBOutlet weak var heroDetailTableView: UITableView!
+    @IBOutlet weak var likeButton: UIBarButtonItem!
     
     let disposeBag = DisposeBag()
-
+    
     var heroDetailViewModel: HeroDetailViewModel!
     
     let dataSource = HeroDetailDataSource.dataSource()
@@ -58,7 +60,8 @@ class HeroDetailViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
+        let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
+                                              likeTapped: likeButton.rx.tap.asDriver())
         
         let output = heroDetailViewModel.transform(input: input)
         
@@ -68,9 +71,17 @@ class HeroDetailViewController: UIViewController {
                     .rx
                     .items(dataSource: dataSource))
             .disposed(by: disposeBag)
+                
+        output
+            .uploadedData
+            .drive()
+            .disposed(by: disposeBag)
+        
+        output.likeTitle.bind(to: self.likeButton.rx.title).disposed(by: disposeBag)
         
         heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
+    
 }
 
 extension HeroDetailViewController: UITableViewDelegate {

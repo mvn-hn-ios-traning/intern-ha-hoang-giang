@@ -95,7 +95,7 @@
             </objects>
             <point key="canvasLocation" x="-946" y="1590"/>
         </scene>
-        <!--Hero Detail View Controller-->
+        <!--Title-->
         <scene sceneID="zhM-X4-ST2">
             <objects>
                 <viewController storyboardIdentifier="HeroDetailViewController" id="ccC-lu-x9M" customClass="HeroDetailViewController" customModule="Dota2Dictionary" customModuleProvider="target" sceneMemberID="viewController">
@@ -117,8 +117,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ere-kL-IG4"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="Y7W-l9-MsY">
+                        <barButtonItem key="rightBarButtonItem" title="Like pls" id="BcE-IK-Lcr"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="heroDetailTableView" destination="paO-qn-Qav" id="qOl-sS-vM3"/>
+                        <outlet property="likeButton" destination="BcE-IK-Lcr" id="MxE-QD-kn8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJ5-n6-xzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

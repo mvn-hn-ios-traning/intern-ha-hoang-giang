@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HeroDetailViewModelPlus {    
+public class HeroDetailViewModelPlus {    
     let heroDetail: HeroDetailModel
     
     let heroID: String
