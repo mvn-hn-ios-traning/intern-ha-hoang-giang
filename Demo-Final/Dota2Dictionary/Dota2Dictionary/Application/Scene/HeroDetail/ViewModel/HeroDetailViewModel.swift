@@ -53,9 +53,6 @@ class HeroDetailViewModel: ViewModelType {
                                              .loreSection(items: [.heroLoreTableViewItem(lore: $0)]))
         }
         
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        
         var tappedLikeCheck: Driver<Bool>
         
         tappedLikeCheck = input.likeTapped
@@ -64,26 +61,10 @@ class HeroDetailViewModel: ViewModelType {
         }
         
         let uploadedDataOutput = tappedLikeCheck
-        .debug("tappedLikeCheck")
             .withLatestFrom(loadingALlData.asDriver(onErrorDriveWith: .empty())) { state, data in
-                    
-                if let user = Auth.auth().currentUser {
-                    guard let name = data.name,
-                        let localizedName = data.localizedName
-                        else {return}
-                    
-                    let value: [String: Any] = [
-                        "name": name,
-                        "localizedName": localizedName,
-                        "id": data.heroID
-                    ]
-                    
-                    if state == true {
-                        ref.child("liked").child(user.uid).child(self.heroID).setValue(value)
-                    } else {
-                        ref.child("liked").child(user.uid).child(self.heroID).removeValue()
-                    }
-                }
+                self.useCase.like(heroID: self.heroID,
+                                  state: state,
+                                  data: data)
         }
         
         return Output(cellDatas: cellDatas,

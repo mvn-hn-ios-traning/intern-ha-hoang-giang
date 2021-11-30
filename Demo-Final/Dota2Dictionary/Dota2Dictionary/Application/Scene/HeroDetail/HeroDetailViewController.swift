@@ -78,7 +78,9 @@ class HeroDetailViewController: UIViewController {
                     .items(dataSource: dataSource))
             .disposed(by: disposeBag)
                 
-        output.uploadedData.drive()
+        output
+            .uploadedData
+            .drive()
             .disposed(by: disposeBag)
         
         heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -88,13 +90,6 @@ class HeroDetailViewController: UIViewController {
         let ref = Database.database().reference()
         
         if let user = Auth.auth().currentUser {
-            ref.child("liked").child(user.uid).child(heroDetailViewModel.heroID).observeSingleEvent(of: .value) { (snapshot) in
-                if snapshot.exists() {
-                    self.checkLike = true
-                } else {
-                    self.checkLike = false
-                }
-            }
             
             ref.child("liked").child(user.uid).child(heroDetailViewModel.heroID).observe(.childAdded) { (_) in
                 self.likeButton.title = "Unlike now"
@@ -103,7 +98,6 @@ class HeroDetailViewController: UIViewController {
                 self.likeButton.title = "Like pls"
             }
         }
-        
     }
     
 }
@@ -118,14 +112,4 @@ extension HeroDetailViewController: UITableViewDelegate {
             return UITableView.automaticDimension
         }
     }
-}
-
-enum LikeButtonState {
-    case likeState
-    case unlikeState
-}
-
-enum Action {
-    case like
-    case unlike
 }

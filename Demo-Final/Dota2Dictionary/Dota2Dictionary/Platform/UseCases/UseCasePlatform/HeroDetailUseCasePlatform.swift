@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import Firebase
 
 // MARK: Hero Detail
 class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
@@ -86,6 +87,29 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 }
             }
             return Disposables.create()
+        }
+    }
+    
+    func like(heroID: String, state: Bool, data: HeroDetailViewModelPlus) {
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        if let user = Auth.auth().currentUser {
+            guard let name = data.name,
+                let localizedName = data.localizedName
+                else { return }
+            
+            let value: [String: Any] = [
+                "name": name,
+                "localizedName": localizedName,
+                "id": data.heroID
+            ]
+            
+            if state == true {
+                ref.child("liked").child(user.uid).child(heroID).setValue(value)
+            } else {
+                ref.child("liked").child(user.uid).child(heroID).removeValue()
+            }
         }
     }
 }
