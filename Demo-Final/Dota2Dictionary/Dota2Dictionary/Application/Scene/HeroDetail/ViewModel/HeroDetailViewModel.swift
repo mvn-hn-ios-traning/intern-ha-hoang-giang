@@ -53,9 +53,10 @@ class HeroDetailViewModel: ViewModelType {
                                              .loreSection(items: [.heroLoreTableViewItem(lore: $0)]))
         }
         
-        var tappedLikeCheck: Driver<Bool>
+        let changingLikeTittle = input.firstLoading.asObservable().flatMap {
+            self.useCase.changeLikeTitle(heroID: self.heroID) }
         
-        tappedLikeCheck = input.likeTapped
+        let tappedLikeCheck = input.likeTapped
             .scan(false) { (lastState, _) in
                 return !lastState
         }
@@ -68,7 +69,8 @@ class HeroDetailViewModel: ViewModelType {
         }
         
         return Output(cellDatas: cellDatas,
-                      uploadedData: uploadedDataOutput)
+                      uploadedData: uploadedDataOutput,
+                      likeTitle: changingLikeTittle)
     }
 }
 
@@ -77,12 +79,11 @@ extension HeroDetailViewModel {
     struct Input {
         let firstLoading: Driver<Void>
         let likeTapped: Driver<Void>
-        let unlikeTapped: Driver<Void>
-        let check: Bool
     }
     
     struct Output {
         let cellDatas: Observable<[HeroDetailTableViewSection]>
         let uploadedData: Driver<Void>
+        let likeTitle: Observable<String>
     }
 }

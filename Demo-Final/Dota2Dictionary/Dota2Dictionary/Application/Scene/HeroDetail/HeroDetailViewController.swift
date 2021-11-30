@@ -18,8 +18,6 @@ class HeroDetailViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    var checkLike: Bool = false
-
     var heroDetailViewModel: HeroDetailViewModel!
     
     let dataSource = HeroDetailDataSource.dataSource()
@@ -28,7 +26,6 @@ class HeroDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRegister()
-        listenLike()
         bindViewModel()
     }
     
@@ -63,11 +60,8 @@ class HeroDetailViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let unlikeTapped = PublishSubject<Void>()
         let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
-                                              likeTapped: likeButton.rx.tap.asDriver(),
-                                              unlikeTapped: unlikeTapped.asDriver(onErrorJustReturn: ()),
-                                              check: checkLike)
+                                              likeTapped: likeButton.rx.tap.asDriver())
         
         let output = heroDetailViewModel.transform(input: input)
         
@@ -83,21 +77,9 @@ class HeroDetailViewController: UIViewController {
             .drive()
             .disposed(by: disposeBag)
         
-        heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)
-    }
-    
-    func listenLike() {
-        let ref = Database.database().reference()
+        output.likeTitle.bind(to: self.likeButton.rx.title).disposed(by: disposeBag)
         
-        if let user = Auth.auth().currentUser {
-            
-            ref.child("liked").child(user.uid).child(heroDetailViewModel.heroID).observe(.childAdded) { (_) in
-                self.likeButton.title = "Unlike now"
-            }
-            ref.child("liked").child(user.uid).child(heroDetailViewModel.heroID).observe(.childRemoved) { (_) in
-                self.likeButton.title = "Like pls"
-            }
-        }
+        heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
 }

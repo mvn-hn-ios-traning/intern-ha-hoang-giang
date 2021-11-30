@@ -90,9 +90,25 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
         }
     }
     
+    func changeLikeTitle(heroID: String) -> Observable<String> {
+        let ref = Database.database().reference()
+        
+        return Observable.create { (observer) -> Disposable in
+            
+            if let user = Auth.auth().currentUser {
+                ref.child("liked").child(user.uid).child(heroID).observe(.childAdded) { (_) in
+                    observer.onNext("Unlike now")
+                }
+                ref.child("liked").child(user.uid).child(heroID).observe(.childRemoved) { (_) in
+                   observer.onNext("Like pls")
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
     func like(heroID: String, state: Bool, data: HeroDetailViewModelPlus) {
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
+        let ref = Database.database().reference()
         
         if let user = Auth.auth().currentUser {
             guard let name = data.name,
