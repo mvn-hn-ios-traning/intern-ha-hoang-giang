@@ -119,8 +119,14 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 "localizedName": localizedName,
                 "id": heroID
             ]
-            
-            ref.child("liked").child(user.uid).child(heroID).setValue(value)
+            ref.child("liked").child(user.uid).child(heroID).observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists() {
+                    ref.child("liked").child(user.uid).child(heroID).removeValue()
+                } else {
+                    ref.child("liked").child(user.uid).child(heroID).setValue(value)
+                }
+            })
+//
         }
     }
 }
