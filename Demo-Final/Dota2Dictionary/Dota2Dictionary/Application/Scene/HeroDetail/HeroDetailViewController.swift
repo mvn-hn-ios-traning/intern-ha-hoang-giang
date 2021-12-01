@@ -59,6 +59,7 @@ class HeroDetailViewController: UIViewController {
                                      forCellReuseIdentifier: ConstantsForCell.heroLoreTableViewCell)
     }
     
+    // MARK: - bind view model
     func bindViewModel() {
         let input = HeroDetailViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
                                               likeTapped: likeButton.rx.tap.asDriver())
@@ -77,7 +78,10 @@ class HeroDetailViewController: UIViewController {
             .drive()
             .disposed(by: disposeBag)
         
-        output.likeTitle.bind(to: self.likeButton.rx.title).disposed(by: disposeBag)
+        output
+            .likeTitle
+            .bind(to: self.likeButton.rx.title)
+            .disposed(by: disposeBag)
         
         heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }

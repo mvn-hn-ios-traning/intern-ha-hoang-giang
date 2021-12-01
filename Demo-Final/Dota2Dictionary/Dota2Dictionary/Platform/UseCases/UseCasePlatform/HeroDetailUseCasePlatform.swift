@@ -101,6 +101,8 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 ref.child("liked").child(user.uid).child(heroID).observe(.childRemoved) { (_) in
                    observer.onNext("Like pls")
                 }
+            } else {
+                observer.onNext("")
             }
             return Disposables.create()
         }
@@ -120,7 +122,17 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 "id": heroID
             ]
             
-            ref.child("liked").child(user.uid).child(heroID).setValue(value)
+            ref.child("liked").child(user.uid).child(heroID).getData(completion: { error, snapshot in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                if snapshot.exists() {
+                    ref.child("liked").child(user.uid).child(heroID).removeValue()
+                } else {
+                    ref.child("liked").child(user.uid).child(heroID).setValue(value)
+                }
+            })
         }
     }
 }
