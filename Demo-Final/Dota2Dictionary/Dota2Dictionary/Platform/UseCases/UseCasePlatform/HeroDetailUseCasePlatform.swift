@@ -126,7 +126,6 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                     ref.child("liked").child(user.uid).child(heroID).setValue(value)
                 }
             })
-//
         }
     }
 }
