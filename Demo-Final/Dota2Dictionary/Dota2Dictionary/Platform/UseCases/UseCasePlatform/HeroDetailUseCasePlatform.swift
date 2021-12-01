@@ -101,8 +101,9 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 ref.child("liked").child(user.uid).child(heroID).observe(.childRemoved) { (_) in
                    observer.onNext("Like pls")
                 }
+            } else {
+                observer.onNext("")
             }
-            observer.onNext("")
             return Disposables.create()
         }
     }
