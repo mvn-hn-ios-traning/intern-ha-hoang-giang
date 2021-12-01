@@ -119,7 +119,12 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 "localizedName": localizedName,
                 "id": heroID
             ]
-            ref.child("liked").child(user.uid).child(heroID).observeSingleEvent(of: .value, with: { snapshot in
+            
+            ref.child("liked").child(user.uid).child(heroID).getData(completion: { error, snapshot in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
                 if snapshot.exists() {
                     ref.child("liked").child(user.uid).child(heroID).removeValue()
                 } else {
