@@ -102,6 +102,7 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                    observer.onNext("Like pls")
                 }
             }
+            observer.onNext("")
             return Disposables.create()
         }
     }
