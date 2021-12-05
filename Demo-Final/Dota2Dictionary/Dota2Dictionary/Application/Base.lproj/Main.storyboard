@@ -382,7 +382,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iRp-G2-YJD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iRp-G2-YJD">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -464,13 +464,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XQw-ep-HGg"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="Zgj-Q7-bk7">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="WA7-aK-g0T">
-                            <connections>
-                                <action selector="signOut:" destination="5og-LV-0u8" id="byM-Hq-kOM"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="pCO-ua-Z1m" id="re0-M4-bn5"/>
                         <outlet property="forgotButton" destination="wxr-Yl-oly" id="Qsr-ee-vYc"/>
@@ -479,7 +472,6 @@
                         <outlet property="passwordTextField" destination="I3W-Sa-0BN" id="FI4-9h-X5j"/>
                         <outlet property="profileTableView" destination="iRp-G2-YJD" id="IbG-bt-dkn"/>
                         <outlet property="registerButton" destination="4GQ-aN-3Se" id="NcB-9X-DvG"/>
-                        <outlet property="signOutButton" destination="WA7-aK-g0T" id="vW4-w7-Uq4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vuc-J9-fS2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

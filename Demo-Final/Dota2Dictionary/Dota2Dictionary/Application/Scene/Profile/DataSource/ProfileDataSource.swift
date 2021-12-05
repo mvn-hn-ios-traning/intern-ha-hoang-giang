@@ -11,7 +11,7 @@ import RxDataSources
 enum ProfileTableViewItem {
     case profileInfoItem(info: String)
     case profileSignOutItem(signout: String)
-    case profileLikeItem(like: [String])
+    case profileLikeItem(like: HeroLikedModel)
 }
 
 enum ProfileTableViewSection {

@@ -47,17 +47,21 @@ class ProfileViewModel: ViewModelType {
             .asObservable()
             .flatMap { self.useCase.resetPassword(email: $0) }
         
-        let items = BehaviorSubject<[ProfileTableViewSection]>(value: [
-            .infoSection(items: [.profileInfoItem(info: "")]),
-            .signoutSection(items: [.profileSignOutItem(signout: "")]),
-            .likeSection(items: [.profileLikeItem(like: ["1", "2", "3"])])
-        ])
+        let loadingLikedHero = self.useCase.loadLikedHero()
+        let cellData = loadingLikedHero
+            .map {
+                [ProfileTableViewSection](arrayLiteral:
+                    .infoSection(items: [.profileInfoItem(info: "")]),
+                    .signoutSection(items: [.profileSignOutItem(signout: "")]),
+                    .likeSection(items: $0.map { .profileLikeItem(like: $0) })
+                )
+        }
         
         return Output(tappedLoginOutput: tappedLoginOutput,
                       tappedRegisterOutput: tappedRegisterOutput,
                       resetPasswordOuput: resetPassword,
                       loginSuccess: loginSuccess,
-                      cellItems: items)
+                      cellItems: cellData)
     }
     
 }
@@ -76,6 +80,6 @@ extension ProfileViewModel {
         let tappedRegisterOutput: Driver<Void>
         let resetPasswordOuput: Observable<String>
         let loginSuccess: Driver<Bool>
-        let cellItems: BehaviorSubject<[ProfileTableViewSection]>
+        let cellItems: Observable<[ProfileTableViewSection]>
     }
 }

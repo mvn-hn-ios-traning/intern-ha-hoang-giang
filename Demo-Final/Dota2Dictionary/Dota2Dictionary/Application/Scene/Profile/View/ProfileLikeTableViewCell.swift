@@ -9,8 +9,10 @@ import UIKit
 
 class ProfileLikeTableViewCell: UITableViewCell {
 
-    func configure(_ model: [String]) {
-        
+    @IBOutlet weak var localizedName: UILabel!
+    
+    func configure(_ model: HeroLikedModel) {
+        self.localizedName.text = model.localizedName
     }
     
 }
