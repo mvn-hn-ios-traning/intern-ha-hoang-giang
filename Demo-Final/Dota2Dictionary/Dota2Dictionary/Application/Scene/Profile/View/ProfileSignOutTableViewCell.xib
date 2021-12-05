@@ -18,6 +18,7 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6T-2v-Ypp">
                         <rect key="frame" x="0.0" y="0.0" width="337" height="129"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                         <state key="normal" title="Sign Out"/>
                         <connections>
                             <action selector="signOut:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vrO-yy-Lwg"/>

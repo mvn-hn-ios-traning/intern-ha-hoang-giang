@@ -14,8 +14,6 @@ class HeroInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var heroAvatar: UIImageView!
     @IBOutlet weak var heroName: UILabel!
     
-    private let disposeBag = DisposeBag()
-
     override func prepareForReuse() {
         super.prepareForReuse()
         heroAvatar.image = nil

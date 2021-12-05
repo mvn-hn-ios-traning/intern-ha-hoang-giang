@@ -142,7 +142,9 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 {
-            return 75
+            return 64
+        } else if indexPath.section == 2 {
+            return 128
         } else {
             return UITableView.automaticDimension
         }
