@@ -64,7 +64,6 @@ class ProfileUseCasePlatform: ProfileUseCaseDomain {
                         observer.onNext(listLikedHero)
                     }
                 }
-              
             }
             return Disposables.create()
         }

@@ -384,7 +384,6 @@
 		2237445326FB369200CAFF69 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				22785D1526FDAF6A0032131B /* API */,
 				22785D1626FDAF6F0032131B /* Network */,
 				2237445C26FB849A00CAFF69 /* UseCases */,
 			);
@@ -673,13 +672,6 @@
 				22834422274CE7E800DC7A55 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		22785D1526FDAF6A0032131B /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		22785D1626FDAF6F0032131B /* Network */ = {
