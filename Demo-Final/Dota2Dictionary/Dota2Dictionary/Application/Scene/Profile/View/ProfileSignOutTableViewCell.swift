@@ -10,8 +10,13 @@ import Firebase
 
 class ProfileSignOutTableViewCell: UITableViewCell {
 
-    func configure(_ model: String) {
-        
-    }
+    func configure(_ model: String) { }
     
+    @IBAction func signOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("error in signout")
+        }
+    }
 }

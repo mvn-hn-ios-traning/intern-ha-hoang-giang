@@ -33,9 +33,9 @@ class ProfileViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkUserLoggedIn()
         tableViewRegister()
         bindViewModel()
-        checkUserLoggedIn()
     }
     
     func tableViewRegister() {
@@ -116,6 +116,10 @@ class ProfileViewController: UIViewController {
             .bind(to: profileTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        profileTableView
+            .rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
     }
     
     func checkUserLoggedIn() {
@@ -133,10 +137,16 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-    
-    @IBAction func signOut(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-        } catch { print("error in signout") }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 64
+        } else if indexPath.section == 2 {
+            return 128
+        } else {
+            return UITableView.automaticDimension
+        }
     }
 }

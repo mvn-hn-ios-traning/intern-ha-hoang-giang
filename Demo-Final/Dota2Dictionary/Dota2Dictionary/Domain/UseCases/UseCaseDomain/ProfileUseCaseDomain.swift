@@ -10,7 +10,7 @@ import RxSwift
 
 public protocol ProfileUseCaseDomain {
     func signout()
-    func login(email: String,
-               password: String) -> Observable<String>
+    func login(email: String, password: String) -> Observable<String>
     func resetPassword(email: String) -> Observable<String>
+    func loadLikedHero() -> Observable<[HeroLikedModel]>
 }

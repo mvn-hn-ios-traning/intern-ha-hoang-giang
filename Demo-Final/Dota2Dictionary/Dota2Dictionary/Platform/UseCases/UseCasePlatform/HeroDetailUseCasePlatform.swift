@@ -116,18 +116,24 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
                 let localizedName = data.localizedName
                 else { return }
             
+            guard let key = ref.child("liked").childByAutoId().key else { return }
+            
             let value: [String: Any] = [
                 "name": name,
                 "localizedName": localizedName,
-                "id": heroID
+                "id": heroID,
+                "timestamp": key
             ]
             
-            ref.child("liked").child(user.uid).child(heroID).getData(completion: { error, snapshot in
+            let heroRef = ref.child("liked").child(user.uid)
+            
+            heroRef.getData(completion: { error, snapshot in
                 guard error == nil else {
-                    print(error!.localizedDescription)
+                    print("error like")
                     return
                 }
-                if snapshot.exists() {
+                
+                if snapshot.hasChild(heroID) == true {
                     ref.child("liked").child(user.uid).child(heroID).removeValue()
                 } else {
                     ref.child("liked").child(user.uid).child(heroID).setValue(value)
