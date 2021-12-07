@@ -24,9 +24,11 @@ class HeroAbilitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var bkbPierce: UILabel!
     @IBOutlet weak var attribute: UILabel!
     
+    var resultText: String = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        abilityImage.layer.cornerRadius = abilityImage.frame.size.width / 2
     }
 
     func configure(_ viewModel: HeroDetailAbilitiesModel) {
@@ -76,15 +78,13 @@ class HeroAbilitiesTableViewCell: UITableViewCell {
     
     func configureAttrib(_ viewModel: HeroDetailAbilitiesModel) {
         let abstractArray = viewModel.attrib?.filter { $0.generated == nil }
-
-        var resultText: String = ""
         
         for each in abstractArray! {
             let eachResult = each.header + " " + each.value.mccdValue + "\n\n"
             resultText.append(eachResult)
         }
-        
         attribute.text = resultText
+        
     }
     
 }
