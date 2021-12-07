@@ -29,6 +29,7 @@ class PatchDetailViewController: UIViewController {
         bindViewModel()
     }
     
+    // MARK: - Bind ViewModel
     func bindViewModel() {
         let input = PatchDetailViewModel.Input(heroesPatchSelecting: selectHeroesPatch.rx.tap.asDriver(),
                                                itemsPatchSelecting: selectItemsPatch.rx.tap.asDriver(),
@@ -47,6 +48,7 @@ class PatchDetailViewController: UIViewController {
                 cell.configure(model: detail)
             }
             .disposed(by: disposeBag)
+        
     }
     
 }

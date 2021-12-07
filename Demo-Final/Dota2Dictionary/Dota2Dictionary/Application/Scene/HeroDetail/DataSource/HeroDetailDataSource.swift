@@ -60,7 +60,7 @@ extension HeroDetailTableViewSection: SectionModelType {
 // MARK: - DataSource
 struct HeroDetailDataSource {
     typealias DataSource = RxTableViewSectionedReloadDataSource
-    
+
     static func dataSource() -> DataSource<HeroDetailTableViewSection> {
         
         return .init(configureCell: { (dataSource, tableView, indexPath, _) -> UITableViewCell in

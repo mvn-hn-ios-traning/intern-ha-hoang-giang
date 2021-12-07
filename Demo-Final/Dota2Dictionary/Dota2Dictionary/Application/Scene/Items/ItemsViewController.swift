@@ -34,7 +34,7 @@ class ItemsViewController: UIViewController {
                                         searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver(),
                                         firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
         let output = itemViewModel.transform(input: input)
-                
+        
         output
             .searchOutput
             .bind(to: itemAllCollectionView

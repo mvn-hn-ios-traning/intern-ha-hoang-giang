@@ -83,7 +83,8 @@ struct ProfileDataSource {
             }
         },
                      titleForHeaderInSection: { dataSource, index in
-                        return dataSource.sectionModels[index].header }
+                        return dataSource.sectionModels[index].header
+        }
         )
     }
 }

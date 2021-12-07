@@ -95,20 +95,21 @@ class ProfileViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        output
-            .tappedRegisterOutput
-            .drive()
-            .disposed(by: disposeBag)
+        output.tappedRegisterOutput.drive().disposed(by: disposeBag)
         
         output
             .resetPasswordOuput
-            .bind { self.view.makeToast($0, position: .top) }
+            .bind { [weak self] text in
+                guard let self = self else { return }
+                self.view.makeToast(text, position: .top) }
             .disposed(by: disposeBag)
         
         output
             .loginSuccess
             .asObservable()
-            .bind { self.loginView.isHidden = $0 }
+            .bind { [weak self] state in
+                guard let self = self else { return }
+                self.loginView.isHidden = state }
             .disposed(by: disposeBag)
         
         output
@@ -116,10 +117,7 @@ class ProfileViewController: UIViewController {
             .bind(to: profileTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        profileTableView
-            .rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
+        profileTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
     func checkUserLoggedIn() {
@@ -146,7 +144,7 @@ extension ProfileViewController: UITableViewDelegate {
         } else if indexPath.section == 2 {
             return 128
         } else {
-            return UITableView.automaticDimension
+            return 256
         }
     }
 }

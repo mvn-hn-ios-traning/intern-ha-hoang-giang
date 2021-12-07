@@ -40,13 +40,12 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ToastManager.shared.style = style
-        
+        modelAvatar()
         tapEvent()
         bindViewModel()
     }
     
     func bindViewModel() {
-        
         let input = RegisterViewModel.Input(imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
                                             enteredFirstName: firstNameTF.rx.text.orEmpty.asDriver(),
                                             enteredLastName: lastNameTF.rx.text.orEmpty.asDriver(),
@@ -73,6 +72,14 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Setup Avatar
+    func modelAvatar() {
+        avatarPicture.layer.borderWidth = 1.0
+        avatarPicture.layer.masksToBounds = true
+        avatarPicture.layer.borderColor = UIColor.white.cgColor
+        avatarPicture.layer.cornerRadius = avatarPicture.frame.size.width/2
+        avatarPicture.clipsToBounds = true
+    }
+    
     func tapEvent() {
         self.avatarPicture.isUserInteractionEnabled = true
         self.avatarPicture.addGestureRecognizer(tap)
@@ -167,7 +174,6 @@ class RegisterViewController: UIViewController {
             self.present(photoUnavailableAlert, animated: true, completion: nil)
         }
     }
-    
 }
 
 // MARK: - UIImagePickerControllerDelegate
