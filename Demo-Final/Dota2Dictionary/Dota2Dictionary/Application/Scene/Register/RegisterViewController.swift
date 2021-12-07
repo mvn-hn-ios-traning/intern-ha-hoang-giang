@@ -145,9 +145,11 @@ class RegisterViewController: UIViewController {
     // Go to photo libary
     func photoLibrary() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            self.present(imagePicker, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.imagePicker.delegate = self
+                self.imagePicker.sourceType = .photoLibrary
+                self.present(self.imagePicker, animated: true, completion: nil)
+            }
         }
     }
     
@@ -188,4 +190,3 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true, completion: nil)
     }
 }
-

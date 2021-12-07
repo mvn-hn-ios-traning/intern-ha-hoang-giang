@@ -23,7 +23,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mht-Ia-Jwl" secondAttribute="bottom" id="Mda-uY-0ED"/>
                             <constraint firstItem="mht-Ia-Jwl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dNi-hF-v00"/>
@@ -61,12 +61,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2O-Pq-q11">
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="hero_icon"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMe-Z2-paZ">
                                         <rect key="frame" x="207" y="0.0" width="207" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="icon_armor"/>
+                                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="item"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -75,7 +78,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JrI-wu-vYd" firstAttribute="leading" secondItem="Joa-bu-d7x" secondAttribute="leading" id="5ok-R0-CNl"/>
                             <constraint firstItem="Joa-bu-d7x" firstAttribute="trailing" secondItem="JrI-wu-vYd" secondAttribute="trailing" id="Wyc-ze-sHu"/>
@@ -480,8 +483,8 @@
         <image name="agiIcon" width="24" height="24"/>
         <image name="create_acc_button" width="250" height="60"/>
         <image name="hero_icon" width="25" height="20"/>
-        <image name="icon_armor" width="32" height="32"/>
         <image name="intelIcon" width="24" height="24"/>
+        <image name="item" width="25" height="25"/>
         <image name="login_button" width="250" height="60"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="sign_up_button" width="259" height="63"/>

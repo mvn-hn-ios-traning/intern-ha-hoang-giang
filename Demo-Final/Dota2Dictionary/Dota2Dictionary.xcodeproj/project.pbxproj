@@ -296,6 +296,9 @@
 			isa = PBXGroup;
 			children = (
 				2286A54626FC78BD0086134D /* ViewModelType.swift */,
+				226FA97A27173BF700633AD4 /* ValueWrapper.swift */,
+				226EEBEE2717C9AC00219FC9 /* OptionalObject.swift */,
+				224C17D72713DC1F00DD4B76 /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			children = (
 				2237445826FB37B100CAFF69 /* AppDelegate */,
 				2237445926FB396800CAFF69 /* Resources */,
+				2237444F26FB35D900CAFF69 /* Utility */,
 				2237444D26FB35CA00CAFF69 /* Application */,
 				2237445326FB369200CAFF69 /* Platform */,
 				2237445426FB36A200CAFF69 /* Domain */,
@@ -353,9 +357,8 @@
 		2237444F26FB35D900CAFF69 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				226FA97A27173BF700633AD4 /* ValueWrapper.swift */,
-				226EEBEE2717C9AC00219FC9 /* OptionalObject.swift */,
-				224C17D72713DC1F00DD4B76 /* Constants.swift */,
+				2270AC2D2741F51D00802F72 /* Extension */,
+				2229E1B8275DBC1F002DB7A2 /* Common */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -440,9 +443,6 @@
 		2237445926FB396800CAFF69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2237444F26FB35D900CAFF69 /* Utility */,
-				2270AC2D2741F51D00802F72 /* Extension */,
-				2229E1B8275DBC1F002DB7A2 /* Common */,
 				226F1BB527037912008A693D /* Assets.xcassets */,
 				223743EA26FB0A4800CAFF69 /* Info.plist */,
 				22D94E052742426B00C55BA1 /* GoogleService-Info.plist */,

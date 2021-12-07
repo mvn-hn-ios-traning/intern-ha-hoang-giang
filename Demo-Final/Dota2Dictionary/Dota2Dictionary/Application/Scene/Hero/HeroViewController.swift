@@ -27,6 +27,7 @@ class HeroViewController: UIViewController {
                                              bundle: nil),
                                        forCellWithReuseIdentifier: ConstantsForCell.allHeroCollectionViewCell)
         bindViewModel()
+        configureNavigateBar()
     }
     
     func bindViewModel() {
@@ -61,6 +62,11 @@ class HeroViewController: UIViewController {
             .rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+    }
+    
+    func configureNavigateBar() {
+        navigationController!.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+        navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
 }

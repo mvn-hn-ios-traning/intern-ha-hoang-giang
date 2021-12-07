@@ -20,10 +20,12 @@ class PatchViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         patchTableView.register(UINib(nibName: ConstantsForCell.patchTableViewCell,
                                       bundle: nil),
                                 forCellReuseIdentifier: ConstantsForCell.patchTableViewCell)
         bindViewModel()
+        configureNavigateBar()
     }
     
     func bindViewModel() {
@@ -47,6 +49,20 @@ class PatchViewController: UIViewController {
             .selectedOutput
             .drive()
             .disposed(by: disposeBag)
+    }
+    
+    func configureNavigateBar() {
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            appearance.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        } else {
+            navigationController!.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+            navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        }
     }
     
 }
