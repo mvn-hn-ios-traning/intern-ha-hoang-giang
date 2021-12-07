@@ -21,6 +21,7 @@ class ItemsViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         itemSearchBar.delegate = self
         itemAllCollectionView.register(UINib(nibName: ConstantsForCell.itemsAllCollectionViewCell,
                                              bundle: nil),
@@ -85,7 +86,6 @@ extension ItemsViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.itemSearchBar.text = ""
         self.itemSearchBar.endEditing(true)
     }
 }

@@ -40,6 +40,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ToastManager.shared.style = style
+        hideKeyboardWhenTappedAround()
         modelAvatar()
         tapEvent()
         bindViewModel()
@@ -187,3 +188,4 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true, completion: nil)
     }
 }
+
