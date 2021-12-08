@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
                 guard let self = self else { return }
                 
                 self.view.endEditing(true)
-                self.view.makeToast(text, position: .top)
+                self.displayAlertWhenClickSignup(text: text)
             })
             .disposed(by: disposeBag)
     }
@@ -181,6 +181,19 @@ class RegisterViewController: UIViewController {
             self.present(photoUnavailableAlert, animated: true, completion: nil)
         }
     }
+    
+    // MARK: - When click Signup button
+    func displayAlertWhenClickSignup(text: String) {
+        let alert = UIAlertController(title: nil,
+                                      message: text,
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK",
+                                   style: .cancel,
+                                   handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
+    
 }
 
 // MARK: - UIImagePickerControllerDelegate
