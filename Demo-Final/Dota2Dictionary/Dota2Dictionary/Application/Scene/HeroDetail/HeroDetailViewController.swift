@@ -95,9 +95,12 @@ class HeroDetailViewController: UIViewController {
         
         output
             .likeTitle
-            .map({ string -> UIImage in
-                let image = UIImage(named: string)
-                return image!
+            .map({ string -> UIImage? in
+                if let image = UIImage(named: string) {
+                    return image
+                } else {
+                    return nil
+                }
             })
             .bind(to: self.likeButton.rx.image)
             .disposed(by: disposeBag)
