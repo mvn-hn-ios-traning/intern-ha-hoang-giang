@@ -26,11 +26,13 @@ class RegisterViewModel: ViewModelType {
             .combineLatest(input.enteredFirstName,
                            input.enteredLastName,
                            input.enteredEmail,
-                           input.enteredPassword) {
+                           input.enteredPassword,
+                           input.imageTrigger) {
                             return !$0.isEmpty
                                 && !$1.isEmpty
                                 && !$2.isEmpty
                                 && !$3.isEmpty
+                                && $4 != nil
         }
         
         let mergeText = Driver

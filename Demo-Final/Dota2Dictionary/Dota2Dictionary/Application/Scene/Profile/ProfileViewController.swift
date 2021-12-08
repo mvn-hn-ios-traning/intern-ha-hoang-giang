@@ -118,7 +118,8 @@ class ProfileViewController: UIViewController {
             .asObservable()
             .bind { [weak self] state in
                 guard let self = self else { return }
-                self.loginView.isHidden = state }
+                self.loginView.isHidden = state
+                self.profileTableView.reloadData()}
             .disposed(by: disposeBag)
         
         output

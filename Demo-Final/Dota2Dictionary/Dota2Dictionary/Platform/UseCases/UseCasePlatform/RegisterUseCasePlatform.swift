@@ -60,7 +60,7 @@ class RegisterUseCasePlatform: RegisterUseCaseDomain {
                 guard error == nil else { return }
                 let changeRequest =
                     Auth.auth().currentUser?.createProfileChangeRequest()
-                changeRequest?.displayName = firstName + lastName
+                changeRequest?.displayName = firstName + " " + lastName
                 changeRequest?.photoURL = url
                 
                 changeRequest?.commitChanges(completion: { error in

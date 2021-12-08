@@ -26,12 +26,14 @@ class ProfileInfoTableViewCell: UITableViewCell {
             guard let avatar = user?.photoURL,
                 let name = user?.displayName,
                 let email = user?.email
-                else { return }
+                else {
+                    return
+            }
             
             self.avatar.kf.setImage(with: avatar)
             self.nameUser.text = "Username: \(name)"
             self.emailUser.text = "Email: \(email)"
-                        
+            
         }
     }
     
