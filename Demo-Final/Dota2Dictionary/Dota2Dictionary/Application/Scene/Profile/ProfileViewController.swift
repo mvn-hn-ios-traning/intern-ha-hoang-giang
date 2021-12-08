@@ -93,6 +93,10 @@ class ProfileViewController: UIViewController {
         
         let output = profileViewModel.transform(input: input)
         
+        [output.enableLogin.drive(loginButton.rx.isEnabled),
+         output.tappedRegisterOutput.drive()]
+            .forEach({$0.disposed(by: disposeBag)})
+        
         output
             .tappedLoginOutput
             .drive(onNext: { [weak self] text in
@@ -101,9 +105,7 @@ class ProfileViewController: UIViewController {
                 self.view.makeToast(text, position: .top)
             })
             .disposed(by: disposeBag)
-        
-        output.tappedRegisterOutput.drive().disposed(by: disposeBag)
-        
+                
         output
             .resetPasswordOuput
             .bind { [weak self] text in

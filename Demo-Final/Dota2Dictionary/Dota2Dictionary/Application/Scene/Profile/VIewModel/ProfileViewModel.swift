@@ -23,6 +23,13 @@ class ProfileViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let mergeText = Driver.combineLatest(input.enteredEmail, input.enteredPassword)
         
+        let enableLogin = Driver
+            .combineLatest(input.enteredEmail,
+                           input.enteredPassword) {
+                            return !$0.isEmpty
+                                && !$1.isEmpty
+        }
+        
         let tappedLoginOutput = input
             .tappedLogin
             .withLatestFrom(mergeText) { _, text in
@@ -57,7 +64,8 @@ class ProfileViewModel: ViewModelType {
                 )
         }
         
-        return Output(tappedLoginOutput: tappedLoginOutput,
+        return Output(enableLogin: enableLogin,
+                      tappedLoginOutput: tappedLoginOutput,
                       tappedRegisterOutput: tappedRegisterOutput,
                       resetPasswordOuput: resetPassword,
                       loginSuccess: loginSuccess,
@@ -76,6 +84,7 @@ extension ProfileViewModel {
     }
     
     struct Output {
+        let enableLogin: Driver<Bool>
         let tappedLoginOutput: Driver<String>
         let tappedRegisterOutput: Driver<Void>
         let resetPasswordOuput: Observable<String>

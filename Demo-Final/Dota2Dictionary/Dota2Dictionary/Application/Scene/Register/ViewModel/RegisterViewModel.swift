@@ -39,7 +39,6 @@ class RegisterViewModel: ViewModelType {
                            input.enteredLastName,
                            input.enteredEmail,
                            input.enteredPassword)
-            .debug("mergeText")
         
         let tappedRegister = input
             .tappedRegister
@@ -49,7 +48,6 @@ class RegisterViewModel: ViewModelType {
                                       lastName: text.2,
                                       email: text.3,
                                       password: text.4) }
-            .debug("mergeText in tapped")
             .asObservable()
             .flatMap {$0}
         
