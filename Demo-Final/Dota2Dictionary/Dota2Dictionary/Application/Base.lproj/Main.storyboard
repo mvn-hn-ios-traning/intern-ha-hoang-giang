@@ -123,7 +123,7 @@
                         <viewLayoutGuide key="safeArea" id="ere-kL-IG4"/>
                     </view>
                     <navigationItem key="navigationItem" id="Y7W-l9-MsY">
-                        <barButtonItem key="rightBarButtonItem" title="Like pls" id="BcE-IK-Lcr"/>
+                        <barButtonItem key="rightBarButtonItem" image="unStar" id="BcE-IK-Lcr"/>
                     </navigationItem>
                     <connections>
                         <outlet property="heroDetailTableView" destination="paO-qn-Qav" id="qOl-sS-vM3"/>
@@ -499,5 +499,6 @@
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="sign_up_button" width="259" height="63"/>
         <image name="strengthIcon" width="24" height="24"/>
+        <image name="unStar" width="23.5" height="22.5"/>
     </resources>
 </document>

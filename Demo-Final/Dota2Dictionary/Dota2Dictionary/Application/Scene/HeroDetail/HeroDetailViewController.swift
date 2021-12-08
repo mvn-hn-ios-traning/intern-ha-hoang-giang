@@ -23,7 +23,7 @@ class HeroDetailViewController: UIViewController {
     let dataSource = HeroDetailDataSource.dataSource()
     
     var oldTabbarFr: CGRect = .zero
-        
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,7 +95,11 @@ class HeroDetailViewController: UIViewController {
         
         output
             .likeTitle
-            .bind(to: self.likeButton.rx.title)
+            .map({ string -> UIImage in
+                let image = UIImage(named: string)
+                return image!
+            })
+            .bind(to: self.likeButton.rx.image)
             .disposed(by: disposeBag)
         
         heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)

@@ -96,10 +96,10 @@ class HeroDetailUseCasePlatform: HeroDetailUseCaseDomain {
         return Observable.create { (observer) -> Disposable in
             if let user = Auth.auth().currentUser {
                 ref.child("liked").child(user.uid).child(heroID).observe(.childAdded) { (_) in
-                    observer.onNext("Unlike now")
+                    observer.onNext("doStar")
                 }
                 ref.child("liked").child(user.uid).child(heroID).observe(.childRemoved) { (_) in
-                   observer.onNext("Like pls")
+                   observer.onNext("unStar")
                 }
             } else {
                 observer.onNext("")
