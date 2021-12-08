@@ -57,17 +57,8 @@ class PatchViewController: UIViewController {
     }
     
     func configureNavigateBar() {
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            appearance.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        } else {
-            navigationController!.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-            navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        }
+        navigationController!.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+        navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
 }
