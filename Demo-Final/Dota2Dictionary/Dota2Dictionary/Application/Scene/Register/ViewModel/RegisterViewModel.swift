@@ -53,13 +53,21 @@ class RegisterViewModel: ViewModelType {
             .asObservable()
             .flatMap {$0}
         
-        return Output(enableRegister: enableRegister,
+        let goBackOutput = input
+            .backTrigger
+            .do(onNext: {
+                self.navigator.toLogin()
+            })
+        
+        return Output(goBack: goBackOutput,
+                      enableRegister: enableRegister,
                       tappedRegister: tappedRegister)
     }
 }
 
 extension RegisterViewModel {
     struct Input {
+        let backTrigger: Driver<Void>
         let imageTrigger: Driver<UIImage?>
         let enteredFirstName: Driver<String>
         let enteredLastName: Driver<String>
@@ -69,6 +77,7 @@ extension RegisterViewModel {
     }
     
     struct Output {
+        let goBack: Driver<Void>
         let enableRegister: Driver<Bool>
         let tappedRegister: Observable<String>
     }

@@ -13,6 +13,7 @@ import Photos
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var avatarPicture: UIImageView!
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
@@ -47,7 +48,8 @@ class RegisterViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let input = RegisterViewModel.Input(imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
+        let input = RegisterViewModel.Input(backTrigger: backButton.rx.tap.asDriver(),
+                                            imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
                                             enteredFirstName: firstNameTF.rx.text.orEmpty.asDriver(),
                                             enteredLastName: lastNameTF.rx.text.orEmpty.asDriver(),
                                             enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
@@ -55,6 +57,8 @@ class RegisterViewController: UIViewController {
                                             tappedRegister: registerButton.rx.tap.asDriver())
         
         let output = registerViewModel.transform(input: input)
+        
+        output.goBack.drive().disposed(by: disposeBag)
         
         output
             .enableRegister

@@ -223,14 +223,28 @@
                                 </constraints>
                                 <state key="normal" image="sign_up_button"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-0W-szW">
+                                <rect key="frame" x="10" y="59" width="67" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UcF-km-yhL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title=" Back" image="arrowshape.turn.up.left.fill" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Pxf-pj-ZiZ" firstAttribute="centerX" secondItem="OAP-Gq-v8h" secondAttribute="centerX" id="D8n-fw-74f"/>
                             <constraint firstItem="EdE-Am-cxF" firstAttribute="centerX" secondItem="OAP-Gq-v8h" secondAttribute="centerX" id="FXh-wh-Gcs"/>
+                            <constraint firstItem="Pxf-pj-ZiZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DFJ-0W-szW" secondAttribute="trailing" constant="8" symbolic="YES" id="NFV-Qs-6MB"/>
                             <constraint firstItem="Dma-MG-IZE" firstAttribute="top" secondItem="69J-RC-TVW" secondAttribute="bottom" constant="50" id="VVv-eZ-Vut"/>
+                            <constraint firstItem="DFJ-0W-szW" firstAttribute="leading" secondItem="OAP-Gq-v8h" secondAttribute="leading" constant="10" id="Yc1-Dq-OMX"/>
                             <constraint firstItem="Pxf-pj-ZiZ" firstAttribute="top" secondItem="OAP-Gq-v8h" secondAttribute="top" constant="50" id="gtB-Tm-I4Y"/>
                             <constraint firstItem="Dma-MG-IZE" firstAttribute="width" secondItem="4V3-et-b6X" secondAttribute="width" multiplier="0.55" id="idH-jI-xuS"/>
+                            <constraint firstItem="DFJ-0W-szW" firstAttribute="top" secondItem="OAP-Gq-v8h" secondAttribute="top" constant="15" id="jhL-Ks-754"/>
                             <constraint firstItem="69J-RC-TVW" firstAttribute="centerX" secondItem="OAP-Gq-v8h" secondAttribute="centerX" id="joM-7E-Utp"/>
                             <constraint firstItem="EdE-Am-cxF" firstAttribute="width" secondItem="4V3-et-b6X" secondAttribute="width" multiplier="0.75" id="khY-z0-Bxc"/>
                             <constraint firstItem="Dma-MG-IZE" firstAttribute="centerX" secondItem="OAP-Gq-v8h" secondAttribute="centerX" id="ljq-Ua-2Bv"/>
@@ -242,6 +256,7 @@
                     </view>
                     <connections>
                         <outlet property="avatarPicture" destination="Pxf-pj-ZiZ" id="nUJ-gC-uG8"/>
+                        <outlet property="backButton" destination="DFJ-0W-szW" id="CWt-bH-3fD"/>
                         <outlet property="emailTextField" destination="6BA-C3-cdV" id="K5q-8R-EgU"/>
                         <outlet property="firstNameTF" destination="17S-XU-k96" id="cuu-ks-QMF"/>
                         <outlet property="lastNameTF" destination="94k-go-anO" id="swY-ij-Yfs"/>
@@ -481,6 +496,7 @@
     </scenes>
     <resources>
         <image name="agiIcon" width="24" height="24"/>
+        <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
         <image name="create_acc_button" width="250" height="60"/>
         <image name="hero_icon" width="25" height="20"/>
         <image name="intelIcon" width="24" height="24"/>
