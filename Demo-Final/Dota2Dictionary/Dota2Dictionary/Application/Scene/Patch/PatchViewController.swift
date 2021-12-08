@@ -28,6 +28,11 @@ class PatchViewController: UIViewController {
         configureNavigateBar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        navigationController?.navigationBar.barStyle = .black
+    }
+    
     func bindViewModel() {
         let input = PatchViewModel.Input(firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()),
                                          selection: patchTableView.rx.itemSelected.asDriver())

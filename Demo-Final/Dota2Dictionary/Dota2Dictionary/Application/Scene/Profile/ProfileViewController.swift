@@ -40,6 +40,11 @@ class ProfileViewController: UIViewController {
         bindViewModel()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        navigationController?.navigationBar.barStyle = .black
+    }
+    
     func tableViewRegister() {
         profileTableView.register(UINib(nibName: ConstantsForCell.profileInfoTableViewCell,
                                         bundle: nil),

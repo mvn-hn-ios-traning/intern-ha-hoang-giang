@@ -30,6 +30,11 @@ class ItemsViewController: UIViewController {
         configureNavigateBar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        navigationController?.navigationBar.barStyle = .black
+    }
+    
     // MARK: - bind View Model
     func bindViewModel() {
         let input = ItemViewModel.Input(selection: itemAllCollectionView.rx.itemSelected.asDriver(),

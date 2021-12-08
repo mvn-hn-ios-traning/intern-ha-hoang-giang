@@ -30,6 +30,11 @@ class HeroViewController: UIViewController {
         configureNavigateBar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        navigationController?.navigationBar.barStyle = .black
+    }
+    
     func bindViewModel() {
         let strBtn = strengthButton.rx.tap.map {HeroAttributeButton.str}
         let agiBtn = agibilityButton.rx.tap.map {HeroAttributeButton.agi}
