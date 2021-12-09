@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,6 +24,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mht-Ia-Jwl" secondAttribute="bottom" id="Mda-uY-0ED"/>
@@ -30,7 +32,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mht-Ia-Jwl" secondAttribute="trailing" id="tHo-ai-9g8"/>
                             <constraint firstItem="mht-Ia-Jwl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tyG-Pf-yfg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Patch Notes" id="Mib-qZ-hVh"/>
                     <connections>
@@ -78,6 +79,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Joa-bu-d7x"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JrI-wu-vYd" firstAttribute="leading" secondItem="Joa-bu-d7x" secondAttribute="leading" id="5ok-R0-CNl"/>
@@ -88,7 +90,6 @@
                             <constraint firstItem="n4M-dZ-ZlK" firstAttribute="leading" secondItem="Joa-bu-d7x" secondAttribute="leading" id="oAU-Oa-kzI"/>
                             <constraint firstItem="JrI-wu-vYd" firstAttribute="top" secondItem="n4M-dZ-ZlK" secondAttribute="bottom" id="ttt-ye-Bor"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Joa-bu-d7x"/>
                     </view>
                     <connections>
                         <outlet property="patchDetailTableView" destination="JrI-wu-vYd" id="pXl-R6-EsI"/>
@@ -113,6 +114,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ere-kL-IG4"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="paO-qn-Qav" firstAttribute="top" secondItem="ere-kL-IG4" secondAttribute="top" id="Nq4-eP-XOU"/>
@@ -120,7 +122,6 @@
                             <constraint firstItem="paO-qn-Qav" firstAttribute="leading" secondItem="ere-kL-IG4" secondAttribute="leading" id="Q1j-lu-cc6"/>
                             <constraint firstItem="ere-kL-IG4" firstAttribute="bottom" secondItem="paO-qn-Qav" secondAttribute="bottom" id="ywY-VG-dgC"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ere-kL-IG4"/>
                     </view>
                     <navigationItem key="navigationItem" id="Y7W-l9-MsY">
                         <barButtonItem key="rightBarButtonItem" image="unStar" id="BcE-IK-Lcr"/>
@@ -147,6 +148,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="erv-bx-fTc"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YtS-px-Tux" firstAttribute="top" secondItem="erv-bx-fTc" secondAttribute="top" id="MLT-E0-WwF"/>
@@ -154,7 +156,6 @@
                             <constraint firstItem="erv-bx-fTc" firstAttribute="trailing" secondItem="YtS-px-Tux" secondAttribute="trailing" id="jVm-2M-6MK"/>
                             <constraint firstItem="erv-bx-fTc" firstAttribute="bottom" secondItem="YtS-px-Tux" secondAttribute="bottom" id="lqJ-d9-47N"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="erv-bx-fTc"/>
                     </view>
                     <connections>
                         <outlet property="itemDetailTableView" destination="YtS-px-Tux" id="Cuk-99-tIN"/>
@@ -235,6 +236,7 @@
                                 </state>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="OAP-Gq-v8h"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Pxf-pj-ZiZ" firstAttribute="centerX" secondItem="OAP-Gq-v8h" secondAttribute="centerX" id="D8n-fw-74f"/>
@@ -252,7 +254,6 @@
                             <constraint firstItem="EdE-Am-cxF" firstAttribute="top" secondItem="Pxf-pj-ZiZ" secondAttribute="bottom" constant="50" id="ygD-Sl-GzM"/>
                             <constraint firstItem="69J-RC-TVW" firstAttribute="width" secondItem="4V3-et-b6X" secondAttribute="width" multiplier="0.75" id="zEy-FP-LqQ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="OAP-Gq-v8h"/>
                     </view>
                     <connections>
                         <outlet property="avatarPicture" destination="Pxf-pj-ZiZ" id="nUJ-gC-uG8"/>
@@ -308,6 +309,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="d6E-Yg-Dl9"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="d6E-Yg-Dl9" firstAttribute="trailing" secondItem="Gm9-GN-qHW" secondAttribute="trailing" id="4yi-0D-DK3"/>
@@ -318,7 +320,6 @@
                             <constraint firstItem="Gm9-GN-qHW" firstAttribute="leading" secondItem="d6E-Yg-Dl9" secondAttribute="leading" id="sqF-Re-lDM"/>
                             <constraint firstItem="d6E-Yg-Dl9" firstAttribute="trailing" secondItem="Z9j-hG-Ue1" secondAttribute="trailing" id="v9l-yL-LkO"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="d6E-Yg-Dl9"/>
                     </view>
                     <navigationItem key="navigationItem" title="Hero" id="1h6-Wh-kKR"/>
                     <connections>
@@ -365,6 +366,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="3JX-b5-r7V"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
@@ -376,7 +378,6 @@
                             <constraint firstItem="ndF-7W-jMA" firstAttribute="top" secondItem="3JX-b5-r7V" secondAttribute="top" id="d2g-UN-8mf"/>
                             <constraint firstItem="3JX-b5-r7V" firstAttribute="bottom" secondItem="CpN-wT-mfn" secondAttribute="bottom" id="rTF-rg-fCR"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3JX-b5-r7V"/>
                     </view>
                     <navigationItem key="navigationItem" title="Item" id="4RN-kq-llB"/>
                     <connections>
@@ -419,8 +420,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxr-Yl-oly">
-                                        <rect key="frame" x="246" y="287.5" width="129" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxr-Yl-oly">
+                                        <rect key="frame" x="246.5" y="287.5" width="128" height="33"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                         <state key="normal" title="Forgot password"/>
                                     </button>
@@ -458,6 +459,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="XQw-ep-HGg"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XQw-ep-HGg" firstAttribute="trailing" secondItem="gNb-MS-0AF" secondAttribute="trailing" id="1Or-pU-zfI"/>
@@ -471,7 +473,6 @@
                             <constraint firstItem="pCO-ua-Z1m" firstAttribute="width" secondItem="TKY-9Z-71y" secondAttribute="width" multiplier="0.75" id="kkH-Ka-Big"/>
                             <constraint firstItem="pCO-ua-Z1m" firstAttribute="height" secondItem="TKY-9Z-71y" secondAttribute="height" multiplier="0.05" id="nxF-kM-0Ca"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="XQw-ep-HGg"/>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="pCO-ua-Z1m" id="re0-M4-bn5"/>

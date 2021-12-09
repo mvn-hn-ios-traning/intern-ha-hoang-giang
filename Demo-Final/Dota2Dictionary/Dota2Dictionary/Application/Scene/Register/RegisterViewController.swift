@@ -101,13 +101,6 @@ class RegisterViewController: UIViewController {
                                       message: "Choose options",
                                       preferredStyle: .actionSheet)
         
-        let takePhoto = UIAlertAction(title: "Take a photo",
-                                      style: .default) { (_) in
-                                        self.imagePicker.sourceType = .camera
-                                        self.present(self.imagePicker,
-                                                     animated: true,
-                                                     completion: nil) }
-        
         let takeLibrary = UIAlertAction(title: "Photo Library",
                                         style: .default) { (_) in
                                             self.photoAuthorisationStatus()
@@ -115,7 +108,6 @@ class RegisterViewController: UIViewController {
                                             
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        alert.addAction(takePhoto)
         alert.addAction(takeLibrary)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
@@ -141,6 +133,8 @@ class RegisterViewController: UIViewController {
         case .denied:
             print("Permission not determined")
             self.addAlertForSettings()
+        case .limited:
+            break
         @unknown default:
             break
         }

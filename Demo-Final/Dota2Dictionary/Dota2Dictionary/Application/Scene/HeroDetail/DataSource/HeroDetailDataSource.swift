@@ -63,9 +63,9 @@ struct HeroDetailDataSource {
 
     static func dataSource() -> DataSource<HeroDetailTableViewSection> {
         
-        return .init(configureCell: { (dataSource, tableView, indexPath, _) -> UITableViewCell in
+        return .init(configureCell: { (_, tableView, indexPath, item) -> UITableViewCell in
             
-            switch dataSource[indexPath] {
+            switch item {
             case .heroInfoTableViewItem(let info):
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell.heroInfoTableViewCell,
                                                                for: indexPath) as? HeroInfoTableViewCell else {

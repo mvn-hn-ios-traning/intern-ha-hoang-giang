@@ -30,11 +30,6 @@ class ItemsViewController: UIViewController {
         configureNavigateBar()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        navigationController?.navigationBar.barStyle = .black
-    }
-    
     // MARK: - bind View Model
     func bindViewModel() {
         let input = ItemViewModel.Input(selection: itemAllCollectionView.rx.itemSelected.asDriver(),
@@ -64,8 +59,15 @@ class ItemsViewController: UIViewController {
     }
     
     func configureNavigateBar() {
-        navigationController!.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 75/255.0, green: 75/255.0, blue: 75/255.0, alpha: 0.25)
+        appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
+                                          .foregroundColor: UIColor.white]
+
+        // Customizing our navigation bar
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
 }

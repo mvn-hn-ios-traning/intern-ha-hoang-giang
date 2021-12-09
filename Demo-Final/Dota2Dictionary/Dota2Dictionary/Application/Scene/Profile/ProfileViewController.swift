@@ -40,11 +40,6 @@ class ProfileViewController: UIViewController {
         bindViewModel()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        navigationController?.navigationBar.barStyle = .black
-    }
-    
     func tableViewRegister() {
         profileTableView.register(UINib(nibName: ConstantsForCell.profileInfoTableViewCell,
                                         bundle: nil),
@@ -58,8 +53,14 @@ class ProfileViewController: UIViewController {
     }
     
     func configureNavigateBar() {
-        navigationController!.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 75/255.0, green: 75/255.0, blue: 75/255.0, alpha: 0.25)
+        appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
+                                          .foregroundColor: UIColor.white]
+        // Customizing our navigation bar
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     // MARK: - Bind ViewModel
@@ -165,5 +166,9 @@ extension ProfileViewController: UITableViewDelegate {
         } else {
             return 256
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = .white
     }
 }
