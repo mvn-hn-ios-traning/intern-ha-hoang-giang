@@ -90,7 +90,9 @@ class ItemDetailViewController: UIViewController {
 extension ItemDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 6 {
-            return CGFloat(250)
+            return 250
+        } else if indexPath.section == 0 {
+            return 128
         } else {
             return UITableView.automaticDimension
         }

@@ -65,29 +65,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Bind ViewModel
     func bindViewModel() {
         let forgotTrigger = forgotButton.rx.tap.flatMap {
-            return Observable<String>.create { (observer) -> Disposable in
-                let alert = UIAlertController(title: "Enter your email here",
-                                              message: "Check email for reset password mail",
-                                              preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "Cancel",
-                                              style: .cancel,
-                                              handler: nil))
-                
-                alert.addTextField(configurationHandler: { textField in
-                    textField.placeholder = "Input your email here..."
-                })
-                
-                alert.addAction(UIAlertAction(title: "OK",
-                                              style: .default,
-                                              handler: { _ in
-                                                if let name = alert.textFields?.first?.text {
-                                                    observer.onNext(name)
-                                                }
-                }))
-                self.present(alert, animated: true)
-                return Disposables.create()
-            }
+            return self.areYouSure()
         }
         
         let input = ProfileViewModel.Input(enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
@@ -133,6 +111,33 @@ class ProfileViewController: UIViewController {
             .disposed(by: disposeBag)
         
         profileTableView.rx.setDelegate(self).disposed(by: disposeBag)
+    }
+    
+    
+    func areYouSure() -> Observable<String> {
+        Observable<String>.create { [weak self] (observer) -> Disposable in
+            let alert = UIAlertController(title: "Enter your email here",
+                                          message: "Check email for reset password mail",
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Cancel",
+                                          style: .cancel,
+                                          handler: nil))
+            
+            alert.addTextField(configurationHandler: { textField in
+                textField.placeholder = "Input your email here..."
+            })
+            
+            alert.addAction(UIAlertAction(title: "OK",
+                                          style: .default,
+                                          handler: { _ in
+                                            if let name = alert.textFields?.first?.text {
+                                                observer.onNext(name)
+                                            }
+            }))
+            self?.present(alert, animated: true)
+            return Disposables.create()
+        }
     }
     
     func checkUserLoggedIn() {
