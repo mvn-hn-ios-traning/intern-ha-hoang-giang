@@ -75,7 +75,7 @@ class RegisterViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-    
+        
     // MARK: - Setup Avatar
     func modelAvatar() {
         avatarPicture.layer.borderWidth = 1.0

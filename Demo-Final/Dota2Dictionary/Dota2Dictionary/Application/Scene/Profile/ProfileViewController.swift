@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController {
         checkUserLoggedIn()
         tableViewRegister()
         bindViewModel()
+        
         if #available(iOS 15, *) {
             profileTableView.sectionHeaderTopPadding = 0.0
         }
