@@ -85,8 +85,6 @@
 		22834415274CC72000DC7A55 /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22834414274CC72000DC7A55 /* ProfileDataSource.swift */; };
 		22834418274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22834416274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift */; };
 		22834419274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22834417274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib */; };
-		2283441C274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283441A274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift */; };
-		2283441D274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2283441B274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib */; };
 		22834420274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283441E274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift */; };
 		22834421274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2283441F274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib */; };
 		2284BC3B27463869009FBA6B /* ProfileUseCaseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC3A27463869009FBA6B /* ProfileUseCaseDomain.swift */; };
@@ -220,8 +218,6 @@
 		22834414274CC72000DC7A55 /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
 		22834416274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoTableViewCell.swift; sourceTree = "<group>"; };
 		22834417274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileInfoTableViewCell.xib; sourceTree = "<group>"; };
-		2283441A274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSignOutTableViewCell.swift; sourceTree = "<group>"; };
-		2283441B274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSignOutTableViewCell.xib; sourceTree = "<group>"; };
 		2283441E274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLikeTableViewCell.swift; sourceTree = "<group>"; };
 		2283441F274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileLikeTableViewCell.xib; sourceTree = "<group>"; };
 		2284BC3A27463869009FBA6B /* ProfileUseCaseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseDomain.swift; sourceTree = "<group>"; };
@@ -720,8 +716,6 @@
 			children = (
 				22834416274CCC8300DC7A55 /* ProfileInfoTableViewCell.swift */,
 				22834417274CCC8300DC7A55 /* ProfileInfoTableViewCell.xib */,
-				2283441A274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift */,
-				2283441B274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib */,
 				2283441E274CCCB000DC7A55 /* ProfileLikeTableViewCell.swift */,
 				2283441F274CCCB000DC7A55 /* ProfileLikeTableViewCell.xib */,
 			);
@@ -876,7 +870,6 @@
 				226BB805271ECAD6000EC3F9 /* HeroRolesTableViewCell.xib in Resources */,
 				22902E6E2715399C006A96D8 /* Main.storyboard in Resources */,
 				228CCC65272FC14700001A1C /* ItemComponentTableViewCell.xib in Resources */,
-				2283441D274CCCA200DC7A55 /* ProfileSignOutTableViewCell.xib in Resources */,
 				22682A0F271DB49D00E99D64 /* HeroInfoTableViewCell.xib in Resources */,
 				226D8BA6272F8402004C76EA /* ItemHintTableViewCell.xib in Resources */,
 				2284F22A273A7AAF00F75368 /* HeroLoreTableViewCell.xib in Resources */,
@@ -994,7 +987,6 @@
 				2270A964273B658800EADBE4 /* HeroUseCaseDomain.swift in Sources */,
 				226F0A512744A4DA00A02E73 /* RegisterUseCaseDomain.swift in Sources */,
 				226D8BA5272F8402004C76EA /* ItemHintTableViewCell.swift in Sources */,
-				2283441C274CCCA200DC7A55 /* ProfileSignOutTableViewCell.swift in Sources */,
 				2270A9BF273B800800EADBE4 /* ItemDetailNetwork.swift in Sources */,
 				22682A0E271DB49D00E99D64 /* HeroInfoTableViewCell.swift in Sources */,
 				226EEBEF2717C9AC00219FC9 /* OptionalObject.swift in Sources */,

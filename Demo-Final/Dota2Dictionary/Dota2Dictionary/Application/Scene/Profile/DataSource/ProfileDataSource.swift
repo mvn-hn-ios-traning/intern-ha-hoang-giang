@@ -10,13 +10,11 @@ import RxDataSources
 
 enum ProfileTableViewItem {
     case profileInfoItem(info: String)
-    case profileSignOutItem(signout: String)
     case profileLikeItem(like: HeroLikedModel)
 }
 
 enum ProfileTableViewSection {
     case infoSection(items: [ProfileTableViewItem])
-    case signoutSection(items: [ProfileTableViewItem])
     case likeSection(items: [ProfileTableViewItem])
 }
 
@@ -27,8 +25,6 @@ extension ProfileTableViewSection: SectionModelType {
         switch self {
         case .infoSection:
             return "Info"
-        case .signoutSection:
-            return "Sign Out"
         case .likeSection:
             return "Liked"
         }
@@ -37,8 +33,6 @@ extension ProfileTableViewSection: SectionModelType {
     var items: [ProfileTableViewItem] {
         switch self {
         case .infoSection(items: let items):
-            return items
-        case .signoutSection(items: let items):
             return items
         case .likeSection(items: let items):
             return items
@@ -63,14 +57,6 @@ struct ProfileDataSource {
                                          for: indexPath) as? ProfileInfoTableViewCell
                     else { return UITableViewCell() }
                 cell.configure(info)
-                return cell
-                
-            case .profileSignOutItem(let signout):
-                guard let cell = tableView
-                    .dequeueReusableCell(withIdentifier: ConstantsForCell.profileSignOutTableViewCell,
-                                         for: indexPath) as? ProfileSignOutTableViewCell
-                    else { return UITableViewCell() }
-                cell.configure(signout)
                 return cell
                 
             case .profileLikeItem(let like):

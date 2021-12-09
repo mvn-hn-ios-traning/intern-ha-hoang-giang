@@ -15,7 +15,6 @@ import Kingfisher
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileTableView: UITableView!
-    
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var signOutButton: UIBarButtonItem!
     @IBOutlet weak var emailTextField: UITextField!
@@ -38,6 +37,9 @@ class ProfileViewController: UIViewController {
         checkUserLoggedIn()
         tableViewRegister()
         bindViewModel()
+        if #available(iOS 15, *) {
+            profileTableView.sectionHeaderTopPadding = 0.0
+        }
     }
     
     func tableViewRegister() {
@@ -160,15 +162,16 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 {
-            return 64
-        } else if indexPath.section == 2 {
             return 128
         } else {
-            return 256
+            return 330
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = .white
+        view.tintColor = UIColor(red: 45/255.0, green: 45/255.0, blue: 45/255.0, alpha: 1)
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.textColor = .white
+        }
     }
 }

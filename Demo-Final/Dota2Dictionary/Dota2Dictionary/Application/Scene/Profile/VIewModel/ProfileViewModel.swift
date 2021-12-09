@@ -59,7 +59,6 @@ class ProfileViewModel: ViewModelType {
             .map {
                 [ProfileTableViewSection](arrayLiteral:
                     .infoSection(items: [.profileInfoItem(info: "")]),
-                    .signoutSection(items: [.profileSignOutItem(signout: "")]),
                     .likeSection(items: $0.map { .profileLikeItem(like: $0) })
                 )
         }

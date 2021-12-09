@@ -20,6 +20,14 @@ class ProfileInfoTableViewCell: UITableViewCell {
         self.avatar.image = nil
     }
     
+    @IBAction func signOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("error in signout")
+        }
+    }
+    
     func configure(_ model: String) {
         self.modelAvatar()
         Auth.auth().addStateDidChangeListener { (_, user) in
