@@ -113,7 +113,6 @@ class ProfileViewController: UIViewController {
         profileTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
-    
     func areYouSure() -> Observable<String> {
         Observable<String>.create { [weak self] (observer) -> Disposable in
             let alert = UIAlertController(title: "Enter your email here",
