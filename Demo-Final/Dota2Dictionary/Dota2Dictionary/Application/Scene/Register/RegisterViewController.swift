@@ -45,8 +45,10 @@ class RegisterViewController: UIViewController {
         modelAvatar()
         tapEvent()
         bindViewModel()
+        listenKeyboard()
     }
-    
+
+    // MARK: - Bind View Model
     func bindViewModel() {
         let input = RegisterViewModel.Input(backTrigger: backButton.rx.tap.asDriver(),
                                             imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
@@ -186,6 +188,31 @@ class RegisterViewController: UIViewController {
                                    handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true)
+    }
+    
+    // MARK: - Listen Keyboard
+    func listenKeyboard() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize =
+                (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            return
+        }
+        self.view.frame.origin.y = 0 - keyboardSize.height/2
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
 }
