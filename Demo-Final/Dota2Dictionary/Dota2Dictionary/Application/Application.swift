@@ -87,13 +87,25 @@ final class Application {
         
         window.rootViewController = tabbarController
         
-        tabbarController.tabBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        tabbarController.tabBar.tintColor = UIColor.link
+        configureTabBar(tabbarController: tabbarController)
         
         patchNavigator.toPatch()
         heroNavigator.toHero()
         itemNavigator.toItem()
         profileNavigator.toProfile()
+    }
+    
+    func configureTabBar(tabbarController: UITabBarController) {
+        tabbarController.tabBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+        tabbarController.tabBar.tintColor = UIColor.link
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(red: 75/255.0, green: 75/255.0, blue: 75/255.0, alpha: 0.25)
+            tabbarController.tabBar.scrollEdgeAppearance = appearance
+            tabbarController.tabBar.standardAppearance = appearance
+        }
     }
     
 }

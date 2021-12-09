@@ -63,6 +63,7 @@ class ProfileViewController: UIViewController {
         // Customizing our navigation bar
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
     }
     
     // MARK: - Bind ViewModel

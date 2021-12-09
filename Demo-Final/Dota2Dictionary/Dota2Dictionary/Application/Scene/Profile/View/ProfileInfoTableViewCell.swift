@@ -21,11 +21,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
     }
     
     @IBAction func signOut(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("error in signout")
-        }
+        sureToLogout()
     }
     
     func configure(_ model: String) {
@@ -51,6 +47,26 @@ class ProfileInfoTableViewCell: UITableViewCell {
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.layer.cornerRadius = avatar.frame.size.width/2
         avatar.clipsToBounds = true
+    }
+    
+    func sureToLogout() {
+        let alert = UIAlertController(title: "Log out",
+                                      message: "Are you sure to log out?",
+                                      preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "No",
+                                    style: .cancel,
+                                    handler: nil)
+        let action2 = UIAlertAction(title: "Yes",
+                                    style: .destructive) { _ in
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("error in signout")
+            }
+        }
+        alert.addAction(action1)
+        alert.addAction(action2)
+        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
     
 }
