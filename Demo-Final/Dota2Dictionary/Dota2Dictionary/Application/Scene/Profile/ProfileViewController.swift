@@ -77,9 +77,12 @@ class ProfileViewController: UIViewController {
                                            enteredPassword: passwordTextField.rx.text.orEmpty.asDriver(),
                                            tappedLogin: loginButton.rx.tap.asDriver(),
                                            tappedRegister: registerButton.rx.tap.asDriver(),
-                                           forgotTrigger: forgotTrigger.asDriver(onErrorJustReturn: String()))
+                                           forgotTrigger: forgotTrigger.asDriver(onErrorJustReturn: String()),
+                                           selectionCell: profileTableView.rx.itemSelected.asDriver())
         
         let output = profileViewModel.transform(input: input)
+        
+        output.selected.drive().disposed(by: disposeBag)
         
         [output.enableLogin.drive(loginButton.rx.isEnabled),
          output.tappedRegisterOutput.drive()]
@@ -118,6 +121,7 @@ class ProfileViewController: UIViewController {
         profileTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
+    // MARK: - alert for log out
     func areYouSure() -> Observable<String> {
         Observable<String>.create { [weak self] (observer) -> Disposable in
             let alert = UIAlertController(title: "Enter your email here",
@@ -161,6 +165,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 {
@@ -174,6 +179,22 @@ extension ProfileViewController: UITableViewDelegate {
         view.tintColor = UIColor(red: 45/255.0, green: 45/255.0, blue: 45/255.0, alpha: 1)
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = .white
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            print("aaa")
+        } else {
+            print("bbb")
         }
     }
 }

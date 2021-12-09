@@ -76,6 +76,7 @@ final class Application {
         
         let profileNavigator = ProfileNavigator(profileService: profileUseCaseProvider,
                                                 registerService: registerUseCaseProvider,
+                                                likedHeroService: heroDetailUseCaseProvider,
                                                 storyBoard: storyboard,
                                                 navigationController: profileNavigationController)
         

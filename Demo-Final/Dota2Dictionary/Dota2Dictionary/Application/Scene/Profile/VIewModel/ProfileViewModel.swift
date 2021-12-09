@@ -63,12 +63,21 @@ class ProfileViewModel: ViewModelType {
                 )
         }
         
+        let selected = input
+            .selectionCell
+            .withLatestFrom(loadingLikedHero.asDriver(onErrorDriveWith: .empty())) { (index, data) -> HeroLikedModel in
+                return data[index.row]
+            }.do(onNext: { 
+                self.navigator.toLikeDetail($0)
+            })
+        
         return Output(enableLogin: enableLogin,
                       tappedLoginOutput: tappedLoginOutput,
                       tappedRegisterOutput: tappedRegisterOutput,
                       resetPasswordOuput: resetPassword,
                       loginSuccess: loginSuccess,
-                      cellItems: cellData)
+                      cellItems: cellData,
+                      selected: selected)
     }
     
 }
@@ -80,6 +89,7 @@ extension ProfileViewModel {
         let tappedLogin: Driver<Void>
         let tappedRegister: Driver<Void>
         let forgotTrigger: Driver<String>
+        let selectionCell: Driver<IndexPath>
     }
     
     struct Output {
@@ -89,5 +99,6 @@ extension ProfileViewModel {
         let resetPasswordOuput: Observable<String>
         let loginSuccess: Driver<Bool>
         let cellItems: Observable<[ProfileTableViewSection]>
+        let selected: Driver<HeroLikedModel>
     }
 }
