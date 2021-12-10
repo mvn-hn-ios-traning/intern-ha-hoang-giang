@@ -21,7 +21,7 @@ class PatchDetailViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     var oldTabbarFr: CGRect = .zero
-    
+        
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
