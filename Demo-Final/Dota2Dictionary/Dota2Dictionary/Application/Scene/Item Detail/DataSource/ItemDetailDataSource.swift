@@ -79,9 +79,9 @@ struct ItemDetailDataSource {
                 cell.configure(hint)
                 return cell
             case .itemManaColdownItem(let manacd):
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: ConstantsForCell
-                    .manaColdownTableViewCell,
-                                                               for: indexPath)
+                guard let cell = tableView
+                    .dequeueReusableCell(withIdentifier: ConstantsForCell.manaColdownTableViewCell,
+                                         for: indexPath)
                     as? ManaColdownTableViewCell else {
                         return UITableViewCell()
                 }

@@ -27,6 +27,7 @@ class HeroViewController: UIViewController {
                                              bundle: nil),
                                        forCellWithReuseIdentifier: ConstantsForCell.allHeroCollectionViewCell)
         bindViewModel()
+        configureNavigateBar()
     }
     
     func bindViewModel() {
@@ -61,6 +62,18 @@ class HeroViewController: UIViewController {
             .rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+    }
+    
+    func configureNavigateBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 75/255.0, green: 75/255.0, blue: 75/255.0, alpha: 0.25)
+        appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
+                                          .foregroundColor: UIColor.white]
+
+        // Customizing our navigation bar
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
 }

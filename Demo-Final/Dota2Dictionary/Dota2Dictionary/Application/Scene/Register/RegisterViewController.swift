@@ -13,6 +13,7 @@ import Photos
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var avatarPicture: UIImageView!
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
@@ -40,14 +41,17 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ToastManager.shared.style = style
-        
+        hideKeyboardWhenTappedAround()
+        modelAvatar()
         tapEvent()
         bindViewModel()
+        listenKeyboard()
     }
-    
+
+    // MARK: - Bind View Model
     func bindViewModel() {
-        
-        let input = RegisterViewModel.Input(imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
+        let input = RegisterViewModel.Input(backTrigger: backButton.rx.tap.asDriver(),
+                                            imageTrigger: imageSubject.asDriver(onErrorJustReturn: nil),
                                             enteredFirstName: firstNameTF.rx.text.orEmpty.asDriver(),
                                             enteredLastName: lastNameTF.rx.text.orEmpty.asDriver(),
                                             enteredEmail: emailTextField.rx.text.orEmpty.asDriver(),
@@ -55,6 +59,8 @@ class RegisterViewController: UIViewController {
                                             tappedRegister: registerButton.rx.tap.asDriver())
         
         let output = registerViewModel.transform(input: input)
+        
+        output.goBack.drive().disposed(by: disposeBag)
         
         output
             .enableRegister
@@ -67,12 +73,20 @@ class RegisterViewController: UIViewController {
                 guard let self = self else { return }
                 
                 self.view.endEditing(true)
-                self.view.makeToast(text, position: .top)
+                self.displayAlertWhenClickSignup(text: text)
             })
             .disposed(by: disposeBag)
     }
-    
+        
     // MARK: - Setup Avatar
+    func modelAvatar() {
+        avatarPicture.layer.borderWidth = 1.0
+        avatarPicture.layer.masksToBounds = true
+        avatarPicture.layer.borderColor = UIColor.white.cgColor
+        avatarPicture.layer.cornerRadius = avatarPicture.frame.size.width/2
+        avatarPicture.clipsToBounds = true
+    }
+    
     func tapEvent() {
         self.avatarPicture.isUserInteractionEnabled = true
         self.avatarPicture.addGestureRecognizer(tap)
@@ -89,13 +103,6 @@ class RegisterViewController: UIViewController {
                                       message: "Choose options",
                                       preferredStyle: .actionSheet)
         
-        let takePhoto = UIAlertAction(title: "Take a photo",
-                                      style: .default) { (_) in
-                                        self.imagePicker.sourceType = .camera
-                                        self.present(self.imagePicker,
-                                                     animated: true,
-                                                     completion: nil) }
-        
         let takeLibrary = UIAlertAction(title: "Photo Library",
                                         style: .default) { (_) in
                                             self.photoAuthorisationStatus()
@@ -103,7 +110,6 @@ class RegisterViewController: UIViewController {
                                             
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        alert.addAction(takePhoto)
         alert.addAction(takeLibrary)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
@@ -129,6 +135,8 @@ class RegisterViewController: UIViewController {
         case .denied:
             print("Permission not determined")
             self.addAlertForSettings()
+        case .limited:
+            break
         @unknown default:
             break
         }
@@ -137,9 +145,11 @@ class RegisterViewController: UIViewController {
     // Go to photo libary
     func photoLibrary() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            self.present(imagePicker, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.imagePicker.delegate = self
+                self.imagePicker.sourceType = .photoLibrary
+                self.present(self.imagePicker, animated: true, completion: nil)
+            }
         }
     }
     
@@ -166,6 +176,43 @@ class RegisterViewController: UIViewController {
             photoUnavailableAlert.addAction(cancelAction)
             self.present(photoUnavailableAlert, animated: true, completion: nil)
         }
+    }
+    
+    // MARK: - When click Signup button
+    func displayAlertWhenClickSignup(text: String) {
+        let alert = UIAlertController(title: nil,
+                                      message: text,
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK",
+                                   style: .cancel,
+                                   handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
+    
+    // MARK: - Listen Keyboard
+    func listenKeyboard() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize =
+                (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            return
+        }
+        self.view.frame.origin.y = 0 - keyboardSize.height/2
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
 }

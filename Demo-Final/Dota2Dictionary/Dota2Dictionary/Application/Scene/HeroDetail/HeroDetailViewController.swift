@@ -21,12 +21,27 @@ class HeroDetailViewController: UIViewController {
     var heroDetailViewModel: HeroDetailViewModel!
     
     let dataSource = HeroDetailDataSource.dataSource()
-        
+    
+    var oldTabbarFr: CGRect = .zero
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRegister()
         bindViewModel()
+        oldTabbarFr = self.tabBarController?.tabBar.frame ?? .zero
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.frame = .zero
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.frame = oldTabbarFr
     }
     
     func tableViewRegister() {
@@ -80,7 +95,14 @@ class HeroDetailViewController: UIViewController {
         
         output
             .likeTitle
-            .bind(to: self.likeButton.rx.title)
+            .map({ string -> UIImage? in
+                if let image = UIImage(named: string) {
+                    return image
+                } else {
+                    return nil
+                }
+            })
+            .bind(to: self.likeButton.rx.image)
             .disposed(by: disposeBag)
         
         heroDetailTableView.rx.setDelegate(self).disposed(by: disposeBag)

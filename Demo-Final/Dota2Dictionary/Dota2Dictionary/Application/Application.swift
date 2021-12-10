@@ -43,8 +43,6 @@ final class Application {
         patchNavigationController.tabBarItem = UITabBarItem(title: "Patch",
                                                             image: UIImage(systemName: "book"),
                                                             selectedImage: nil)
-        patchNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        patchNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         let patchNavigator = PatchNavigator(services: patchUseCaseProvider,
                                             servicesDetail: patchDetailUseCaseProvider,
@@ -55,8 +53,6 @@ final class Application {
         heroNavigationController.tabBarItem = UITabBarItem(title: "Hero",
                                                            image: UIImage(named: "hero_icon"),
                                                            selectedImage: nil)
-        heroNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        heroNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         let heroNavigator = HeroNavigator(services: heroUseCaseProvider,
                                           servicesDetail: heroDetailUseCaseProvider,
@@ -67,8 +63,6 @@ final class Application {
         itemNavigationController.tabBarItem = UITabBarItem(title: "Item",
                                                            image: UIImage(systemName: "pencil.slash"),
                                                            selectedImage: nil)
-        itemNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        itemNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         let itemNavigator = ItemNavigator(services: itemUseCaseProvider,
                                           servicesDetail: itemDetailUseCaseProvider,
@@ -79,11 +73,10 @@ final class Application {
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile",
                                                               image: UIImage(named: "profile_icon"),
                                                               selectedImage: nil)
-        profileNavigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        profileNavigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         let profileNavigator = ProfileNavigator(profileService: profileUseCaseProvider,
                                                 registerService: registerUseCaseProvider,
+                                                likedHeroService: heroDetailUseCaseProvider,
                                                 storyBoard: storyboard,
                                                 navigationController: profileNavigationController)
         
@@ -95,13 +88,25 @@ final class Application {
         
         window.rootViewController = tabbarController
         
-        tabbarController.tabBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-        tabbarController.tabBar.tintColor = UIColor.link
+        configureTabBar(tabbarController: tabbarController)
         
         patchNavigator.toPatch()
         heroNavigator.toHero()
         itemNavigator.toItem()
         profileNavigator.toProfile()
+    }
+    
+    func configureTabBar(tabbarController: UITabBarController) {
+        tabbarController.tabBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+        tabbarController.tabBar.tintColor = UIColor.link
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(red: 75/255.0, green: 75/255.0, blue: 75/255.0, alpha: 0.25)
+            tabbarController.tabBar.scrollEdgeAppearance = appearance
+            tabbarController.tabBar.standardAppearance = appearance
+        }
     }
     
 }

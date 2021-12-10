@@ -58,7 +58,7 @@ extension HeroRolesTableViewCell: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let columnsSpacing: CGFloat = 20
-        let numberOfColumns: CGFloat = 3
+        let numberOfColumns: CGFloat = 5
         let width: CGFloat = (collectionView.bounds.width - (columnsSpacing * (numberOfColumns - 1)))/numberOfColumns
         
         return CGSize(width: width,

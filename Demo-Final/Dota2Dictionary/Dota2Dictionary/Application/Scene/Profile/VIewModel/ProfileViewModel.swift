@@ -23,6 +23,13 @@ class ProfileViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let mergeText = Driver.combineLatest(input.enteredEmail, input.enteredPassword)
         
+        let enableLogin = Driver
+            .combineLatest(input.enteredEmail,
+                           input.enteredPassword) {
+                            return !$0.isEmpty
+                                && !$1.isEmpty
+        }
+        
         let tappedLoginOutput = input
             .tappedLogin
             .withLatestFrom(mergeText) { _, text in
@@ -52,16 +59,25 @@ class ProfileViewModel: ViewModelType {
             .map {
                 [ProfileTableViewSection](arrayLiteral:
                     .infoSection(items: [.profileInfoItem(info: "")]),
-                    .signoutSection(items: [.profileSignOutItem(signout: "")]),
                     .likeSection(items: $0.map { .profileLikeItem(like: $0) })
                 )
         }
         
-        return Output(tappedLoginOutput: tappedLoginOutput,
+        let selected = input
+            .selectionCell
+            .withLatestFrom(loadingLikedHero.asDriver(onErrorDriveWith: .empty())) { (index, data) -> HeroLikedModel in
+                return data[index.row]
+            }.do(onNext: { 
+                self.navigator.toLikeDetail($0)
+            })
+        
+        return Output(enableLogin: enableLogin,
+                      tappedLoginOutput: tappedLoginOutput,
                       tappedRegisterOutput: tappedRegisterOutput,
                       resetPasswordOuput: resetPassword,
                       loginSuccess: loginSuccess,
-                      cellItems: cellData)
+                      cellItems: cellData,
+                      selected: selected)
     }
     
 }
@@ -73,13 +89,16 @@ extension ProfileViewModel {
         let tappedLogin: Driver<Void>
         let tappedRegister: Driver<Void>
         let forgotTrigger: Driver<String>
+        let selectionCell: Driver<IndexPath>
     }
     
     struct Output {
+        let enableLogin: Driver<Bool>
         let tappedLoginOutput: Driver<String>
         let tappedRegisterOutput: Driver<Void>
         let resetPasswordOuput: Observable<String>
         let loginSuccess: Driver<Bool>
         let cellItems: Observable<[ProfileTableViewSection]>
+        let selected: Driver<HeroLikedModel>
     }
 }

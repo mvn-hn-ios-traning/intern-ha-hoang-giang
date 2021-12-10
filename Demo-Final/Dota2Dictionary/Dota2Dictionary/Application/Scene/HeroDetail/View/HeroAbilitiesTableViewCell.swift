@@ -23,17 +23,19 @@ class HeroAbilitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var dmgType: UILabel!
     @IBOutlet weak var bkbPierce: UILabel!
     @IBOutlet weak var attribute: UILabel!
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        abilityImage.layer.cornerRadius = abilityImage.frame.size.width / 2
     }
 
     func configure(_ viewModel: HeroDetailAbilitiesModel) {
         configureAvatar(viewModel)
         
         abilityName.text = viewModel.dname
-        abilityDescription.text = viewModel.desc
+        
+        guard let descrip = viewModel.desc else {return}
+        abilityDescription.text = descrip
         
         configureMCCD(viewModel)
         
@@ -76,15 +78,15 @@ class HeroAbilitiesTableViewCell: UITableViewCell {
     
     func configureAttrib(_ viewModel: HeroDetailAbilitiesModel) {
         let abstractArray = viewModel.attrib?.filter { $0.generated == nil }
-
-        var resultText: String = ""
         
+        var resultText: String = ""
+
         for each in abstractArray! {
             let eachResult = each.header + " " + each.value.mccdValue + "\n\n"
             resultText.append(eachResult)
         }
-        
         attribute.text = resultText
+        
     }
     
 }

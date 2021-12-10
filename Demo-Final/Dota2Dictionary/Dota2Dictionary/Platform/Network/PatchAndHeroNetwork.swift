@@ -184,6 +184,9 @@ class Network: NSObject {
                         if let primaryAttr = heroProperties["primary_attr"] as? String {
                             listHeroAdd.primaryAttr = primaryAttr
                         }
+                        if let localizeName = heroProperties["localized_name"] as? String {
+                            listHeroAdd.localizedName = localizeName
+                        }
                     }
                     listHero.append(listHeroAdd)
                 }

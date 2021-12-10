@@ -20,6 +20,8 @@ class PatchDetailViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    var oldTabbarFr: CGRect = .zero
+        
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +29,22 @@ class PatchDetailViewController: UIViewController {
                                             bundle: nil),
                                       forCellReuseIdentifier: ConstantsForCell.patchDetailTableViewCell)
         bindViewModel()
+        oldTabbarFr = self.tabBarController?.tabBar.frame ?? .zero
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.frame = .zero
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.frame = oldTabbarFr
+    }
+    
+    // MARK: - Bind ViewModel
     func bindViewModel() {
         let input = PatchDetailViewModel.Input(heroesPatchSelecting: selectHeroesPatch.rx.tap.asDriver(),
                                                itemsPatchSelecting: selectItemsPatch.rx.tap.asDriver(),
@@ -47,6 +63,7 @@ class PatchDetailViewController: UIViewController {
                 cell.configure(model: detail)
             }
             .disposed(by: disposeBag)
+        
     }
     
 }

@@ -26,11 +26,13 @@ class RegisterViewModel: ViewModelType {
             .combineLatest(input.enteredFirstName,
                            input.enteredLastName,
                            input.enteredEmail,
-                           input.enteredPassword) {
+                           input.enteredPassword,
+                           input.imageTrigger) {
                             return !$0.isEmpty
                                 && !$1.isEmpty
                                 && !$2.isEmpty
                                 && !$3.isEmpty
+                                && $4 != nil
         }
         
         let mergeText = Driver
@@ -39,7 +41,6 @@ class RegisterViewModel: ViewModelType {
                            input.enteredLastName,
                            input.enteredEmail,
                            input.enteredPassword)
-            .debug("mergeText")
         
         let tappedRegister = input
             .tappedRegister
@@ -49,17 +50,24 @@ class RegisterViewModel: ViewModelType {
                                       lastName: text.2,
                                       email: text.3,
                                       password: text.4) }
-            .debug("mergeText in tapped")
             .asObservable()
             .flatMap {$0}
         
-        return Output(enableRegister: enableRegister,
+        let goBackOutput = input
+            .backTrigger
+            .do(onNext: {
+                self.navigator.toLogin()
+            })
+        
+        return Output(goBack: goBackOutput,
+                      enableRegister: enableRegister,
                       tappedRegister: tappedRegister)
     }
 }
 
 extension RegisterViewModel {
     struct Input {
+        let backTrigger: Driver<Void>
         let imageTrigger: Driver<UIImage?>
         let enteredFirstName: Driver<String>
         let enteredLastName: Driver<String>
@@ -69,6 +77,7 @@ extension RegisterViewModel {
     }
     
     struct Output {
+        let goBack: Driver<Void>
         let enableRegister: Driver<Bool>
         let tappedRegister: Observable<String>
     }

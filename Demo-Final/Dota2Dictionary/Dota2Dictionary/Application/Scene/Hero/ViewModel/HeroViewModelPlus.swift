@@ -23,10 +23,7 @@ final class HeroViewModelPlus {
         self.hero = hero
         self.heroID = hero.heroID
         self.heroNameOriginal = hero.name
-        self.heroName = hero.name
-            .replacingOccurrences(of: "npc_dota_hero_", with: "")
-            .replacingOccurrences(of: "_", with: " ")
-            .capitalized
+        self.heroName = hero.localizedName
         self.heroAvatar = hero.name.replacingOccurrences(of: "npc_dota_hero_", with: "")
     }
 }

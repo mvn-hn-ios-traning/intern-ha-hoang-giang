@@ -21,11 +21,13 @@ class ItemsViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         itemSearchBar.delegate = self
         itemAllCollectionView.register(UINib(nibName: ConstantsForCell.itemsAllCollectionViewCell,
                                              bundle: nil),
                                        forCellWithReuseIdentifier: ConstantsForCell.itemsAllCollectionViewCell)
         bindViewModel()
+        configureNavigateBar()
     }
     
     // MARK: - bind View Model
@@ -34,7 +36,7 @@ class ItemsViewController: UIViewController {
                                         searchTrigger: itemSearchBar.rx.text.orEmpty.asDriver(),
                                         firstLoading: Observable.just(Void()).asDriver(onErrorJustReturn: Void()))
         let output = itemViewModel.transform(input: input)
-                
+        
         output
             .searchOutput
             .bind(to: itemAllCollectionView
@@ -54,6 +56,18 @@ class ItemsViewController: UIViewController {
             .rx
             .setDelegate(self)
             .disposed(by: disposeBag)
+    }
+    
+    func configureNavigateBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 75/255.0, green: 75/255.0, blue: 75/255.0, alpha: 0.25)
+        appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
+                                          .foregroundColor: UIColor.white]
+
+        // Customizing our navigation bar
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
 }
@@ -85,7 +99,6 @@ extension ItemsViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.itemSearchBar.text = ""
         self.itemSearchBar.endEditing(true)
     }
 }

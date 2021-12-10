@@ -19,11 +19,25 @@ class ItemDetailViewController: UIViewController {
     
     let dataSource = ItemDetailDataSource.dataSource()
     
+    var oldTabbarFr: CGRect = .zero
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRegister()
         bindViewModel()
-        
+        oldTabbarFr = self.tabBarController?.tabBar.frame ?? .zero
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.frame = .zero
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.frame = oldTabbarFr
     }
     
     func tableViewRegister() {
@@ -76,7 +90,9 @@ class ItemDetailViewController: UIViewController {
 extension ItemDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 6 {
-            return CGFloat(250)
+            return 250
+        } else if indexPath.section == 0 {
+            return 128
         } else {
             return UITableView.automaticDimension
         }
